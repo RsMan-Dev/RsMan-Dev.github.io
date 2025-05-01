@@ -1,0 +1,1 @@
+import{M as r}from"./index-BmnT0ak3.js";import"./Counter-DkOShU3t.js";import{j as e,y as c}from"./web-D0I6bkB-.js";function o(t){const n=Object.assign({h1:"h1"},r(),t.components);return e(n.h1,{children:"About"})}function i(t={}){const{wrapper:n}=Object.assign({},r(),t.components);return n?e(n,c(t,{get children(){return e(o,t)}})):o(t)}export{i as default};

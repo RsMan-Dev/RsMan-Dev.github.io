@@ -1,0 +1,1 @@
+import{q as i,b as c,t as o,w as u,C as $,A as g,z as m}from"./web-D0I6bkB-.js";var C=u("<button class=increment type=button>Clicks: <!$><!/>");function b(){const[e,n]=c(0);return(()=>{var t=o(C),r=t.firstChild,a=r.nextSibling,[s,l]=$(a.nextSibling);return t.$$click=()=>n(e()+1),g(t,e,s,l),m(),t})()}i(["click"]);export{b as C};

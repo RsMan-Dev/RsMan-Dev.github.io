@@ -1,0 +1,85 @@
+{
+  "_Counter-CWIoMshG.css": {
+    "file": "assets/Counter-CWIoMshG.css",
+    "src": "_Counter-CWIoMshG.css"
+  },
+  "_Counter-DkOShU3t.js": {
+    "file": "assets/Counter-DkOShU3t.js",
+    "name": "Counter",
+    "imports": [
+      "_web-D0I6bkB-.js"
+    ],
+    "css": [
+      "assets/Counter-CWIoMshG.css"
+    ]
+  },
+  "_HttpStatusCode-DjTx85av.js": {
+    "file": "assets/HttpStatusCode-DjTx85av.js",
+    "name": "HttpStatusCode"
+  },
+  "_index-BmnT0ak3.js": {
+    "file": "assets/index-BmnT0ak3.js",
+    "name": "index",
+    "imports": [
+      "_web-D0I6bkB-.js"
+    ]
+  },
+  "_web-D0I6bkB-.js": {
+    "file": "assets/web-D0I6bkB-.js",
+    "name": "web"
+  },
+  "src/routes/[...404].mdx?pick=$css": {
+    "file": "assets/_...404_-DpjFCrGj.js",
+    "name": "_...404_",
+    "src": "src/routes/[...404].mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_index-BmnT0ak3.js",
+      "_web-D0I6bkB-.js",
+      "_HttpStatusCode-DjTx85av.js"
+    ]
+  },
+  "src/routes/about.mdx?pick=$css": {
+    "file": "assets/about-BU5l2odC.js",
+    "name": "about",
+    "src": "src/routes/about.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_index-BmnT0ak3.js",
+      "_Counter-DkOShU3t.js",
+      "_web-D0I6bkB-.js"
+    ]
+  },
+  "src/routes/index.mdx?pick=$css": {
+    "file": "assets/index-h5Sj-ZFA.js",
+    "name": "index",
+    "src": "src/routes/index.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_index-BmnT0ak3.js",
+      "_Counter-DkOShU3t.js",
+      "_web-D0I6bkB-.js"
+    ]
+  },
+  "virtual:$vinxi/handler/client": {
+    "file": "assets/client-8QB5It_T.js",
+    "name": "client",
+    "src": "virtual:$vinxi/handler/client",
+    "isEntry": true,
+    "imports": [
+      "_web-D0I6bkB-.js",
+      "_HttpStatusCode-DjTx85av.js"
+    ],
+    "dynamicImports": [
+      "src/routes/[...404].mdx?pick=$css",
+      "src/routes/about.mdx?pick=$css",
+      "src/routes/index.mdx?pick=$css"
+    ],
+    "css": [
+      "assets/client-rN2XJZw8.css"
+    ]
+  }
+}
