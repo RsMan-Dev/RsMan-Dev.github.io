@@ -3,7 +3,6 @@ import solid from 'vite-plugin-solid'
 
 export default defineConfig({
   plugins: [solid()],
-  base: '/rsman.github.io/',
   build: {
     outDir: 'dist',
     rollupOptions: {
@@ -15,8 +14,6 @@ export default defineConfig({
     }
   },
   server: {
-    headers: {
-      'Content-Type': 'application/javascript',
-    },
+    port: 3000,
   },
 })
