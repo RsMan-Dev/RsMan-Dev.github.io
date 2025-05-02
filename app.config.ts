@@ -8,6 +8,22 @@ import rehypeRaw from "rehype-raw";
 import rehypeExpressiveCode from "rehype-expressive-code";
 import { nodeTypes } from "@mdx-js/mdx";
 
+import fs from "node:fs";
+
+const routes = [...new Set(fs.globSync("./src/routes/**/*")
+  .map(route => route
+    .replaceAll("\\", "/")
+    .replace("src/routes", "")
+    .replace(/\.[^\.]+$/, "")
+    .replace(/\/index$/, "")
+    .replace(/\([^\)]+\)/g, "")
+    .replace(/\[\.\.\.[^\]]+\]/g, "")
+    .replace("//", "/")
+    .replace(/\/$/, "")
+  ).filter(Boolean)
+), "/"]
+
+console.log(routes);
 
 const { default: mdx } = pkg;
 export default defineConfig({
@@ -78,8 +94,6 @@ export default defineConfig({
   server: {
     baseURL: process.env.BASE_PATH,
     preset: "static",
-    prerender: {
-      routes: ["/home", "/docs"],
-    }
+    prerender: { routes }
   }
 });
