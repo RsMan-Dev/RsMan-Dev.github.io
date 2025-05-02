@@ -1,5 +1,5 @@
 import { useLocation, useNavigate } from "@solidjs/router";
-import { createMemo, createSignal, For, ParentProps } from "solid-js";
+import { createMemo, createSignal, For, onCleanup, ParentProps } from "solid-js";
 
 import Button from "~/components/Button";
 
@@ -35,34 +35,29 @@ export default function Docs( props: ParentProps) {
       <Button class="mb-4" onClick={"/home"}>Back to portfolio</Button>
       <NavGroup groups={fileGroups} parentPath="/docs/repo" nonExpandable/>
     </nav>
-    <main class="flex-1 p-4 pb-24 overflow-y-auto">
-      <script>{`
-        (() => {
-          const e = document.querySelector("#docs main");
-          const observer = new MutationObserver(mutations => {
-            for (const mutation of mutations) {
-              for (const node of mutation.addedNodes) {
-                if (node instanceof HTMLElement) {
-                  if(node.hasAttribute("innerhtml")) node.innerHTML = node.getAttribute("innerhtml");
-                  node.querySelectorAll("[innerhtml]").forEach(node => {
-                    node.innerHTML = node.getAttribute("innerhtml");
-                  });
-                }
-              }
-              for (const node of mutation.removedNodes) {
-                if (node instanceof HTMLElement && node.hasAttribute("innerhtml")) {
-                  node.removeAttribute("innerhtml");
-                }
-              }
-            }
-          });
-          observer.observe(e, { childList: true, subtree: true, attributes: true, attributeFilter: ["innerhtml"] });
-          e.querySelectorAll("[innerhtml]").forEach(node => {
-            node.innerHTML = node.getAttribute("innerhtml");
-          });
-        })()
-      `}</script>
+    <main ref={e => {
+      function applyInnerHTML(node: HTMLElement){
+        if(node.hasAttribute("innerhtml")) node.innerHTML = node.getAttribute("innerhtml")!;
+        node.querySelectorAll("[innerhtml]").forEach(node => {
+          node.innerHTML = node.getAttribute("innerhtml")!;
+        });
+      }
+
+      const observer = new MutationObserver(mutations => {
+        for (const mutation of mutations)
+          for (const node of mutation.addedNodes)
+            if (node instanceof HTMLElement) applyInnerHTML(node);
+      });
+      observer.observe(e, { childList: true, subtree: true, attributes: true, attributeFilter: ["innerhtml"] });
+      onCleanup(() => observer.disconnect());
+      applyInnerHTML(e);
+    }} class="flex-1 p-4 pb-24 overflow-y-auto">
       {props.children}
+      {/* instant innerHTML */}
+      <script>{`
+        document.querySelectorAll("[innerhtml]").forEach(node => node.innerHTML = node.getAttribute("innerhtml"));
+        document.currentScript?.remove();
+      `}</script>
     </main>
   </div>
 }
