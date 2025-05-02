@@ -21,7 +21,7 @@ const routes = [...new Set(fs.globSync("./src/routes/**/*")
     .replace("//", "/")
     .replace(/\/$/, "")
   ).filter(Boolean)
-), "/"].map(route => (process.env.BASE_PATH ?? "") + route)
+), "/"].map(route => ((process.env.BASE_PATH ?? "") + route).replace("//", "/"))
 
 console.log(routes);
 
