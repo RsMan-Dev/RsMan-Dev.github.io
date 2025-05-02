@@ -1,0 +1,1 @@
+import{M as o}from"./index-D4wBul8M.js";import{b as n,k as a}from"./web-CesR-2RA.js";function r(t){return[]}function s(t={}){const{wrapper:e}=Object.assign({},o(),t.components);return e?n(e,a(t,{get children(){return n(r,t)}})):r()}export{s as default};

@@ -1,0 +1,1 @@
+import{a as l,i as e,m,l as n,t as r}from"./web-CesR-2RA.js";import{u as p}from"./routing-CIhIEP7y.js";var i=r("<h1>"),c=r("<hr>");function h(a){const s=p(),o=l(()=>{let t=s.pathname.replace("/docs/repo/","").split("/")[0];return t.startsWith("rbxts-")&&(t=t.replace("rbxts-","@rbxts/")),t});return[(()=>{var t=e(i);return n(t,o),t})(),e(c),m(()=>a.children)]}export{h as default};
