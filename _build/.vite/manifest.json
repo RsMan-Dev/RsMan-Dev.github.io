@@ -1,11 +1,523 @@
 {
+  "_Button-D1-gfHjJ.js": {
+    "file": "assets/Button-D1-gfHjJ.js",
+    "name": "Button",
+    "imports": [
+      "_web-BqXwO0ET.js"
+    ]
+  },
+  "_HttpStatusCode-CLXM79FM.js": {
+    "file": "assets/HttpStatusCode-CLXM79FM.js",
+    "name": "HttpStatusCode",
+    "imports": [
+      "_web-BqXwO0ET.js"
+    ]
+  },
+  "_index-CLq0K9jS.js": {
+    "file": "assets/index-CLq0K9jS.js",
+    "name": "index",
+    "imports": [
+      "_web-BqXwO0ET.js"
+    ]
+  },
+  "_routing-Ap8HEzwW.js": {
+    "file": "assets/routing-Ap8HEzwW.js",
+    "name": "routing",
+    "imports": [
+      "_web-BqXwO0ET.js"
+    ]
+  },
+  "_web-BqXwO0ET.js": {
+    "file": "assets/web-BqXwO0ET.js",
+    "name": "web"
+  },
+  "assets/images/rbxts_logo.png": {
+    "file": "assets/rbxts_logo-Ccf_Ip2j.png",
+    "src": "assets/images/rbxts_logo.png"
+  },
+  "src/custom-elements/sticky-el.ts": {
+    "file": "assets/sticky-el-jEp8OxeE.js",
+    "name": "sticky-el",
+    "src": "src/custom-elements/sticky-el.ts",
+    "isDynamicEntry": true
+  },
+  "src/routes/(app).tsx?pick=default&pick=$css": {
+    "file": "assets/(app)-bAj9KqsC.js",
+    "name": "(app)",
+    "src": "src/routes/(app).tsx?pick=default&pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-BqXwO0ET.js",
+      "_Button-D1-gfHjJ.js"
+    ]
+  },
+  "src/routes/(app)/home.tsx?pick=default&pick=$css": {
+    "file": "assets/home-oVj10PCR.js",
+    "name": "home",
+    "src": "src/routes/(app)/home.tsx?pick=default&pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-BqXwO0ET.js",
+      "_Button-D1-gfHjJ.js"
+    ],
+    "css": [
+      "assets/home-ClqRm0ak.css"
+    ],
+    "assets": [
+      "assets/rbxts_logo-Ccf_Ip2j.png"
+    ]
+  },
+  "src/routes/[...404].tsx?pick=default&pick=$css": {
+    "file": "assets/_...404_-CYXb9PrU.js",
+    "name": "_...404_",
+    "src": "src/routes/[...404].tsx?pick=default&pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-BqXwO0ET.js",
+      "_HttpStatusCode-CLXM79FM.js"
+    ]
+  },
+  "src/routes/docs.tsx?pick=default&pick=$css": {
+    "file": "assets/docs-CXhnuqZF.js",
+    "name": "docs",
+    "src": "src/routes/docs.tsx?pick=default&pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-BqXwO0ET.js",
+      "_Button-D1-gfHjJ.js",
+      "_routing-Ap8HEzwW.js"
+    ]
+  },
+  "src/routes/docs/index.tsx?pick=default&pick=$css": {
+    "file": "assets/index-Dvc-p5jb.js",
+    "name": "index",
+    "src": "src/routes/docs/index.tsx?pick=default&pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-BqXwO0ET.js"
+    ]
+  },
+  "src/routes/docs/repo.tsx?pick=default&pick=$css": {
+    "file": "assets/repo-SHmTpxkn.js",
+    "name": "repo",
+    "src": "src/routes/docs/repo.tsx?pick=default&pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-BqXwO0ET.js",
+      "_routing-Ap8HEzwW.js"
+    ]
+  },
+  "src/routes/docs/repo/index.tsx?pick=default&pick=$css": {
+    "file": "assets/index-UVFN9HA0.js",
+    "name": "index",
+    "src": "src/routes/docs/repo/index.tsx?pick=default&pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_routing-Ap8HEzwW.js",
+      "_web-BqXwO0ET.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-bridge/0-Introduction.mdx?pick=$css": {
+    "file": "assets/0-Introduction-DsN8sFkj.js",
+    "name": "0-Introduction",
+    "src": "src/routes/docs/repo/rbxts-bridge/0-Introduction.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_index-CLq0K9jS.js",
+      "_web-BqXwO0ET.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-bridge/[...404].tsx?pick=default&pick=$css": {
+    "file": "assets/_...404_-BKTYAog5.js",
+    "name": "_...404_",
+    "src": "src/routes/docs/repo/rbxts-bridge/[...404].tsx?pick=default&pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_routing-Ap8HEzwW.js",
+      "_web-BqXwO0ET.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-bridge/fn.mdx?pick=$css": {
+    "file": "assets/fn-DsN8sFkj.js",
+    "name": "fn",
+    "src": "src/routes/docs/repo/rbxts-bridge/fn.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_index-CLq0K9jS.js",
+      "_web-BqXwO0ET.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/0-Introduction.mdx?pick=$css": {
+    "file": "assets/0-Introduction-4v7UKEal.js",
+    "name": "0-Introduction",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/0-Introduction.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-BqXwO0ET.js",
+      "_index-CLq0K9jS.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/JSON/parse.mdx?pick=$css": {
+    "file": "assets/parse-Ba62BlCF.js",
+    "name": "parse",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/JSON/parse.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-BqXwO0ET.js",
+      "_index-CLq0K9jS.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/JSON/stringify.mdx?pick=$css": {
+    "file": "assets/stringify-CXO_1aGv.js",
+    "name": "stringify",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/JSON/stringify.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-BqXwO0ET.js",
+      "_index-CLq0K9jS.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/Object/0-is.mdx?pick=$css": {
+    "file": "assets/0-is-CxB-IQlq.js",
+    "name": "0-is",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Object/0-is.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-BqXwO0ET.js",
+      "_index-CLq0K9jS.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/Object/1-toString.mdx?pick=$css": {
+    "file": "assets/1-toString-DOJjWfoI.js",
+    "name": "1-toString",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Object/1-toString.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-BqXwO0ET.js",
+      "_index-CLq0K9jS.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/Object/assign.mdx?pick=$css": {
+    "file": "assets/assign-e-MPIOA5.js",
+    "name": "assign",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Object/assign.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-BqXwO0ET.js",
+      "_index-CLq0K9jS.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/Object/create.mdx?pick=$css": {
+    "file": "assets/create-D-8iU36U.js",
+    "name": "create",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Object/create.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-BqXwO0ET.js",
+      "_index-CLq0K9jS.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/Object/dup.mdx?pick=$css": {
+    "file": "assets/dup-Cg8VRBEV.js",
+    "name": "dup",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Object/dup.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-BqXwO0ET.js",
+      "_index-CLq0K9jS.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/Object/entries.mdx?pick=$css": {
+    "file": "assets/entries-DUXNg9cz.js",
+    "name": "entries",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Object/entries.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-BqXwO0ET.js",
+      "_index-CLq0K9jS.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/Object/equals.mdx?pick=$css": {
+    "file": "assets/equals-Dhsid41_.js",
+    "name": "equals",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Object/equals.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-BqXwO0ET.js",
+      "_index-CLq0K9jS.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/Object/fromEntries.mdx?pick=$css": {
+    "file": "assets/fromEntries-BBPG5VVe.js",
+    "name": "fromEntries",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Object/fromEntries.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-BqXwO0ET.js",
+      "_index-CLq0K9jS.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/Object/hasOwn.mdx?pick=$css": {
+    "file": "assets/hasOwn-a16SQJ2L.js",
+    "name": "hasOwn",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Object/hasOwn.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-BqXwO0ET.js",
+      "_index-CLq0K9jS.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/Object/isArray.mdx?pick=$css": {
+    "file": "assets/isArray-B4scAi3z.js",
+    "name": "isArray",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Object/isArray.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-BqXwO0ET.js",
+      "_index-CLq0K9jS.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/Object/isCallable.mdx?pick=$css": {
+    "file": "assets/isCallable-viwyEwwT.js",
+    "name": "isCallable",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Object/isCallable.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-BqXwO0ET.js",
+      "_index-CLq0K9jS.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/Object/isEmpty.mdx?pick=$css": {
+    "file": "assets/isEmpty-BHwwWBMw.js",
+    "name": "isEmpty",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Object/isEmpty.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-BqXwO0ET.js",
+      "_index-CLq0K9jS.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/Object/keys.mdx?pick=$css": {
+    "file": "assets/keys-BcNLjpY7.js",
+    "name": "keys",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Object/keys.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-BqXwO0ET.js",
+      "_index-CLq0K9jS.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/Object/values.mdx?pick=$css": {
+    "file": "assets/values-B8SUwZOW.js",
+    "name": "values",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Object/values.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-BqXwO0ET.js",
+      "_index-CLq0K9jS.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/Proxy/0-introduction.mdx?pick=$css": {
+    "file": "assets/0-introduction-G4JUlGfc.js",
+    "name": "0-introduction",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Proxy/0-introduction.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-BqXwO0ET.js",
+      "_index-CLq0K9jS.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/Proxy/hook - apply.mdx?pick=$css": {
+    "file": "assets/hook - apply-DOHDkuoU.js",
+    "name": "hook - apply",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Proxy/hook - apply.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-BqXwO0ET.js",
+      "_index-CLq0K9jS.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/Proxy/hook - get.mdx?pick=$css": {
+    "file": "assets/hook - get-6MifOB-E.js",
+    "name": "hook - get",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Proxy/hook - get.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-BqXwO0ET.js",
+      "_index-CLq0K9jS.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/Proxy/hook - iter.mdx?pick=$css": {
+    "file": "assets/hook - iter-Bo_lqa4T.js",
+    "name": "hook - iter",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Proxy/hook - iter.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-BqXwO0ET.js",
+      "_index-CLq0K9jS.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/Proxy/hook - len.mdx?pick=$css": {
+    "file": "assets/hook - len-CtPNQrnj.js",
+    "name": "hook - len",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Proxy/hook - len.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-BqXwO0ET.js",
+      "_index-CLq0K9jS.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/Proxy/hook - ownKeys.mdx?pick=$css": {
+    "file": "assets/hook - ownKeys-BUjn2d21.js",
+    "name": "hook - ownKeys",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Proxy/hook - ownKeys.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-BqXwO0ET.js",
+      "_index-CLq0K9jS.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/Proxy/hook - set.mdx?pick=$css": {
+    "file": "assets/hook - set-JkDJsRhu.js",
+    "name": "hook - set",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Proxy/hook - set.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-BqXwO0ET.js",
+      "_index-CLq0K9jS.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/Timers/setInterval.mdx?pick=$css": {
+    "file": "assets/setInterval-NcVMp7gV.js",
+    "name": "setInterval",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Timers/setInterval.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-BqXwO0ET.js",
+      "_index-CLq0K9jS.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/Timers/setTimeout.mdx?pick=$css": {
+    "file": "assets/setTimeout-CPdrO6XS.js",
+    "name": "setTimeout",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Timers/setTimeout.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-BqXwO0ET.js",
+      "_index-CLq0K9jS.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/[...404].tsx?pick=default&pick=$css": {
+    "file": "assets/_...404_-Bk4pNKhy.js",
+    "name": "_...404_",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/[...404].tsx?pick=default&pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_routing-Ap8HEzwW.js",
+      "_web-BqXwO0ET.js"
+    ]
+  },
+  "src/routes/index.tsx?pick=default&pick=$css": {
+    "file": "assets/index-C-AnCJ81.js",
+    "name": "index",
+    "src": "src/routes/index.tsx?pick=default&pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_routing-Ap8HEzwW.js",
+      "_web-BqXwO0ET.js"
+    ]
+  },
   "virtual:$vinxi/handler/client": {
-    "file": "assets/client-Cw5s_jMn.js",
+    "file": "assets/client-BkjIdQev.js",
     "name": "client",
     "src": "virtual:$vinxi/handler/client",
     "isEntry": true,
+    "imports": [
+      "_web-BqXwO0ET.js",
+      "_HttpStatusCode-CLXM79FM.js",
+      "_routing-Ap8HEzwW.js"
+    ],
+    "dynamicImports": [
+      "src/routes/(app).tsx?pick=default&pick=$css",
+      "src/routes/[...404].tsx?pick=default&pick=$css",
+      "src/routes/docs.tsx?pick=default&pick=$css",
+      "src/routes/index.tsx?pick=default&pick=$css",
+      "src/routes/(app)/home.tsx?pick=default&pick=$css",
+      "src/routes/docs/index.tsx?pick=default&pick=$css",
+      "src/routes/docs/repo.tsx?pick=default&pick=$css",
+      "src/routes/docs/repo/index.tsx?pick=default&pick=$css",
+      "src/routes/docs/repo/rbxts-bridge/0-Introduction.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-bridge/[...404].tsx?pick=default&pick=$css",
+      "src/routes/docs/repo/rbxts-bridge/fn.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/0-Introduction.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/[...404].tsx?pick=default&pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/JSON/parse.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/JSON/stringify.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Object/0-is.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Object/1-toString.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Object/assign.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Object/create.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Object/dup.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Object/entries.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Object/equals.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Object/fromEntries.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Object/hasOwn.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Object/isArray.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Object/isCallable.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Object/isEmpty.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Object/keys.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Object/values.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Proxy/0-introduction.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Proxy/hook - apply.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Proxy/hook - get.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Proxy/hook - iter.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Proxy/hook - len.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Proxy/hook - ownKeys.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Proxy/hook - set.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Timers/setInterval.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Timers/setTimeout.mdx?pick=$css",
+      "src/custom-elements/sticky-el.ts"
+    ],
     "css": [
-      "assets/client-rN2XJZw8.css"
+      "assets/client-W2kPuFHV.css"
     ]
   }
 }
