@@ -1,0 +1,12 @@
+ownKeys is triggered when the keys of the proxy are requested, it can be used to modify the keys that are returned
+
+```ts
+const a = new Proxy({}, {
+  ownKeys: (target) => {
+    return ["a", "b"];
+  }
+});
+
+Object.keys(a); // will return ["a", "b"], even if target does not have any keys
+```
+

@@ -1,0 +1,21 @@
+Uses runService.Heartbeat to call the function in given Timeout
+
+```ts
+const a = setTimeout(() => {
+  print("Hello, world!"); // will be called in 1 second
+}, 1000);
+```
+
+<br/>
+
+Returns a handle to the timeout, which can be used to clear the timeout
+The handle is a table, to ensure that we gets a unique reference
+
+```ts
+const a = setTimeout(() => {
+  print("Hello, world!"); // will be called in 1 second
+}, 1000);
+
+clearTimeout(a); // will not be called
+```
+

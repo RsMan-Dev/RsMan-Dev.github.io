@@ -1,0 +1,31 @@
+check if an object is empty
+
+```ts
+const a = {};
+
+print(Object.isEmpty(a)); // true
+```
+
+<br/>
+
+Works with proxies
+
+```ts
+const a = new Proxy({}, {});
+
+print(Object.isEmpty(a)); // true
+```
+
+<br/>
+
+Works with all other table types
+
+```ts
+const a = new Map([]);
+const b = new Set([]);
+const c = [];
+
+print(Object.isEmpty(a)); // true
+print(Object.isEmpty(b)); // true
+print(Object.isEmpty(c)); // true
+```

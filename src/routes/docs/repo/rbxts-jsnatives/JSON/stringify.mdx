@@ -1,0 +1,33 @@
+srtingifies a table to a json string
+
+```ts
+const a = {a: 1, b: 2, c: 3};
+
+print(JSON.stringify(a)); // {"a":1,"b":2,"c":3}
+```
+
+<br/>
+
+Works with proxies
+
+```ts
+const a = new Proxy({a: 1, b: 2, c: 3}, {});
+
+print(JSON.stringify(a)); // {"a":1,"b":2,"c":3}
+```
+
+<br/>
+
+Works with all other table types
+
+```ts
+const a = new Map([["a", 1], ["b", 2], ["c", 3]]);
+const b = new Set([1, 2, 3]);
+const c = [1, 2, 3];  
+
+print(JSON.stringify(a)); // {"a":1,"b":2,"c":3}
+print(JSON.stringify(b)); // {"1":true,"2":true,"3":true}
+print(JSON.stringify(c)); // [1,2,3]
+```
+
+

@@ -1,0 +1,37 @@
+uses runService.Heartbeat to call the function in given Interval
+
+```ts
+const a = setInterval(() => {
+  print("Hello, world!"); // will be called every 1 second
+}, 1000);
+```
+
+<br/>
+
+Returns a handle to the interval, which can be used to clear the interval
+
+```ts
+const a = setInterval(() => {
+  print("Hello, world!"); // will be called every 1 second
+}, 1000);
+
+clearInterval(a); // will not be called
+```
+
+<br/>
+
+Can be used to call a function n times
+
+```ts
+let i = 0;
+const a = setInterval(() => {
+  print("Hello, world!"); // will be called every 1 second, 5 times
+  i++;
+  if(i >= 5){
+    clearInterval(a);
+  }
+}, 1000);
+```
+
+
+

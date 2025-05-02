@@ -1,0 +1,25 @@
+allows to create an object with or without extending another object
+
+```ts
+const a = Object.create({a: 1});
+
+print(a.a); // 1
+```
+
+<br/>
+
+```ts
+const a = Object.create(new Proxy({}, {get: (target, prop) => {
+  return "none";
+}}));
+
+print(a.a); // "none"
+```
+
+<br/>
+
+```ts
+const a = Object.create();
+
+print(a.a); // undefined
+```

@@ -1,0 +1,20 @@
+iter is triggered when the proxy is iterated over, using globalized iteration, so applyable when object is a Map or Set
+
+```ts
+const a = new Proxy(new Map([["a", 1], ["b", 2]]), {
+  iter: (target) => {
+    const keys = Object.keys(target);
+    let index = 0;
+    return function() {
+      if (index >= keys.length) return undefined;
+      const key = keys[index];
+      index++;
+      return [key, target[key]];
+    }
+  }
+});
+
+for (const [key, value] of a) {
+  print(key, value);
+}
+```

@@ -1,0 +1,84 @@
+
+
+This library aims to add all missing javascript natives to roblox.
+
+## Why this library ?
+
+You may ask you why this library exists in a workd where object-utils or luau-polyfills exists.
+
+Well, the answer is simple, none of these libraries includes a proxy support for roblox,
+features that needs to rewrite all the natives to work correctly.  
+As on my own libraries a ise proxies a lot, i needed to make my own library to implement javascript natives supporting proxies.
+
+## Installation
+
+To use this library, you need to install it using roblox-ts.
+
+```bash title="roblox-ts"
+npm install @rbxts/jsnatives
+```
+
+You also can install it directly from github (in case you want to use a unreleased version):
+
+```bash
+npm install @rbxts/jsnatives@github:RsMan-Dev/rbxts-jsnatives
+```
+
+<br/>
+
+## How to use
+
+You simply just have to import the objects utilities you want to use
+
+```ts
+import { Proxy, Object } from "@rbxts/jsnatives";
+
+const proxy = new Proxy({}, {get: (target, prop) => {
+  if(Object.hasOwn(target, prop)) return target[prop];
+  return "none";
+}});
+
+proxy.a = 1;
+print(proxy.a, proxy.b); // 1 none
+```
+
+<br/>
+
+## Features:
+
+- Proxy support with hooks:
+  - get => get a key
+  - set => set a key
+  - ownKeys => get all keys
+  - apply => call the proxy as a function
+  - len => get the length of the proxy (if an array)
+  - iter => iterate the proxy (must return iterator)
+
+- Object methods:
+  - isArray => check if the object is an array
+  - create => create an object
+  - keys => get all keys
+  - entries => get all entries
+  - values => get all values
+  - assign => assign an object
+  - fromEntries => create an object from an array of entries
+  - hasOwn => check if the object has a key
+  - isEmpty => check if the object is empty
+  - dup => duplicate an object
+  - is => check if the object is the same as another object
+  - equals => check if the object is equal to another object
+  - toString => convert the object to a string
+  - isCallable => check if the object is callable
+
+- JSON methods:
+  - parse => parse a string to an object
+  - stringify => convert an object to a string
+
+
+
+
+
+
+
+
+

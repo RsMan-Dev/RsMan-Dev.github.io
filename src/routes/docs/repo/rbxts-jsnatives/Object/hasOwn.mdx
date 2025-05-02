@@ -1,0 +1,59 @@
+checks if object has own property
+
+```ts
+const a = {a: 1, b: 2, c: 3};
+
+print(Object.hasOwn(a, "a")); // true
+print(Object.hasOwn(a, "b")); // true
+print(Object.hasOwn(a, "c")); // true
+```
+
+<br/>
+
+Works with proxies
+
+```ts
+const a = new Proxy({}, {
+  ownKeys: () => ["a", "b", "c"]
+});
+
+print(Object.hasOwn(a, "a")); // true
+print(Object.hasOwn(a, "b")); // true
+print(Object.hasOwn(a, "c")); // true
+```
+
+<br/>
+
+```ts
+const a = new Set([1, 2, 3]);
+
+print(Object.hasOwn(a, 1)); // true
+print(Object.hasOwn(a, 2)); // true
+print(Object.hasOwn(a, 3)); // true
+```
+
+<br/>
+
+```ts
+const a = new Map([["a", 1], ["b", 2], ["c", 3]]);
+
+print(Object.hasOwn(a, "a")); // true
+print(Object.hasOwn(a, "b")); // true
+print(Object.hasOwn(a, "c")); // true
+```
+
+
+<br/>
+
+```ts
+const a = [1, 2, 3];
+
+print(Object.hasOwn(a, 0)); // true
+print(Object.hasOwn(a, 1)); // true
+print(Object.hasOwn(a, 2)); // true
+print(Object.hasOwn(a, 3)); // false
+```
+
+
+
+

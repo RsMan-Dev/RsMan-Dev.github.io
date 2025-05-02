@@ -1,0 +1,13 @@
+len is triggered when the length of the proxy is requested, it can be used to modify the length that is returned
+
+```ts
+const a = new Proxy([1, 2, 3], {
+  len: (target) => {
+    return target.length - 1;
+  }
+});
+
+a.size(); // will return 2
+```
+
+

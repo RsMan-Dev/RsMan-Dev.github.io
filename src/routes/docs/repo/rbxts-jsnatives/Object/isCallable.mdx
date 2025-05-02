@@ -1,0 +1,35 @@
+check if an object is callable
+
+```ts
+const a = function() {};
+
+print(Object.isCallable(a)); // true
+```
+
+<br/>
+
+Works with proxies
+
+```ts
+const a = new Proxy({}, {
+  apply: () => {
+    return 1;
+  }
+});
+
+print(Object.isCallable(a)); // true
+```
+
+<br/>
+
+Works metatables
+
+```ts
+const a = setmetatable({}, {
+  __call: () => {
+    return 1;
+  }
+});
+
+print(Object.isCallable(a)); // true
+```

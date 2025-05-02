@@ -1,0 +1,61 @@
+duplicates an object
+
+```ts
+const a = {a: 1, b: 2, c: 3};
+const b = Object.dup(a);
+
+print(a, b, a === b); // {a: 1, b: 2, c: 3} {a: 1, b: 2, c: 3} false
+```
+
+<br/>
+
+```ts
+const a = new Map([["a", 1], ["b", 2], ["c", 3]]);
+const b = Object.dup(a);
+
+print(a, b, a === b); // {a: 1, b: 2, c: 3} {a: 1, b: 2, c: 3} false
+```
+
+<br/>
+
+```ts
+const a = new Set([1, 2, 3]);
+const b = Object.dup(a);
+
+print(a, b, a === b); // {a: true, b: true, c: true} {a: true, b: true, c: true} false
+```
+
+
+<br/>
+
+Works with proxies
+
+```ts
+const a = new Proxy({a: 1, b: 2, c: 3}, {});
+const b = Object.dup(a);
+
+print(a, b, a === b); // {} {a: 1, b: 2, c: 3} false
+```
+
+<br/>
+
+Works with arrays
+
+```ts
+const a = [1, 2, 3];
+const b = Object.dup(a);
+
+print(a, b, a === b, Object.isArray(b)); // [1, 2, 3] [1, 2, 3] false true
+```
+<br/>
+
+Can be recursively duplicated
+
+```ts
+const a = {a: 1, b: 2, c: 3, d: {e: 4, f: 5}};
+const b = Object.dup(a);
+const c = Object.dup(a, true);
+
+print(a, b, a.d === b.d); // {a: 1, b: 2, c: 3, d: {e: 4, f: 5}} {a: 1, b: 2, c: 3, d: {e: 4, f: 5}} true
+print(a, c, a.d === c.d); // {a: 1, b: 2, c: 3, d: {e: 4, f: 5}} {a: 1, b: 2, c: 3, d: {e: 4, f: 5}} false
+```

@@ -1,0 +1,64 @@
+get all entries of an object
+
+```ts
+const a = {a: 1, b: 2, c: 3};
+
+print(Object.entries(a)); // [["a", 1], ["b", 2], ["c", 3]]
+```
+
+<br/>
+
+On proxy, getting entries will trigger key trap, as we are getting values of the object
+```ts
+const a = new Proxy({}, {
+  ownKeys: () => {
+    return ["a", "b", "c"];
+  },
+  get: (target, prop) => {
+    print("key trap", prop);
+    return prop;
+  }
+});
+
+print(Object.entries(a)); // [["a", "a"], ["b", "b"], ["c", "c"]] (prints "key trap a", "key trap b", "key trap c")
+```
+
+Note that if the proxy returns undefined, the entry will contains only the key as lua's tables can't have undefined values
+
+```ts
+const a = new Proxy({}, {
+  ownKeys: () => {
+    return ["a", "b", "c"];
+  },
+  get: (target, prop) => {
+    print("key trap", prop);
+    return prop === "b" ? undefined : prop;
+  }
+});
+
+print(Object.entries(a)); // [["a", "a"], ["b"], ["c", "c"]]
+```
+
+<br/>
+
+```ts
+const a = new Set([1, 2, 3]);
+
+print(Object.entries(a)); // [[1, true], [2, true], [3, true]]
+```
+
+<br/>
+
+```ts
+const a = new Map([["a", 1], ["b", 2], ["c", 3]]);
+
+print(Object.entries(a)); // [["a", 1], ["b", 2], ["c", 3]]
+```
+
+<br/>
+
+```ts
+const a = [1, 2, 3];
+
+print(Object.entries(a)); // [[0, 1], [1, 2], [2, 3]]
+```

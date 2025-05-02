@@ -1,0 +1,41 @@
+the set hook is triggered when a property is set on the proxy
+
+```ts
+const a = new Proxy({}, {
+  set: (target, prop, value) => {
+    print("set", prop, value);
+  }
+});
+
+a.a = 1; // will log "set a 1"
+
+a["a"] = 1; // will log "set a 1"
+
+a.b; // will log nothing, not set
+```
+
+<br/>
+
+Set can be bypassed for certain values, by using the second argument of the Proxy constructor, it will be the main table in setmetatable()
+
+```ts
+const a = new Proxy({}, {
+  set: (target, prop, value) => {
+    print("set", prop, value);
+  }
+}, {
+  a: 1
+});
+
+a.a = 1; // will log nothing, bypassed
+
+a["a"] = 1; // will log nothing, bypassed
+
+a.b = 1; // will log "set b 1"
+
+a["b"] = 1; // will log "set b 1"
+```
+
+
+
+

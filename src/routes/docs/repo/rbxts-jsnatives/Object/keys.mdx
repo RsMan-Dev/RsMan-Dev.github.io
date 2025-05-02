@@ -1,0 +1,49 @@
+get all keys of an object
+
+```ts
+const a = {a: 1, b: 2, c: 3};
+
+print(Object.keys(a)); // ["a", "b", "c"]
+```
+
+<br/>
+
+On proxy, getting keys will never trigger key trap
+
+```ts
+const a = new Proxy({}, {
+  ownKeys: () => {
+    return ["a", "b", "c"];
+  },
+  get: (target, prop) => {
+    print("key trap");
+  }
+});
+
+print(Object.keys(a)); // ["a", "b", "c"] (no key trap logged)
+```
+
+<br/>
+
+```ts
+const a = new Set([1, 2, 3]);
+
+print(Object.keys(a)); // ["1", "2", "3"]
+```
+
+<br/>
+
+```ts
+const a = new Map([["a", 1], ["b", 2], ["c", 3]]);
+
+print(Object.keys(a)); // ["a", "b", "c"]
+```
+
+<br/>
+
+```ts
+const a = [1, 2, 3];
+
+print(Object.keys(a)); // ["0", "1", "2"]
+```
+

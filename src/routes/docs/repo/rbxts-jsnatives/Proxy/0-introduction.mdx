@@ -1,0 +1,19 @@
+Proxies are a way to intercept and redefine operations on objects.
+An object can act litterally like another object using proxy, can be used to create side effects on operations
+
+```ts
+const a = new Proxy({}, {
+  get: (target, prop) => {
+    print("get", prop);
+    return prop;
+  },
+  set: (target, prop, value) => {
+    print("set", prop, value);
+    target[prop] = value;
+  }
+});
+
+a.a = 1; // will log "set a 1"
+print(a.a); // will log "get a" and return 1
+print(a.b); // will log "get b" and return undefined
+```

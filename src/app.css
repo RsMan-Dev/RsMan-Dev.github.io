@@ -1,39 +1,177 @@
+/*noinspection CssInvalidAtRule*/
+@unocss ;
+
+html {
+  @apply h-full scroll-smooth;
+}
+
 body {
-  font-family: Gordita, Roboto, Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  --grid-size: 80px;
+  --grid-color: #cccccc;
+  --bg-color: theme('colors.background');
+  --x-margin: 8rem;
+
+  @apply min-h-full m-0 font-sans relative overflow-x-hidden scroll-smooth;
+  background-image: linear-gradient(var(--grid-color), transparent 1px, transparent), linear-gradient(90deg, var(--grid-color), transparent 1px, transparent), linear-gradient(var(--bg-color), var(--bg-color));
+  background-size: var(--grid-size) var(--grid-size);
+  background-position: -1px -1px;
+
+  &::before {
+    content: "";
+
+    @apply fixed inset-0;
+    background-image: radial-gradient(transparent 50%, var(--bg-color));
+  }
+
+  > * {
+    @apply relative;
+  }
+
+  > nav {
+    @apply flex items-center gap-4 px-12 py-4 justify-end fixed top-0 inset-x-0 z-2147483646 text-xl backdrop-blur-lg lt-md:text-base h-8;
+  }
+  
+
+  > section {
+    padding-left: var(--x-margin);
+    padding-right: var(--x-margin);
+  }
 }
 
 a {
-  margin-right: 1rem;
+  @apply text-secondary no-underline;
 }
 
-main {
-  text-align: center;
-  padding: 1em;
-  margin: 0 auto;
+@property --animation-var {
+  syntax: "<number>";
+  initial-value: 0;
+  inherits: true;
+}
+
+@property --animation-var-rev {
+  syntax: "<number>";
+  initial-value: 1;
+  inherits: true;
+}
+
+@keyframes animation-var {
+  0% {
+    --animation-var: 0;
+    --animation-var-rev: 1;
+  }
+
+  100% {
+    --animation-var: 1;
+    --animation-var-rev: 0;
+  }
+}
+
+h1, h2, h3, h4, h5, h6 {
+  @apply font-bold color-primary m-0;
 }
 
 h1 {
-  color: #335d92;
-  text-transform: uppercase;
-  font-size: 4rem;
-  font-weight: 100;
-  line-height: 1.1;
-  margin: 4rem auto;
-  max-width: 14rem;
+  @apply text-4xl;
+}
+
+h2 {
+  @apply text-3xl font-medium;
+}
+
+h3 {
+  @apply text-2xl font-medium;
+}
+
+h4 {
+  @apply text-xl font-medium;
+}
+
+h5 {
+  @apply text-lg font-bold;
+}
+
+h6 {
+  @apply text-base font-bold;
+}
+
+
+button, .btn {
+  @apply bg-primary text-white px-4 py-2 rounded-md outline outline-2 outline-primary -outline-offset-2 inline-block border-none font-bold uppercase;
+
+
+  sticky-el:has(> &) {
+    @apply rounded-md;
+  }
+
+  &.outline {
+    @apply bg-transparent text-primary;
+  }
+}
+:where(button, .btn) {
+  @apply text-sm;
 }
 
 p {
-  max-width: 14rem;
-  margin: 2rem auto;
-  line-height: 1.35;
+  @apply text-lg;
 }
 
-@media (min-width: 480px) {
-  h1 {
-    max-width: none;
+.shimmer {
+  --shimmer-color: #DDD;
+  --shimmer-color-alt: #EEE;
+  @apply relative rounded-lg overflow-clip;
+}
+
+.shimmer::after {
+  content: "";
+  animation: shimmer 1.5s infinite, shimmer-color 0.5s infinite alternate;
+  --shimmer-color-animated-opacity: 50%;
+  --shimmer-color-animated: color-mix(in srgb, var(--shimmer-color), var(--shimmer-color-alt) var(--shimmer-color-animated-opacity));
+  @apply absolute inset-0 bg-gray-200;
+  background-image: linear-gradient(-45deg, var(--shimmer-color-animated) 40%, var(--shimmer-color-alt) 50%, var(--shimmer-color-animated) 60%);
+  background-size: 300%;
+  background-position-x: 100%;
+}
+@property --shimmer-color-animated-opacity {
+  syntax: "<percentage>";
+  initial-value: 100%;
+  inherits: true;
+}
+@keyframes shimmer { to { background-position-x: 0% } }
+@keyframes shimmer-color { from { --shimmer-color-animated-opacity: 0% } to { --shimmer-color-animated-opacity: 50% } }
+
+
+.fade-in-bottom {
+  animation: animation-var linear both;
+  animation-timeline: view();
+  animation-range: entry 0% cover 20%;
+
+  transform: translate(0, calc(var(--animation-var-rev) * 25px));
+  opacity: calc(1 - var(--animation-var-rev));
+}
+
+.fade-in-left {
+  animation: animation-var linear both;
+  animation-timeline: view();
+  animation-range: entry 0% cover 20%;
+  
+  transform: translate(calc(var(--animation-var-rev) * 25px), 0);
+  opacity: calc(1 - var(--animation-var-rev));
+}
+
+.collapsible {
+  @apply grid grid-rows-[0fr];
+  transition: grid-template-rows 0.3s ease-in-out;
+  
+  >div{
+    @apply min-h-0;
+    overflow: clip;
   }
 
-  p {
-    max-width: none;
+  &.open {
+    @apply grid-rows-[1fr];
+    >div{ 
+      animation: 0s 0.3s linear forwards revert-overflow ;
+    }
   }
 }
+@keyframes revert-overflow { from { overflow: clip } to { overflow: visible } }

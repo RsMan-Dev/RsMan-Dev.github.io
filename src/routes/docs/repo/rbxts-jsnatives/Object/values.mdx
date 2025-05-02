@@ -1,0 +1,66 @@
+get all values of an object
+
+```ts
+const a = {a: 1, b: 2, c: 3};
+
+print(Object.values(a)); // [1, 2, 3]
+```
+
+<br/>
+
+On proxies, Object.values will trigger the get trap to get the values
+
+```ts
+const a = new Proxy({}, {
+  ownKeys: () => {
+    return ["a", "b", "c"];
+  },
+  get: (target, prop) => {
+    return prop;
+  }
+});
+
+print(Object.values(a)); // ["a", "b", "c"]
+```
+
+Note that if the proxy returns undefined, the table may have different length than Object.keys
+
+```ts
+const a = new Proxy({}, {
+  ownKeys: () => {
+    return ["a", "b", "c"];
+  },
+  get: (target, prop) => {
+    return prop === "b" ? undefined : prop;
+  }
+});
+
+print(Object.values(a), Object.keys(a)); // ["a", "c"] ["a", "b", "c"]
+```
+
+<br/>
+
+```ts
+const a = new Set([1, 2, 3]);
+
+print(Object.values(a)); // [true, true, true]
+```
+
+
+<br/>
+
+```ts
+const a = new Map([["a", 1], ["b", 2], ["c", 3]]);
+
+print(Object.values(a)); // [1, 2, 3]
+```
+<br/>
+
+```ts
+const a = [1, 2, 3];
+
+print(Object.values(a)); // [1, 2, 3]
+```
+
+<br/>
+

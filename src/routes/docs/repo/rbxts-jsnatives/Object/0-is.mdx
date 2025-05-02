@@ -1,0 +1,24 @@
+checks if two objects are the same (by reference)
+
+```ts
+const a = {};
+const b = {};
+
+print(Object.is(a, b)); // false
+```
+<br/>
+```ts
+const a = {};
+const b = a;
+
+print(Object.is(a, b)); // true
+```
+<br/>
+```ts	
+const a = {};
+const b = {e: a};
+
+print(Object.is(a, b.e)); // true
+```
+
+

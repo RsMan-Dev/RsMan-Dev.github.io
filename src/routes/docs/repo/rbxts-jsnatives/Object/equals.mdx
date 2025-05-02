@@ -1,0 +1,49 @@
+check if objects has same keys and values equals (non-reference check)
+
+```ts
+const a = {a: 1, b: 2, c: 3};
+const b = {a: 1, b: 2, c: 3};
+const c = {a: 1, b: 2, c: 4};
+
+print(Object.equals(a, b)); // true
+print(Object.equals(a, c)); // false
+```
+
+<br/>
+
+Works with proxies
+
+```ts
+const a = new Proxy({a: 1, b: 2, c: 3}, {});
+const b = {a: 1, b: 2, c: 3};
+
+print(Object.equals(a, b)); // true
+```
+
+<br/>
+
+Works with all other table types
+
+```ts
+const a = new Map([["a", 1], ["b", 2], ["c", 3]]);
+const b = new Set([1, 2, 3]);
+const c = [1, 2, 3];
+
+print(Object.equals(a, b)); // false
+print(Object.equals(a, c)); // false
+print(Object.equals(b, c)); // false
+```
+
+<br/>
+
+Can be recursively checked
+
+```ts
+const a = {a: 1, b: 2, c: 3, d: {e: 4, f: 5}};
+const b = {a: 1, b: 2, c: 3, d: {e: 4, f: 5}};
+
+print(Object.equals(a, b)); // false (d's reference is different)
+print(Object.equals(a, b, true)); // true (d's is no longer checked by reference because deep is true)
+```
+
+

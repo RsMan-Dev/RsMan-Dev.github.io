@@ -1,0 +1,51 @@
+mimics the `Array.isArray` function from javascript
+
+in lua side it checks if element is a table and if the table has a non-zero length or if next(table) returns something, 
+otherwise table is not considered to be an array.
+
+
+```ts
+const a = [1, 2, 3];
+
+print(Object.isArray(a)); // true
+```
+
+<br/>
+
+```ts
+const a = {};
+
+print(Object.isArray(a)); // false
+```
+
+<br/>
+
+```ts
+const a = {1: 1};
+
+print(Object.isArray(a)); // false
+```
+
+<br/>
+
+Works with proxies
+
+```ts
+const a = new Proxy([1, 2, 3], {});
+
+print(Object.isArray(a)); // true
+```
+
+<br/>
+
+Proxies with len hook returning non 0 will return true
+
+```ts
+const a = new Proxy({}, {
+  len: () => {
+    return 3;
+  }
+});
+
+print(Object.isArray(a)); // true
+```

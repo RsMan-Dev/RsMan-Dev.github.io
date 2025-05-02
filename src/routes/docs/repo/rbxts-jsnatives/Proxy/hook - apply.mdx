@@ -1,0 +1,11 @@
+the apply hook is triggered when a proxy is called as a function
+
+```ts
+const a = new Proxy({}, {
+  apply: (target, proxy, ...argumentsList) => {
+    print("apply", target, thisArg, ...argumentsList);
+  }
+});
+
+a(1, 2, 3); // will log "apply" {} {} 1 2 3
+```
