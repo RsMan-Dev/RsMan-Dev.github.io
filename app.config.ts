@@ -21,7 +21,7 @@ const routes = [...new Set(fs.globSync("./src/routes/**/*")
     .replace("//", "/")
     .replace(/\/$/, "")
   ).filter(Boolean)
-), "/"].map(route => ((process.env.BASE_PATH ?? "") + route).replace("//", "/"))
+), "/"].map(route => (("") + route).replace("//", "/"))
 
 console.log(routes);
 
@@ -92,7 +92,7 @@ export default defineConfig({
   },
   ssr: true,
   server: {
-    baseURL: process.env.BASE_PATH,
+    // baseURL: process.env.BASE_PATH,
     preset: "static",
     prerender: { routes }
   }
