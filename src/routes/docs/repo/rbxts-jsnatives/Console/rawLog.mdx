@@ -1,0 +1,66 @@
+# rawLog
+
+Outputs values to the console directly using Lua's `print` function without any additional formatting.
+
+## Signature
+
+```ts
+function rawLog(...args: unknown[]): void
+```
+
+## Description
+
+The `console.rawLog` method prints values to the console using Lua's built-in `print` function directly. Unlike `console.log`, it doesn't apply any automatic formatting, inspection, or indentation to the output. This is useful when you need to output raw data or want to avoid the automatic object inspection.
+
+### Parameters
+- `...args`: A list of values to output to the console without formatting. Can be of any type.
+
+### Return value
+- None (void).
+
+## Examples
+
+### Basic usage
+
+```ts
+// Raw logging a string
+console.rawLog("Hello world");
+// Outputs: Hello world
+
+// Raw logging multiple values
+console.rawLog("Value:", 42);
+// Outputs: Value: 42
+```
+
+### Comparing with console.log
+
+```ts
+// Create a complex object
+const player = {
+  name: "Player1",
+  level: 5,
+  inventory: ["sword", "shield", "potion"]
+};
+
+// Compare output formats
+console.log("Player info:", player); 
+// Outputs: Player info: { name: "Player1", level: 5, inventory: ["sword", "shield", "potion"] }
+// (with indentation and inspection)
+
+console.rawLog("Player info:", player);
+// Outputs: Player info: table: 0x1234abcd
+// (direct print output without inspection)
+```
+
+### Logging raw data
+
+```ts
+// Logging raw values
+const binaryData = "01010101";
+console.rawLog("Binary data:", binaryData);
+// Outputs directly: Binary data: 01010101
+
+// Logging numbers
+console.rawLog("Score:", 42, "Lives:", 3);
+// Outputs directly: Score: 42 Lives: 3
+```

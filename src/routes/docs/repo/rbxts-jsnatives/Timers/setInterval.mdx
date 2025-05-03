@@ -1,37 +1,85 @@
-uses runService.Heartbeat to call the function in given Interval
+# setInterval
+
+Repeatedly executes a function with a fixed delay between each call.
+
+## Signature
 
 ```ts
-const a = setInterval(() => {
-  print("Hello, world!"); // will be called every 1 second
+function setInterval(cb: (sym: symbol) => void, ms = 0): symbol
+```
+
+## Description
+
+The `setInterval` function repeatedly calls a callback function with a fixed time delay between each call. It returns a symbol that can be used to stop the interval using `clearInterval`.
+
+Internally, it uses Roblox's `task.delay` function to implement the interval behavior.
+
+### Parameters
+- `cb`: A callback function to execute repeatedly. It receives the interval symbol as an argument.
+- `ms`: The delay in milliseconds between each execution of the callback. Default is 0.
+
+### Return value
+- A unique symbol that identifies the interval and can be used with `clearInterval` to stop it.
+
+## Examples
+
+### Basic usage
+
+```ts
+// Log a message every second
+const intervalSymbol = setInterval((sym) => {
+  print("This message appears every second");
 }, 1000);
 ```
 
-<br/>
-
-Returns a handle to the interval, which can be used to clear the interval
+### Stopping an interval
 
 ```ts
-const a = setInterval(() => {
-  print("Hello, world!"); // will be called every 1 second
-}, 1000);
+// Create an interval that executes every 2 seconds
+const intervalSymbol = setInterval((sym) => {
+  print("Interval is running");
+}, 2000);
 
-clearInterval(a); // will not be called
+// Later, when you want to stop it:
+clearInterval(intervalSymbol);
 ```
 
-<br/>
-
-Can be used to call a function n times
+### Self-terminating interval
 
 ```ts
-let i = 0;
-const a = setInterval(() => {
-  print("Hello, world!"); // will be called every 1 second, 5 times
-  i++;
-  if(i >= 5){
-    clearInterval(a);
+let count = 0;
+const intervalSymbol = setInterval((sym) => {
+  count++;
+  print(`Count: ${count}`);
+  
+  // Stop the interval after 5 executions
+  if (count >= 5) {
+    print("Interval complete");
+    clearInterval(sym); // Using the symbol passed to the callback
   }
 }, 1000);
 ```
 
+### Creating a timer
+
+```ts
+// Create a 10-second countdown timer
+let timeLeft = 10;
+const timerSymbol = setInterval((sym) => {
+  print(`Time remaining: ${timeLeft} seconds`);
+  timeLeft--;
+  
+  if (timeLeft < 0) {
+    print("Timer complete!");
+    clearInterval(sym);
+  }
+}, 1000);
+```
+
+```ts
+const a = setInterval(() => {
+  print("Hello, world!"); // will be called every 1 second
+}, 1000);
+```
 
 

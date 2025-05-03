@@ -1,0 +1,209 @@
+# groupEnd
+
+Exits the current inline group in the console.
+
+## Signature
+
+```ts
+function groupEnd(): void
+```
+
+## Description
+
+The `console.groupEnd` method exits the current inline group in the console, reducing the indentation level. It is used to close groups that were previously created with either `console.group()` or `console.groupCollapsed()`.
+
+### Parameters
+- None.
+
+### Return value
+- None (void).
+
+## Examples
+
+### Basic usage
+
+```ts
+// Create and exit a simple group
+console.group("User Details");
+console.log("Name: John Doe");
+console.log("Email: john@example.com");
+console.groupEnd(); // Exit the "User Details" group
+
+// Normal logging continues without indentation
+console.log("Other information");
+```
+
+### Nested groups
+
+```ts
+// Working with nested groups
+console.group("Level 1");
+console.log("Info at level 1");
+
+console.group("Level 2");
+console.log("Info at level 2");
+
+console.group("Level 3");
+console.log("Info at level 3");
+console.groupEnd(); // Exit Level 3
+
+console.log("Back to level 2");
+console.groupEnd(); // Exit Level 2
+
+console.log("Back to level 1");
+console.groupEnd(); // Exit Level 1
+
+console.log("Back to normal output");
+```
+
+### Mixing group types
+
+```ts
+// Mix regular and collapsed groups
+console.group("Main Information"); // Expanded group
+console.log("Critical data shown by default");
+
+console.groupCollapsed("Additional Details"); // Collapsed group
+console.log("Less important information hidden by default");
+console.log("User can click to expand this group");
+console.groupEnd(); // Exit the collapsed group
+
+console.log("More critical information");
+console.groupEnd(); // Exit the main group
+```
+
+### Using try/finally for safety
+
+```ts
+// Using try/finally to ensure groups are always closed
+function safeGrouping(label: string, fn: () => void) {
+  console.group(label);
+  try {
+    fn();
+  } finally {
+    console.groupEnd(); // This will always run, even if an error occurs
+  }
+}
+
+// Usage
+safeGrouping("Important Process", () => {
+  console.log("Step 1");
+  console.log("Step 2");
+  
+  // Even if an error happens here, the group will be closed
+  if (Math.random() < 0.5) {
+    throw new Error("Random failure");
+  }
+  
+  console.log("Step 3");
+});
+```
+
+### Controlling group depth
+
+```ts
+// Helper functions to manage group depth
+class LogManager {
+  private groupDepth = 0;
+  
+  group(label: string): void {
+    console.group(label);
+    this.groupDepth++;
+  }
+  
+  groupCollapsed(label: string): void {
+    console.groupCollapsed(label);
+    this.groupDepth++;
+  }
+  
+  groupEnd(): void {
+    if (this.groupDepth > 0) {
+      console.groupEnd();
+      this.groupDepth--;
+    }
+  }
+  
+  endAllGroups(): void {
+    while (this.groupDepth > 0) {
+      console.groupEnd();
+      this.groupDepth--;
+    }
+  }
+}
+
+// Usage
+const logger = new LogManager();
+logger.group("Outer Group");
+logger.groupCollapsed("Inner Group");
+console.log("Deeply nested content");
+logger.groupEnd(); // End Inner Group
+logger.groupEnd(); // End Outer Group
+
+// Or close everything at once
+logger.group("Group 1");
+logger.group("Group 2");
+logger.group("Group 3");
+console.log("Very deeply nested");
+logger.endAllGroups(); // Closes all groups at once
+```
+
+### Timed group operations
+
+```ts
+// Combine grouping with timing
+function timedGroup<T>(label: string, fn: () => T): T {
+  console.group(`${label} (running...)`);
+  console.time("duration");
+  
+  try {
+    const result = fn();
+    console.timeEnd("duration");
+    return result;
+  } catch (error) {
+    console.timeEnd("duration");
+    console.error("Error:", error);
+    throw error;
+  } finally {
+    console.groupEnd();
+  }
+}
+
+// Usage
+const result = timedGroup("Complex Calculation", () => {
+  // Perform calculation
+  let sum = 0;
+  for (let i = 0; i < 1000000; i++) {
+    sum += i;
+  }
+  return sum;
+});
+```
+
+### Conditional group ending
+
+```ts
+// Conditional group operation and ending
+function conditionalGroup(condition: boolean, label: string, fn: () => void) {
+  let groupActive = false;
+  
+  if (condition) {
+    console.group(label);
+    groupActive = true;
+  }
+  
+  fn();
+  
+  if (groupActive) {
+    console.groupEnd();
+  }
+}
+
+// Usage
+conditionalGroup(true, "Debugging Information", () => {
+  console.log("This will be in a group");
+});
+
+conditionalGroup(false, "Hidden Group", () => {
+  console.log("This won't be in a group");
+});
+``` 

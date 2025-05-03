@@ -1,0 +1,56 @@
+# Array.isArray
+
+Determines whether the passed value is an Array.
+
+## Signature
+
+```ts
+function isArray(array: unknown): array is unknown[]
+```
+
+## Description
+
+The `Array.isArray()` method determines whether the passed value is an Array. It returns `true` if the value is an Array, and `false` otherwise.
+
+This method is particularly useful when you need to check if a value is an array before performing array-specific operations on it.
+
+## Examples
+
+### Basic usage
+
+```ts
+const array = [1, 2, 3];
+const object = { a: 1, b: 2 };
+const string = "hello";
+
+print(ArrayUtils.isArray(array)); // true
+print(ArrayUtils.isArray(object)); // false
+print(ArrayUtils.isArray(string)); // false
+```
+
+### Type narrowing
+
+```ts
+function processValue(value: unknown) {
+  if (ArrayUtils.isArray(value)) {
+    // In this block, value is typed as unknown[]
+    return value.length;
+  } else {
+    // In this block, value is still unknown
+    return 0;
+  }
+}
+
+print(processValue([1, 2, 3])); // 3
+print(processValue("not an array")); // 0
+```
+
+### Working with proxy objects
+
+```ts
+const proxiedArray = new Proxy([1, 2, 3], {});
+const proxiedObject = new Proxy({}, {});
+
+print(ArrayUtils.isArray(proxiedArray)); // true
+print(ArrayUtils.isArray(proxiedObject)); // false
+``` 

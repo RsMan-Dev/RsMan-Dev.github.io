@@ -1,24 +1,75 @@
-checks if two objects are the same (by reference)
+# Object.is
+
+Determines whether two values are the same value.
+
+## Signature
 
 ```ts
-const a = {};
-const b = {};
-
-print(Object.is(a, b)); // false
+function is<T, U>(obj: T, other: U): obj is T & U
 ```
-<br/>
+
+## Description
+
+The `Object.is()` method determines whether two values are the same value. It performs a reference check rather than a content equality check.
+
+Unlike the equality operators (`==` and `===`), `Object.is()` treats `NaN` as equal to itself and treats `-0` and `+0` as different.
+
+The method returns a type predicate that narrows the type to `T & U` when the objects are the same.
+
+## Examples
+
+### Basic reference check
+
 ```ts
-const a = {};
-const b = a;
+const objA = {};
+const objB = {};
 
-print(Object.is(a, b)); // true
+print(Object.is(objA, objB)); // false (different objects)
 ```
-<br/>
+
+### Same reference
+
+```ts
+const objA = {};
+const objB = objA;
+
+print(Object.is(objA, objB)); // true (same reference)
+```
+
+### Nested references
+
 ```ts	
-const a = {};
-const b = {e: a};
+const objA = {};
+const objB = {ref: objA};
 
-print(Object.is(a, b.e)); // true
+print(Object.is(objA, objB.ref)); // true (same reference)
+```
+
+### With primitive values
+
+```ts
+print(Object.is(1, 1)); // true
+print(Object.is("hello", "hello")); // true
+print(Object.is(true, true)); // true
+print(Object.is(null, null)); // true
+print(Object.is(undefined, undefined)); // true
+
+print(Object.is(NaN, NaN)); // true (unlike ===)
+print(Object.is(0, -0)); // false (unlike ===)
+```
+
+### Type narrowing with is
+
+```ts
+function processValues<T, U>(value1: T, value2: U) {
+  if (Object.is(value1, value2)) {
+    // In this block, value1 and value2 are typed as T & U
+    return "Values are the same";
+  } else {
+    // In this block, value1 is T and value2 is U
+    return "Values are different";
+  }
+}
 ```
 
 

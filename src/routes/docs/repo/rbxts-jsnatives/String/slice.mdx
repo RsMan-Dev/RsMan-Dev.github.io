@@ -1,0 +1,105 @@
+# slice
+
+Extracts a section of a string and returns it as a new string.
+
+## Signature
+
+```ts
+function slice(str: string, start?: NumericAdmissible, end?: NumericAdmissible): string
+```
+
+## Description
+
+The `slice` function extracts a section of a string and returns it as a new string, without modifying the original string. The extracted portion starts at the `start` index and ends at, but does not include, the `end` index.
+
+### Parameters
+- `str`: The string to extract from.
+- `start` (optional): The zero-based index at which to begin extraction. If a string is provided, it will be converted to a number. If omitted, extraction starts from the beginning of the string (index 0).
+- `end` (optional): The zero-based index before which to end extraction. If a string is provided, it will be converted to a number. If omitted, extraction continues to the end of the string.
+
+### Return value
+- A new string containing the extracted section of the string.
+
+## Examples
+
+### Basic usage
+
+```ts
+// Extract a substring
+const str = "Hello world";
+const world = String.slice(str, 6);
+print(world); // Outputs: "world"
+
+const hello = String.slice(str, 0, 5);
+print(hello); // Outputs: "Hello"
+```
+
+### Using negative indices
+
+```ts
+// Negative indices count from the end of the string
+const str = "Hello world";
+const last5 = String.slice(str, -5);
+print(last5); // Outputs: "world"
+
+const excludeLast = String.slice(str, 0, -1);
+print(excludeLast); // Outputs: "Hello worl"
+```
+
+### Using string indices
+
+```ts
+// String indices are converted to numbers
+const str = "Hello world";
+const portion = String.slice(str, "1", "5");
+print(portion); // Outputs: "ello"
+```
+
+### Edge cases
+
+```ts
+const str = "Hello world";
+
+// If start > end, an empty string is returned
+const emptyResult = String.slice(str, 5, 2);
+print(emptyResult); // Outputs: "" (empty string)
+
+// If start > string length, an empty string is returned
+const beyondLength = String.slice(str, 20);
+print(beyondLength); // Outputs: "" (empty string)
+
+// If end > string length, extraction continues to the end
+const toEnd = String.slice(str, 6, 100);
+print(toEnd); // Outputs: "world"
+```
+
+### Using without parameters
+
+```ts
+// Without parameters, the entire string is returned
+const str = "Hello world";
+const copy = String.slice(str);
+print(copy); // Outputs: "Hello world"
+```
+
+### Common slicing patterns
+
+```ts
+const str = "Hello world";
+
+// Get first 5 characters
+const first5 = String.slice(str, 0, 5);
+print(first5); // Outputs: "Hello"
+
+// Get last 5 characters
+const last5 = String.slice(str, -5);
+print(last5); // Outputs: "world"
+
+// Remove first character
+const withoutFirst = String.slice(str, 1);
+print(withoutFirst); // Outputs: "ello world"
+
+// Remove last character
+const withoutLast = String.slice(str, 0, -1);
+print(withoutLast); // Outputs: "Hello worl"
+```

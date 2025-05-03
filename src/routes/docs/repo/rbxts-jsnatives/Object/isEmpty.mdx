@@ -1,31 +1,57 @@
-check if an object is empty
+# Object.isEmpty
+
+Checks if an object is empty (has no enumerable properties).
+
+## Signature
 
 ```ts
-const a = {};
-
-print(Object.isEmpty(a)); // true
+function isEmpty<T>(obj: T): boolean
 ```
 
-<br/>
+## Description
 
-Works with proxies
+The `Object.isEmpty()` method determines whether an object has any enumerable properties. It returns `true` if the object has no enumerable properties, and `false` otherwise.
+
+This method works with all object types including regular objects, arrays, Maps, Sets, and proxies.
+
+## Examples
+
+### Empty object check
 
 ```ts
-const a = new Proxy({}, {});
+const emptyObj = {};
+const nonEmptyObj = {a: 1};
 
-print(Object.isEmpty(a)); // true
+print(Object.isEmpty(emptyObj)); // true
+print(Object.isEmpty(nonEmptyObj)); // false
 ```
 
-<br/>
-
-Works with all other table types
+### Proxy check
 
 ```ts
-const a = new Map([]);
-const b = new Set([]);
-const c = [];
+const emptyProxy = new Proxy({}, {});
+const nonEmptyProxy = new Proxy({a: 1}, {});
 
-print(Object.isEmpty(a)); // true
-print(Object.isEmpty(b)); // true
-print(Object.isEmpty(c)); // true
+print(Object.isEmpty(emptyProxy)); // true
+print(Object.isEmpty(nonEmptyProxy)); // false
+```
+
+### Collection types
+
+```ts
+const emptyMap = new Map();
+const emptySet = new Set();
+const emptyArray = [];
+
+const nonEmptyMap = new Map([["a", 1]]);
+const nonEmptySet = new Set([1]);
+const nonEmptyArray = [1];
+
+print(Object.isEmpty(emptyMap)); // true
+print(Object.isEmpty(emptySet)); // true
+print(Object.isEmpty(emptyArray)); // true
+
+print(Object.isEmpty(nonEmptyMap)); // false
+print(Object.isEmpty(nonEmptySet)); // false
+print(Object.isEmpty(nonEmptyArray)); // false
 ```

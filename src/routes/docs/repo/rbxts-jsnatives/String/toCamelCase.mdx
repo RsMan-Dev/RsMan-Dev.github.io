@@ -1,0 +1,90 @@
+# toCamelCase
+
+Converts a string to camelCase format.
+
+## Signature
+
+```ts
+function toCamelCase(str: string): string
+```
+
+## Description
+
+The `toCamelCase` function converts a string to camelCase format. It removes spaces, hyphens, underscores, and other separators, and transforms the string into a format where the first word is lowercase and subsequent words start with a capital letter, with no spaces or separators between them.
+
+### Parameters
+- `str`: The string to convert to camelCase.
+
+### Return value
+- A new string in camelCase format.
+
+## Examples
+
+### Basic usage
+
+```ts
+// Converting different formats to camelCase
+const space = String.toCamelCase("hello world");
+print(space); // Outputs: "helloWorld"
+
+const kebab = String.toCamelCase("hello-world");
+print(kebab); // Outputs: "helloWorld"
+
+const snake = String.toCamelCase("hello_world");
+print(snake); // Outputs: "helloWorld"
+
+const pascal = String.toCamelCase("HelloWorld");
+print(pascal); // Outputs: "helloWorld"
+```
+
+### Multiple words
+
+```ts
+// Converting multi-word strings
+const multiple = String.toCamelCase("hello beautiful world");
+print(multiple); // Outputs: "helloBeautifulWorld"
+
+const mixedSeparators = String.toCamelCase("hello_beautiful-world");
+print(mixedSeparators); // Outputs: "helloBeautifulWorld"
+```
+
+### Handling edge cases
+
+```ts
+// Empty string
+const empty = String.toCamelCase("");
+print(empty); // Outputs: ""
+
+// Single word uppercase, each next letter will be considered new word
+const single = String.toCamelCase("HELLO");
+print(single); // Outputs: "hELLO"
+
+// Already in camelCase
+const alreadyCamel = String.toCamelCase("helloWorld");
+print(alreadyCamel); // Outputs: "helloWorld"
+```
+
+### Converting from other cases
+
+```ts
+// From sentence case
+const sentence = String.toCamelCase("This is a sentence");
+print(sentence); // Outputs: "thisIsASentence"
+
+// From title case
+const title = String.toCamelCase("This Is A Title");
+print(title); // Outputs: "thisIsATitle"
+
+// From snake_case
+const snake = String.toCamelCase("user_first_name");
+print(snake); // Outputs: "userFirstName"
+
+// From kebab-case
+const kebab = String.toCamelCase("api-response-code");
+print(kebab); // Outputs: "apiResponseCode"
+
+// From PascalCase
+const pascal = String.toCamelCase("UserLoginRequest");
+print(pascal); // Outputs: "userLoginRequest"
+```
+``` 

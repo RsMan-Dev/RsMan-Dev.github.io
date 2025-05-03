@@ -1,0 +1,79 @@
+# Array.reverse
+
+Reverses an array in place and returns the reference to the same array.
+
+## Signature
+
+```ts
+function reverse<T>(array: Array<T>): Array<T>
+```
+
+## Description
+
+The `Array.reverse()` method reverses an array in place. The first array element becomes the last, and the last array element becomes the first. This method mutates the original array and returns a reference to the same array.
+
+## Examples
+
+### Basic reversal
+
+```ts
+const array = [1, 2, 3, 4, 5];
+const reversed = ArrayUtils.reverse(array);
+
+print(array); // [5, 4, 3, 2, 1]
+print(reversed); // [5, 4, 3, 2, 1]
+print(array === reversed); // true - both reference the same array
+```
+
+### Reversing arrays with different types
+
+```ts
+const mixedArray = [1, "two", true, { key: "value" }];
+ArrayUtils.reverse(mixedArray);
+
+print(mixedArray); // [{ key: "value" }, true, "two", 1]
+```
+
+### Reversing empty arrays
+
+```ts
+const emptyArray = [];
+ArrayUtils.reverse(emptyArray);
+
+print(emptyArray); // [] - an empty array remains empty
+```
+
+### Using reverse in a chain of operations
+
+```ts
+const array = [1, 2, 3, 4, 5];
+
+// Filter out odd numbers, double the values, then reverse
+const result = ArrayUtils.reverse(
+  array
+    .filter(x => x % 2 === 0)
+    .map(x => x * 2)
+);
+
+print(result); // [8, 4] (from original even numbers [2, 4] -> doubled [4, 8] -> reversed [8, 4])
+```
+
+### Comparison with toReversed
+
+```ts
+const original = [1, 2, 3, 4, 5];
+
+// reverse() mutates the original array
+const mutatedArray = ArrayUtils.reverse(original);
+print(original); // [5, 4, 3, 2, 1]
+print(mutatedArray); // [5, 4, 3, 2, 1]
+print(original === mutatedArray); // true - same array reference
+
+// To reverse without mutation, use toReversed() or create a copy first
+const copied = [...original];
+const reversedCopy = ArrayUtils.reverse(copied);
+print(original); // [5, 4, 3, 2, 1] - still reversed from before
+print(copied); // [1, 2, 3, 4, 5] -> [5, 4, 3, 2, 1] - copy was reversed
+print(reversedCopy); // [5, 4, 3, 2, 1]
+print(copied === reversedCopy); // true - same array reference
+``` 

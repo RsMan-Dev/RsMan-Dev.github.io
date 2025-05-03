@@ -1,17 +1,38 @@
-get all values of an object
+# Object.values
+
+Returns an array of a given object's own enumerable property values.
+
+## Signature
 
 ```ts
-const a = {a: 1, b: 2, c: 3};
-
-print(Object.values(a)); // [1, 2, 3]
+function values<T>(obj: ReadonlyArray<T>): Array<NonNullable<T>>
+function values<T>(obj: ReadonlySet<T>): Array<true>
+function values<T>(obj: ReadonlyMap<unknown, T>): Array<NonNullable<T>>
+function values<T extends object>(obj: T): Array<NonNullable<T[keyof T]>>
 ```
 
-<br/>
+## Description
 
-On proxies, Object.values will trigger the get trap to get the values
+The `Object.values()` method returns an array containing the values that correspond to all of a given object's own enumerable property names. The return type varies based on the input object type:
+- For arrays: returns an array of the values
+- For sets: returns an array of `true` values (one for each entry)
+- For maps: returns an array of the map's values
+- For objects: returns an array of the property values
+
+## Examples
+
+### Object values
 
 ```ts
-const a = new Proxy({}, {
+const obj = {a: 1, b: 2, c: 3};
+
+print(Object.values(obj)); // [1, 2, 3]
+```
+
+### Proxy values
+
+```ts
+const proxiedObj = new Proxy({}, {
   ownKeys: () => {
     return ["a", "b", "c"];
   },
@@ -20,13 +41,13 @@ const a = new Proxy({}, {
   }
 });
 
-print(Object.values(a)); // ["a", "b", "c"]
+print(Object.values(proxiedObj)); // ["a", "b", "c"]
 ```
 
-Note that if the proxy returns undefined, the table may have different length than Object.keys
+### Proxy with undefined values
 
 ```ts
-const a = new Proxy({}, {
+const proxiedWithUndefined = new Proxy({}, {
   ownKeys: () => {
     return ["a", "b", "c"];
   },
@@ -35,32 +56,29 @@ const a = new Proxy({}, {
   }
 });
 
-print(Object.values(a), Object.keys(a)); // ["a", "c"] ["a", "b", "c"]
+print(Object.values(proxiedWithUndefined), Object.keys(proxiedWithUndefined)); // ["a", "c"] ["a", "b", "c"]
 ```
 
-<br/>
+### Set values
 
 ```ts
-const a = new Set([1, 2, 3]);
+const set = new Set([1, 2, 3]);
 
-print(Object.values(a)); // [true, true, true]
+print(Object.values(set)); // [true, true, true]
 ```
 
-
-<br/>
+### Map values
 
 ```ts
-const a = new Map([["a", 1], ["b", 2], ["c", 3]]);
+const map = new Map([["a", 1], ["b", 2], ["c", 3]]);
 
-print(Object.values(a)); // [1, 2, 3]
+print(Object.values(map)); // [1, 2, 3]
 ```
-<br/>
+
+### Array values
 
 ```ts
-const a = [1, 2, 3];
+const array = [1, 2, 3];
 
-print(Object.values(a)); // [1, 2, 3]
+print(Object.values(array)); // [1, 2, 3]
 ```
-
-<br/>
-

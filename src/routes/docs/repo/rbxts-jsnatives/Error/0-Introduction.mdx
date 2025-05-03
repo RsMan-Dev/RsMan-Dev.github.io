@@ -1,0 +1,62 @@
+# Error
+
+The Error object represents an error when something goes wrong in a program.
+
+## Overview
+
+```ts
+interface Error {
+  message: string;
+  name: string;
+  stack?: string;
+}
+
+interface ErrorConstructor {
+  new (message?: string): Error;
+  (message?: string): Error;
+  readonly captureStackTrace: (error: Error, options?: Callback) => void;
+}
+```
+
+The Error module includes:
+
+- An `Error` interface that defines the structure of error objects
+- An `ErrorConstructor` that allows creating new error objects
+- The ability to capture stack traces for detailed debugging
+
+Errors are automatically created and thrown by the runtime system when built-in operations fail, and can also be explicitly created and thrown by your code.
+
+## Usage Example
+
+```ts
+import { Error } from "@rbxts/jsnatives";
+
+// Create a basic error
+const error1 = new Error("Something went wrong");
+print(error1.name);    // "Error"
+print(error1.message); // "Something went wrong"
+
+// Use in try/catch
+try {
+  throw new Error("Operation failed");
+} catch (err) {
+  if (err instanceof Error) {
+    print(`Caught error: ${err.message}`);
+    
+    // Access stack trace if available
+    if (err.stack) {
+      print(err.stack);
+    }
+  }
+}
+
+// Create custom error with captured stack trace
+function generateError() {
+  const customError = new Error("Custom error");
+  Error.captureStackTrace(customError, generateError);
+  return customError;
+}
+
+const myError = generateError();
+// The stack trace won't include the generateError function itself
+``` 

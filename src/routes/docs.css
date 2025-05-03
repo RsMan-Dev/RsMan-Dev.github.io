@@ -1,0 +1,21 @@
+#docs{
+  h1 {
+    @apply text-3xl;
+  }
+
+  h2 {
+    @apply text-3xl;
+  }
+
+  h3 {
+    @apply text-xl;
+  }
+
+  h1, h2, h3 {
+    @apply mb-4;
+  }
+
+  pre {
+    @apply mb-4;
+  }
+}

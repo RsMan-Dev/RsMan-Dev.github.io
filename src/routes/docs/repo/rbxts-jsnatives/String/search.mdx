@@ -1,0 +1,179 @@
+# search
+
+Searches for a match between a pattern and a string.
+
+## Signature
+
+```ts
+function search(str: string, pattern: PatternAdmissible): number
+```
+
+## Description
+
+The `search` function executes a search for a Lua pattern in a string and returns the index of the first match found. It uses Lua's pattern matching system rather than JavaScript's regular expressions.
+
+### Parameters
+- `str`: The string to search within.
+- `pattern`: The pattern to search for. Can be a string, number, or boolean. If a non-string value is provided, it will be converted to a string.
+
+### Return value
+- The zero-based index of the first match of the pattern.
+- If no match is found, -1 is returned.
+
+## Examples
+
+### Basic usage
+
+```ts
+// Search for a simple substring
+const index = String.search("Hello world", "world");
+print(index); // Outputs: 6
+
+// Search for a character
+const letterIndex = String.search("Hello world", "e");
+print(letterIndex); // Outputs: 1
+```
+
+### Using Lua patterns
+
+```ts
+// Search for any digit
+const digitIndex = String.search("Hello 123 world", "%d");
+print(digitIndex); // Outputs: 6
+
+// Search for any whitespace
+const spaceIndex = String.search("Hello world", "%s");
+print(spaceIndex); // Outputs: 5
+
+// Search for word boundary
+const wordStart = String.search("Hello world", "%a+");
+print(wordStart); // Outputs: 0
+```
+
+### Pattern matching examples
+
+```ts
+// Match a word starting with 'w'
+const wWordIndex = String.search("Hello world", "w%a+");
+print(wWordIndex); // Outputs: 6
+
+// Match any vowel
+const vowelIndex = String.search("Hello", "[aeiou]");
+print(vowelIndex); // Outputs: 1
+
+// Match a pattern with character classes
+const uppercase = String.search("Hello World", "%u%l+");
+print(uppercase); // Outputs: 0 (matches "Hello")
+```
+
+### Not found cases
+
+```ts
+// Pattern not in the string
+const notFound = String.search("Hello world", "xyz");
+print(notFound); // Outputs: -1
+
+// Pattern not matching
+const noMatch = String.search("12345", "%a");
+print(noMatch); // Outputs: -1 (no alphabetic characters)
+```
+
+### Using non-string patterns
+
+```ts
+// Using a number
+const numberPattern = String.search("The answer is 42!", 42);
+print(numberPattern); // Outputs: 14
+
+// Using a boolean
+const boolPattern = String.search("Is it true or false?", true);
+print(boolPattern); // Outputs: 6
+```
+
+### Common Lua pattern characters
+
+```ts
+// %d - digits
+const digits = String.search("abc123", "%d+");
+print(digits); // Outputs: 3
+
+// %a - letters
+const letters = String.search("123abc", "%a+");
+print(letters); // Outputs: 3
+
+// %w - alphanumeric
+const alphanumeric = String.search("!@#$abc123", "%w+");
+print(alphanumeric); // Outputs: 4
+
+// %s - whitespace
+const whitespace = String.search("hello world", "%s");
+print(whitespace); // Outputs: 5
+
+// . - any character
+const anyChar = String.search("hello", "h.l");
+print(anyChar); // Outputs: 0
+```
+
+### Differences from JavaScript RegExp
+
+```ts
+// In JavaScript you might use:
+// "Hello world".search(/o/g) // returns 4
+
+// In this API:
+const result = String.search("Hello world", "o");
+print(result); // Outputs: 4
+
+// JavaScript regex flags aren't supported
+// For case-insensitive, use character classes instead
+const caseInsensitive = String.search("Hello", "[hH]");
+print(caseInsensitive); // Outputs: 0
+```
+
+### Practical applications
+
+```ts
+// Validate if a string contains a number
+function containsNumber(text: string): boolean {
+  return String.search(text, "%d") !== -1;
+}
+
+print(containsNumber("Hello123")); // Outputs: true
+print(containsNumber("Hello world")); // Outputs: false
+
+// Check if a string starts with uppercase
+function startsWithUppercase(text: string): boolean {
+  return String.search(text, "^%u") !== -1;
+}
+
+print(startsWithUppercase("Hello")); // Outputs: true
+print(startsWithUppercase("hello")); // Outputs: false
+
+// Find the position of the first word
+function findFirstWord(text: string): number {
+  return String.search(text, "%a+");
+}
+
+print(findFirstWord("  Hello world")); // Outputs: 2
+print(findFirstWord("123Hello")); // Outputs: 3
+```
+
+### Comparison with indexOf
+
+```ts
+const str = "Hello world";
+
+// Using search for exact match (like indexOf)
+const searchResult = String.search(str, "world");
+print(searchResult); // Outputs: 6
+
+// Using indexOf for comparison
+const indexOfResult = String.indexOf(str, "world");
+print(indexOfResult); // Outputs: 6
+
+// The key difference: search can use Lua patterns
+const patternResult = String.search(str, "w%a+"); // any word starting with 'w'
+print(patternResult); // Outputs: 6
+
+// This would be more complex with indexOf
+```

@@ -1,36 +1,95 @@
-the get hook is triggered when a property is accessed on the proxy
+# Proxy - get hook
+
+The `get` hook is triggered when a property is accessed on the proxy.
+
+## Signature
 
 ```ts
-const a = new Proxy({}, {
-  get: (target, prop) => {
-    print("get", prop);
-    return prop;
-  }
-});
-
-a.a; // will log "get a"
-
-a["a"]; // will log "get a"
-
-a.b = 1; // will log nothing as the set trap is not defined
+function get<T>(target: T, key: unknown, proxy: T): any;
 ```
 
-<br/>
+## Description
 
-Get can be bypassed for certain values, by using the second argument of the Proxy constructor, it will be the main table in setmetatable()
+The `get` handler trap is called when a property is read from the proxy object. It allows you to intercept and customize property access operations.
+
+> Note: If raw is provided and contains the key, get hook will be bypassed.
+
+### Parameters
+- `target`: The original target object the proxy is wrapping
+- `key`: The property key (string, number, or symbol) being accessed
+- `proxy`: The proxy instance itself
+
+### Return value
+- The value that should be returned for the property access
+
+## Examples
+
+### Basic property access interception
 
 ```ts
-const a = new Proxy({}, {
-  get: (target, prop) => {
-    print("get", prop);
-    return prop;
+const target = { message: "Hello" };
+const proxy = new Proxy(target, {
+  get: (target, prop, proxy) => {
+    console.log(`Accessing property: ${String(prop)}`);
+    return target[prop];
   }
-}, {
-  a: 1
 });
 
-print(a.a); // will return 1, logs nothing
+console.log(proxy.message); // Logs: "Accessing property: message", then "Hello"
+console.log(proxy["message"]); // Logs: "Accessing property: message", then "Hello"
+```
 
-print(a.b); // will log "get b" and return undefined
+### Virtual properties
+
+```ts
+const target = { x: 10, y: 20 };
+const proxy = new Proxy(target, {
+  get: (target, prop, proxy) => {
+    if (prop === "sum") {
+      return target.x + target.y;
+    }
+    return target[prop];
+  }
+});
+
+console.log(proxy.sum); // 30 (virtual property)
+```
+
+### Using raw properties to bypass the get trap
+
+```ts
+const target = {};
+const proxy = new Proxy(target, {
+  get: (target, prop, proxy) => {
+    console.log(`Get trap for ${String(prop)}`);
+    return `Trapped: ${String(prop)}`;
+  }
+}, {
+  directProp: "Direct access"
+});
+
+console.log(proxy.normalProp); // Logs: "Get trap for normalProp", then "Trapped: normalProp"
+console.log(proxy.directProp); // Logs: "Direct access" (bypasses the get trap)
+```
+
+### Conditional access control
+
+```ts
+const userData = { username: "admin", role: "admin", email: "admin@example.com" };
+const protectedData = new Proxy(userData, {
+  get: (target, prop, proxy) => {
+    if (prop === "email" && target.role !== "admin") {
+      return "Permission denied";
+    }
+    return target[prop];
+  }
+});
+
+console.log(protectedData.username); // "admin"
+console.log(protectedData.email); // "admin@example.com" (allowed because role is admin)
+
+// Change role
+userData.role = "user";
+console.log(protectedData.email); // "Permission denied"
 ```
 

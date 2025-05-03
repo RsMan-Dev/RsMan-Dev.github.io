@@ -1,0 +1,74 @@
+# time
+
+Starts a timer you can use to track how long an operation takes.
+
+## Signature
+
+```ts
+function time(label?: string): void
+```
+
+## Description
+
+The `console.time` method starts a timer with an optional label. This timer can be used in conjunction with `console.timeEnd()` to measure how long an operation takes. The timer continues running until `console.timeEnd()` is called with the same label.
+
+### Parameters
+- `label` (optional): A string identifying the timer. If omitted, a default label is used.
+
+### Return value
+- None (void).
+
+## Examples
+
+### Basic usage
+
+```ts
+// Start a timer with default label
+console.time();
+
+// Perform some operation
+for (let i = 0; i < 1000000; i++) {
+  // Simulate work
+}
+
+// Stop the timer and log elapsed time
+console.timeEnd();
+// Outputs: default: 15.123ms (time will vary)
+```
+
+### Using a custom label
+
+```ts
+// Start a timer with a custom label
+console.time("processData");
+
+// Perform some data processing
+const result = processLargeDataSet();
+
+// Stop the timer and log elapsed time
+console.timeEnd("processData");
+// Outputs: processData: 123.456ms (time will vary)
+```
+
+### Multiple timers
+
+```ts
+// Using multiple timers simultaneously
+console.time("total");
+
+console.time("part1");
+// First operation
+part1Operation();
+console.timeEnd("part1");
+
+console.time("part2");
+// Second operation
+part2Operation();
+console.timeEnd("part2");
+
+console.timeEnd("total");
+// Outputs:
+// part1: 50.123ms
+// part2: 30.456ms
+// total: 80.789ms
+```

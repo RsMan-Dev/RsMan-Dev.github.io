@@ -1,0 +1,111 @@
+# captureStackTrace
+
+Creates a stack trace property on an Error object.
+
+## Signature
+
+```ts
+function captureStackTrace(error: Error, options?: Callback): void
+```
+
+## Description
+
+The `Error.captureStackTrace()` method creates a `.stack` property on the target error object that represents the point in the code where `captureStackTrace()` was called. It is primarily used to create custom, more informative error messages.
+
+If the optional `options` parameter is provided, it acts as the constructor function that should be omitted from the stack trace. This allows you to hide implementation details from the stack trace.
+
+### Parameters
+- `error`: The error object to create a stack trace on.
+- `options` (optional): A function whose invocation should be omitted from the stack trace. Typically, this is the function that created the error.
+
+### Return value
+- None (void).
+
+## Examples
+
+### Basic Usage
+
+```ts
+// Create a custom error with a stack trace
+const error = new Error("An error occurred");
+Error.captureStackTrace(error);
+
+print(error.stack);
+// Outputs a stack trace starting from the point where captureStackTrace was called
+```
+
+### Hiding Implementation Details
+
+```ts
+// Creating a utility function to generate errors
+function createApiError(message: string, statusCode: number): Error {
+  const error = new Error(message);
+  
+  // Add custom properties
+  (error as any).statusCode = statusCode;
+  
+  // Capture stack trace but hide the createApiError function from it
+  Error.captureStackTrace(error, createApiError);
+  
+  return error;
+}
+
+// Usage
+function processApiResponse(response: any) {
+  if (response.status >= 400) {
+    throw createApiError(`API Error: ${response.statusText}`, response.status);
+  }
+  // More processing...
+}
+
+try {
+  // Simulate a failed API call
+  processApiResponse({ status: 404, statusText: "Not Found" });
+} catch (err) {
+  print(err.message);      // "API Error: Not Found"
+  print((err as any).statusCode); // 404
+  
+  // The stack trace will start at the call to processApiResponse
+  // and won't include createApiError internals
+  if (err.stack) {
+    print(err.stack);
+  }
+}
+```
+
+### Creating a Custom Error Class
+
+```ts
+class DatabaseError extends Error {
+  code: number;
+  
+  constructor(message: string, code: number) {
+    super(message);
+    
+    // Set the name to match the class name
+    this.name = "DatabaseError";
+    
+    // Set custom properties
+    this.code = code;
+    
+    // Capture stack trace excluding the constructor
+    Error.captureStackTrace(this, DatabaseError);
+  }
+}
+
+// Usage
+try {
+  throw new DatabaseError("Failed to connect to database", 5000);
+} catch (err) {
+  if (err instanceof DatabaseError) {
+    print(`${err.name}: ${err.message} (Code: ${err.code})`);
+    // "DatabaseError: Failed to connect to database (Code: 5000)"
+    
+    if (err.stack) {
+      print(err.stack);
+      // Stack trace will start from where the error was thrown
+      // and won't include the DatabaseError constructor
+    }
+  }
+}
+```

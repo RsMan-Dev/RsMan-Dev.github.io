@@ -1,0 +1,121 @@
+# toSnakeCase
+
+Converts a string to snake_case format.
+
+## Signature
+
+```ts
+function toSnakeCase(str: string): string
+```
+
+## Description
+
+The `toSnakeCase` function converts a string to snake_case format. It replaces spaces, hyphens, and other separators with underscores, and transforms the string into a format where all letters are lowercase with words separated by underscores.
+
+### Parameters
+- `str`: The string to convert to snake_case.
+
+### Return value
+- A new string in snake_case format.
+
+## Examples
+
+### Basic usage
+
+```ts
+// Converting different formats to snake_case
+const space = String.toSnakeCase("hello world");
+print(space); // Outputs: "hello_world"
+
+const camel = String.toSnakeCase("helloWorld");
+print(camel); // Outputs: "hello_world"
+
+const pascal = String.toSnakeCase("HelloWorld");
+print(pascal); // Outputs: "hello_world"
+
+const kebab = String.toSnakeCase("hello-world");
+print(kebab); // Outputs: "hello_world"
+```
+
+### Multiple words
+
+```ts
+// Converting multi-word strings
+const multiple = String.toSnakeCase("hello beautiful world");
+print(multiple); // Outputs: "hello_beautiful_world"
+
+const mixedSeparators = String.toSnakeCase("hello_beautiful-world");
+print(mixedSeparators); // Outputs: "hello_beautiful_world"
+```
+
+### Handling edge cases
+
+```ts
+// Empty string
+const empty = String.toSnakeCase("");
+print(empty); // Outputs: ""
+
+// Single word
+const single = String.toSnakeCase("hello");
+print(single); // Outputs: "hello"
+
+// Already in snake_case
+const alreadySnake = String.toSnakeCase("hello_world");
+print(alreadySnake); // Outputs: "hello_world"
+
+// Uppercase
+const uppercase = String.toSnakeCase("HELLO WORLD");
+print(uppercase); // Outputs: "h_e_l_l_o_w_o_r_l_d" (each uppercase is treated as new word)
+```
+
+### Converting from other cases
+
+```ts
+// From sentence case
+const sentence = String.toSnakeCase("This is a sentence");
+print(sentence); // Outputs: "this_is_a_sentence"
+
+// From title case
+const title = String.toSnakeCase("This Is A Title");
+print(title); // Outputs: "this_is_a_title"
+
+// From camelCase
+const camel = String.toSnakeCase("userFirstName");
+print(camel); // Outputs: "user_first_name"
+
+// From PascalCase
+const pascal = String.toSnakeCase("UserLoginRequest");
+print(pascal); // Outputs: "user_login_request"
+
+// From kebab-case
+const kebab = String.toSnakeCase("api-response-code");
+print(kebab); // Outputs: "api_response_code"
+```
+
+### Practical applications
+
+```ts
+// Create database column names
+function createColumnName(name: string): string {
+  return String.toSnakeCase(name);
+}
+
+print(createColumnName("UserFirstName")); // Outputs: "user_first_name"
+print(createColumnName("Created At")); // Outputs: "created_at"
+
+// Normalize configuration keys
+function normalizeConfigKey(key: string): string {
+  return String.toSnakeCase(key);
+}
+
+const configKeys = [
+  "apiKey",
+  "api-url",
+  "Max Items",
+  "DatabaseConnection"
+];
+
+const normalizedKeys = configKeys.map(normalizeConfigKey);
+print(normalizedKeys);
+// Outputs: ["api_key", "api_url", "max_items", "database_connection"]
+```

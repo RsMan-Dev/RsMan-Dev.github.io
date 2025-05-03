@@ -1,0 +1,153 @@
+# difference
+
+Creates a new Set containing elements that exist in the first set but not in the second set.
+
+## Signature
+
+```ts
+function difference<T>(set1: Set<T>, set2: Set<T>): Set<T>
+```
+
+## Description
+
+The `difference` function creates a new Set containing only the elements that are present in the first set but not in the second set. It is sometimes referred to as the "relative complement" of the second set in the first set.
+
+### Parameters
+- `set1`: The first Set (the set to subtract from).
+- `set2`: The second Set (the set to subtract).
+
+### Return value
+- A new Set containing only the elements that exist in `set1` but not in `set2`.
+
+## Examples
+
+### Basic usage
+
+```ts
+// Create two sets
+const set1 = new Set([1, 2, 3, 4]);
+const set2 = new Set([3, 4, 5, 6]);
+
+// Find elements in set1 that are not in set2
+const result = SetUtils.difference(set1, set2);
+console.log([...result]); // Outputs: [1, 2]
+```
+
+### With string elements
+
+```ts
+// Sets with string elements
+const fruits1 = new Set(["apple", "banana", "orange", "kiwi"]);
+const fruits2 = new Set(["banana", "kiwi", "grape"]);
+
+// Find fruits in first set that are not in second set
+const uniqueFruits = SetUtils.difference(fruits1, fruits2);
+console.log([...uniqueFruits]); // Outputs: ["apple", "orange"]
+```
+
+### Order matters
+
+```ts
+// Difference is not commutative - order matters
+const set1 = new Set([1, 2, 3]);
+const set2 = new Set([2, 3, 4]);
+
+// set1 - set2
+const result1 = SetUtils.difference(set1, set2);
+console.log([...result1]); // Outputs: [1]
+
+// set2 - set1
+const result2 = SetUtils.difference(set2, set1);
+console.log([...result2]); // Outputs: [4]
+```
+
+### Empty and identical sets
+
+```ts
+// Difference with an empty set
+const numbers = new Set([1, 2, 3]);
+const empty = new Set();
+
+// set - empty = set
+const result1 = SetUtils.difference(numbers, empty);
+console.log([...result1]); // Outputs: [1, 2, 3]
+
+// empty - set = empty
+const result2 = SetUtils.difference(empty, numbers);
+console.log([...result2]); // Outputs: []
+
+// Difference with identical sets
+const set = new Set([1, 2, 3]);
+const sameset = new Set([1, 2, 3]);
+const result3 = SetUtils.difference(set, sameset);
+console.log([...result3]); // Outputs: []
+```
+
+### Practical application
+
+```ts
+// Remove banned users from active users list
+function removeInactiveMemberships(allUsers: Set<string>, inactiveUsers: Set<string>): Set<string> {
+  return SetUtils.difference(allUsers, inactiveUsers);
+}
+
+// All users
+const allUsers = new Set([
+  "user1", "user2", "user3", "user4", "user5"
+]);
+
+// Inactive users to be removed
+const inactiveUsers = new Set([
+  "user2", "user5"
+]);
+
+// Get active users only
+const activeUsers = removeInactiveMemberships(allUsers, inactiveUsers);
+console.log([...activeUsers]); 
+// Outputs: ["user1", "user3", "user4"]
+```
+
+### Filtering items
+
+```ts
+// Filter out items that match certain criteria
+function filterSelectedItems<T>(allItems: Set<T>, excludeItems: Set<T>): Set<T> {
+  return SetUtils.difference(allItems, excludeItems);
+}
+
+// Shopping cart items
+const cartItems = new Set(["shirt", "pants", "hat", "shoes", "socks"]);
+
+// Items on backorder (unavailable)
+const backorderedItems = new Set(["hat", "shoes"]);
+
+// Get only available items
+const availableItems = filterSelectedItems(cartItems, backorderedItems);
+console.log([...availableItems]); 
+// Outputs: ["shirt", "pants", "socks"]
+```
+
+### Comparison with manual implementation
+
+```ts
+// Manual implementation of difference operation
+function manualDifference<T>(set1: Set<T>, set2: Set<T>): Set<T> {
+  const result = new Set<T>();
+  for (const item of set1) {
+    if (!set2.has(item)) {
+      result.add(item);
+    }
+  }
+  return result;
+}
+
+// Using SetUtils.difference
+const set1 = new Set([1, 2, 3, 4, 5]);
+const set2 = new Set([4, 5, 6, 7]);
+
+const manualResult = manualDifference(set1, set2);
+const utilResult = SetUtils.difference(set1, set2);
+
+console.log([...manualResult]); // Outputs: [1, 2, 3]
+console.log([...utilResult]);   // Outputs: [1, 2, 3]
+``` 

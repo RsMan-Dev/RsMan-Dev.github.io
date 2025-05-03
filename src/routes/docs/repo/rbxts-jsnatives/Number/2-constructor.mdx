@@ -1,0 +1,114 @@
+# Number Constructor
+
+The Number constructor creates a Number value.
+
+## Signature
+
+```ts
+function Number(value: unknown): number
+```
+
+## Description
+
+When called as a function, `Number(value)` converts the argument to a number. If the value cannot be converted, it returns `NaN`.
+
+### Parameters
+- `value`: The value to convert to a number.
+
+### Return value
+- A numeric value.
+
+## Examples
+
+### Basic Usage
+
+```ts
+// Converting string numbers
+Number("123");       // 123
+Number("123.45");    // 123.45
+Number("");          // 0
+
+// Number literals in different bases impossible, use parseInt instead
+Number("0x11");      // 0 (hexadecimal)
+Number("0b11");      // 0 (binary)
+Number("0o11");      // 0 (octal)
+
+// Invalid conversions
+Number("foo");       // NaN
+Number("100a");      // NaN
+
+// Boolean conversions
+Number(true);        // 1
+Number(false);       // 0
+
+// undefined
+Number(undefined);   // NaN
+```
+
+### Using for Type Conversion
+
+```ts
+// Converting user input to numbers
+function processUserInput(input: string) {
+  const numericValue = Number(input);
+  
+  if (Number.isNaN(numericValue)) {
+    return "Please enter a valid number";
+  }
+  
+  return `You entered: ${numericValue}`;
+}
+```
+
+### Formatting Before Conversion
+
+```ts
+// Clean a string before conversion
+function parseCleanNumber(input: string): number {
+  // Remove currency symbols, spaces, and other non-numeric characters
+  const cleaned = input.replace(/[$,\s]/g, "");
+  return Number(cleaned);
+}
+
+// Usage
+parseCleanNumber("$1,234.56"); // 1234.56
+parseCleanNumber("42 items");  // NaN (because "items" remains)
+```
+
+### Checking Conversion Results
+
+```ts
+// Safe conversion with validation
+function safeNumberConversion(value: unknown): number | null {
+  const num = Number(value);
+  
+  if (Number.isNaN(num)) {
+    return null;
+  }
+  
+  return num;
+}
+
+// Usage
+const validResult = safeNumberConversion("42");      // 42
+const invalidResult = safeNumberConversion("hello"); // null
+```
+
+### Combined with Other Number Methods
+
+```ts
+// Parse and format
+function parseAndFormat(input: string, decimalPlaces = 2): string {
+  const num = Number(input);
+  
+  if (Number.isNaN(num)) {
+    return "Invalid number";
+  }
+  
+  return Number.toFixed(num, decimalPlaces);
+}
+
+// Usage
+parseAndFormat("123.456", 1);  // "123.5"
+parseAndFormat("invalid");     // "Invalid number"
+``` 

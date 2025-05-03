@@ -1,16 +1,38 @@
-get all entries of an object
+# Object.entries
+
+Returns an array of a given object's own enumerable property [key, value] pairs.
+
+## Signature
 
 ```ts
-const a = {a: 1, b: 2, c: 3};
-
-print(Object.entries(a)); // [["a", 1], ["b", 2], ["c", 3]]
+function entries<T>(obj: ReadonlyArray<T>): Array<[number, NonNullable<T>]>
+function entries<T>(obj: ReadonlySet<T>): Array<[T, true]>
+function entries<K, T>(obj: ReadonlyMap<K, T>): Array<[K, NonNullable<T>]>
+function entries<T extends object>(obj: T): Array<[keyof T, NonNullable<T[keyof T]>]>
 ```
 
-<br/>
+## Description
 
-On proxy, getting entries will trigger key trap, as we are getting values of the object
+The `Object.entries()` method returns an array containing all of the [key, value] pairs of a given object's own enumerable string properties. The return type varies based on the input object type:
+- For arrays: returns [index, value] pairs
+- For sets: returns [value, true] pairs
+- For maps: returns [key, value] pairs
+- For objects: returns [property, value] pairs
+
+## Examples
+
+### Object entries
+
 ```ts
-const a = new Proxy({}, {
+const obj = {a: 1, b: 2, c: 3};
+
+print(Object.entries(obj)); // [["a", 1], ["b", 2], ["c", 3]]
+```
+
+### Proxy entries
+
+```ts
+const proxiedObj = new Proxy({}, {
   ownKeys: () => {
     return ["a", "b", "c"];
   },
@@ -20,13 +42,13 @@ const a = new Proxy({}, {
   }
 });
 
-print(Object.entries(a)); // [["a", "a"], ["b", "b"], ["c", "c"]] (prints "key trap a", "key trap b", "key trap c")
+print(Object.entries(proxiedObj)); // [["a", "a"], ["b", "b"], ["c", "c"]] (prints "key trap a", "key trap b", "key trap c")
 ```
 
-Note that if the proxy returns undefined, the entry will contains only the key as lua's tables can't have undefined values
+### Proxy with undefined values
 
 ```ts
-const a = new Proxy({}, {
+const proxiedWithUndefined = new Proxy({}, {
   ownKeys: () => {
     return ["a", "b", "c"];
   },
@@ -36,29 +58,29 @@ const a = new Proxy({}, {
   }
 });
 
-print(Object.entries(a)); // [["a", "a"], ["b"], ["c", "c"]]
+print(Object.entries(a)); // [["a", "a"], ["b"], ["c", "c"]] (null values are not included)
 ```
 
-<br/>
+### Set entries
 
 ```ts
-const a = new Set([1, 2, 3]);
+const set = new Set([1, 2, 3]);
 
-print(Object.entries(a)); // [[1, true], [2, true], [3, true]]
+print(Object.entries(set)); // [[1, true], [2, true], [3, true]]
 ```
 
-<br/>
+### Map entries
 
 ```ts
-const a = new Map([["a", 1], ["b", 2], ["c", 3]]);
+const map = new Map([["a", 1], ["b", 2], ["c", 3]]);
 
-print(Object.entries(a)); // [["a", 1], ["b", 2], ["c", 3]]
+print(Object.entries(map)); // [["a", 1], ["b", 2], ["c", 3]]
 ```
 
-<br/>
+### Array entries
 
 ```ts
-const a = [1, 2, 3];
+const array = [1, 2, 3];
 
-print(Object.entries(a)); // [[0, 1], [1, 2], [2, 3]]
+print(Object.entries(array)); // [[0, 1], [1, 2], [2, 3]]
 ```

@@ -1,39 +1,104 @@
-the set hook is triggered when a property is set on the proxy
+# Proxy - set hook
+
+The `set` hook is triggered when a property is set on the proxy.
+
+## Signature
 
 ```ts
-const a = new Proxy({}, {
-  set: (target, prop, value) => {
-    print("set", prop, value);
-  }
-});
-
-a.a = 1; // will log "set a 1"
-
-a["a"] = 1; // will log "set a 1"
-
-a.b; // will log nothing, not set
+function set<T>(target: T, key: unknown, value: unknown, proxy: T): boolean;
 ```
 
-<br/>
+## Description
 
-Set can be bypassed for certain values, by using the second argument of the Proxy constructor, it will be the main table in setmetatable()
+The `set` handler trap is called when a property is set on the proxy object. It allows you to intercept and customize property assignment operations.
+
+### Parameters
+- `target`: The original target object the proxy is wrapping
+- `key`: The property key (string, number, or symbol) being set
+- `value`: The new value being assigned to the property
+- `proxy`: The proxy instance itself
+
+### Return value
+- A boolean indicating whether the assignment succeeded. Return `true` to indicate success, or `false` to indicate failure (which will trigger an error).
+
+## Examples
+
+### Basic property assignment interception
 
 ```ts
-const a = new Proxy({}, {
-  set: (target, prop, value) => {
-    print("set", prop, value);
+const target = {};
+const proxy = new Proxy(target, {
+  set: (target, prop, value, proxy) => {
+    console.log(`Setting property ${String(prop)} to ${value}`);
+    target[prop] = value;
+    return true; // Indicate success
   }
-}, {
-  a: 1
 });
 
-a.a = 1; // will log nothing, bypassed
+proxy.name = "John"; // Logs: "Setting property name to John"
+console.log(target.name); // "John" (the change is reflected in the target)
+```
 
-a["a"] = 1; // will log nothing, bypassed
+### Validation
 
-a.b = 1; // will log "set b 1"
+```ts
+const numbers = [];
+const proxy = new Proxy(numbers, {
+  set: (target, prop, value, proxy) => {
+    // Ensure we're only adding numbers to the array
+    if (typeIs(value, "number")) {
+      target[prop] = value;
+      return true;
+    }
+    console.error("Only numbers can be added to this array");
+    return false; // Reject the operation
+  }
+});
 
-a["b"] = 1; // will log "set b 1"
+proxy.push(1); // Works
+proxy.push(2); // Works
+// proxy.push("3"); // Logs: "Only numbers can be added to this array" and fails with error "[PROXYERROR] Failed to set value on target object"
+console.log(numbers); // [1, 2]
+```
+
+### Transformation
+
+```ts
+const target = {};
+const proxy = new Proxy(target, {
+  set: (target, prop, value, proxy) => {
+    // Convert all string values to uppercase
+    if (typeof value === "string") {
+      target[prop] = value.toUpperCase();
+    } else {
+      target[prop] = value;
+    }
+    return true;
+  }
+});
+
+proxy.name = "john";
+proxy.age = 30;
+console.log(target); // { name: "JOHN", age: 30 }
+```
+
+### Using raw properties to bypass the set trap
+
+```ts
+const target = {};
+const raw = { directProp: "unchanged" };
+const proxy = new Proxy(target, {
+  set: (target, prop, value, proxy) => {
+    console.log(`Set trap for ${String(prop)}`);
+    target[prop] = `Modified: ${value}`;
+    return true;
+  }
+}, raw);
+
+proxy.normalProp = "value"; // Logs: "Set trap for normalProp"
+proxy.directProp = "changed"; // Doesn't trigger the set trap
+console.log(proxy.normalProp); // "Modified: value" (went through set trap)
+console.log(proxy.directProp); // "changed" (raw property was modified directly)
 ```
 
 

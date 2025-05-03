@@ -1,20 +1,143 @@
-iter is triggered when the proxy is iterated over, using globalized iteration, so applyable when object is a Map or Set
+# Proxy - iter hook
+
+The `iter` hook is triggered when the proxy is iterated over.
+
+## Signature
 
 ```ts
-const a = new Proxy(new Map([["a", 1], ["b", 2]]), {
-  iter: (target) => {
-    const keys = Object.keys(target);
-    let index = 0;
-    return function() {
-      if (index >= keys.length) return undefined;
-      const key = keys[index];
-      index++;
-      return [key, target[key]];
-    }
+function iter<T>(target: T, proxy: T): ReturnType<typeof pairs<T>>;
+```
+
+## Description
+
+The `iter` handler trap is called when the proxy is used in a loop like `for...in` or `for...of`. It allows you to customize the iteration behavior of the proxy.
+
+> Note: as objects cannot be used for generailzed iteration, this hook is only useful for maps, arrays, and Sets
+
+### Parameters
+- `target`: The original target object the proxy is wrapping
+- `proxy`: The proxy instance itself
+
+### Return value
+- A lua-type function iterator
+
+## Examples
+
+### Basic iteration customization
+
+```ts
+const target = new Map([["a", 1], ["b", 2], ["c", 3]]);
+const proxy = new Proxy(target, {
+  iter: (target, proxy) => {
+    print("Iteration started");
+    const keys = ArrayUtils.concat(Object.keys(target), "extra");
+    let i = 0;
+    return function () {
+      print("iterating", i);
+      const key = keys[i];
+      i++;
+      if (i < keys.size()) {
+        return [key, target[key]];
+      }
+    };
   }
 });
 
-for (const [key, value] of a) {
-  print(key, value);
+for (const [key, value] of proxy) {
+  console.log(key, value);
 }
+// Logs:
+// Iteration started
+// iterating 0
+// a 1
+// iterating 1
+// b 2
+// iterating 2
+// c 3
+// iterating 3
+// extra (nil)
+```
+
+### Filtered iteration
+
+```ts
+const userData = new Map([["username", "admin"], ["password", "secret123"], ["email", "admin@example.com"], ["role", "admin"], ["apiKey", "abc123xyz"]]);
+
+const safeUserData = new Proxy(userData, {
+  iter: (target, proxy) => {
+    // Filter out sensitive keys during iteration
+    const safeData = Object.dup(target);
+    safeData.delete("password");
+    safeData.delete("apiKey");
+    return pairs(safeData);
+  }
+});
+
+console.log("User data properties:");
+for (const [key, value] of safeUserData) {
+  console.log(key, value);
+}
+// Logs only non-sensitive properties:
+// username admin
+// email admin@example.com
+// role admin
+```
+
+### Transformed iteration
+
+```ts
+const data = new Map([["firstName", "John"], ["lastName", "Doe"], ["age", 30]]);
+const transformedData = new Proxy(data, {
+  iter: (target, proxy) => {
+    // Create a transformed version of the object for iteration
+    const keys = Object.keys(target);
+    let i = 0;
+    return function () {
+      if (i < keys.size()) {
+        const key = keys[i];
+        i++;
+        return [key, [target[key]]];
+      }
+    };
+  }
+});
+
+for (const [key, value] of transformedData) {
+  console.log(key, value);
+}
+// Logs:
+// firstName ["JOHN"]
+// lastName ["DOE"]
+// age [30]
+```
+
+### Custom iteration step
+
+```ts
+const unorderedObject = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
+
+const orderedProxy = new Proxy(unorderedObject, {
+  iter: (target, proxy) => {
+    // Create a transformed version of the object for iteration
+    const keys = Object.keys(target);
+    let i = 0;
+    return function () {
+      if (i < keys.size()) {
+        const key = keys[i];
+        i+=2;
+        return [key, target[key]];
+      }
+    };
+  }
+});
+
+for (const [key, value] of orderedProxy) {
+  console.log(key, value);
+}
+// Logs in alphabetical order:
+// 1 2
+// 3 4
+// 5 6
+// 7 8
+// 9 10
 ```

@@ -1,0 +1,66 @@
+# Object.freeze
+
+Freezes an object, preventing new properties from being added and existing properties from being modified or deleted.
+
+## Signature
+
+```ts
+function freeze<T, Deep extends boolean>(obj: T, deep?: Deep): Deep extends true ? DeepReadonly<T> : Readonly<T>
+```
+
+## Description
+
+The `Object.freeze()` method freezes an object, making it immutable. A frozen object can no longer be changed: new properties cannot be added, existing properties cannot be removed, and the values of existing properties cannot be changed.
+
+The method accepts an optional `deep` parameter which, when set to `true`, freezes the object deeply (making all nested objects also readonly).
+
+## Examples
+
+### Basic freezing
+
+```ts
+const obj = {a: 1, b: 2, c: 3};
+const frozenObj = Object.freeze(obj);
+
+// Attempting to modify a frozen object has no effect
+frozenObj.a = 5; // This has no effect
+print(frozenObj.a); // 1
+
+// TypeScript will also prevent modifications at compile time
+// frozenObj.d = 4; // Error: Property 'd' does not exist on type 'Readonly<{ a: number; b: number; c: number; }>'
+```
+
+### Deep freezing
+
+```ts
+const nestedObj = {
+  a: 1,
+  b: {
+    c: 2,
+    d: {
+      e: 3
+    }
+  }
+};
+
+const deepFrozen = Object.freeze(nestedObj, true);
+
+// Now all nested objects are also frozen
+// deepFrozen.b.c = 5; // Error: Cannot assign to 'c' because it is a read-only property.
+// deepFrozen.b.d.e = 10; // Error: Cannot assign to 'e' because it is a read-only property.
+```
+
+### Freezing arrays and collections
+
+```ts
+const array = [1, 2, 3];
+const frozenArray = Object.freeze(array);
+
+// frozenArray.push(4); // Error: Property 'push' does not exist on type 'readonly number[]'.
+// frozenArray[0] = 10; // Error: Index signature in type 'readonly number[]' only permits reading.
+
+const map = new Map([["a", 1], ["b", 2]]);
+const frozenMap = Object.freeze(map);
+
+// frozenMap.set("c", 3); // Error: Property 'set' does not exist on type 'Readonly<Map<string, number>>'.
+```

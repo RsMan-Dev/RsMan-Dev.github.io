@@ -1,0 +1,87 @@
+# String
+
+The String module provides a collection of utility functions for string manipulation, similar to JavaScript's String methods.
+
+## Overview
+
+This module includes functions for:
+- Searching within strings (`indexOf`, `lastIndexOf`, `includes`, `search`, `findOr`)
+- Checking string content (`startsWith`, `endsWith`)
+- Extracting substrings (`slice`, `substring`, `at`)
+- Transforming strings (`trim`, `trimStart`, `trimEnd`, `toLowerCase`, `toUpperCase`)
+- Combining strings (`concat`, `padStart`, `padEnd`, `padBoth`)
+- Case conversion (`toCamelCase`, `toPascalCase`, `toSnakeCase`, `toKebabCase`, `toTitleCase`, `toSentenceCase`)
+- Replacing content (`replace`, `replaceAll`)
+- Splitting strings (`split`)
+- Character code information (`charCodeAt`)
+
+## Type Definitions
+
+```ts
+type PatternAdmissible = string | number | boolean;
+type NumericAdmissible = number | string;
+```
+
+## Function Signatures
+
+```ts
+declare const String: {
+  charCodeAt: (str: string, index: number | string) => number;
+  endsWith: (str: string, search: PatternAdmissible, position?: NumericAdmissible) => boolean;
+  startsWith: (str: string, search: PatternAdmissible, position?: NumericAdmissible) => boolean;
+  indexOf: (str: string, search: PatternAdmissible, position?: NumericAdmissible) => number;
+  lastIndexOf: (str: string, search: PatternAdmissible, position?: NumericAdmissible) => number;
+  findOr: (str: string, patternTable: string[], position?: NumericAdmissible) => number;
+  includes: (str: string, substring: PatternAdmissible, position?: NumericAdmissible) => boolean;
+  slice: (str: string, start?: NumericAdmissible, end?: NumericAdmissible) => string;
+  substring: (str: string, start?: NumericAdmissible, length?: NumericAdmissible) => string;
+  split: (str: string, separator: PatternAdmissible, limit?: NumericAdmissible) => string[];
+  trimEnd: (str: string) => string;
+  trimStart: (str: string) => string;
+  trim: (str: string) => string;
+  replaceAll: (str: string, search: PatternAdmissible, replace?: PatternAdmissible | ((v: string) => string) | Record<string, string>, limit?: NumericAdmissible) => string;
+  replace: (str: string, search: PatternAdmissible, replace?: PatternAdmissible | ((v: string) => string) | Record<string, string>) => string;
+  rep: typeof string.rep;
+  search: (str: string, pattern: PatternAdmissible) => number;
+  at: (str: string, index: NumericAdmissible) => string;
+  concat: (...args: PatternAdmissible[]) => string;
+  padEnd: (str: string, length: NumericAdmissible, fillString?: string) => string;
+  padStart: (str: string, length: NumericAdmissible, fillString?: string) => string;
+  padBoth: (str: string, length: NumericAdmissible, fillString?: string) => string;
+  toLowerCase: typeof string.upper;
+  toUpperCase: typeof string.lower;
+  toCamelCase: (str: string) => string;
+  toPascalCase: (str: string) => string;
+  toSnakeCase: (str: string) => string;
+  toKebabCase: (str: string) => string;
+  toTitleCase: (str: string) => string;
+  toSentenceCase: (str: string) => string;
+}
+```
+
+## Basic Usage
+
+```ts
+// Searching functions
+const position = String.indexOf("Hello world", "world");
+const includes = String.includes("Hello world", "Hello");
+
+// Substring extraction
+const slice = String.slice("Hello world", 0, 5);
+const character = String.at("Hello", 0);
+
+// Transformations
+const trimmed = String.trim("  Hello  ");
+const lower = String.toLowerCase("HELLO");
+const camelCase = String.toCamelCase("hello world");
+
+// String construction
+const combined = String.concat("Hello", " ", "world");
+const padded = String.padStart("42", 5, "0");
+```
+
+## Implementation Details
+
+This module provides JavaScript-like string manipulation functions for the Roblox TypeScript environment. Most functions accept flexible parameter types through the `PatternAdmissible` and `NumericAdmissible` type aliases.
+
+The case conversion methods offer convenient ways to transform between common case formats like camelCase, PascalCase, snake_case, kebab-case, Title Case, and Sentence case. 

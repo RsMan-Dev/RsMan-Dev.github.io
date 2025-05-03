@@ -1,0 +1,143 @@
+# findOr
+
+Searches for the first occurrence of any string from a list of patterns in a target string.
+
+## Signature
+
+```ts
+function findOr(str: string, patternTable: string[], position?: NumericAdmissible): number
+```
+
+## Description
+
+The `findOr` function searches for multiple patterns at once and returns the index of the first match found. It scans the target string for any of the patterns provided in the array and returns the position of the first occurrence.
+
+### Parameters
+- `str`: The string to search within.
+- `patternTable`: An array of strings to search for.
+- `position` (optional): The position within the string to start the search. Default is 0. If a string is provided, it will be converted to a number.
+
+### Return value
+- The zero-based index of the first occurrence of any pattern from the array.
+- If none of the patterns are found, -1 is returned.
+
+## Examples
+
+### Basic usage
+
+```ts
+// Find the first occurrence of any of the patterns
+const result = String.findOr("Hello world", ["world", "Hello"]);
+print(result); // Outputs: 0 (position of "Hello")
+
+// Another example with multiple patterns
+const text = "The quick brown fox jumps over the lazy dog";
+const position = String.findOr(text, ["fox", "dog", "cat"]);
+print(position); // Outputs: 16 (position of "fox")
+```
+
+### With starting position
+
+```ts
+// Start searching from a specific position
+const text = "apple orange banana apple";
+const result = String.findOr(text, ["apple", "orange"], 6);
+print(result); // Outputs: 7 (position of "orange")
+
+// Starting after all occurrences
+const notFound = String.findOr(text, ["apple", "orange"], 14);
+print(notFound); // Outputs: 20 (position of the second "apple")
+```
+
+### When no patterns match
+
+```ts
+// None of the patterns are in the string
+const noMatch = String.findOr("Hello world", ["xyz", "abc"]);
+print(noMatch); // Outputs: -1
+
+// Patterns exist but not after the starting position
+const tooLate = String.findOr("Hello world", ["Hello"], 6);
+print(tooLate); // Outputs: -1 (search starts after "Hello")
+```
+
+### Case sensitivity
+
+```ts
+// The search is case-sensitive
+const text = "Hello World hello";
+const result = String.findOr(text, ["hello", "WORLD"]);
+print(result); // Outputs: 12 (position of lowercase "hello")
+
+// To do a case-insensitive search, you'd need to convert cases
+function findOrIgnoreCase(str: string, patterns: string[], position: number = 0): number {
+  const lowerStr = String.toLowerCase(str);
+  const lowerPatterns = patterns.map(pattern => String.toLowerCase(pattern));
+  return String.findOr(lowerStr, lowerPatterns, position);
+}
+
+const caseInsensitive = findOrIgnoreCase("Hello World", ["world", "HELLO"]);
+print(caseInsensitive); // Outputs: 0 (position of "hello" in lowercase string)
+```
+
+### Practical applications
+
+```ts
+// Check for any prohibited words in a text
+function containsProhibitedWords(text: string, prohibitedWords: string[]): boolean {
+  return String.findOr(text, prohibitedWords) !== -1;
+}
+
+const message = "This is a friendly message";
+const prohibited = ["offensive", "inappropriate", "rude"];
+print(containsProhibitedWords(message, prohibited)); // Outputs: false
+
+// Find the first occurrence of any HTML tag
+function findFirstHtmlTag(html: string): number {
+  return String.findOr(html, ["<div", "<span", "<p", "<h1", "<img"]);
+}
+
+const htmlContent = "<p>This is a paragraph</p><div>This is a div</div>";
+print(findFirstHtmlTag(htmlContent)); // Outputs: 0 (position of "<p")
+
+// Detect file type from contents
+function detectFileType(content: string): string {
+  const index = String.findOr(content, ["<!DOCTYPE html", "<?xml", "<?php", "import ", "function ", "class "]);
+  
+  if (index === -1) return "unknown";
+  
+  const marker = content.substring(index, index + 10);
+  if (marker.startsWith("<!DOCTYPE")) return "html";
+  if (marker.startsWith("<?xml")) return "xml";
+  if (marker.startsWith("<?php")) return "php";
+  if (marker.startsWith("import ")) return "javascript/typescript";
+  if (marker.startsWith("function ")) return "javascript/typescript";
+  if (marker.startsWith("class ")) return "javascript/typescript";
+  
+  return "unknown";
+}
+
+const htmlFile = "<!DOCTYPE html><html><body>Hello</body></html>";
+print(detectFileType(htmlFile)); // Outputs: "html"
+```
+
+### Comparison with other search methods
+
+```ts
+const text = "Hello world, welcome to the universe";
+
+// Using findOr to search for multiple patterns at once
+const findOrResult = String.findOr(text, ["world", "universe", "welcome"]);
+print(findOrResult); // Outputs: 6 (position of "world")
+
+// Using indexOf would require multiple calls
+const worldPos = String.indexOf(text, "world");
+const universePos = String.indexOf(text, "universe");
+const welcomePos = String.indexOf(text, "welcome");
+const minPos = Math.min(
+  worldPos !== -1 ? worldPos : Infinity,
+  universePos !== -1 ? universePos : Infinity,
+  welcomePos !== -1 ? welcomePos : Infinity
+);
+print(minPos); // Outputs: 6 (same result, but more code)
+```

@@ -1,0 +1,157 @@
+# constructor
+
+Creates a new Symbol primitive value.
+
+## Signature
+
+```ts
+new Symbol(description?: string): symbol
+Symbol(description?: string): symbol
+```
+
+## Description
+
+The `Symbol` constructor creates a new symbol - a unique and immutable primitive value that can be used as a property key. Symbols can be called as a function or with the `new` operator, both producing the same result.
+
+Each symbol value returned from `Symbol()` is unique, meaning no two symbols are the same, even if they have the same description.
+
+### Parameters
+- `description` (optional): A string that provides a description of the symbol, used primarily for debugging purposes. The description is stored internally but cannot be accessed directly from the symbol.
+
+### Return value
+- A new symbol primitive value.
+
+## Examples
+
+### Basic Usage
+
+```ts
+// Creating symbols
+const sym1 = Symbol();
+const sym2 = Symbol("description");
+const sym3 = new Symbol("another description");
+
+// Each symbol is unique
+print(sym1 === sym2); // false
+print(sym2 === sym3); // false
+
+// Even with the same description
+const sym4 = Symbol("test");
+const sym5 = Symbol("test");
+print(sym4 === sym5); // false
+
+// Symbol descriptions are for debugging only
+print(tostring(sym2)); // "Symbol(description)"
+```
+
+### Using Symbols as Property Keys
+
+```ts
+// Create a symbol for a property key
+const idSymbol = Symbol("id");
+
+// Use it as a property key
+const user = {
+  name: "John",
+  [idSymbol]: 12345
+};
+
+// The symbol property is not included in regular operations
+for (const key in user) {
+  print(key); // Only prints "name", not the symbol
+}
+
+// Object.keys also doesn't include symbols
+print(Object.keys(user)); // ["name"]
+
+// Access the property using the symbol
+print(user[idSymbol]); // 12345
+```
+
+### Private Object Properties
+
+```ts
+// Using symbols for private-like properties
+function createCounter() {
+  // Create a symbol only accessible inside this function
+  const countSymbol = Symbol("count");
+  
+  // Create an object with a property only accessible with the symbol
+  const counter = {
+    [countSymbol]: 0,
+    increment() {
+      this[countSymbol] += 1;
+      return this[countSymbol];
+    },
+    getCount() {
+      return this[countSymbol];
+    }
+  };
+  
+  return counter;
+}
+
+const counter = createCounter();
+print(counter.getCount()); // 0
+print(counter.increment()); // 1
+
+// The count property is not directly accessible from outside
+// No way to access it without the symbol reference
+```
+
+### Constants and Enums with Symbols
+
+```ts
+// Using symbols for unique constants
+const directions = {
+  UP: Symbol("UP"),
+  DOWN: Symbol("DOWN"),
+  LEFT: Symbol("LEFT"),
+  RIGHT: Symbol("RIGHT")
+};
+
+function move(direction: symbol) {
+  switch (direction) {
+    case directions.UP:
+      print("Moving up");
+      break;
+    case directions.DOWN:
+      print("Moving down");
+      break;
+    case directions.LEFT:
+      print("Moving left");
+      break;
+    case directions.RIGHT:
+      print("Moving right");
+      break;
+    default:
+      print("Unknown direction");
+  }
+}
+
+// Usage
+move(directions.UP); // "Moving up"
+
+// Symbols prevent accidental usage of incorrect values
+move("UP" as any); // "Unknown direction" - string doesn't match symbol
+```
+
+### Custom Object toString Behavior
+
+```ts
+// Customize object string representation
+const toStringSymbol = Symbol("toString");
+
+const customObject = {
+  [toStringSymbol]() {
+    return "Custom Object Description";
+  },
+  
+  toString() {
+    // Call the symbol method
+    return this[toStringSymbol]();
+  }
+};
+
+print(customObject.toString()); // "Custom Object Description"
+``` 

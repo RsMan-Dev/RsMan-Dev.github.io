@@ -1,0 +1,59 @@
+# toString
+
+Returns a string representing the specified number in the specified radix.
+
+## Signature
+
+```ts
+function toString(value: number, radix?: number): string
+```
+
+## Description
+
+The `Number.toString()` method returns a string representing the specified number in the specified base (radix). Unlike the `toString` method on number primitives, this is a static method that takes the value as an argument.
+
+### Parameters
+- `value`: The number to convert to a string.
+- `radix` (optional): An integer between 2 and 36 specifying the base to use for representing the number value. Default is 10 (decimal).
+
+### Return value
+- A string representing the specified number in the specified radix.
+
+## Examples
+
+### Basic Usage
+
+```ts
+// Decimal (base 10) representation
+Number.toString(42);              // "42"
+Number.toString(-42);             // "-42"
+Number.toString(3.14159);         // "3.14159"
+
+// Large and small numbers
+Number.toString(1000000);         // "1000000"
+Number.toString(0.0001);          // "0.0001"
+
+// Special values
+Number.toString(Infinity);        // "Infinity"
+Number.toString(-Infinity);       // "-Infinity"
+Number.toString(NaN);             // "NaN"
+```
+
+### Different Radixes
+
+```ts
+// Binary (base 2)
+Number.toString(42, 2);           // "101010"
+Number.toString(-42, 2);          // "-101010"
+
+// Octal (base 8)
+Number.toString(42, 8);           // "52"
+
+// Hexadecimal (base 16)
+Number.toString(42, 16);          // "2a"
+Number.toString(255, 16);         // "ff"
+
+// Base 36 (maximum)
+Number.toString(42, 36);          // "16"
+Number.toString(1234567, 36);     // "xa0sl"
+```

@@ -1,0 +1,83 @@
+# encodeUriComponent
+
+Encodes a URI component by replacing special characters with their percent-encoded equivalents.
+
+## Signature
+
+```ts
+function encodeUriComponent(value: string): string
+```
+
+## Description
+
+The `encodeUriComponent` function encodes a Uniform Resource Identifier (URI) component by replacing each instance of certain characters with one, two, three, or four escape sequences representing the UTF-8 encoding of the character.
+
+This function is useful when preparing strings to be included in URL parameters, ensuring that special characters are properly encoded to maintain URL validity.
+
+### Parameters
+- `value`: The string to be encoded.
+
+### Return value
+- A new string representing the encoded URI component.
+
+## Examples
+
+### Basic usage
+
+```ts
+// Encode a simple string
+const result = encodeUriComponent("Hello World");
+// Outputs: "Hello%20World"
+```
+
+### Encoding URL parameters
+
+```ts
+// Building a URL with encoded parameters
+const baseUrl = "https://api.example.com/search";
+const query = "What's up?";
+const category = "Q&A";
+
+const url = `${baseUrl}?q=${encodeUriComponent(query)}&category=${encodeUriComponent(category)}`;
+// url is: "https://api.example.com/search?q=What's%20up%3F&category=Q%26A"
+```
+
+### Encoding special characters
+
+```ts
+// Encode a string with various special characters
+const specialChars = "?&=#+%/:;,@";
+const encoded = encodeUriComponent(specialChars);
+// Outputs: "%3F%26%3D%23%2B%25%2F%3A%3B%2C%40"
+```
+
+### Encoding non-ASCII characters
+
+```ts
+// Encode non-ASCII characters
+const nonAscii = "こんにちは"; // "Hello" in Japanese
+const encodedNonAscii = encodeUriComponent(nonAscii);
+// Outputs: "%E3%81%93%E3%82%93%E3%81%AB%E3%81%A1%E3%81%AF"
+```
+
+### Building a query string
+
+```ts
+// Creating a query string from an object
+function buildQueryString(params: Record<string, string>): string {
+  return Object.entries(params)
+    .map(([key, value]) => {
+      return `${encodeUriComponent(key)}=${encodeUriComponent(value)}`;
+    })
+    .join("&");
+}
+
+const queryParams = {
+  name: "John Doe",
+  occupation: "Software Developer",
+  skills: "JavaScript, TypeScript, Lua"
+};
+
+const queryString = buildQueryString(queryParams);
+// Outputs: "name=John%20Doe&occupation=Software%20Developer&skills=JavaScript%2C%20TypeScript%2C%20Lua"
+``` 

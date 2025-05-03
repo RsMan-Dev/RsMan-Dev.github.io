@@ -1,0 +1,99 @@
+# startsWith
+
+Determines whether a string begins with the characters of a specified string.
+
+## Signature
+
+```ts
+function startsWith(str: string, search: PatternAdmissible, position?: NumericAdmissible): boolean
+```
+
+## Description
+
+The `startsWith` function checks if a string begins with a specified substring. It returns `true` if the string starts with the specified characters, and `false` otherwise. The search is case-sensitive.
+
+### Parameters
+- `str`: The string to check.
+- `search`: The characters to search for at the start of the string. Can be a string, number, or boolean.
+- `position` (optional): The position in the string at which to begin searching. Default is 0. If a string is provided, it will be converted to a number.
+
+### Return value
+- `true` if the string starts with the specified characters.
+- `false` otherwise.
+
+## Examples
+
+### Basic usage
+
+```ts
+// Check if a string starts with a substring
+const startsWithHello = String.startsWith("Hello world", "Hello");
+print(startsWithHello); // Outputs: true
+
+const startsWithWorld = String.startsWith("Hello world", "world");
+print(startsWithWorld); // Outputs: false
+```
+
+### With starting position
+
+```ts
+// Start checking from position 6
+const text = "Hello world";
+const startsWithWorld = String.startsWith(text, "world", 6);
+print(startsWithWorld); // Outputs: true
+
+// Using a position beyond the substring
+const startsWithHe = String.startsWith(text, "He", 1);
+print(startsWithHe); // Outputs: false
+```
+
+### Using non-string values
+
+```ts
+// Checking with a number (converted to string)
+const startsWithNumber = String.startsWith("123456", 123);
+print(startsWithNumber); // Outputs: true
+
+// Checking with a boolean (converted to string)
+const startsWithBoolean = String.startsWith("true story", true);
+print(startsWithBoolean); // Outputs: true
+```
+
+### Case sensitivity
+
+```ts
+// The check is case-sensitive
+const text = "Hello world";
+const startsWithhello = String.startsWith(text, "hello");
+print(startsWithhello); // Outputs: false
+
+const startsWithHello = String.startsWith(text, "Hello");
+print(startsWithHello); // Outputs: true
+```
+
+### Practical applications
+
+```ts
+// Check if a filename has a specific extension
+function hasExtension(filename: string, extension: string): boolean {
+  // Make sure extension starts with a dot
+  if (!String.startsWith(extension, ".")) {
+    extension = `.${extension}`;
+  }
+  
+  return String.endsWith(filename, extension);
+}
+
+print(hasExtension("document.pdf", "pdf")); // Outputs: true
+print(hasExtension("image.jpg", ".jpg")); // Outputs: true
+print(hasExtension("script.ts", "js")); // Outputs: false
+
+// Validate URL protocol
+function isHttpUrl(url: string): boolean {
+  return String.startsWith(url, "http://") || String.startsWith(url, "https://");
+}
+
+print(isHttpUrl("https://example.com")); // Outputs: true
+print(isHttpUrl("ftp://example.com")); // Outputs: false
+```
+``` 

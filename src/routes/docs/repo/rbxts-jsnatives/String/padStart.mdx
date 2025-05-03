@@ -1,0 +1,108 @@
+# padStart
+
+Pads the start of a string with a specified character until it reaches the desired length.
+
+## Signature
+
+```ts
+function padStart(str: string, length: NumericAdmissible, fillString?: string): string
+```
+
+## Description
+
+The `padStart` function pads the current string with another string (multiple times, if needed) until the resulting string reaches the given length. The padding is applied from the start of the current string.
+
+### Parameters
+- `str`: The string to pad.
+- `length`: The target length of the output string. If a string is provided, it will be converted to a number.
+- `fillString` (optional): The string to pad with. Default is a space (" ").
+
+### Return value
+- A new string of the specified length with the fill string applied from the start.
+- If the input string is already longer than the specified length, it is returned unchanged.
+
+## Examples
+
+### Basic usage
+
+```ts
+// Pad with spaces
+const padded = String.padStart("Hello", 10);
+print(padded); // Outputs: "     Hello" (5 spaces added)
+
+// Pad with a custom character
+const paddedZeros = String.padStart("42", 5, "0");
+print(paddedZeros); // Outputs: "00042"
+```
+
+### Using multiple characters for padding
+
+```ts
+// Fill string can be more than one character
+const paddedStars = String.padStart("Hi", 10, "*-");
+print(paddedStars); // Outputs: "*-*-*-*-*Hi"
+```
+
+### Handling edge cases
+
+```ts
+// String already longer than target length
+const noChange = String.padStart("Hello world", 5);
+print(noChange); // Outputs: "Hello world" (no padding added)
+
+// Empty fill string defaults to space
+const defaultFill = String.padStart("Hello", 10, "");
+print(defaultFill); // Outputs: "     Hello" (uses space as default)
+
+// Target length less than 1
+const invalidLength = String.padStart("Hello", -5);
+print(invalidLength); // Outputs: "Hello" (no padding)
+```
+
+### Using string length parameter
+
+```ts
+// String length will be converted to number
+const paddedNumeric = String.padStart("Hello", "8");
+print(paddedNumeric); // Outputs: "   Hello"
+```
+
+### Practical applications
+
+```ts
+// Format a number as a fixed-width string
+function formatId(id: number): string {
+  return String.padStart(tostring(id), 6, "0");
+}
+
+print(formatId(42)); // Outputs: "000042"
+print(formatId(9999)); // Outputs: "009999"
+
+// Format time values
+function formatTime(hours: number, minutes: number, seconds: number): string {
+  const h = String.padStart(tostring(hours), 2, "0");
+  const m = String.padStart(tostring(minutes), 2, "0");
+  const s = String.padStart(tostring(seconds), 2, "0");
+  return `${h}:${m}:${s}`;
+}
+
+print(formatTime(9, 5, 1)); // Outputs: "09:05:01"
+```
+
+### Comparison with padEnd and padBoth
+
+```ts
+const text = "Hello";
+
+// Using padStart
+const startPadded = String.padStart(text, 10, "-");
+print(startPadded); // Outputs: "-----Hello"
+
+// Using padEnd
+const endPadded = String.padEnd(text, 10, "-");
+print(endPadded); // Outputs: "Hello-----"
+
+// Using padBoth
+const bothPadded = String.padBoth(text, 10, "-");
+print(bothPadded); // Outputs: "--Hello--" or similar (balanced)
+```

@@ -1,0 +1,108 @@
+# toTitleCase
+
+Converts a string to Title Case format.
+
+## Signature
+
+```ts
+function toTitleCase(str: string): string
+```
+
+## Description
+
+The `toTitleCase` function converts a string to Title Case format, where the first letter of each word is capitalized and the remaining letters are lowercase. Words are typically identified by spaces, but the function also handles other separators like hyphens and underscores.
+
+### Parameters
+- `str`: The string to convert to Title Case.
+
+### Return value
+- A new string in Title Case format.
+
+## Examples
+
+### Basic usage
+
+```ts
+// Converting different formats to Title Case
+const space = String.toTitleCase("hello world");
+print(space); // Outputs: "Hello World"
+
+const camel = String.toTitleCase("helloWorld");
+print(camel); // Outputs: "Hello World"
+
+const pascal = String.toTitleCase("HelloWorld");
+print(pascal); // Outputs: "Hello World"
+
+const snake = String.toTitleCase("hello_world");
+print(snake); // Outputs: "Hello World"
+
+const kebab = String.toTitleCase("hello-world");
+print(kebab); // Outputs: "Hello World"
+```
+
+### Multiple words
+
+```ts
+// Converting multi-word strings
+const multiple = String.toTitleCase("hello beautiful world");
+print(multiple); // Outputs: "Hello Beautiful World"
+
+const mixedSeparators = String.toTitleCase("hello_beautiful-world");
+print(mixedSeparators); // Outputs: "Hello Beautiful World"
+```
+
+### Handling edge cases
+
+```ts
+// Empty string
+const empty = String.toTitleCase("");
+print(empty); // Outputs: ""
+
+// Single word
+const single = String.toTitleCase("hello");
+print(single); // Outputs: "Hello"
+
+// All uppercase
+const uppercase = String.toTitleCase("HELLO WORLD");
+print(uppercase); // Outputs: "H E L L O W O R L D" (each uppercase is treated as new word)
+
+// Already in Title Case
+const alreadyTitle = String.toTitleCase("Hello World");
+print(alreadyTitle); // Outputs: "Hello World"
+```
+
+### Converting from other cases
+
+```ts
+// From sentence case
+const sentence = String.toTitleCase("this is a sentence.");
+print(sentence); // Outputs: "This Is A Sentence."
+
+// From camelCase
+const camel = String.toTitleCase("userFirstName");
+print(camel); // Outputs: "User First Name"
+
+// From PascalCase
+const pascal = String.toTitleCase("UserLoginRequest");
+print(pascal); // Outputs: "User Login Request"
+
+// From snake_case
+const snake = String.toTitleCase("user_first_name");
+print(snake); // Outputs: "User First Name"
+
+// From kebab-case
+const kebab = String.toTitleCase("api-response-code");
+print(kebab); // Outputs: "Api Response Code"
+```
+
+### Practical applications
+
+```ts
+// Format titles for display
+function formatTitle(title: string): string {
+  return String.toTitleCase(title);
+}
+
+print(formatTitle("the lord of the rings")); // Outputs: "The Lord Of The Rings"
+print(formatTitle("harry_potter_and_the_chamber_of_secrets")); // Outputs: "Harry Potter And The Chamber Of Secrets"
+```

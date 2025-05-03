@@ -1,0 +1,157 @@
+# isSymbol
+
+Determines whether a value is a Symbol.
+
+## Signature
+
+```ts
+function isSymbol(value: any): value is symbol
+```
+
+## Description
+
+The `Symbol.isSymbol()` method determines whether the provided value is a Symbol primitive. It returns `true` if the value is a Symbol; otherwise, it returns `false`.
+
+This method is implemented as a type guard in TypeScript, which means it can be used for both runtime type checking and compile-time type narrowing.
+
+### Parameters
+- `value`: The value to be checked.
+
+### Return value
+- `true` if the value is a Symbol; otherwise, `false`.
+
+## Examples
+
+### Basic Usage
+
+```ts
+// Check various values
+const sym = Symbol("test");
+
+print(Symbol.isSymbol(sym));           // true
+print(Symbol.isSymbol(Symbol.for("shared"))); // true
+
+print(Symbol.isSymbol("symbol"));      // false
+print(Symbol.isSymbol(null));          // false
+print(Symbol.isSymbol(undefined));     // false
+print(Symbol.isSymbol({}));            // false
+print(Symbol.isSymbol(42));            // false
+```
+
+### Type Guarding in TypeScript
+
+```ts
+// Using isSymbol as a type guard
+function processValue(value: unknown): void {
+  if (Symbol.isSymbol(value)) {
+    // TypeScript knows value is a symbol here
+    print(`Symbol found: ${String(value)}`);
+  } else {
+    // TypeScript knows value is not a symbol here
+    print(`Not a symbol: ${typeof value}`);
+  }
+}
+
+// Usage
+processValue(Symbol("test"));     // "Symbol found: Symbol(test)"
+processValue("hello");            // "Not a symbol: string"
+processValue(123);                // "Not a symbol: number"
+```
+
+### Safe Property Access
+
+```ts
+// Safely access symbol properties
+function getSymbolProperty(obj: unknown, key: unknown): unknown {
+  if (!obj || typeof obj !== "object") {
+    return undefined;
+  }
+  
+  if (!Symbol.isSymbol(key)) {
+    return undefined;
+  }
+  
+  return (obj as any)[key];
+}
+
+// Usage
+const userIdSymbol = Symbol("userId");
+const user = {
+  name: "Alice",
+  [userIdSymbol]: 12345
+};
+
+print(getSymbolProperty(user, userIdSymbol));     // 12345
+print(getSymbolProperty(user, "not a symbol"));   // undefined
+print(getSymbolProperty("not an object", userIdSymbol)); // undefined
+```
+
+### Custom Type Checking Utility
+
+```ts
+// Create a type checking utility
+const typeCheck = {
+  isString(value: unknown): value is string {
+    return typeof value === "string";
+  },
+  
+  isNumber(value: unknown): value is number {
+    return typeof value === "number" && !Number.isNaN(value);
+  },
+  
+  isBoolean(value: unknown): value is boolean {
+    return typeof value === "boolean";
+  },
+  
+  isSymbol(value: unknown): value is symbol {
+    return Symbol.isSymbol(value);
+  },
+  
+  isFunction(value: unknown): value is Function {
+    return typeof value === "function";
+  },
+  
+  isObject(value: unknown): value is object {
+    return value !== null && typeof value === "object";
+  }
+};
+
+// Usage
+function validateConfig(config: unknown): void {
+  if (!typeCheck.isObject(config)) {
+    throw new Error("Config must be an object");
+  }
+  
+  const idKey = Symbol.for("id");
+  const id = (config as any)[idKey];
+  
+  if (typeCheck.isSymbol(id)) {
+    print("Config contains a symbol ID");
+  } else if (typeCheck.isNumber(id)) {
+    print(`Config has numeric ID: ${id}`);
+  } else {
+    print("Config has no valid ID");
+  }
+}
+```
+
+### Filtering Arrays
+
+```ts
+// Filter symbols from a mixed array
+function filterSymbols<T>(arr: (T | symbol)[]): symbol[] {
+  return arr.filter(Symbol.isSymbol) as symbol[];
+}
+
+// Usage
+const mixedArray = [
+  "string", 
+  123, 
+  Symbol("first"), 
+  false, 
+  Symbol("second")
+];
+
+const symbols = filterSymbols(mixedArray);
+print(symbols.length); // 2
+``` 

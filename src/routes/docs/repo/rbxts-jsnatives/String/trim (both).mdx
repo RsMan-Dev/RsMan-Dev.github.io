@@ -1,0 +1,92 @@
+# trim
+
+Removes whitespace from both ends of a string.
+
+## Signature
+
+```ts
+function trim(str: string): string
+```
+
+## Description
+
+The `trim` function removes whitespace characters from both the beginning and end of a string, and returns a new string. Whitespace includes spaces, tabs, newlines, and other whitespace characters.
+
+### Parameters
+- `str`: The string to trim.
+
+### Return value
+- A new string with whitespace removed from both ends.
+
+## Examples
+
+### Basic usage
+
+```ts
+// Remove whitespace from both ends
+const trimmed = String.trim("  Hello world  ");
+print(trimmed); // Outputs: "Hello world"
+
+// Trim tabs and newlines
+const multiline = String.trim("\t\n Hello \n\t");
+print(multiline); // Outputs: "Hello"
+```
+
+### Chaining with other string operations
+
+```ts
+// Trim and then convert to uppercase
+const text = "  hello world  ";
+const processedText = String.toUpperCase(String.trim(text));
+print(processedText); // Outputs: "HELLO WORLD"
+```
+
+### Handling empty strings
+
+```ts
+// Trimming an empty string
+const empty = String.trim("");
+print(empty); // Outputs: "" (empty string)
+
+// Trimming a string with only whitespace
+const onlyWhitespace = String.trim("   \t\n  ");
+print(onlyWhitespace); // Outputs: "" (empty string)
+```
+
+### Practical applications
+
+```ts
+// Clean user input
+function cleanInput(input: string): string {
+  return String.trim(input);
+}
+
+const userInput = "   John Doe   ";
+print(cleanInput(userInput)); // Outputs: "John Doe"
+
+// Validate non-empty input
+function isValidInput(input: string): boolean {
+  return String.trim(input) !== "";
+}
+
+print(isValidInput("  Hello  ")); // Outputs: true
+print(isValidInput("   ")); // Outputs: false
+```
+
+### Comparison with trimStart and trimEnd
+
+```ts
+const text = "  Hello world  ";
+
+// Using trim
+const bothEnds = String.trim(text);
+print(bothEnds); // Outputs: "Hello world"
+
+// Using trimStart
+const startOnly = String.trimStart(text);
+print(startOnly); // Outputs: "Hello world  "
+
+// Using trimEnd
+const endOnly = String.trimEnd(text);
+print(endOnly); // Outputs: "  Hello world"
+```

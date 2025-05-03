@@ -1,0 +1,65 @@
+# isSafeInteger
+
+Determines whether the passed value is a safe integer.
+
+## Signature
+
+```ts
+function isSafeInteger(value: number): boolean
+```
+
+## Description
+
+The `Number.isSafeInteger()` method determines whether the provided value is a number that is a safe integer. A safe integer is an integer that can be exactly represented as an IEEE-754 double precision number, which means it must be between -(2^53 - 1) and 2^53 - 1 inclusive.
+
+### Parameters
+- `value`: The value to be tested for being a safe integer.
+
+### Return value
+- `true` if the given value is a safe integer, otherwise `false`.
+
+## Examples
+
+### Basic Usage
+
+```ts
+// Safe integers
+Number.isSafeInteger(42);                     // true
+Number.isSafeInteger(-42);                    // true
+Number.isSafeInteger(0);                      // true
+Number.isSafeInteger(9007199254740991);       // true (MAX_SAFE_INTEGER)
+Number.isSafeInteger(-9007199254740991);      // true (MIN_SAFE_INTEGER)
+
+// Unsafe integers (outside safe range)
+Number.isSafeInteger(9007199254740992);       // false (MAX_SAFE_INTEGER + 1)
+Number.isSafeInteger(-9007199254740992);      // false (MIN_SAFE_INTEGER - 1)
+
+// Non-integers
+Number.isSafeInteger(3.14);                   // false
+Number.isSafeInteger(NaN);                    // false
+Number.isSafeInteger(Infinity);               // false
+Number.isSafeInteger(-Infinity);              // false
+
+// Non-numbers
+Number.isSafeInteger("42");                   // false
+Number.isSafeInteger(null);                   // false
+```
+
+### Checking for Safe Arithmetic
+
+```ts
+// Check if a calculation will produce a safe integer result
+function safeAdd(a: number, b: number): number {
+  const result = a + b;
+  
+  if (!Number.isSafeInteger(result)) {
+    console.warn("Result exceeds safe integer limits and may lose precision");
+  }
+  
+  return result;
+}
+
+// Usage
+safeAdd(42, 100);                         // 142, no warning
+safeAdd(Number.MAX_SAFE_INTEGER, 1);      // Warning about exceeding limits
+```

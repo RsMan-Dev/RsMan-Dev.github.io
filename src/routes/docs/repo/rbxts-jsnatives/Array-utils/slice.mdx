@@ -1,0 +1,99 @@
+# Array.slice
+
+Returns a shallow copy of a portion of an array into a new array.
+
+## Signature
+
+```ts
+function slice<T>(array: Array<T>, start?: number, end?: number): Array<T>
+```
+
+## Description
+
+The `Array.slice()` method returns a shallow copy of a portion of an array into a new array object. It selects elements from `start` index up to, but not including, `end` index. The original array is not modified.
+
+Parameters:
+- `array`: The array to slice
+- `start` (optional): Zero-based index at which to start extraction. Defaults to 0.
+  - If negative, it indicates an offset from the end of the array.
+  - If start >= array.length, an empty array is returned.
+- `end` (optional): Zero-based index before which to end extraction. Defaults to array.length.
+  - If negative, it indicates an offset from the end of the array.
+  - If end >= array.length or omitted, slice extracts through the end of the array.
+
+## Examples
+
+### Basic usage
+
+```ts
+const array = [1, 2, 3, 4, 5];
+const sliced = ArrayUtils.slice(array, 1, 4);
+
+print(array); // [1, 2, 3, 4, 5] - original array is unchanged
+print(sliced); // [2, 3, 4] - new array containing elements from index 1 up to (but not including) index 4
+```
+
+### Using negative indices
+
+```ts
+const array = [1, 2, 3, 4, 5];
+
+// Start from the 2nd to last element, go until the end
+const sliced1 = ArrayUtils.slice(array, -2);
+print(sliced1); // [4, 5]
+
+// Start from the 3rd element, end at the 2nd to last element
+const sliced2 = ArrayUtils.slice(array, 2, -1);
+print(sliced2); // [3, 4]
+
+// Start from the 3rd to last element, end at the last element
+const sliced3 = ArrayUtils.slice(array, -3, -1);
+print(sliced3); // [3, 4]
+```
+
+### Omitting parameters
+
+```ts
+const array = [1, 2, 3, 4, 5];
+
+// Omitting both parameters returns a copy of the entire array
+const fullCopy = ArrayUtils.slice(array);
+print(fullCopy); // [1, 2, 3, 4, 5]
+print(array === fullCopy); // false - they are different array references
+
+// Specifying only start returns from that index to the end
+const fromSecond = ArrayUtils.slice(array, 1);
+print(fromSecond); // [2, 3, 4, 5]
+```
+
+### Slicing with indices beyond array boundaries
+
+```ts
+const array = [1, 2, 3];
+
+// If start is beyond the array length, an empty array is returned
+const empty = ArrayUtils.slice(array, 5);
+print(empty); // []
+
+// If end is beyond the array length, extraction goes to the end of the array
+const toEnd = ArrayUtils.slice(array, 1, 10);
+print(toEnd); // [2, 3]
+```
+
+### Shallow copy behavior
+
+```ts
+const array = [
+  { id: 1, name: "Alice" },
+  { id: 2, name: "Bob" },
+  { id: 3, name: "Charlie" }
+];
+
+const sliced = ArrayUtils.slice(array, 0, 2);
+
+// Modifying the original nested object affects the sliced array too
+array[0].name = "Modified Alice";
+
+print(array[0].name); // "Modified Alice"
+print(sliced[0].name); // "Modified Alice" - objects are shared by reference
+```

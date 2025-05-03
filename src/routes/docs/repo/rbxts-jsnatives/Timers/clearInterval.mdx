@@ -1,0 +1,113 @@
+# clearInterval
+
+Stops an interval that was set with `setInterval`.
+
+## Signature
+
+```ts
+function clearInterval(sym: symbol | undefined): void
+```
+
+## Description
+
+The `clearInterval` function stops a repeating interval that was previously created using `setInterval`. Once an interval is cleared, its callback function will no longer be executed.
+
+If the provided symbol is undefined or the interval has already been cleared, the function has no effect.
+
+### Parameters
+- `sym`: The symbol that identifies the interval to stop, returned by `setInterval`. Can be undefined.
+
+### Return value
+- None
+
+## Examples
+
+### Basic usage
+
+```ts
+// Create an interval that executes every second
+const intervalSymbol = setInterval((sym) => {
+  print("Tick");
+}, 1000);
+
+// After some time, stop the interval
+clearInterval(intervalSymbol);
+```
+
+### Stopping an interval from within the callback
+
+```ts
+let count = 0;
+const intervalSymbol = setInterval((sym) => {
+  count++;
+  print(`Count: ${count}`);
+  
+  // Stop the interval after 5 executions using the symbol passed to the callback
+  if (count >= 5) {
+    print("Stopping interval");
+    clearInterval(sym);
+  }
+}, 1000);
+```
+
+### Conditional clearing
+
+```ts
+// Create and store multiple intervals
+const intervals: symbol[] = [];
+
+// Create 3 intervals with different frequencies
+intervals.push(setInterval((sym) => print("Fast interval"), 500));
+intervals.push(setInterval((sym) => print("Medium interval"), 1000));
+intervals.push(setInterval((sym) => print("Slow interval"), 2000));
+
+// Function to clear all intervals
+function stopAllIntervals() {
+  intervals.forEach(sym => clearInterval(sym));
+  table.clear(intervals);
+}
+
+// Stop all intervals after 10 seconds
+setTimeout((sym) => {
+  print("Stopping all intervals");
+  stopAllIntervals();
+}, 10000);
+```
+
+### Creating a togglable interval
+
+```ts
+function createTogglableInterval(callback: (sym: symbol) => void, ms: number) {
+  let intervalSymbol: symbol | undefined;
+  
+  const start = () => {
+    if (!intervalSymbol) {
+      intervalSymbol = setInterval(callback, ms);
+      return true;
+    }
+    return false;
+  };
+  
+  const stop = () => {
+    if (intervalSymbol) {
+      clearInterval(intervalSymbol);
+      intervalSymbol = undefined;
+      return true;
+    }
+    return false;
+  };
+  
+  const toggle = () => {
+    return intervalSymbol ? stop() : start();
+  };
+  
+  return { start, stop, toggle };
+}
+
+// Usage
+const ticker = createTogglableInterval((sym) => print("Tick"), 1000);
+ticker.start();   // Start the interval
+ticker.toggle();  // Stop the interval
+ticker.toggle();  // Start the interval again
+ticker.stop();    // Stop the interval
+```

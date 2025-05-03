@@ -1,0 +1,154 @@
+# clear
+
+Clears the console output, removing all previously logged messages.
+
+## Signature
+
+```ts
+function clear(): void
+```
+
+## Description
+
+The `console.clear` method clears all content from the console, creating a clean output area. This is useful when you want to start with a fresh console or remove previous debugging output.
+
+### Parameters
+- None.
+
+### Return value
+- None (void).
+
+## Examples
+
+### Basic usage
+
+```ts
+// Clear the console
+console.clear();
+
+// Log a message after clearing
+console.log("Fresh console output");
+```
+
+### Clearing before displaying important information
+
+```ts
+// Clear console before displaying important status
+function displaySystemStatus() {
+  // Clear any previous logs
+  console.clear();
+  
+  console.log("=== SYSTEM STATUS ===");
+  console.log("Memory usage:", getMemoryUsage());
+  console.log("CPU usage:", getCpuUsage());
+  console.log("Active players:", getPlayerCount());
+  console.log("=====================");
+}
+```
+
+### Routine cleanup
+
+```ts
+// Periodically clear the console to prevent clutter
+function setupConsoleCleanup(intervalSeconds: number) {
+  // Clear immediately when starting
+  console.clear();
+  console.log("Console will be cleared every", intervalSeconds, "seconds");
+  
+  // Set up periodic clearing
+  setInterval(() => {
+    console.clear();
+    console.log("Console cleared at", new Date().toTimeString());
+    console.log("Console will be cleared again in", intervalSeconds, "seconds");
+  }, intervalSeconds * 1000);
+}
+
+// Call with 60 seconds interval
+setupConsoleCleanup(60);
+```
+
+### Clear based on user action
+
+```ts
+// Clear console when a specific event occurs
+function onResetButtonClicked() {
+  console.clear();
+  console.log("Console cleared by user action");
+  
+  // Perform reset actions...
+  resetApplication();
+  
+  console.log("Application has been reset");
+}
+```
+
+### Clear before new testing session
+
+```ts
+// Clear console before running tests
+function runTestSuite(suiteName: string) {
+  console.clear();
+  console.log(`Starting test suite: ${suiteName}`);
+  
+  // Run tests...
+  const testResults = executeTests();
+  
+  console.log("Test results:", testResults);
+}
+```
+
+### Conditional clearing
+
+```ts
+// Only clear in certain environments
+const isDevelopment = true; // Set based on environment
+
+function conditionalClear() {
+  if (isDevelopment) {
+    console.clear();
+    console.log("Console cleared (development mode)");
+  } else {
+    console.log("Console clear skipped (production mode)");
+  }
+}
+```
+
+### Clear with confirmation message
+
+```ts
+// Clear with a confirmation message that persists
+function clearWithConfirmation() {
+  const timestamp = new Date().toTimeString();
+  console.clear();
+  console.log(`Console was cleared at ${timestamp}`);
+}
+```
+
+### Implementation in debugging utilities
+
+```ts
+// Part of a debugging utility class
+class DebugConsole {
+  private prefix: string;
+  
+  constructor(prefix: string) {
+    this.prefix = prefix;
+  }
+  
+  log(...args: unknown[]) {
+    console.log(`[${this.prefix}]`, ...args);
+  }
+  
+  clearAndBanner() {
+    console.clear();
+    console.log("===============================");
+    console.log(`=== ${this.prefix} DEBUGGING ===`);
+    console.log("===============================");
+  }
+}
+
+// Usage
+const gameDebugger = new DebugConsole("GAME");
+gameDebugger.clearAndBanner();
+gameDebugger.log("Game initialized");
+``` 

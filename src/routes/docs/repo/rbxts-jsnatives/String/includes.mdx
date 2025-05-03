@@ -1,0 +1,90 @@
+# includes
+
+Determines whether a string contains a specified substring.
+
+## Signature
+
+```ts
+function includes(str: string, substring: PatternAdmissible, position?: NumericAdmissible): boolean
+```
+
+## Description
+
+The `includes` function checks if a string contains a specified substring. It returns `true` if the string contains the specified substring, and `false` otherwise. The search is case-sensitive.
+
+### Parameters
+- `str`: The string to search within.
+- `substring`: The value to search for. Can be a string, number, or boolean.
+- `position` (optional): The position within the string to start the search. Default is 0. If a string is provided, it will be converted to a number.
+
+### Return value
+- `true` if the string contains the specified substring.
+- `false` if the substring is not found.
+
+## Examples
+
+### Basic usage
+
+```ts
+// Check if a string contains a substring
+const hasWorld = String.includes("Hello world", "world");
+print(hasWorld); // Outputs: true
+
+const hasHello = String.includes("Hello world", "Hello");
+print(hasHello); // Outputs: true
+
+const hasFoo = String.includes("Hello world", "foo");
+print(hasFoo); // Outputs: false
+```
+
+### With starting position
+
+```ts
+// Start searching from position 6
+const text = "Hello world";
+const hasO = String.includes(text, "o", 6);
+print(hasO); // Outputs: true (finds the 'o' in "world")
+
+const hasE = String.includes(text, "e", 2);
+print(hasE); // Outputs: false (the 'e' is at position 1, before the starting position)
+```
+
+### Using non-string values
+
+```ts
+// Searching for a number (converted to string)
+const hasNumber = String.includes("The answer is 42", 42);
+print(hasNumber); // Outputs: true
+
+// Searching for a boolean (converted to string)
+const hasBoolean = String.includes("Set value to true", true);
+print(hasBoolean); // Outputs: true
+```
+
+### Practical applications
+
+```ts
+// Check if an email is valid (very simple check)
+function isValidEmail(email: string): boolean {
+  return String.includes(email, "@") && String.includes(email, ".");
+}
+
+print(isValidEmail("user@example.com")); // Outputs: true
+print(isValidEmail("invalid-email")); // Outputs: false
+
+// Check if a string contains any of several substrings
+function containsAny(text: string, ...substrings: string[]): boolean {
+  for (const substring of substrings) {
+    if (String.includes(text, substring)) {
+      return true;
+    }
+  }
+  return false;
+}
+
+const containsBadWord = containsAny(
+  "This is a nice message",
+  "bad", "offensive", "inappropriate"
+);
+print(containsBadWord); // Outputs: false
+```

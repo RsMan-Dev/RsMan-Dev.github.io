@@ -1,0 +1,75 @@
+# timeEnd
+
+Stops a previously started timer and prints the elapsed time to the console.
+
+## Signature
+
+```ts
+function timeEnd(label?: string): void
+```
+
+## Description
+
+The `console.timeEnd` method stops a timer that was previously started with `console.time()` and logs the elapsed time to the console. It uses the same label to identify which timer to stop.
+
+### Parameters
+- `label` (optional): A string identifying the timer to stop. If omitted, the default timer is stopped.
+
+### Return value
+- None (void). However, it logs the elapsed time to the console.
+
+## Examples
+
+### Basic usage
+
+```ts
+// Start a timer
+console.time();
+
+// Perform some operation
+for (let i = 0; i < 1000000; i++) {
+  // Simulate work
+}
+
+// Stop the timer and log elapsed time
+console.timeEnd();
+// Outputs: default: 15.123ms (time will vary)
+```
+
+### Using a custom label
+
+```ts
+// Start a timer with a custom label
+console.time("dataProcessing");
+
+// Perform some data processing
+const result = processLargeDataSet();
+
+// Stop the timer and log elapsed time
+console.timeEnd("dataProcessing");
+// Outputs: dataProcessing: 123.456ms (time will vary)
+```
+
+### Multiple timers
+
+```ts
+// Start multiple timers
+console.time("timer1");
+console.time("timer2");
+
+// First operation
+for (let i = 0; i < 500000; i++) {
+  // Work for timer1
+}
+console.timeEnd("timer1");
+
+// Second operation
+for (let i = 0; i < 1000000; i++) {
+  // Work for timer2
+}
+console.timeEnd("timer2");
+
+// Outputs:
+// timer1: 25.123ms
+// timer2: 50.456ms
+```

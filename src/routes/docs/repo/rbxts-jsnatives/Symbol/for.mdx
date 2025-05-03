@@ -1,0 +1,156 @@
+# for
+
+Retrieves or creates a symbol in the global symbol registry.
+
+## Signature
+
+```ts
+function for(key: string): symbol
+```
+
+## Description
+
+The `Symbol.for()` method searches for an existing symbol in the global symbol registry with the given key and returns it if found. Otherwise, it creates a new symbol with this key, adds it to the global symbol registry, and returns the symbol.
+
+Unlike symbols created with `Symbol()`, which are unique every time, symbols created with `Symbol.for()` are shared and reused if the same key is specified.
+
+### Parameters
+- `key`: A string key used to identify the symbol in the global symbol registry.
+
+### Return value
+- An existing symbol with the given key if found in the global registry, otherwise a new symbol is created, added to the registry, and returned.
+
+## Examples
+
+### Basic Usage
+
+```ts
+// Create a symbol in the registry
+const sym1 = Symbol.for("shared symbol");
+
+// Retrieve the same symbol later
+const sym2 = Symbol.for("shared symbol");
+
+// They are the same symbol
+print(sym1 === sym2); // true
+
+// Different from regular symbols
+const regularSym = Symbol("shared symbol");
+print(sym1 === regularSym); // false
+```
+
+### Sharing Symbols Across Different Parts of Code
+
+```ts
+// In one module
+function setupModule() {
+  const configSymbol = Symbol.for("config");
+  
+  // Store configuration data
+  const globalObj = {} as any;
+  globalObj[configSymbol] = {
+    apiEndpoint: "https://api.example.com",
+    timeout: 5000
+  };
+}
+
+// In another module
+function useConfig() {
+  const configSymbol = Symbol.for("config");
+  
+  // Access the same configuration data
+  const globalObj = {} as any;
+  const config = globalObj[configSymbol];
+  
+  print(config.apiEndpoint); // "https://api.example.com"
+}
+
+setupModule();
+useConfig();
+```
+
+### Creating Namespaced Keys
+
+```ts
+// Use namespaced keys to avoid conflicts
+function createNamespacedSymbol(namespace: string, name: string): symbol {
+  return Symbol.for(`${namespace}:${name}`);
+}
+
+// Usage in different modules
+const userIdSymbol = createNamespacedSymbol("user-module", "id");
+const systemIdSymbol = createNamespacedSymbol("system-module", "id");
+
+// These are different symbols because they have different keys
+print(userIdSymbol === systemIdSymbol); // false
+
+// But reusing the same namespaced key returns the same symbol
+const userIdSymbol2 = createNamespacedSymbol("user-module", "id");
+print(userIdSymbol === userIdSymbol2); // true
+```
+
+### Cross-Context Communication
+
+```ts
+// Using symbols for cross-context message types
+const MESSAGE_TYPES = {
+  USER_UPDATED: Symbol.for("message:user-updated"),
+  SETTINGS_CHANGED: Symbol.for("message:settings-changed"),
+  ERROR_OCCURRED: Symbol.for("message:error-occurred")
+};
+
+function handleMessage(messageType: symbol, data: any) {
+  switch (messageType) {
+    case MESSAGE_TYPES.USER_UPDATED:
+      print(`User updated: ${data.username}`);
+      break;
+    case MESSAGE_TYPES.SETTINGS_CHANGED:
+      print(`Settings changed: ${data.setting} = ${data.value}`);
+      break;
+    case MESSAGE_TYPES.ERROR_OCCURRED:
+      print(`Error: ${data.message}`);
+      break;
+    default:
+      print("Unknown message type");
+  }
+}
+
+// Example usage
+handleMessage(
+  MESSAGE_TYPES.USER_UPDATED, 
+  { username: "NewUserName" }
+); // "User updated: NewUserName"
+
+// Any code with access to the same symbol keys can communicate
+const sameUserUpdatedSymbol = Symbol.for("message:user-updated");
+print(sameUserUpdatedSymbol === MESSAGE_TYPES.USER_UPDATED); // true
+```
+
+### Feature Detection
+
+```ts
+// Using Symbol.for for feature detection
+const FEATURES = {
+  DARK_MODE: Symbol.for("feature:dark-mode"),
+  ADVANCED_SEARCH: Symbol.for("feature:advanced-search"),
+  REAL_TIME_UPDATES: Symbol.for("feature:real-time-updates")
+};
+
+// Set available features
+const availableFeatures = new Set<symbol>([
+  FEATURES.DARK_MODE,
+  FEATURES.ADVANCED_SEARCH
+]);
+
+function hasFeature(feature: symbol): boolean {
+  return availableFeatures.has(feature);
+}
+
+// Check features
+print(hasFeature(FEATURES.DARK_MODE)); // true
+print(hasFeature(FEATURES.REAL_TIME_UPDATES)); // false
+
+// Other code can check for the same features
+const darkModeSymbol = Symbol.for("feature:dark-mode");
+print(hasFeature(darkModeSymbol)); // true
+``` 

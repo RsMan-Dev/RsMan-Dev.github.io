@@ -1,0 +1,107 @@
+# isFinite
+
+Determines whether the passed value is a finite number.
+
+## Signature
+
+```ts
+function isFinite(value: number): boolean
+```
+
+## Description
+
+The `Number.isFinite()` method determines whether the passed value is a finite number - that is, it checks if the type of the value is Number and the value is neither positive Infinity, negative Infinity, nor NaN.
+
+This is different from the global `isFinite()` function, which first coerces its argument to a number before testing it.
+
+### Parameters
+- `value`: The value to be tested for finiteness.
+
+### Return value
+- `true` if the given value is a finite number, otherwise `false`.
+
+## Examples
+
+### Basic Usage
+
+```ts
+// Finite numbers
+Number.isFinite(42);          // true
+Number.isFinite(-42);         // true
+Number.isFinite(42.5);        // true
+
+// Non-finite numbers
+Number.isFinite(Infinity);    // false
+Number.isFinite(-Infinity);   // false
+Number.isFinite(NaN);         // false
+
+// Non-numbers
+Number.isFinite("42");        // false
+Number.isFinite(null);        // false
+Number.isFinite(undefined);   // false
+```
+
+### Validation Functions
+
+```ts
+// Validate that a value is usable for calculations
+function isValidForMath(value: unknown): boolean {
+  return Number.isFinite(Number(value));
+}
+
+// Test cases
+isValidForMath(42);           // true
+isValidForMath("42");         // true
+isValidForMath(Infinity);     // false
+isValidForMath("invalid");    // false
+```
+
+### Preventing Division by Zero
+
+```ts
+// Safely divide two numbers
+function safeDivide(a: number, b: number): number {
+  // Check for division by zero or near-zero
+  if (!Number.isFinite(a / b)) {
+    throw new Error("Division by zero or resulting in a non-finite value");
+  }
+  
+  return a / b;
+}
+
+// Usage
+try {
+  const result = safeDivide(10, 0);
+} catch (error) {
+  console.log(error.message); // "Division by zero or resulting in a non-finite value"
+}
+```
+
+### Range Checking in Graphics
+
+```ts
+// Check if a point is within the renderable area
+function isPointRenderable(x: number, y: number): boolean {
+  // Check that coordinates are finite numbers
+  if (!Number.isFinite(x) || !Number.isFinite(y)) {
+    return false;
+  }
+  
+  // Additional bounds checking
+  return x >= 0 && x < 1000 && y >= 0 && y < 800;
+}
+```
+
+### Filtering Arrays
+
+```ts
+// Filter out non-finite values from an array
+function getFiniteValues(values: number[]): number[] {
+  return values.filter(Number.isFinite);
+}
+
+// Usage
+const mixedValues = [42, Infinity, -Infinity, NaN, 100];
+const finiteOnly = getFiniteValues(mixedValues);
+// finiteOnly is [42, 100]
+``` 

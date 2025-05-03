@@ -1,0 +1,148 @@
+# constructor
+
+Creates a new Error object.
+
+## Signature
+
+```ts
+new Error(message?: string): Error
+Error(message?: string): Error
+```
+
+## Description
+
+The `Error` constructor creates a new error object. When called as a function, it behaves the same as when called as a constructor, returning a new `Error` object in both cases.
+
+### Parameters
+- `message` (optional): A human-readable description of the error. The default is an empty string.
+
+### Return value
+- A new `Error` object with the specified message.
+
+## Examples
+
+### Basic Usage
+
+```ts
+// Creating an error with a constructor
+const error1 = new Error("Something went wrong");
+print(error1.name);    // "Error"
+print(error1.message); // "Something went wrong"
+
+// Creating an error with a function call
+const error2 = Error("Another error");
+print(error2.name);    // "Error"
+print(error2.message); // "Another error"
+
+// Creating an error without a message
+const error3 = new Error();
+print(error3.message); // "" (empty string)
+```
+
+### Creating and Throwing Errors
+
+```ts
+function divide(a: number, b: number): number {
+  if (b === 0) {
+    throw new Error("Division by zero");
+  }
+  return a / b;
+}
+
+try {
+  const result = divide(10, 0);
+} catch (err) {
+  print(`Caught an error: ${err.message}`);
+  // Outputs: "Caught an error: Division by zero"
+}
+```
+
+### Custom Parameter Validation
+
+```ts
+function validateParameters(options: unknown): void {
+  if (options === undefined || options === null) {
+    throw new Error("Options parameter is required");
+  }
+  
+  if (typeof options !== "object") {
+    throw new Error("Options must be an object");
+  }
+  
+  // More validation...
+}
+
+try {
+  validateParameters("not an object");
+} catch (err) {
+  print(err.message); // "Options must be an object"
+}
+```
+
+### Enhancing Error Information
+
+```ts
+// Add context to errors
+function processUserData(userId: string) {
+  try {
+    // Simulate an operation that might fail
+    if (!userId) {
+      throw new Error("Invalid user ID");
+    }
+    
+    // More processing...
+    
+  } catch (err) {
+    // Add context to the original error
+    const enhancedError = new Error(
+      `Failed to process user data: ${err.message}`
+    );
+    
+    // Can also preserve original stack if available
+    if (err.stack) {
+      enhancedError.stack = err.stack;
+    }
+    
+    throw enhancedError;
+  }
+}
+```
+
+### Setting Custom Properties
+
+```ts
+// Create an error with additional properties
+function createCustomError(
+  message: string,
+  code: number,
+  details?: unknown
+): Error {
+  const error = new Error(message);
+  
+  // Add custom properties to the error object
+  // Note: TypeScript doesn't know about these properties by default
+  (error as any).code = code;
+  
+  if (details !== undefined) {
+    (error as any).details = details;
+  }
+  
+  return error;
+}
+
+// Usage
+try {
+  throw createCustomError("Resource not found", 404, {
+    resourceType: "user",
+    requestedId: "123"
+  });
+} catch (err) {
+  print(err.message);  // "Resource not found"
+  print((err as any).code);  // 404
+  
+  if ((err as any).details) {
+    print(`Resource type: ${(err as any).details.resourceType}`);
+    // "Resource type: user"
+  }
+}
+``` 

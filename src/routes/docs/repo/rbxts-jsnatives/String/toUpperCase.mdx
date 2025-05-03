@@ -1,0 +1,131 @@
+# toUpperCase
+
+Converts a string to uppercase.
+
+## Signature
+
+```ts
+function toUpperCase(str: string): string
+```
+
+## Description
+
+The `toUpperCase` function converts all the alphabetic characters in a string to uppercase. It uses Lua's `string.upper` function internally.
+
+### Parameters
+- `str`: The string to convert to uppercase.
+
+### Return value
+- A new string with all alphabetic characters converted to uppercase.
+
+## Examples
+
+### Basic usage
+
+```ts
+// Convert a string to uppercase
+const upper = String.toUpperCase("hello world");
+print(upper); // Outputs: "HELLO WORLD"
+
+// Mixed case conversion
+const mixed = String.toUpperCase("Hello World");
+print(mixed); // Outputs: "HELLO WORLD"
+```
+
+### Case preservation for non-alphabetic characters
+
+```ts
+// Numbers and special characters are not affected
+const withNumbers = String.toUpperCase("hello 123!");
+print(withNumbers); // Outputs: "HELLO 123!"
+
+// Only alphabetic characters are converted
+const special = String.toUpperCase("abc-def_ghi@jkl");
+print(special); // Outputs: "ABC-DEF_GHI@JKL"
+```
+
+### Handling edge cases
+
+```ts
+// Empty string
+const empty = String.toUpperCase("");
+print(empty); // Outputs: ""
+
+// Already uppercase
+const alreadyUpper = String.toUpperCase("HELLO WORLD");
+print(alreadyUpper); // Outputs: "HELLO WORLD"
+
+// Non-alphabetic characters
+const nonAlpha = String.toUpperCase("123!@#");
+print(nonAlpha); // Outputs: "123!@#" (unchanged)
+```
+
+### Practical applications
+
+```ts
+// Create headings or emphasis
+function createHeading(text: string): string {
+  return String.toUpperCase(text);
+}
+
+print(createHeading("important notice")); // Outputs: "IMPORTANT NOTICE"
+
+// Format constants
+function formatConstantName(name: string): string {
+  return String.toUpperCase(String.replace(name, " ", "_"));
+}
+
+print(formatConstantName("max items")); // Outputs: "MAX_ITEMS"
+```
+
+### Using with other string functions
+
+```ts
+// Combine with other string functions for more complex operations
+function emphasizeFirstWord(text: string): string {
+  const words = String.split(text, " ");
+  if (words.length > 0) {
+    words[0] = String.toUpperCase(words[0]);
+  }
+  return words.join(" ");
+}
+
+print(emphasizeFirstWord("welcome to our website")); // Outputs: "WELCOME to our website"
+
+// Create acronyms
+function createAcronym(phrase: string): string {
+  const words = String.split(phrase, " ");
+  let acronym = "";
+  
+  for (const word of words) {
+    if (word.length > 0) {
+      acronym += String.toUpperCase(word[0]);
+    }
+  }
+  
+  return acronym;
+}
+
+print(createAcronym("as soon as possible")); // Outputs: "ASAP"
+print(createAcronym("national aeronautics and space administration")); // Outputs: "NAASA"
+```
+
+### Comparison with toLowerCase
+
+```ts
+// Original string
+const original = "Hello World 123";
+
+// Convert to uppercase
+const upper = String.toUpperCase(original);
+print(upper); // Outputs: "HELLO WORLD 123"
+
+// Convert to lowercase
+const lower = String.toLowerCase(original);
+print(lower); // Outputs: "hello world 123"
+
+// Converting between cases
+print(String.toLowerCase(upper)); // Outputs: "hello world 123"
+print(String.toUpperCase(lower)); // Outputs: "HELLO WORLD 123"
+```
+``` 

@@ -1,0 +1,60 @@
+# Number
+
+The Number object provides constants and methods for working with numeric values, similar to JavaScript's Number functionality.
+
+## Overview
+
+```ts
+declare const Number: {
+  (value: unknown): number;
+  EPSILON: number;
+  MAX_SAFE_INTEGER: number;
+  MIN_SAFE_INTEGER: number;
+  MAX_VALUE: number;
+  MIN_VALUE: number;
+  NaN: number;
+  NegativeNaN: number;
+  NEGATIVE_INFINITY: number;
+  POSITIVE_INFINITY: number;
+  isFinite: (value: number) => boolean;
+  isInteger: (value: number) => boolean;
+  isNaN: (value: number) => boolean;
+  isSafeInteger: (value: number) => boolean;
+  toExponential: (value: number, fractionDigits?: number) => string | null;
+  parseFloat: (value: unknown) => number;
+  parseInt: (value: unknown, radix?: number) => number;
+  toFixed: (value: number, digits?: number) => string;
+  toString: (value: number, radix?: number) => string;
+};
+```
+
+The Number module includes:
+
+- A function to convert values to numbers
+- Constants for important numeric values
+- Utility methods for checking number properties
+- Methods for parsing and formatting numbers
+
+## Usage Example
+
+```ts
+import { Number } from "@rbxts/jsnatives";
+
+// Convert values to numbers
+const num1 = Number("123");      // 123
+const num2 = Number("123.45");   // 123.45
+const num3 = Number.parseInt("0xFF", 16);     // 255
+
+// Use constants
+if (num1 < Number.MAX_SAFE_INTEGER) {
+  // Safe to use as integer
+}
+
+// Check number properties
+const isWhole = Number.isInteger(num1);    // true
+const isValid = !Number.isNaN(num1);       // true
+
+// Format numbers
+const formatted = Number.toFixed(num2, 1); // "123.5"
+const binary = Number.toString(num1, 2);   // "1111011"
+```

@@ -1,0 +1,117 @@
+# union
+
+Creates a new Set containing all elements from both sets.
+
+## Signature
+
+```ts
+function union<T>(set1: Set<T>, set2: Set<T>): Set<T>
+```
+
+## Description
+
+The `union` function combines two sets together, creating a new Set that contains all the elements from both input sets. If an element is present in both sets, it will appear only once in the resulting Set.
+
+### Parameters
+- `set1`: The first Set.
+- `set2`: The second Set.
+
+### Return value
+- A new Set containing all elements from both `set1` and `set2`.
+
+## Examples
+
+### Basic usage
+
+```ts
+// Create two sets with some numbers
+const set1 = new Set([1, 2, 3, 4]);
+const set2 = new Set([3, 4, 5, 6]);
+
+// Combine both sets using union
+const result = SetUtils.union(set1, set2);
+console.log([...result]); // Outputs: [1, 2, 3, 4, 5, 6]
+```
+
+### With string elements
+
+```ts
+// Sets with string elements
+const fruits1 = new Set(["apple", "banana", "orange"]);
+const fruits2 = new Set(["banana", "grape", "kiwi"]);
+
+// Combine the fruit sets
+const allFruits = SetUtils.union(fruits1, fruits2);
+console.log([...allFruits]); // Outputs: ["apple", "banana", "orange", "grape", "kiwi"]
+```
+
+### With mixed types
+
+```ts
+// Sets with mixed element types
+const mixedSet1 = new Set([1, "hello", true]);
+const mixedSet2 = new Set([2, "world", true]);
+
+// Union of mixed type sets
+const combinedMixed = SetUtils.union(mixedSet1, mixedSet2);
+console.log([...combinedMixed]); // Outputs: [1, "hello", true, 2, "world"]
+```
+
+### Empty sets
+
+```ts
+// Union with an empty set
+const numbers = new Set([1, 2, 3]);
+const empty = new Set();
+
+// Union with an empty set returns a copy of the non-empty set
+const result1 = SetUtils.union(numbers, empty);
+console.log([...result1]); // Outputs: [1, 2, 3]
+
+// Union of two empty sets returns an empty set
+const result2 = SetUtils.union(empty, empty);
+console.log([...result2]); // Outputs: []
+```
+
+### Practical application
+
+```ts
+// Merging user permissions
+function mergePermissions(basePermissions: Set<string>, rolePermissions: Set<string>): Set<string> {
+  return SetUtils.union(basePermissions, rolePermissions);
+}
+
+// User has base permissions
+const userPermissions = new Set(["read", "comment"]);
+
+// User's role has additional permissions
+const adminPermissions = new Set(["write", "delete", "moderate"]);
+
+// Combine permissions
+const effectivePermissions = mergePermissions(userPermissions, adminPermissions);
+console.log([...effectivePermissions]); 
+// Outputs: ["read", "comment", "write", "delete", "moderate"]
+```
+
+### Comparison with manual implementation
+
+```ts
+// Manual implementation of union operation
+function manualUnion<T>(set1: Set<T>, set2: Set<T>): Set<T> {
+  const result = new Set<T>(set1);
+  for (const item of set2) {
+    result.add(item);
+  }
+  return result;
+}
+
+// Using SetUtils.union
+const set1 = new Set([1, 2, 3]);
+const set2 = new Set([3, 4, 5]);
+
+const manualResult = manualUnion(set1, set2);
+const utilResult = SetUtils.union(set1, set2);
+
+console.log([...manualResult]); // Outputs: [1, 2, 3, 4, 5]
+console.log([...utilResult]);   // Outputs: [1, 2, 3, 4, 5]
+``` 

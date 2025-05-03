@@ -1,0 +1,60 @@
+# charCodeAt
+
+Returns the Unicode value of the character at the specified position in a string.
+
+## Signature
+
+```ts
+function charCodeAt(str: string, index: number | string): number
+```
+
+## Description
+
+The `charCodeAt` function returns an integer representing the Unicode value of the character at the specified position in a string. from the UTF-8 code unit.
+
+### Parameters
+- `str`: The string to extract a character code from.
+- `index`: The zero-based index of the character. If a string is provided, it will be converted to a number.
+
+### Return value
+- A number representing the UTF-8 code unit at the specified index.
+- If the index is out of range, it returns `NaN`.
+
+## Examples
+
+### Basic usage
+
+```ts
+// Get the character code of 'A'
+const code = String.charCodeAt("ABCDE", 0);
+print(code); // Outputs: 65
+
+// Get the character code of 'C'
+const middleCode = String.charCodeAt("ABCDE", 2);
+print(middleCode); // Outputs: 67
+```
+
+### Using with string index
+
+```ts
+// String indices are automatically converted to numbers
+const code = String.charCodeAt("Hello", "0");
+print(code); // Outputs: 72 (the character code for 'H')
+```
+
+### Handling out of range indices
+
+```ts
+// Accessing an index out of range
+const invalidCode = String.charCodeAt("ABC", 10);
+print(invalidCode); // Outputs: NaN
+
+// Checking for valid character codes
+function isValidChar(str: string, index: number) {
+  const code = String.charCodeAt(str, index);
+  return !isNaN(code);
+}
+
+print(isValidChar("Hello", 1)); // Outputs: true
+print(isValidChar("Hello", 10)); // Outputs: false
+```

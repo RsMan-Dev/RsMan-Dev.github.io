@@ -1,0 +1,113 @@
+# toKebabCase
+
+Converts a string to kebab-case format.
+
+## Signature
+
+```ts
+function toKebabCase(str: string): string
+```
+
+## Description
+
+The `toKebabCase` function converts a string to kebab-case format. It replaces spaces, underscores, and other separators with hyphens, and transforms the string into a format where all letters are lowercase with words separated by hyphens.
+
+### Parameters
+- `str`: The string to convert to kebab-case.
+
+### Return value
+- A new string in kebab-case format.
+
+## Examples
+
+### Basic usage
+
+```ts
+// Converting different formats to kebab-case
+const space = String.toKebabCase("hello world");
+print(space); // Outputs: "hello-world"
+
+const camel = String.toKebabCase("helloWorld");
+print(camel); // Outputs: "hello-world"
+
+const pascal = String.toKebabCase("HelloWorld");
+print(pascal); // Outputs: "hello-world"
+
+const snake = String.toKebabCase("hello_world");
+print(snake); // Outputs: "hello-world"
+```
+
+### Multiple words
+
+```ts
+// Converting multi-word strings
+const multiple = String.toKebabCase("hello beautiful world");
+print(multiple); // Outputs: "hello-beautiful-world"
+
+const mixedSeparators = String.toKebabCase("hello_beautiful-world");
+print(mixedSeparators); // Outputs: "hello-beautiful-world"
+```
+
+### Handling edge cases
+
+```ts
+// Empty string
+const empty = String.toKebabCase("");
+print(empty); // Outputs: ""
+
+// Single word
+const single = String.toKebabCase("hello");
+print(single); // Outputs: "hello"
+
+// Already in kebab-case
+const alreadyKebab = String.toKebabCase("hello-world");
+print(alreadyKebab); // Outputs: "hello-world"
+
+// Uppercase
+const uppercase = String.toKebabCase("HELLO WORLD");
+print(uppercase); // Outputs: "h-e-l-l-o-w-o-r-l-d" (each uppercase is treated as new word)
+```
+
+### Converting from other cases
+
+```ts
+// From sentence case
+const sentence = String.toKebabCase("This is a sentence");
+print(sentence); // Outputs: "this-is-a-sentence"
+
+// From title case
+const title = String.toKebabCase("This Is A Title");
+print(title); // Outputs: "this-is-a-title"
+
+// From camelCase
+const camel = String.toKebabCase("userFirstName");
+print(camel); // Outputs: "user-first-name"
+
+// From PascalCase
+const pascal = String.toKebabCase("UserLoginRequest");
+print(pascal); // Outputs: "user-login-request"
+
+// From snake_case
+const snake = String.toKebabCase("user_login_request");
+print(snake); // Outputs: "user-login-request"
+```
+
+### Practical applications
+
+```ts
+// Create CSS class names
+function createClassName(name: string): string {
+  return String.toKebabCase(name);
+}
+
+print(createClassName("ButtonPrimary")); // Outputs: "button-primary"
+print(createClassName("Header Section")); // Outputs: "header-section"
+
+// Create URL slugs
+function createSlug(title: string): string {
+  return String.toKebabCase(title);
+}
+
+print(createSlug("Getting Started with TypeScript")); // Outputs: "getting-started-with-typescript"
+print(createSlug("10 Best Practices for Clean Code")); // Outputs: "10-best-practices-for-clean-code"
+```

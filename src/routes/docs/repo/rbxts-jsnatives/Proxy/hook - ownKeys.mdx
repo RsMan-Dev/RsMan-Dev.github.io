@@ -1,12 +1,98 @@
-ownKeys is triggered when the keys of the proxy are requested, it can be used to modify the keys that are returned
+# Proxy - ownKeys hook
+
+The `ownKeys` hook is triggered when the keys of the proxy are requested.
+
+## Signature
 
 ```ts
-const a = new Proxy({}, {
-  ownKeys: (target) => {
-    return ["a", "b"];
+function ownKeys<T>(target: T, proxy: T): Array<keyof T>;
+```
+
+## Description
+
+The `ownKeys` handler trap is called when the list of property keys on the proxy is being retrieved, such as when using `Object.keys()`.
+
+> Warning: This hook is not working with pairs or ipairs, always use Object.* functions, or generralized iteration.
+
+### Parameters
+- `target`: The original target object the proxy is wrapping
+- `proxy`: The proxy instance itself
+
+### Return value
+- An array of property keys (strings, numbers, or symbols)
+
+## Examples
+
+### Basic key enumeration interception
+
+```ts
+const target = { a: 1, b: 2, c: 3 };
+const proxy = new Proxy(target, {
+  ownKeys: (target, proxy) => {
+    console.log("ownKeys trap called");
+    return Object.keys(target).filter(key => key !== "c");
   }
 });
 
-Object.keys(a); // will return ["a", "b"], even if target does not have any keys
+console.log(Object.keys(proxy)); // Logs: "ownKeys trap called", then ["a", "b"]
+```
+
+### Virtual keys
+
+```ts
+const target = { x: 10, y: 20 };
+const proxy = new Proxy(target, {
+  ownKeys: (target, proxy) => {
+    return [...Object.keys(target), "sum"]; // Add a virtual property "sum"
+  },
+  get: (target, prop, proxy) => {
+    if (prop === "sum") {
+      return target.x + target.y;
+    }
+    return target[prop];
+  }
+});
+
+console.log(Object.keys(proxy)); // ["x", "y", "sum"]
+console.log(proxy.sum); // 30
+```
+
+### Filtering keys
+
+```ts
+const user = {
+  username: "admin",
+  password: "secret123",
+  email: "admin@example.com",
+  role: "admin"
+};
+
+const safeUser = new Proxy(user, {
+  ownKeys: (target, proxy) => {
+    // Filter out sensitive properties
+    return Object.keys(target).filter(key => !["password"].includes(key));
+  }
+});
+
+console.log(Object.keys(safeUser)); // ["username", "email", "role"]
+```
+
+### Sorting keys
+
+```ts
+const unorderedObject = {
+  z: 1,
+  a: 2,
+  m: 3,
+  k: 4
+};
+
+const orderedProxy = new Proxy(unorderedObject, {
+  ownKeys: (target, proxy) => {
+    return Object.keys(target).sort();
+  }
+});
+
+console.log(Object.keys(orderedProxy)); // ["a", "k", "m", "z"]
 ```
 

@@ -1,0 +1,79 @@
+# log
+
+Outputs a message to the console with string formatting and automatic object inspection.
+
+## Signature
+
+```ts
+function log(...args: unknown[]): void
+```
+
+## Description
+
+The `console.log` method prints one or more values to the console. When the first argument is a string, it uses it as a formatting string (similar to `string.format` in Lua) for the remaining arguments. For non-string first arguments, it automatically inspects and formats objects and tables for readability, and indents the output according to the current group level.
+
+### Parameters
+- `...args`: A list of values to output to the console. If the first argument is a string, it can contain format specifiers that are replaced with values from the remaining arguments.
+
+### Return value
+- None (void).
+
+## Examples
+
+### Basic usage
+
+```ts
+// Logging a simple string
+console.log("Hello world");
+// Outputs: Hello world (with indentation)
+
+// Logging with string formatting
+console.log("Player %s has score %d", "Alex", 42);
+// Outputs: Player Alex has score 42 (formatted string with indentation)
+
+// Logging numbers without formatting
+console.log(42);
+// Outputs: 42 (with indentation)
+```
+
+### String formatting
+
+```ts
+// Using string format specifiers (like Lua's string.format)
+console.log("Pi is approximately %.2f", 3.14159);
+// Outputs: Pi is approximately 3.14
+
+// Multiple arguments
+console.log("Player: %s, Level: %d, Active: %s", "John", 5, true);
+// Outputs: Player: John, Level: 5, Active: true
+
+// Percent sign
+console.log("Progress: %d%%", 75);
+// Outputs: Progress: 75%
+```
+
+### Logging objects
+
+```ts
+// Logging an object (uses inspection)
+const player = {
+  name: "PlayerOne",
+  level: 5,
+  health: 100,
+  inventory: ["sword", "shield", "potion"]
+};
+
+console.log(player);
+// Outputs an inspected representation without indentation:
+// {name: "PlayerOne", level: 5, health: 100, inventory: ["sword", "shield", "potion"]}
+```
+
+### Logging arrays
+
+```ts
+// Logging an array
+const items = ["apple", "banana", "orange"];
+console.log(items);
+// Outputs inspected array without indentation:
+// ["apple", "banana", "orange"]
+```

@@ -1,0 +1,165 @@
+# replaceAll
+
+Replaces all occurrences of a specified value with another value in a string.
+
+## Signature
+
+```ts
+function replaceAll(
+  str: string, 
+  search: PatternAdmissible, 
+  replace?: PatternAdmissible | ((v: string) => string) | Record<string, string>,
+  limit?: NumericAdmissible
+): string
+```
+
+## Description
+
+The `replaceAll` function returns a new string with all matches of a pattern replaced by a replacement. The pattern can be a string, number, or boolean, and the replacement can be a string, number, boolean, a function that returns a replacement string, or an object with replacement mappings.
+
+Unlike `replace`, this function always replaces all occurrences by default, but can be limited by providing a limit parameter.
+
+### Parameters
+- `str`: The string to perform replacements on.
+- `search`: The pattern to search for. Can be a string, number, or boolean. Can also be a Lua pattern string.
+- `replace` (optional): The replacement value. Can be:
+  - A string, number, or boolean value (which will be converted to a string)
+  - A function that returns a replacement string
+  - An object where keys are substrings to replace and values are their replacements
+- `limit` (optional): Maximum number of replacements to make. If omitted, all occurrences are replaced.
+
+### Return value
+- A new string with replacements applied.
+
+## Examples
+
+### Basic usage
+
+```ts
+// Replace all occurrences of a substring
+const newStr = String.replaceAll("apple apple apple", "apple", "orange");
+print(newStr); // Outputs: "orange orange orange"
+
+// With a limit
+const limited = String.replaceAll("apple apple apple", "apple", "orange", 2);
+print(limited); // Outputs: "orange orange apple"
+```
+
+### Using non-string values
+
+```ts
+// Using numbers and booleans
+const withNumber = String.replaceAll("The answer is 42, repeat: 42", 42, 43);
+print(withNumber); // Outputs: "The answer is 43, repeat: 43"
+
+const withBoolean = String.replaceAll("This is true, that is true", true, false);
+print(withBoolean); // Outputs: "This is false, that is false"
+```
+
+### Using a function for replacements
+
+```ts
+// Using a function to transform the matched substrings
+const result = String.replaceAll("hello hello", "hello", (match) => {
+  return String.toUpperCase(match);
+});
+print(result); // Outputs: "HELLO HELLO"
+
+// Create a function that adds emphasis to words
+function emphasize(text: string, word: string): string {
+  return String.replaceAll(text, word, (match) => `**${match}**`);
+}
+
+const emphasized = emphasize("This is important and this is crucial", "is");
+print(emphasized); // Outputs: "Th**is** **is** important and th**is** **is** crucial"
+```
+
+### Using an object map for replacements
+
+```ts
+// Using an object to map multiple replacements
+const template = "Hello {name}, welcome to {place}!";
+const result = String.replaceAll(template, "{(.+)}", {
+  "name": "John",
+  "place": "Roblox"
+});
+print(result); // Outputs: "Hello John, welcome to Roblox!"
+
+// Simple templating system
+const values = {
+  "user": "Alice",
+  "product": "Premium",
+  "date": "2023-04-15"
+};
+
+const message = "Dear {user}, your {product} subscription will renew on {date}.";
+const personalized = String.replaceAll(message, "{(.+)}", values);
+print(personalized); 
+// Outputs: "Dear Alice, your Premium subscription will renew on 2023-04-15."
+```
+
+### Using with Lua patterns
+
+```ts
+// Replace all whitespace with a single space
+const text = "Hello  world\t!\nHow are  you?";
+const normalized = String.replaceAll(text, "%s+", " ");
+print(normalized); // Outputs: "Hello world ! How are you?"
+
+// Replace all digits with an X
+const numbers = "Call 555-123-4567 or 555-987-6543";
+const redacted = String.replaceAll(numbers, "%d", "X");
+print(redacted); // Outputs: "Call XXX-XXX-XXXX or XXX-XXX-XXXX"
+```
+
+### Case sensitivity
+
+```ts
+// Replacements are case-sensitive
+const text = "Hello hello HELLO";
+const result = String.replaceAll(text, "hello", "hi");
+print(result); // Outputs: "Hello hi HELLO" (only lowercase "hello" is replaced)
+```
+
+### Comparison with replace
+
+```ts
+// In many implementations, replace only affects the first occurrence
+const str = "one two one two";
+const withReplace = String.replace(str, "one", "three");
+print(withReplace); // Might output: "three two one two" (depends on implementation)
+
+// replaceAll affects all occurrences by default
+const withReplaceAll = String.replaceAll(str, "one", "three");
+print(withReplaceAll); // Outputs: "three two three two"
+
+// Using limit with replaceAll
+const withLimit = String.replaceAll(str, "one", "three", 1);
+print(withLimit); // Outputs: "three two one two" (only first occurrence)
+```
+
+### Practical examples
+
+```ts
+// Sanitize a string for HTML display
+function sanitizeHtml(html: string): string {
+  return String.replaceAll(html, {
+    "&": "&amp;",
+    "<": "&lt;",
+    ">": "&gt;",
+    '"': "&quot;",
+    "'": "&#39;"
+  });
+}
+
+const unsafe = '<div class="dangerous">Alert("XSS")</div>';
+print(sanitizeHtml(unsafe)); 
+// Outputs: "&lt;div class=&quot;dangerous&quot;&gt;Alert(&quot;XSS&quot;)&lt;/div&gt;"
+
+// Normalize file paths
+function normalizePath(path: string): string {
+  return String.replaceAll(path, "\\", "/");
+}
+
+print(normalizePath("C:\\Users\\Name\\Documents")); // Outputs: "C:/Users/Name/Documents"
+``` 

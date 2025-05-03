@@ -1,0 +1,85 @@
+# trimEnd
+
+Removes whitespace from the end of a string.
+
+## Signature
+
+```ts
+function trimEnd(str: string): string
+```
+
+## Description
+
+The `trimEnd` function removes whitespace characters from the end of a string, and returns a new string. Whitespace includes spaces, tabs, newlines, and other whitespace characters.
+
+### Parameters
+- `str`: The string to trim.
+
+### Return value
+- A new string with whitespace removed from the end.
+
+## Examples
+
+### Basic usage
+
+```ts
+// Remove whitespace from the end
+const trimmed = String.trimEnd("  Hello world  ");
+print(trimmed); // Outputs: "  Hello world"
+
+// Trim tabs and newlines
+const multiline = String.trimEnd("\t\n Hello \n\t");
+print(multiline); // Outputs: "\t\n Hello"
+```
+
+### Chaining with other string operations
+
+```ts
+// Trim end and then convert to uppercase
+const text = "  hello world  ";
+const processedText = String.toUpperCase(String.trimEnd(text));
+print(processedText); // Outputs: "  HELLO WORLD"
+```
+
+### Handling empty strings
+
+```ts
+// Trimming an empty string
+const empty = String.trimEnd("");
+print(empty); // Outputs: "" (empty string)
+
+// Trimming a string with only whitespace
+const onlyWhitespace = String.trimEnd("   \t\n  ");
+print(onlyWhitespace); // Outputs: "" (empty string)
+```
+
+### Practical applications
+
+```ts
+// Clean up multi-line text
+function removeTrailingNewlines(text: string): string {
+  return String.trimEnd(text);
+}
+
+const multilineText = "Hello\nWorld\n\n\n";
+const cleaned = removeTrailingNewlines(multilineText);
+print(cleaned); // Outputs: "Hello\nWorld"
+```
+
+### Comparison with trim and trimStart
+
+```ts
+const text = "  Hello world  ";
+
+// Using trimEnd
+const endOnly = String.trimEnd(text);
+print(endOnly); // Outputs: "  Hello world"
+
+// Using trim
+const bothEnds = String.trim(text);
+print(bothEnds); // Outputs: "Hello world"
+
+// Using trimStart
+const startOnly = String.trimStart(text);
+print(startOnly); // Outputs: "Hello world  "
+```

@@ -1,0 +1,99 @@
+# replace
+
+Replaces occurrences of a specified value with another value in a string.
+
+## Signature
+
+```ts
+function replace(
+  str: string, 
+  search: PatternAdmissible, 
+  replace?: PatternAdmissible | ((v: string) => string) | Record<string, string>
+): string
+```
+
+## Description
+
+The `replace` function returns a new string with some or all matches of a pattern replaced by a replacement. The pattern can be a string, number, or boolean, and the replacement can be a string, number, boolean, a function that returns a replacement string, or an object with replacement mappings.
+
+Pattern isnot a regex, it is a string pattern for lua.
+
+Unlike JavaScript's `replace`, this implementation replaces all occurrences by default, equivalent to `replaceAll` with limit 1.
+
+### Parameters
+- `str`: The string to perform replacements on.
+- `search`: The pattern to search for. Can be a string, number, or boolean.
+- `replace` (optional): The replacement value. Can be:
+  - A string, number, or boolean value (which will be converted to a string)
+  - A function that returns a replacement string
+  - An object where keys are substrings to replace and values are their replacements
+
+### Return value
+- A new string with replacements applied.
+
+## Examples
+
+### Basic usage
+
+```ts
+// Replace a substring with another string
+const newStr = String.replace("Hello world", "world", "universe");
+print(newStr); // Outputs: "Hello universe"
+```
+
+### Using non-string values
+
+```ts
+// Using numbers and booleans
+const withNumber = String.replace("The answer is 42", 42, 43);
+print(withNumber); // Outputs: "The answer is 43"
+
+const withBoolean = String.replace("This is true", true, false);
+print(withBoolean); // Outputs: "This is false"
+```
+
+### Using a function for replacements
+
+```ts
+// Using a function to transform the matched substrings
+const result = String.replace("hello world", "hello", (match) => {
+  return String.toUpperCase(match);
+});
+print(result); // Outputs: "HELLO world"
+
+// Create a function that adds emphasis to words
+function addEmphasis(text: string, word: string) {
+  return String.replace(text, word, (match) => `**${match}**`);
+}
+
+const emphasized = addEmphasis("This is important", "important");
+print(emphasized); // Outputs: "This is **important**"
+```
+
+### Using an object map for replacements
+
+```ts
+const template = "Hello {name}, welcome to Roblox!";
+const result = String.replace(template, "{name}", {
+  name: "John",
+});
+print(result); // Outputs: "Hello John, welcome to Roblox!"
+```
+
+### Case sensitivity
+
+```ts
+const text = "Hello hello HELLO";
+const result = String.replace(text, "hello", "hi");
+print(result); // "Hello hi HELLO" (lowercased "hello" is replaced)
+```
+
+### Pattern matching
+
+Using lua string pattern to replace.
+
+```ts
+const text = "Hello World";
+const result = String.replace(text, "%s(%u)", (match) => `-${String.toLowerCase(match)}`);
+print(result); // "Hello-world"
+```

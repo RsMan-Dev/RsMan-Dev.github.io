@@ -1,40 +1,56 @@
-will assign all properties of the next objects to the first one, overriding existing properties from the first objects
+# Object.assign
+
+Copies all enumerable own properties from one or more source objects to a target object.
+
+## Signature
 
 ```ts
-const a = {a: 1};
-const b = [1, 2, 3];
-const c = new Set([1, 2, 3]);
-const d = new Map([["a", 8], ["b", 2], ["c", 3]]);
-
-print(Object.assign(a, b, c, d)); // {a: 8, 0: 1, 1: true, 2: true, 3: true, b: 2, c: 3}
+function assign<T, U>(target: T, ...sources: U[]): T & ReduceObjectArray<U>
 ```
 
-<br/>
+## Description
 
-Works with proxies
+The `Object.assign()` method copies all enumerable own properties from one or more source objects to a target object. It returns the modified target object.
+
+Properties in the target object will be overwritten by properties in the sources if they have the same key. Later sources' properties will similarly overwrite earlier ones.
+
+## Examples
+
+### Merging objects
 
 ```ts
-const a = {c: 1}
+const target = {a: 1};
+const sourceArray = [1, 2, 3];
+const sourceSet = new Set([1, 2, 3]);
+const sourceMap = new Map([["a", 8], ["b", 2], ["c", 3]]);
+
+const result = Object.assign(target, sourceArray, sourceSet, sourceMap);
+print(result); // {a: 8, 0: 1, 1: true, 2: true, 3: true, b: 2, c: 3}
+```
+
+### Working with proxies
+
+```ts
+const objA = {c: 1}
 
 const target = {}
 
-const b = new Proxy(target, {
+const proxiedTarget = new Proxy(target, {
   set: (target, prop, value) => {
     target[prop] = value;
     return true;
   }
 })
 
-const c = new Proxy({}, {
+const proxiedSource = new Proxy({}, {
   get: (target, prop) => {
     return prop === "a" ? 2 : prop;
   },
   ownKeys: () => ["a", "b"]
 })
 
-// remember that a proxy is technically an empty object
-print(Object.assign(b, c, a), target, JSON.stringify(b)); // {} {a: 2, b: 2, c: 1}, {"a":2,"b":2,"c":1}
-
-
-
+// Note that a proxy is technically an empty object
+const result = Object.assign(proxiedTarget, proxiedSource, objA);
+print(result, target, JSON.stringify(proxiedTarget)); 
+// {} {a: 2, b: 2, c: 1}, {"a":2,"b":2,"c":1}
 ```

@@ -1,0 +1,144 @@
+# intersection
+
+Creates a new Set containing only elements that exist in both sets.
+
+## Signature
+
+```ts
+function intersection<T>(set1: Set<T>, set2: Set<T>): Set<T>
+```
+
+## Description
+
+The `intersection` function creates a new Set containing only the elements that are present in both of the input sets. It returns the common elements between the two sets.
+
+### Parameters
+- `set1`: The first Set.
+- `set2`: The second Set.
+
+### Return value
+- A new Set containing only the elements that exist in both `set1` and `set2`.
+
+## Examples
+
+### Basic usage
+
+```ts
+// Create two sets with some common elements
+const set1 = new Set([1, 2, 3, 4]);
+const set2 = new Set([3, 4, 5, 6]);
+
+// Find the common elements using intersection
+const result = SetUtils.intersection(set1, set2);
+console.log([...result]); // Outputs: [3, 4]
+```
+
+### With string elements
+
+```ts
+// Sets with string elements
+const fruits1 = new Set(["apple", "banana", "orange"]);
+const fruits2 = new Set(["banana", "grape", "orange"]);
+
+// Find common fruits
+const commonFruits = SetUtils.intersection(fruits1, fruits2);
+console.log([...commonFruits]); // Outputs: ["banana", "orange"]
+```
+
+### No common elements
+
+```ts
+// Sets with no elements in common
+const set1 = new Set([1, 2, 3]);
+const set2 = new Set([4, 5, 6]);
+
+// Intersection will be empty
+const emptyIntersection = SetUtils.intersection(set1, set2);
+console.log([...emptyIntersection]); // Outputs: []
+console.log(emptyIntersection.size); // Outputs: 0
+```
+
+### Empty set cases
+
+```ts
+// Intersection with an empty set
+const numbers = new Set([1, 2, 3]);
+const empty = new Set();
+
+// Intersection with empty set always results in empty set
+const result1 = SetUtils.intersection(numbers, empty);
+console.log([...result1]); // Outputs: []
+
+// Intersection of two empty sets is also empty
+const result2 = SetUtils.intersection(empty, empty);
+console.log([...result2]); // Outputs: []
+```
+
+### Practical application
+
+```ts
+// Finding common permissions between roles
+function findCommonPermissions(role1Permissions: Set<string>, role2Permissions: Set<string>): Set<string> {
+  return SetUtils.intersection(role1Permissions, role2Permissions);
+}
+
+// Editor role permissions
+const editorPermissions = new Set(["read", "write", "comment", "edit"]);
+
+// Moderator role permissions
+const moderatorPermissions = new Set(["read", "comment", "moderate", "delete"]);
+
+// Find permissions common to both roles
+const sharedPermissions = findCommonPermissions(editorPermissions, moderatorPermissions);
+console.log([...sharedPermissions]); 
+// Outputs: ["read", "comment"]
+```
+
+### Using with large data sets
+
+```ts
+// Example with larger sets
+function findMatchingProducts(userInterests: Set<string>, availableProducts: Set<string>): Set<string> {
+  return SetUtils.intersection(userInterests, availableProducts);
+}
+
+// User has expressed interest in these product categories
+const userInterests = new Set([
+  "electronics", "books", "clothing", "sports", "outdoors", "kitchen"
+]);
+
+// Currently available product categories on sale
+const saleProducts = new Set([
+  "electronics", "furniture", "kitchen", "bathroom", "clothing", "garden"
+]);
+
+// Find matching interests and sale items
+const recommendedProducts = findMatchingProducts(userInterests, saleProducts);
+console.log([...recommendedProducts]); 
+// Outputs: ["electronics", "clothing", "kitchen"]
+```
+
+### Comparison with manual implementation
+
+```ts
+// Manual implementation of intersection operation
+function manualIntersection<T>(set1: Set<T>, set2: Set<T>): Set<T> {
+  const result = new Set<T>();
+  for (const item of set1) {
+    if (set2.has(item)) {
+      result.add(item);
+    }
+  }
+  return result;
+}
+
+// Using SetUtils.intersection
+const set1 = new Set([1, 2, 3, 4]);
+const set2 = new Set([3, 4, 5, 6]);
+
+const manualResult = manualIntersection(set1, set2);
+const utilResult = SetUtils.intersection(set1, set2);
+
+console.log([...manualResult]); // Outputs: [3, 4]
+console.log([...utilResult]);   // Outputs: [3, 4]
+``` 

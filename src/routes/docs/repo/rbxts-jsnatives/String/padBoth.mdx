@@ -1,0 +1,135 @@
+# padBoth
+
+Pads both the start and end of a string with a specified character until it reaches the desired length.
+
+## Signature
+
+```ts
+function padBoth(str: string, length: NumericAdmissible, fillString?: string): string
+```
+
+## Description
+
+The `padBoth` function pads the current string with another string (multiple times, if needed) until the resulting string reaches the given length. The padding is applied to both the beginning and end of the current string, attempting to center the original string.
+will always add the same amount of padding to both sides.
+
+### Parameters
+- `str`: The string to pad.
+- `length`: The target length of the output string. If a string is provided, it will be converted to a number.
+- `fillString` (optional): The string to pad with. Default is a space (" ").
+
+### Return value
+- A new string of the specified length with the fill string applied to both ends.
+- If the input string is already longer than the specified length, it is returned unchanged.
+
+## Examples
+
+### Basic usage
+
+```ts
+// Pad with spaces
+const padded = String.padBoth("Hello", 11);
+print(padded); // Outputs: "   Hello   " (3 spaces at start, 3 at end)
+
+// Pad with a custom character
+const paddedStars = String.padBoth("Hello", 11, "*");
+print(paddedStars); // Outputs: "***Hello***"
+```
+
+### Using multiple characters for padding
+
+```ts
+// Fill string can be more than one character
+const paddedPattern = String.padBoth("Hi", 10, "-.");
+print(paddedPattern); // Outputs: "-.-.Hi-.-."
+```
+
+### Handling edge cases
+
+```ts
+// String already longer than target length
+const noChange = String.padBoth("Hello world", 5);
+print(noChange); // Outputs: "Hello world" (no padding added)
+
+// Empty fill string defaults to space
+const defaultFill = String.padBoth("Hello", 11, "");
+print(defaultFill); // Outputs: "   Hello   " (uses space as default)
+
+// Target length less than 1
+const invalidLength = String.padBoth("Hello", -5);
+print(invalidLength); // Outputs: "Hello" (no padding)
+
+// Odd number of padding characters distributes extra space to the end
+const oddPadding = String.padBoth("Hi", 7);
+print(oddPadding); // Outputs: "  Hi  " (2 spaces at start, 2 at end)
+```
+
+### Using string length parameter
+
+```ts
+// String length will be converted to number
+const paddedNumeric = String.padBoth("Hello", "11");
+print(paddedNumeric); // Outputs: "   Hello   "
+```
+
+### Practical applications
+
+```ts
+// Center text in a fixed-width field
+function centerText(text: string, width: number): string {
+  return String.padBoth(text, width);
+}
+
+print(centerText("Title", 20)); // Outputs: "       Title        "
+
+// Create a header for console output
+function createHeader(title: string, width: number = 40, char: string = "="): string {
+  const paddedTitle = String.padBoth(` ${title} `, width, char);
+  return paddedTitle;
+}
+
+print(createHeader("User Settings"));
+// Outputs: "===========User Settings============"
+```
+
+### Comparison with padStart and padEnd
+
+```ts
+const text = "Hello";
+
+// Using padBoth
+const bothPadded = String.padBoth(text, 11, "-");
+print(bothPadded); // Outputs: "---Hello---"
+
+// Using padStart
+const startPadded = String.padStart(text, 11, "-");
+print(startPadded); // Outputs: "------Hello"
+
+// Using padEnd
+const endPadded = String.padEnd(text, 11, "-");
+print(endPadded); // Outputs: "Hello------"
+```
+
+### Centering text with varied lengths
+
+```ts
+// Center multiple lines of text
+function centerLines(lines: string[], width: number): string[] {
+  return lines.map(line => String.padBoth(line, width));
+}
+
+const centeredLines = centerLines([
+  "Title",
+  "Subtitle",
+  "Author: John Doe"
+], 30);
+
+for (const line of centeredLines) {
+  print(`|${line}|`);
+}
+/* Outputs:
+|            Title            |
+|          Subtitle           |
+|       Author: John Doe      |
+*/
+``` 

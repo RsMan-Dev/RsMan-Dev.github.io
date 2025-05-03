@@ -1,0 +1,53 @@
+# Timers
+
+The Timers module provides functions for scheduling code execution after a delay and at regular intervals.
+
+## Overview
+
+The module includes four main functions:
+- `setTimeout`: Schedules a function to run after a specified delay
+- `clearTimeout`: Cancels a scheduled timeout
+- `setInterval`: Repeatedly runs a function with a fixed delay between executions
+- `clearInterval`: Stops an interval from continuing to run
+
+These functions provide JavaScript-like timer functionality in the Roblox environment, using Roblox's `task.delay` system internally.
+
+## Signatures
+
+```ts
+function setTimeout(cb: (sym: symbol) => void, ms = 0): symbol
+function clearTimeout(sym: symbol | undefined): void
+function setInterval(cb: (sym: symbol) => void, ms = 0): symbol
+function clearInterval(sym: symbol | undefined): void
+```
+
+## Basic Usage
+
+```ts
+// Execute code after 2 seconds
+const timeout = setTimeout((sym) => {
+  print("Timeout executed after 2 seconds");
+}, 2000);
+
+// Execute code every 1 second
+const interval = setInterval((sym) => {
+  print("Interval executing every second");
+}, 1000);
+
+// Cancel the scheduled timeout (if it hasn't executed yet)
+clearTimeout(timeout);
+
+// Stop the interval after 5 seconds
+setTimeout((sym) => {
+  clearInterval(interval);
+  print("Interval stopped after 5 seconds");
+}, 5000);
+```
+
+## Implementation Details
+
+The module uses `symbol` objects as unique identifiers for both timeouts and intervals. This avoids potential memory leaks that could occur with numeric IDs or other reference types.
+
+When you create a timeout or interval, the callback receives the symbol as its parameter, allowing you to cancel it from within the callback itself.
+
+Internally, the module uses WeakMaps to track active timeouts and intervals, ensuring proper cleanup when symbols are no longer referenced. 

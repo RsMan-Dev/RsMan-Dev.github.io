@@ -1,0 +1,192 @@
+# isSubsetOf
+
+Determines whether the first set is a subset of the second set.
+
+## Signature
+
+```ts
+function isSubsetOf<T>(set1: Set<T>, set2: Set<T>): boolean
+```
+
+## Description
+
+The `isSubsetOf` function checks if the first set is a subset of the second set. A set A is a subset of a set B if every element of A is also an element of B.
+
+### Parameters
+- `set1`: The set to check if it's a subset.
+- `set2`: The set to check against.
+
+### Return value
+- `true` if all elements of `set1` are present in `set2` (meaning `set1` is a subset of `set2`).
+- `false` otherwise.
+
+## Examples
+
+### Basic usage
+
+```ts
+// Create two sets
+const set1 = new Set([1, 2]);
+const set2 = new Set([1, 2, 3, 4]);
+
+// Check if set1 is a subset of set2
+const result = SetUtils.isSubsetOf(set1, set2);
+console.log(result); // Outputs: true
+
+// Another example
+const set3 = new Set([1, 2, 5]);
+const result2 = SetUtils.isSubsetOf(set3, set2);
+console.log(result2); // Outputs: false (5 is not in set2)
+```
+
+### With string elements
+
+```ts
+// Sets with string elements
+const smallFruitSet = new Set(["apple", "banana"]);
+const largeFruitSet = new Set(["apple", "banana", "orange", "grape"]);
+
+// Check if smallFruitSet is a subset of largeFruitSet
+const isSubset = SetUtils.isSubsetOf(smallFruitSet, largeFruitSet);
+console.log(isSubset); // Outputs: true
+```
+
+### Equal sets
+
+```ts
+// Two identical sets
+const set1 = new Set([1, 2, 3]);
+const set2 = new Set([1, 2, 3]);
+
+// A set is a subset of itself
+const result = SetUtils.isSubsetOf(set1, set2);
+console.log(result); // Outputs: true
+```
+
+### Empty sets
+
+```ts
+// Empty set is a subset of any set
+const empty = new Set();
+const numbers = new Set([1, 2, 3]);
+
+const emptyIsSubset = SetUtils.isSubsetOf(empty, numbers);
+console.log(emptyIsSubset); // Outputs: true
+
+// Non-empty set is not a subset of empty set
+const numbersAreSubset = SetUtils.isSubsetOf(numbers, empty);
+console.log(numbersAreSubset); // Outputs: false
+```
+
+### Practical application: Permission checking
+
+```ts
+// Check if a user has all required permissions
+function hasRequiredPermissions(userPermissions: Set<string>, requiredPermissions: Set<string>): boolean {
+  return SetUtils.isSubsetOf(requiredPermissions, userPermissions);
+}
+
+// User's permissions
+const userPermissions = new Set([
+  "read", "write", "edit", "delete", "admin"
+]);
+
+// Permissions required for an operation
+const requiredForOperation = new Set([
+  "read", "write", "edit"
+]);
+
+// Check if user can perform the operation
+const canPerformOperation = hasRequiredPermissions(userPermissions, requiredForOperation);
+console.log(canPerformOperation); // Outputs: true
+
+// Permissions required for another operation
+const requiredForAdminOperation = new Set([
+  "read", "write", "admin", "superuser"
+]);
+
+// Check for admin operation
+const canPerformAdminOp = hasRequiredPermissions(userPermissions, requiredForAdminOperation);
+console.log(canPerformAdminOp); // Outputs: false (missing "superuser")
+```
+
+### Checking feature support
+
+```ts
+// Check if a system supports all required features
+function supportsAllFeatures(systemFeatures: Set<string>, requiredFeatures: Set<string>): boolean {
+  return SetUtils.isSubsetOf(requiredFeatures, systemFeatures);
+}
+
+// Features provided by a system
+const systemFeatures = new Set([
+  "bluetooth", "wifi", "gps", "camera", "accelerometer"
+]);
+
+// Features needed by app A
+const appARequirements = new Set([
+  "wifi", "camera"
+]);
+
+// Features needed by app B
+const appBRequirements = new Set([
+  "bluetooth", "nfc", "camera"
+]);
+
+// Check compatibility
+const appACompatible = supportsAllFeatures(systemFeatures, appARequirements);
+console.log(appACompatible); // Outputs: true
+
+const appBCompatible = supportsAllFeatures(systemFeatures, appBRequirements);
+console.log(appBCompatible); // Outputs: false (missing "nfc")
+```
+
+### Proper subset vs subset
+
+```ts
+// Check for proper subset (all elements in set1 are in set2, but set1 ≠ set2)
+function isProperSubset<T>(set1: Set<T>, set2: Set<T>): boolean {
+  return SetUtils.isSubsetOf(set1, set2) && set1.size < set2.size;
+}
+
+const set1 = new Set([1, 2]);
+const set2 = new Set([1, 2, 3]);
+const set3 = new Set([1, 2]);
+
+// Regular subset check
+console.log(SetUtils.isSubsetOf(set1, set2)); // Outputs: true
+console.log(SetUtils.isSubsetOf(set1, set3)); // Outputs: true
+
+// Proper subset check
+console.log(isProperSubset(set1, set2)); // Outputs: true
+console.log(isProperSubset(set1, set3)); // Outputs: false (equal sets)
+```
+
+### Comparison with manual implementation
+
+```ts
+// Manual implementation of isSubsetOf operation
+function manualIsSubsetOf<T>(set1: Set<T>, set2: Set<T>): boolean {
+  for (const item of set1) {
+    if (!set2.has(item)) {
+      return false;
+    }
+  }
+  return true;
+}
+
+// Using SetUtils.isSubsetOf
+const smallSet = new Set([1, 2]);
+const largeSet = new Set([1, 2, 3, 4, 5]);
+const incompatibleSet = new Set([1, 6]);
+
+const manualResult1 = manualIsSubsetOf(smallSet, largeSet);
+const utilResult1 = SetUtils.isSubsetOf(smallSet, largeSet);
+console.log(manualResult1); // Outputs: true
+console.log(utilResult1);   // Outputs: true
+
+const manualResult2 = manualIsSubsetOf(incompatibleSet, largeSet);
+const utilResult2 = SetUtils.isSubsetOf(incompatibleSet, largeSet);
+console.log(manualResult2); // Outputs: false
+console.log(utilResult2);   // Outputs: false
+``` 

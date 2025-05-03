@@ -1,0 +1,203 @@
+# WeakMap and WeakSet with Symbol Support
+
+Enhanced versions of WeakMap and WeakSet that support using symbols as keys.
+
+## Signature
+
+```ts
+interface WeakMapWithSymbol<K extends object | symbol, V> extends Map<K, V> {}
+
+interface WeakMapConstructor {
+  new<K extends object | symbol, V>(): WeakMapWithSymbol<K, V>
+  new<K extends object | symbol, V>(entries: ReadonlyArray<[K, V]>): WeakMapWithSymbol<K, V>
+}
+
+interface WeakSetWithSymbol<T extends object | symbol> extends Set<T> {}
+
+interface WeakSetConstructor {
+  new<T extends object | symbol>(): WeakSetWithSymbol<T>
+  new<T extends object | symbol>(values: ReadonlyArray<T>): WeakSetWithSymbol<T>
+}
+```
+
+## Description
+
+The Symbol module enhances the standard WeakMap and WeakSet collections to support symbols as keys, in addition to objects. This extension allows for memory-efficient tracking of symbols without preventing them from being garbage collected when they are no longer referenced elsewhere in the code.
+
+These enhanced collections maintain the same API as their standard counterparts but with expanded type definitions to accept symbols.
+
+## Examples
+
+### WeakMap with Symbol Keys
+
+```ts
+// Create a WeakMap that can use symbols as keys
+const metadataMap = new WeakMap<symbol | object, any>();
+
+// Store metadata for symbols
+const entitySymbol = Symbol("entity");
+metadataMap.set(entitySymbol, {
+  type: "player",
+  createdAt: Date.now()
+});
+
+// Check if a symbol has metadata
+print(metadataMap.has(entitySymbol)); // true
+
+// Retrieve the metadata
+const metadata = metadataMap.get(entitySymbol);
+print(metadata.type); // "player"
+
+// Delete the metadata
+metadataMap.delete(entitySymbol);
+print(metadataMap.has(entitySymbol)); // false
+```
+
+### WeakSet with Symbol Values
+
+```ts
+// Create a WeakSet that can store symbols
+const registeredSymbols = new WeakSet<symbol | object>();
+
+// Register some symbols
+const sym1 = Symbol("one");
+const sym2 = Symbol("two");
+
+registeredSymbols.add(sym1);
+registeredSymbols.add(sym2);
+
+// Check if a symbol is registered
+print(registeredSymbols.has(sym1)); // true
+print(registeredSymbols.has(Symbol("not registered"))); // false
+
+// Remove a symbol
+registeredSymbols.delete(sym2);
+print(registeredSymbols.has(sym2)); // false
+```
+
+### Tracking Symbol Usage
+
+```ts
+// Track where symbols are being used
+function createSymbolTracker() {
+  const usageMap = new WeakMap<symbol, Set<string>>();
+  
+  return {
+    track(sym: symbol, context: string): void {
+      if (!usageMap.has(sym)) {
+        usageMap.set(sym, new Set<string>());
+      }
+      
+      usageMap.get(sym)!.add(context);
+    },
+    
+    getUsage(sym: symbol): string[] {
+      if (!usageMap.has(sym)) {
+        return [];
+      }
+      
+      return Array.from(usageMap.get(sym)!);
+    }
+  };
+}
+
+// Usage
+const tracker = createSymbolTracker();
+const configSymbol = Symbol("config");
+
+tracker.track(configSymbol, "UserService");
+tracker.track(configSymbol, "AuthController");
+
+print(tracker.getUsage(configSymbol)); // ["UserService", "AuthController"]
+```
+
+### Feature Flags with Cleanup
+
+```ts
+// Manage feature flags with automatic cleanup
+function createFeatureManager() {
+  const enabledFeatures = new WeakSet<symbol | object>();
+  const featureMetadata = new WeakMap<symbol | object, any>();
+  
+  return {
+    defineFeature(name: string, metadata: any = {}): symbol {
+      const feature = Symbol.for(`feature:${name}`);
+      featureMetadata.set(feature, {
+        name,
+        definedAt: Date.now(),
+        ...metadata
+      });
+      return feature;
+    },
+    
+    enableFeature(feature: symbol): void {
+      enabledFeatures.add(feature);
+    },
+    
+    disableFeature(feature: symbol): void {
+      enabledFeatures.delete(feature);
+    },
+    
+    isEnabled(feature: symbol): boolean {
+      return enabledFeatures.has(feature);
+    },
+    
+    getMetadata(feature: symbol): any {
+      return featureMetadata.get(feature);
+    }
+  };
+}
+
+// Usage
+const features = createFeatureManager();
+
+const darkMode = features.defineFeature("dark-mode", {
+  description: "Enable dark theme across the app",
+  defaultValue: false
+});
+
+features.enableFeature(darkMode);
+print(features.isEnabled(darkMode)); // true
+print(features.getMetadata(darkMode).description); // "Enable dark theme across the app"
+```
+
+### Registry with Memory Management
+
+```ts
+// Create a registry that doesn't prevent garbage collection
+function createRegistry<T>() {
+  const items = new WeakMap<symbol | object, T>();
+  
+  return {
+    register(key: symbol | object, value: T): void {
+      items.set(key, value);
+    },
+    
+    get(key: symbol | object): T | undefined {
+      return items.get(key);
+    },
+    
+    unregister(key: symbol | object): boolean {
+      return items.delete(key);
+    },
+    
+    has(key: symbol | object): boolean {
+      return items.has(key);
+    }
+  };
+}
+
+// Usage
+const resourceRegistry = createRegistry<{ url: string, type: string }>();
+
+const imageSymbol = Symbol("image-resource");
+resourceRegistry.register(imageSymbol, {
+  url: "https://example.com/image.png",
+  type: "image/png"
+});
+
+const resource = resourceRegistry.get(imageSymbol);
+if (resource) {
+  print(`Found resource: ${resource.url}`);
+}
+``` 

@@ -1,0 +1,48 @@
+# toExponential
+
+Returns a string representing the number in exponential notation.
+
+## Signature
+
+```ts
+function toExponential(value: number, fractionDigits?: number): string | null
+```
+
+## Description
+
+The `Number.toExponential()` method formats a number using exponential notation, where the number is represented with one digit before the decimal point, followed by the specified number of digits after the decimal point, and the exponent.
+
+### Parameters
+- `value`: The number to format in exponential notation.
+- `fractionDigits` (optional): Number of digits after the decimal point. Must be in the range 0-20, inclusive. If omitted, it uses as many digits as necessary to represent the value.
+
+### Return value
+- A string representing the given number in exponential notation, or `null` if the operation fails.
+
+## Examples
+
+### Basic Usage
+
+```ts
+// Simple exponential formatting
+Number.toExponential(123.456);         // "1.23456e+2"
+Number.toExponential(0.0001234);       // "1.234e-4"
+Number.toExponential(0);               // "0e+0"
+
+// Specifying fraction digits
+Number.toExponential(123.456, 2);      // "1.23e+2"
+Number.toExponential(123.456, 0);      // "1e+2"
+Number.toExponential(123.456, 5);      // "1.23456e+2"
+```
+
+### Formatting Very Large or Small Numbers
+
+```ts
+// Very large numbers
+Number.toExponential(1000000000);      // "1e+9"
+Number.toExponential(1000000000, 2);   // "1.00e+9"
+
+// Very small numbers
+Number.toExponential(0.0000000001);    // "1e-10"
+Number.toExponential(0.0000000001, 3); // "1.000e-10"
+```

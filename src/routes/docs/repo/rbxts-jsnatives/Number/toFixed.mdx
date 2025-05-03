@@ -1,0 +1,71 @@
+# toFixed
+
+Formats a number using fixed-point notation.
+
+## Signature
+
+```ts
+function toFixed(value: number, digits?: number): string
+```
+
+## Description
+
+The `Number.toFixed()` method formats a number using fixed-point notation, returning a string representation of the number that does not use exponential notation and has exactly the specified number of digits after the decimal point.
+
+### Parameters
+- `value`: The number to format.
+- `digits` (optional): The number of digits to appear after the decimal point. Must be in the range 0-20, inclusive. Default is 0.
+
+### Return value
+- A string representing the given number using fixed-point notation.
+
+## Examples
+
+### Basic Usage
+
+```ts
+// Simple fixed-point formatting
+Number.toFixed(123.456, 2);        // "123.46" (rounded)
+Number.toFixed(123.456, 0);        // "123" (no decimal part)
+Number.toFixed(123.456, 4);        // "123.4560" (padded with zeros)
+
+// Rounding behavior
+Number.toFixed(0.125, 2);          // "0.13" (rounded up)
+Number.toFixed(0.124, 2);          // "0.12" (rounded down)
+Number.toFixed(0.5, 0);            // "1" (rounded up)
+Number.toFixed(0.4, 0);            // "0" (rounded down)
+
+// Very small numbers become zero
+Number.toFixed(0.0000001, 2);      // "0.00"
+
+// Large numbers maintain their integer part
+Number.toFixed(1234567.89, 2);     // "1234567.89"
+```
+
+### Formatting Currency
+
+```ts
+// Format as currency
+function formatCurrency(amount: number, currency = "$", decimals = 2): string {
+  return currency + Number.toFixed(amount, decimals);
+}
+
+// Usage
+formatCurrency(123.456);             // "$123.46"
+formatCurrency(1234.56, "€", 2);     // "€1234.56"
+formatCurrency(99, "£");             // "£99.00"
+```
+
+### Percentage Formatting
+
+```ts
+// Format a decimal as percentage
+function formatPercentage(decimal: number, decimals = 1): string {
+  return Number.toFixed(decimal * 100, decimals) + "%";
+}
+
+// Usage
+formatPercentage(0.1234);           // "12.3%"
+formatPercentage(0.5, 0);           // "50%"
+formatPercentage(1.75, 2);          // "175.00%"
+```

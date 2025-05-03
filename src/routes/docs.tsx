@@ -1,6 +1,7 @@
 import { useLocation, useNavigate } from "@solidjs/router";
 import { createMemo, createSignal, For, onCleanup, ParentProps } from "solid-js";
 
+import "./docs.css";
 import Button from "~/components/Button";
 
 const filePathes = Object.keys(import.meta.glob("./docs/**/*"))
@@ -28,9 +29,11 @@ const fileGroups = filePathes.reduce((acc, path) => {
   return acc;
 }, {} as FileGroup);
 
+"".search
+
 export default function Docs( props: ParentProps) {
   return <div id="docs" class="flex h-full">
-    <nav class="shadow-background shadow-xl bg-background p-4 flex flex-col gap-1">
+    <nav class="shadow-background shadow-xl bg-background p-4 flex flex-col gap-1 overflow-y-auto">
       <h2 class="!text-2xl font-bold !mb-4">Project Docs</h2>
       <Button class="mb-4" onClick={"/home"}>Back to portfolio</Button>
       <NavGroup groups={fileGroups} parentPath="/docs/repo" nonExpandable/>
@@ -74,7 +77,7 @@ function NavGroup(props: {groups: FileGroup | undefined, parentPath: string, non
   return <>
     { typeof props.groups === "undefined" 
       ? <Button 
-          class={`!flex !justify-between !text-start w-full !py-1 !outline-none !normal-case ${history.pathname.startsWith(props.parentPath) ? "" : "outline !px-0"} box-border`}
+          class={`!flex !justify-between !text-start w-full !py-1 !outline-none !normal-case ${decodeURIComponent(history.pathname).startsWith(props.parentPath) ? "" : "outline !px-0"} box-border`}
           onClick={props.parentPath}
         >{name()}</Button>
       : props.nonExpandable

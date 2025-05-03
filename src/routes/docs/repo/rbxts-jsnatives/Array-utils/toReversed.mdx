@@ -1,0 +1,81 @@
+# Array.toReversed
+
+Returns a new array with the elements in reversed order.
+
+## Signature
+
+```ts
+function toReversed<T>(array: Array<T>): Array<T>
+```
+
+## Description
+
+The `Array.toReversed()` method returns a new array with the elements in reversed order. Unlike the `reverse()` method, `toReversed()` does not mutate the original array but instead returns a new array.
+
+## Examples
+
+### Basic usage
+
+```ts
+const original = [1, 2, 3, 4, 5];
+const reversed = ArrayUtils.toReversed(original);
+
+print(original); // [1, 2, 3, 4, 5] - unchanged
+print(reversed); // [5, 4, 3, 2, 1]
+print(original === reversed); // false - different array references
+```
+
+### Reversing arrays with different types
+
+```ts
+const mixedArray = [1, "two", true, { key: "value" }];
+const reversed = ArrayUtils.toReversed(mixedArray);
+
+print(mixedArray); // [1, "two", true, { key: "value" }] - unchanged
+print(reversed); // [{ key: "value" }, true, "two", 1]
+```
+
+### Reversing empty arrays
+
+```ts
+const emptyArray = [];
+const reversed = ArrayUtils.toReversed(emptyArray);
+
+print(emptyArray); // []
+print(reversed); // []
+print(emptyArray === reversed); // false - still different array references
+```
+
+### Chaining with other array methods
+
+```ts
+const array = [1, 2, 3, 4, 5];
+
+// Filter even numbers, double them, then reverse the result
+const result = ArrayUtils.toReversed(
+  array
+    .filter(x => x % 2 === 0)
+    .map(x => x * 2)
+);
+
+print(array); // [1, 2, 3, 4, 5] - original unchanged
+print(result); // [8, 4] (from [2, 4] -> [4, 8] -> [8, 4])
+```
+
+### Comparison with reverse
+
+```ts
+const original = [1, 2, 3, 4, 5];
+
+// toReversed() returns a new array without modifying the original
+const newReversed = ArrayUtils.toReversed(original);
+print(original); // [1, 2, 3, 4, 5] - unchanged
+print(newReversed); // [5, 4, 3, 2, 1]
+print(original === newReversed); // false - different array references
+
+// reverse() modifies the original array
+const mutatedArray = ArrayUtils.reverse(original);
+print(original); // [5, 4, 3, 2, 1] - modified
+print(mutatedArray); // [5, 4, 3, 2, 1]
+print(original === mutatedArray); // true - same array reference
+```

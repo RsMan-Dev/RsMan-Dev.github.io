@@ -1,0 +1,94 @@
+# group
+
+Creates a new inline group in the console, causing subsequent console messages to be indented.
+
+## Signature
+
+```ts
+function group(...args: unknown[]): void
+```
+
+## Description
+
+The `console.group` method creates a new inline group in the console output. This indents subsequent console messages until a `console.groupEnd()` call is made, helping to organize related log messages and make them more readable.
+
+### Parameters
+- `...args`: A list of values to output as the label for the group. Can be of any type.
+
+### Return value
+- None (void).
+
+## Examples
+
+### Basic usage
+
+```ts
+// Create a simple group
+console.group("User Details");
+console.log("Name: John Doe");
+console.log("Age: 30");
+console.log("Email: john@example.com");
+console.groupEnd();
+
+// Continue with normal logging
+console.log("Other information");
+```
+
+### Nested groups
+
+```ts
+// Create nested groups for hierarchical information
+console.group("Application");
+console.log("Version: 1.0.0");
+
+console.group("User");
+console.log("Name: John Doe");
+console.log("Role: Admin");
+
+console.group("Permissions");
+console.log("- Read");
+console.log("- Write");
+console.log("- Delete");
+console.groupEnd(); // Ends Permissions group
+
+console.groupEnd(); // Ends User group
+
+console.group("System");
+console.log("OS: Windows");
+console.log("Memory: 16GB");
+console.groupEnd(); // Ends System group
+
+console.groupEnd(); // Ends Application group
+```
+
+### Logging objects in groups
+
+```ts
+// Group for object details
+const user = {
+  name: "John Doe",
+  age: 30,
+  email: "john@example.com",
+  roles: ["admin", "editor"],
+  settings: {
+    theme: "dark",
+    notifications: true
+  }
+};
+
+console.group("User Object");
+console.log("Name:", user.name);
+console.log("Age:", user.age);
+console.log("Email:", user.email);
+
+console.group("Roles");
+user.roles.forEach(role => console.log(`- ${role}`));
+console.groupEnd();
+
+console.group("Settings");
+console.log("Theme:", user.settings.theme);
+console.log("Notifications:", user.settings.notifications);
+console.groupEnd();
+
+console.groupEnd();
+```

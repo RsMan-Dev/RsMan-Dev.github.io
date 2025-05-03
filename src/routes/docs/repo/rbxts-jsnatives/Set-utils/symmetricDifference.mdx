@@ -1,0 +1,205 @@
+# symmetricDifference
+
+Creates a new Set containing elements that exist in either of the sets, but not in both.
+
+## Signature
+
+```ts
+function symmetricDifference<T>(set1: Set<T>, set2: Set<T>): Set<T>
+```
+
+## Description
+
+The `symmetricDifference` function creates a new Set containing elements that are in either of the input sets, but not in their intersection. It's equivalent to the union of both sets minus their intersection, or the union of their differences.
+
+### Parameters
+- `set1`: The first Set.
+- `set2`: The second Set.
+
+### Return value
+- A new Set containing only the elements that exist in exactly one of the sets.
+
+## Examples
+
+### Basic usage
+
+```ts
+// Create two sets
+const set1 = new Set([1, 2, 3, 4]);
+const set2 = new Set([3, 4, 5, 6]);
+
+// Find elements unique to each set
+const result = SetUtils.symmetricDifference(set1, set2);
+console.log([...result]); // Outputs: [1, 2, 5, 6]
+```
+
+### With string elements
+
+```ts
+// Sets with string elements
+const fruits1 = new Set(["apple", "banana", "orange"]);
+const fruits2 = new Set(["banana", "grape", "kiwi"]);
+
+// Find fruits unique to each set
+const uniqueFruits = SetUtils.symmetricDifference(fruits1, fruits2);
+console.log([...uniqueFruits]); // Outputs: ["apple", "orange", "grape", "kiwi"]
+```
+
+### Symmetric property
+
+```ts
+// Symmetric difference is commutative - order doesn't matter
+const set1 = new Set([1, 2, 3]);
+const set2 = new Set([3, 4, 5]);
+
+// set1 △ set2
+const result1 = SetUtils.symmetricDifference(set1, set2);
+console.log([...result1]); // Outputs: [1, 2, 4, 5]
+
+// set2 △ set1
+const result2 = SetUtils.symmetricDifference(set2, set1);
+console.log([...result2]); // Outputs: [3, 4, 5, 1, 2] (order may vary, but same elements)
+```
+
+### Empty and identical sets
+
+```ts
+// Symmetric difference with an empty set
+const numbers = new Set([1, 2, 3]);
+const empty = new Set();
+
+// set △ empty = set
+const result1 = SetUtils.symmetricDifference(numbers, empty);
+console.log([...result1]); // Outputs: [1, 2, 3]
+
+// empty △ set = set
+const result2 = SetUtils.symmetricDifference(empty, numbers);
+console.log([...result2]); // Outputs: [1, 2, 3]
+
+// Symmetric difference with identical sets
+const set = new Set([1, 2, 3]);
+const sameset = new Set([1, 2, 3]);
+const result3 = SetUtils.symmetricDifference(set, sameset);
+console.log([...result3]); // Outputs: [] (empty set)
+```
+
+### Practical application: Change detection
+
+```ts
+// Detect changes between two states
+function detectChanges<T>(oldState: Set<T>, newState: Set<T>): Set<T> {
+  return SetUtils.symmetricDifference(oldState, newState);
+}
+
+// Items in original inventory
+const originalInventory = new Set([
+  "apples", "bananas", "oranges", "milk", "bread", "eggs"
+]);
+
+// Items after shopping
+const updatedInventory = new Set([
+  "apples", "bananas", "oranges", "milk", "cheese", "yogurt"
+]);
+
+// Find what changed (removed or added items)
+const changes = detectChanges(originalInventory, updatedInventory);
+console.log([...changes]); 
+// Outputs: ["bread", "eggs", "cheese", "yogurt"]
+```
+
+### Finding unique elements
+
+```ts
+// Find unique elements among multiple sets
+function findUniqueElements<T>(sets: Set<T>[]): Set<T> {
+  // Create a frequency map
+  const elementCount = new Map<T, number>();
+  
+  // Count occurrences
+  for (const set of sets) {
+    for (const item of set) {
+      elementCount.set(item, (elementCount.get(item) || 0) + 1);
+    }
+  }
+  
+  // Filter elements that appear only once
+  const uniqueElements = new Set<T>();
+  for (const [item, count] of elementCount.entries()) {
+    if (count === 1) {
+      uniqueElements.add(item);
+    }
+  }
+  
+  return uniqueElements;
+}
+
+// Example usage
+const group1 = new Set([1, 2, 3, 4]);
+const group2 = new Set([3, 4, 5, 6]);
+const group3 = new Set([5, 6, 7, 8]);
+
+// Using symmetric difference
+const uniqueG1G2 = SetUtils.symmetricDifference(group1, group2);  // [1, 2, 5, 6]
+const uniqueElements = SetUtils.symmetricDifference(uniqueG1G2, group3); // [1, 2, 7, 8]
+console.log([...uniqueElements]);
+```
+
+### Calculating changes in set operations
+
+```ts
+// Function to classify changes
+function classifyChanges<T>(oldSet: Set<T>, newSet: Set<T>): { added: Set<T>, removed: Set<T> } {
+  const added = SetUtils.difference(newSet, oldSet);
+  const removed = SetUtils.difference(oldSet, newSet);
+  
+  return { added, removed };
+}
+
+// Sets to compare
+const oldPermissions = new Set(["read", "write", "comment"]);
+const newPermissions = new Set(["read", "admin", "delete", "comment"]);
+
+// Get symmetric difference first
+const allChanges = SetUtils.symmetricDifference(oldPermissions, newPermissions);
+console.log([...allChanges]); // Outputs: ["write", "admin", "delete"]
+
+// Classify the changes
+const changes = classifyChanges(oldPermissions, newPermissions);
+console.log([...changes.added]);   // Outputs: ["admin", "delete"]
+console.log([...changes.removed]); // Outputs: ["write"]
+```
+
+### Comparison with manual implementation
+
+```ts
+// Manual implementation of symmetric difference
+function manualSymmetricDifference<T>(set1: Set<T>, set2: Set<T>): Set<T> {
+  const result = new Set<T>();
+  
+  // Add elements from set1 that are not in set2
+  for (const item of set1) {
+    if (!set2.has(item)) {
+      result.add(item);
+    }
+  }
+  
+  // Add elements from set2 that are not in set1
+  for (const item of set2) {
+    if (!set1.has(item)) {
+      result.add(item);
+    }
+  }
+  
+  return result;
+}
+
+// Using SetUtils.symmetricDifference
+const set1 = new Set([1, 2, 3, 4]);
+const set2 = new Set([3, 4, 5, 6]);
+
+const manualResult = manualSymmetricDifference(set1, set2);
+const utilResult = SetUtils.symmetricDifference(set1, set2);
+
+console.log([...manualResult]); // Outputs: [1, 2, 5, 6]
+console.log([...utilResult]);   // Outputs: [1, 2, 5, 6]
+``` 

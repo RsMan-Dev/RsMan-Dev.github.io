@@ -1,0 +1,96 @@
+# trimStart
+
+Removes whitespace from the beginning of a string.
+
+## Signature
+
+```ts
+function trimStart(str: string): string
+```
+
+## Description
+
+The `trimStart` function removes whitespace characters from the beginning of a string, and returns a new string. Whitespace includes spaces, tabs, newlines, and other whitespace characters.
+
+### Parameters
+- `str`: The string to trim.
+
+### Return value
+- A new string with whitespace removed from the beginning.
+
+## Examples
+
+### Basic usage
+
+```ts
+// Remove whitespace from the beginning
+const trimmed = String.trimStart("  Hello world  ");
+print(trimmed); // Outputs: "Hello world  "
+
+// Trim tabs and newlines
+const multiline = String.trimStart("\t\n Hello \n\t");
+print(multiline); // Outputs: "Hello \n\t"
+```
+
+### Chaining with other string operations
+
+```ts
+// Trim start and then convert to uppercase
+const text = "  hello world  ";
+const processedText = String.toUpperCase(String.trimStart(text));
+print(processedText); // Outputs: "HELLO WORLD  "
+```
+
+### Handling empty strings
+
+```ts
+// Trimming an empty string
+const empty = String.trimStart("");
+print(empty); // Outputs: "" (empty string)
+
+// Trimming a string with only whitespace
+const onlyWhitespace = String.trimStart("   \t\n  ");
+print(onlyWhitespace); // Outputs: "" (empty string)
+```
+
+### Practical applications
+
+```ts
+// Format code indentation
+function removeLeadingIndentation(code: string): string {
+  const lines = String.split(code, "\n");
+  const trimmedLines = [];
+  
+  for (const line of lines) {
+    trimmedLines.push(String.trimStart(line));
+  }
+  
+  return trimmedLines.join("\n");
+}
+
+const code = "    function hello() {\n        print('Hello');\n    }";
+const formatted = removeLeadingIndentation(code);
+print(formatted);
+// Outputs:
+// function hello() {
+// print('Hello');
+// }
+```
+
+### Comparison with trim and trimEnd
+
+```ts
+const text = "  Hello world  ";
+
+// Using trimStart
+const startOnly = String.trimStart(text);
+print(startOnly); // Outputs: "Hello world  "
+
+// Using trim
+const bothEnds = String.trim(text);
+print(bothEnds); // Outputs: "Hello world"
+
+// Using trimEnd
+const endOnly = String.trimEnd(text);
+print(endOnly); // Outputs: "  Hello world"
+```

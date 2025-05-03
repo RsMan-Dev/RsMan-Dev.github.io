@@ -1,0 +1,75 @@
+# Symbol
+
+The Symbol module provides functionality for creating unique identifiers that can be used as property keys and are guaranteed not to conflict with other property names.
+
+## Overview
+
+```ts
+type SymbolCallable = {
+  (name: string): symbol
+}
+
+interface SymbolConstructor extends SymbolCallable {
+  new(name: string): symbol
+  for(key: string): symbol
+  isSymbol(value: any): value is symbol
+}
+
+// WeakMap and WeakSet enhancements
+interface WeakMapWithSymbol<K extends object | symbol, V> extends Map<K, V> {}
+
+interface WeakMapConstructor {
+  new<K extends object | symbol, V>(): WeakMapWithSymbol<K, V>
+  new<K extends object | symbol, V>(entries: ReadonlyArray<[K, V]>): WeakMapWithSymbol<K, V>
+}
+
+interface WeakSetWithSymbol<T extends object | symbol> extends Set<T> {}
+
+interface WeakSetConstructor {
+  new<T extends object | symbol>(): WeakSetWithSymbol<T>
+  new<T extends object | symbol>(values: ReadonlyArray<T>): WeakSetWithSymbol<T>
+}
+```
+
+The Symbol module includes:
+
+- A function to create new symbols with optional descriptions
+- A constructor to create new symbols (behaves the same as the function)
+- The `for` method to access symbols in a global symbol registry
+- The `isSymbol` method to check if a value is a symbol
+- Enhanced WeakMap and WeakSet interfaces that support symbols as keys
+
+Symbols are primarily used to create unique property keys that won't conflict with other property names, particularly useful for adding properties to objects you don't control.
+
+## Usage Example
+
+```ts
+import { Symbol } from "@rbxts/jsnatives";
+
+// Create a symbol
+const mySymbol = Symbol("description");
+
+// Use a symbol as an object property key
+const obj = {};
+obj[mySymbol] = "This property is accessible only with the symbol";
+
+// Access the property
+print(obj[mySymbol]); // "This property is accessible only with the symbol"
+
+// Create a symbol in the global registry
+const globalSymbol = Symbol.for("shared symbol");
+
+// Retrieve the same symbol from anywhere in code
+const sameSymbol = Symbol.for("shared symbol");
+print(globalSymbol === sameSymbol); // true
+
+// Type checking
+print(Symbol.isSymbol(mySymbol)); // true
+print(Symbol.isSymbol("not a symbol")); // false
+
+// Using with WeakMap and WeakSet
+const symbolKey = Symbol("weakmap key");
+const weakMap = new WeakMap<symbol, string>();
+weakMap.set(symbolKey, "Value associated with symbol");
+print(weakMap.get(symbolKey)); // "Value associated with symbol"
+``` 

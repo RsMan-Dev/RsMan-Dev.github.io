@@ -1,0 +1,120 @@
+# inspect
+
+Converts an object to a string with formatted representation for debugging.
+
+## Signature
+
+```ts
+function inspect(value: unknown, options?: InspectOptions): string
+
+interface InspectOptions {
+  depth?: number;
+}
+```
+
+## Description
+
+The `inspect` function returns a string representation of an object, intended for debugging. It stringifies objects in a prettier and more readable way than `JSON.stringify()`, handling circular references, showing non-enumerable properties, and providing customizable depth for recursive inspection.
+
+### Parameters
+- `value`: The value to convert to a string representation.
+- `options` (optional): An object that controls how the value is stringified.
+  - `depth` (optional): The number of times to recurse while formatting the object. Default is 2.
+
+### Return value
+- A string representation of the input value.
+
+## Examples
+
+### Basic Usage
+
+```ts
+import { inspect } from "@rbxts/jsnatives";
+
+// Simple values
+inspect(42);                      // "42"
+inspect("hello");                 // "'hello'"
+inspect(true);                    // "true"
+
+// Objects
+const obj = { name: "Player", score: 100 };
+inspect(obj);                     // "{ name: 'Player', score: 100 }"
+
+// Arrays
+const arr = [1, "two", { three: 3 }];
+inspect(arr);                     // "[ 1, 'two', { three: 3 } ]"
+```
+
+### Controlling Recursion Depth
+
+```ts
+// Nested object
+const nestedObj = {
+  level1: {
+    level2: {
+      level3: {
+        level4: {
+          value: "deeply nested"
+        }
+      }
+    }
+  }
+};
+
+// Default depth (2)
+inspect(nestedObj);
+// "{ level1: { level2: { level3: [Object] } } }"
+
+// Shallow inspection (depth 1)
+inspect(nestedObj, { depth: 1 });
+// "{ level1: { level2: [Object] } }"
+
+// Deep inspection (depth 4)
+inspect(nestedObj, { depth: 4 });
+// "{ level1: { level2: { level3: { level4: { value: 'deeply nested' } } } } }"
+```
+
+### Debugging Complex Structures
+
+```ts
+// Debug function for logging objects with formatting
+function debug(label: string, value: unknown): void {
+  print(`[DEBUG] ${label}: ${inspect(value)}`);
+}
+
+// Usage
+const player = {
+  id: 12345,
+  username: "GamerX",
+  inventory: {
+    weapons: ["sword", "bow"],
+    potions: 5,
+    artifacts: {
+      magical: 2,
+      rare: 1
+    }
+  },
+  status: {
+    health: 95,
+    mana: 50
+  }
+};
+
+debug("Player data", player);
+// Logs a formatted representation of the player object
+```
+
+### Handling Circular References
+
+```ts
+// Object with circular reference
+const circularObj: any = {
+  name: "circular",
+  value: 42
+};
+circularObj.self = circularObj;  // Create circular reference
+
+// Will display without infinite recursion
+inspect(circularObj);
+// "{ name: 'circular', value: 42, self: [Circular] }"
+```

@@ -1,0 +1,102 @@
+# Properties
+
+Properties of the Error object.
+
+## message
+
+A human-readable description of the error.
+
+### Signature
+
+```ts
+message: string
+```
+
+### Description
+
+The `message` property is a string that contains a description of the error, provided by the creator of the error. This is typically used to convey information about what went wrong.
+
+### Examples
+
+```ts
+const error = new Error("File not found");
+print(error.message); // "File not found"
+
+// Setting message after creation
+const anotherError = new Error();
+anotherError.message = "Connection timed out";
+print(anotherError.message); // "Connection timed out"
+```
+
+## name
+
+The name of the error.
+
+### Signature
+
+```ts
+name: string
+```
+
+### Description
+
+The `name` property represents the name of the error type. For errors created with the `Error` constructor, this is "Error" by default. Custom error types may have different names.
+
+### Examples
+
+```ts
+const error = new Error("Something went wrong");
+print(error.name); // "Error"
+
+// Customizing the error name
+const customError = new Error("Database connection failed");
+customError.name = "DatabaseError";
+print(customError.name); // "DatabaseError"
+```
+
+## stack
+
+A stack trace that shows the call path taken to reach the point where the error was instantiated.
+
+### Signature
+
+```ts
+stack?: string
+```
+
+### Description
+
+The `stack` property contains a stack trace, which is a string representation of the call stack at the point the error was created. This is useful for debugging and understanding where an error occurred.
+
+The property is optional as it might not be available in all environments.
+
+### Examples
+
+```ts
+// Creating an error and checking its stack trace
+function generateError() {
+  const error = new Error("Test error");
+  return error;
+}
+
+const myError = generateError();
+if (myError.stack) {
+  print(myError.stack);
+  // Output might look something like:
+  // Error: Test error
+  //     at generateError (script.ts:3:17)
+  //     at script.ts:7:16
+}
+
+// Using stack trace for logging
+function logError(error: Error): void {
+  print(`Error: ${error.message}`);
+  
+  if (error.stack) {
+    print("Stack trace:");
+    print(error.stack);
+  } else {
+    print("No stack trace available");
+  }
+}
+``` 

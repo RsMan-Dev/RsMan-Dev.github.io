@@ -1,0 +1,209 @@
+# isDisjointFrom
+
+Determines whether two sets have no elements in common.
+
+## Signature
+
+```ts
+function isDisjointFrom<T>(set1: Set<T>, set2: Set<T>): boolean
+```
+
+## Description
+
+The `isDisjointFrom` function checks if two sets have no elements in common. Sets are disjoint if their intersection is empty.
+
+### Parameters
+- `set1`: The first Set.
+- `set2`: The second Set.
+
+### Return value
+- `true` if the sets have no elements in common (their intersection is empty).
+- `false` if the sets have at least one element in common.
+
+## Examples
+
+### Basic usage
+
+```ts
+// Create two sets with no elements in common
+const set1 = new Set([1, 2, 3]);
+const set2 = new Set([4, 5, 6]);
+
+// Check if sets are disjoint
+const result = SetUtils.isDisjointFrom(set1, set2);
+console.log(result); // Outputs: true
+
+// Sets with common elements
+const set3 = new Set([3, 4, 5]);
+const result2 = SetUtils.isDisjointFrom(set1, set3);
+console.log(result2); // Outputs: false (3 is common)
+```
+
+### With string elements
+
+```ts
+// Sets with string elements
+const fruitsSet = new Set(["apple", "banana", "orange"]);
+const vegetablesSet = new Set(["carrot", "potato", "celery"]);
+
+// Check if sets are disjoint
+const areDifferentFoodGroups = SetUtils.isDisjointFrom(fruitsSet, vegetablesSet);
+console.log(areDifferentFoodGroups); // Outputs: true
+
+// Sets with common elements
+const citrusSet = new Set(["orange", "lemon", "lime"]);
+const areDifferentFruits = SetUtils.isDisjointFrom(fruitsSet, citrusSet);
+console.log(areDifferentFruits); // Outputs: false ("orange" is common)
+```
+
+### Empty sets
+
+```ts
+// Empty sets are disjoint from any set
+const empty = new Set();
+const numbers = new Set([1, 2, 3]);
+
+const emptyAndNumbers = SetUtils.isDisjointFrom(empty, numbers);
+console.log(emptyAndNumbers); // Outputs: true
+
+// Two empty sets are also disjoint
+const twoEmpty = SetUtils.isDisjointFrom(empty, new Set());
+console.log(twoEmpty); // Outputs: true
+```
+
+### Symmetric property
+
+```ts
+// isDisjointFrom is symmetric - order doesn't matter
+const set1 = new Set([1, 2, 3]);
+const set2 = new Set([4, 5, 6]);
+
+const result1 = SetUtils.isDisjointFrom(set1, set2);
+const result2 = SetUtils.isDisjointFrom(set2, set1);
+
+console.log(result1); // Outputs: true
+console.log(result2); // Outputs: true
+
+// Same for sets with common elements
+const set3 = new Set([3, 4, 5]);
+const result3 = SetUtils.isDisjointFrom(set1, set3);
+const result4 = SetUtils.isDisjointFrom(set3, set1);
+
+console.log(result3); // Outputs: false
+console.log(result4); // Outputs: false
+```
+
+### Practical application: Conflict detection
+
+```ts
+// Check if two resource allocations conflict
+function hasResourceConflict(allocation1: Set<string>, allocation2: Set<string>): boolean {
+  return !SetUtils.isDisjointFrom(allocation1, allocation2);
+}
+
+// Resources allocated to team A
+const teamAResources = new Set([
+  "conference-room-1", "projector-2", "laptop-3", "laptop-4"
+]);
+
+// Resources allocated to team B
+const teamBResources = new Set([
+  "conference-room-2", "projector-1", "laptop-5", "laptop-6"
+]);
+
+// Resources allocated to team C
+const teamCResources = new Set([
+  "conference-room-1", "projector-3", "laptop-7"
+]);
+
+// Check for conflicts
+const conflictAB = hasResourceConflict(teamAResources, teamBResources);
+console.log("Team A and B have conflicts:", conflictAB); // Outputs: false
+
+const conflictAC = hasResourceConflict(teamAResources, teamCResources);
+console.log("Team A and C have conflicts:", conflictAC); // Outputs: true (conference-room-1)
+```
+
+### Checking for overlapping categories
+
+```ts
+// Check if two products belong to completely different categories
+function areDistinctCategories(categories1: Set<string>, categories2: Set<string>): boolean {
+  return SetUtils.isDisjointFrom(categories1, categories2);
+}
+
+// Categories for product A
+const productACategories = new Set([
+  "electronics", "computers", "office"
+]);
+
+// Categories for product B
+const productBCategories = new Set([
+  "home", "kitchen", "appliances"
+]);
+
+// Categories for product C
+const productCCategories = new Set([
+  "electronics", "gadgets", "accessories"
+]);
+
+// Check for category overlap
+const abDistinct = areDistinctCategories(productACategories, productBCategories);
+console.log("Products A and B are in distinct categories:", abDistinct); // Outputs: true
+
+const acDistinct = areDistinctCategories(productACategories, productCCategories);
+console.log("Products A and C are in distinct categories:", acDistinct); // Outputs: false (electronics)
+```
+
+### Using with intersection
+
+```ts
+// Relationship between isDisjointFrom and intersection
+const set1 = new Set([1, 2, 3]);
+const set2 = new Set([4, 5, 6]);
+const set3 = new Set([3, 4, 5]);
+
+// Using isDisjointFrom
+const areDisjoint = SetUtils.isDisjointFrom(set1, set2);
+console.log(areDisjoint); // Outputs: true
+
+// Using intersection
+const intersection = SetUtils.intersection(set1, set2);
+console.log("Intersection is empty:", intersection.size === 0); // Outputs: true
+
+// Same for sets with common elements
+const areDisjoint2 = SetUtils.isDisjointFrom(set1, set3);
+console.log(areDisjoint2); // Outputs: false
+
+const intersection2 = SetUtils.intersection(set1, set3);
+console.log("Intersection size:", intersection2.size); // Outputs: 1
+```
+
+### Comparison with manual implementation
+
+```ts
+// Manual implementation of isDisjointFrom operation
+function manualIsDisjointFrom<T>(set1: Set<T>, set2: Set<T>): boolean {
+  for (const item of set1) {
+    if (set2.has(item)) {
+      return false;
+    }
+  }
+  return true;
+}
+
+// Using SetUtils.isDisjointFrom
+const set1 = new Set([1, 2, 3]);
+const set2 = new Set([4, 5, 6]);
+const set3 = new Set([3, 4, 5]);
+
+const manualResult1 = manualIsDisjointFrom(set1, set2);
+const utilResult1 = SetUtils.isDisjointFrom(set1, set2);
+console.log(manualResult1); // Outputs: true
+console.log(utilResult1);   // Outputs: true
+
+const manualResult2 = manualIsDisjointFrom(set1, set3);
+const utilResult2 = SetUtils.isDisjointFrom(set1, set3);
+console.log(manualResult2); // Outputs: false
+console.log(utilResult2);   // Outputs: false
+``` 

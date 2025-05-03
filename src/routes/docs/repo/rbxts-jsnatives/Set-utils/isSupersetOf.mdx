@@ -1,0 +1,208 @@
+# isSupersetOf
+
+Determines whether the first set is a superset of the second set.
+
+## Signature
+
+```ts
+function isSupersetOf<T>(set1: Set<T>, set2: Set<T>): boolean
+```
+
+## Description
+
+The `isSupersetOf` function checks if the first set is a superset of the second set. A set A is a superset of a set B if every element of B is also an element of A.
+
+### Parameters
+- `set1`: The set to check if it's a superset.
+- `set2`: The set to check against.
+
+### Return value
+- `true` if all elements of `set2` are present in `set1` (meaning `set1` is a superset of `set2`).
+- `false` otherwise.
+
+## Examples
+
+### Basic usage
+
+```ts
+// Create two sets
+const largeSet = new Set([1, 2, 3, 4]);
+const smallSet = new Set([1, 2]);
+
+// Check if largeSet is a superset of smallSet
+const result = SetUtils.isSupersetOf(largeSet, smallSet);
+console.log(result); // Outputs: true
+
+// Another example
+const incompatibleSet = new Set([1, 5]);
+const result2 = SetUtils.isSupersetOf(largeSet, incompatibleSet);
+console.log(result2); // Outputs: false (5 is not in largeSet)
+```
+
+### With string elements
+
+```ts
+// Sets with string elements
+const largeFruitSet = new Set(["apple", "banana", "orange", "grape"]);
+const smallFruitSet = new Set(["apple", "banana"]);
+
+// Check if largeFruitSet is a superset of smallFruitSet
+const isSuperset = SetUtils.isSupersetOf(largeFruitSet, smallFruitSet);
+console.log(isSuperset); // Outputs: true
+```
+
+### Equal sets
+
+```ts
+// Two identical sets
+const set1 = new Set([1, 2, 3]);
+const set2 = new Set([1, 2, 3]);
+
+// A set is a superset of itself
+const result = SetUtils.isSupersetOf(set1, set2);
+console.log(result); // Outputs: true
+```
+
+### Empty sets
+
+```ts
+// Any set is a superset of the empty set
+const numbers = new Set([1, 2, 3]);
+const empty = new Set();
+
+const numbersAreSuperset = SetUtils.isSupersetOf(numbers, empty);
+console.log(numbersAreSuperset); // Outputs: true
+
+// Empty set is not a superset of non-empty set
+const emptyIsSuperset = SetUtils.isSupersetOf(empty, numbers);
+console.log(emptyIsSuperset); // Outputs: false
+```
+
+### Relationship with isSubsetOf
+
+```ts
+// isSupersetOf is the reverse of isSubsetOf
+const set1 = new Set([1, 2, 3, 4]);
+const set2 = new Set([2, 3]);
+
+// Using isSupersetOf
+const supersetResult = SetUtils.isSupersetOf(set1, set2);
+console.log(supersetResult); // Outputs: true
+
+// Equivalent check using isSubsetOf with reversed arguments
+const subsetResult = SetUtils.isSubsetOf(set2, set1);
+console.log(subsetResult); // Outputs: true
+```
+
+### Practical application: Feature compatibility
+
+```ts
+// Check if a system provides all features needed by an application
+function supportsApplication(availableFeatures: Set<string>, requiredFeatures: Set<string>): boolean {
+  return SetUtils.isSupersetOf(availableFeatures, requiredFeatures);
+}
+
+// Features provided by a system
+const systemFeatures = new Set([
+  "bluetooth", "wifi", "gps", "camera", "accelerometer", "gyroscope"
+]);
+
+// Features needed by app A
+const appARequirements = new Set([
+  "wifi", "camera", "gps"
+]);
+
+// Features needed by app B
+const appBRequirements = new Set([
+  "wifi", "nfc", "camera"
+]);
+
+// Check compatibility
+const appACompatible = supportsApplication(systemFeatures, appARequirements);
+console.log(appACompatible); // Outputs: true
+
+const appBCompatible = supportsApplication(systemFeatures, appBRequirements);
+console.log(appBCompatible); // Outputs: false (missing "nfc")
+```
+
+### Access control
+
+```ts
+// Check if a user has sufficient access
+function hasAccess(userRoles: Set<string>, requiredRoles: Set<string>): boolean {
+  return SetUtils.isSupersetOf(userRoles, requiredRoles);
+}
+
+// User's roles
+const adminRoles = new Set([
+  "user", "editor", "moderator", "admin"
+]);
+
+const editorRoles = new Set([
+  "user", "editor"
+]);
+
+// Required roles for different operations
+const viewOperation = new Set(["user"]);
+const editOperation = new Set(["user", "editor"]);
+const deleteOperation = new Set(["moderator"]);
+
+// Check access
+console.log(hasAccess(adminRoles, viewOperation));  // Outputs: true
+console.log(hasAccess(adminRoles, editOperation));  // Outputs: true
+console.log(hasAccess(adminRoles, deleteOperation)); // Outputs: true
+
+console.log(hasAccess(editorRoles, viewOperation));  // Outputs: true
+console.log(hasAccess(editorRoles, editOperation));  // Outputs: true
+console.log(hasAccess(editorRoles, deleteOperation)); // Outputs: false (missing "moderator")
+```
+
+### Proper superset vs superset
+
+```ts
+// Check for proper superset (all elements in set2 are in set1, but set1 ≠ set2)
+function isProperSuperset<T>(set1: Set<T>, set2: Set<T>): boolean {
+  return SetUtils.isSupersetOf(set1, set2) && set1.size > set2.size;
+}
+
+const set1 = new Set([1, 2, 3]);
+const set2 = new Set([1, 2]);
+const set3 = new Set([1, 2, 3]);
+
+// Regular superset check
+console.log(SetUtils.isSupersetOf(set1, set2)); // Outputs: true
+console.log(SetUtils.isSupersetOf(set1, set3)); // Outputs: true
+
+// Proper superset check
+console.log(isProperSuperset(set1, set2)); // Outputs: true
+console.log(isProperSuperset(set1, set3)); // Outputs: false (equal sets)
+```
+
+### Comparison with manual implementation
+
+```ts
+// Manual implementation of isSupersetOf operation
+function manualIsSupersetOf<T>(set1: Set<T>, set2: Set<T>): boolean {
+  for (const item of set2) {
+    if (!set1.has(item)) {
+      return false;
+    }
+  }
+  return true;
+}
+
+// Using SetUtils.isSupersetOf
+const largeSet = new Set([1, 2, 3, 4, 5]);
+const smallSet = new Set([1, 2]);
+const incompatibleSet = new Set([1, 6]);
+
+const manualResult1 = manualIsSupersetOf(largeSet, smallSet);
+const utilResult1 = SetUtils.isSupersetOf(largeSet, smallSet);
+console.log(manualResult1); // Outputs: true
+console.log(utilResult1);   // Outputs: true
+
+const manualResult2 = manualIsSupersetOf(largeSet, incompatibleSet);
+const utilResult2 = SetUtils.isSupersetOf(largeSet, incompatibleSet);
+console.log(manualResult2); // Outputs: false
+console.log(utilResult2);   // Outputs: false
+``` 

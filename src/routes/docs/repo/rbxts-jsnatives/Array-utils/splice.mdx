@@ -1,0 +1,110 @@
+# Array.splice
+
+Changes the contents of an array by removing or replacing existing elements and/or adding new elements in place.
+
+## Signature
+
+```ts
+function splice<T>(array: Array<T>, start: number, count: number, ...items: T[]): Array<T>
+```
+
+## Description
+
+The `Array.splice()` method changes the contents of an array by removing or replacing existing elements and/or adding new elements in place. This method modifies the original array and returns an array containing the deleted elements.
+
+Parameters:
+- `array`: The array to modify
+- `start`: The index at which to start changing the array.
+  - If greater than the length of the array, start will be set to the length of the array.
+  - If negative, it will begin that many elements from the end of the array.
+- `count`: The number of elements to remove from the array.
+  - If count is 0 or negative, no elements are removed.
+- `items` (optional): The elements to add to the array, beginning from the `start` position.
+
+## Examples
+
+### Removing elements
+
+```ts
+const array = [1, 2, 3, 4, 5];
+const removed = ArrayUtils.splice(array, 1, 3);
+
+print(array); // [1, 5] - original array is modified
+print(removed); // [2, 3, 4] - array of removed elements
+```
+
+### Removing elements with negative start index
+
+```ts
+const array = [1, 2, 3, 4, 5];
+const removed = ArrayUtils.splice(array, -2, 2);
+
+print(array); // [1, 2, 3] - removed the last 2 elements
+print(removed); // [4, 5] - array of removed elements
+```
+
+### Adding elements
+
+```ts
+const array = [1, 2, 3];
+const removed = ArrayUtils.splice(array, 1, 0, 'a', 'b');
+
+print(array); // [1, 'a', 'b', 2, 3] - added elements at index 1
+print(removed); // [] - no elements were removed
+```
+
+### Replacing elements
+
+```ts
+const array = [1, 2, 3, 4, 5];
+const removed = ArrayUtils.splice(array, 1, 2, 'a', 'b', 'c');
+
+print(array); // [1, 'a', 'b', 'c', 4, 5] - replaced 2 elements with 3 new ones
+print(removed); // [2, 3] - array of removed elements
+```
+
+### Using splice to clear an array
+
+```ts
+const array = [1, 2, 3, 4, 5];
+const removed = ArrayUtils.splice(array, 0, array.size());
+
+print(array); // [] - original array is now empty
+print(removed); // [1, 2, 3, 4, 5] - all elements were removed
+```
+
+### Using splice with indices beyond array boundaries
+
+```ts
+const array = [1, 2, 3];
+
+// If start is beyond the length, splice adds at the end
+const removed1 = ArrayUtils.splice(array, 10, 0, 4, 5);
+print(array); // [1, 2, 3, 4, 5]
+print(removed1); // [] - no elements were removed
+
+// If count is larger than the number of elements after start, all elements from start are removed
+const array2 = [1, 2, 3, 4, 5];
+const removed2 = ArrayUtils.splice(array2, 2, 10);
+print(array2); // [1, 2]
+print(removed2); // [3, 4, 5]
+```
+
+### Preserving object references
+
+```ts
+const users = [
+  { id: 1, name: 'Alice' },
+  { id: 2, name: 'Bob' },
+  { id: 3, name: 'Charlie' }
+];
+
+const removedUsers = ArrayUtils.splice(users, 1, 1, { id: 4, name: 'Dave' });
+
+print(users); // [{ id: 1, name: 'Alice' }, { id: 4, name: 'Dave' }, { id: 3, name: 'Charlie' }]
+print(removedUsers); // [{ id: 2, name: 'Bob' }]
+
+// The removed object reference is preserved
+removedUsers[0].name = 'Modified Bob';
+print(removedUsers[0].name); // 'Modified Bob'
+```

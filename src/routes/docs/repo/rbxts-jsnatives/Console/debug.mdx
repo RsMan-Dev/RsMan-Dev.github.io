@@ -1,0 +1,79 @@
+# debug
+
+Outputs a debug message to the console, intended for developer debugging purposes.
+
+## Signature
+
+```ts
+function debug(...args: unknown[]): void
+```
+
+## Description
+
+The `console.debug` method prints one or more values to the console as debug information. These messages are usually less prominent than regular logs. Like `console.debug`, it supports string formatting when the first argument is a string.
+
+### Parameters
+- `...args`: A list of values to output to the console as debug information. If the first argument is a string, it can contain format specifiers.
+
+### Return value
+- None (void).
+
+## Examples
+
+### Basic usage
+
+```ts
+// Logging a simple string
+console.debug("Hello world");
+// Outputs: Hello world (with indentation)
+
+// Logging with string formatting
+console.debug("Player %s has score %d", "Alex", 42);
+// Outputs: Player Alex has score 42 (formatted string with indentation)
+
+// Logging numbers without formatting
+console.debug(42);
+// Outputs: 42 (with indentation)
+```
+
+### String formatting
+
+```ts
+// Using string format specifiers (like Lua's string.format)
+console.debug("Pi is approximately %.2f", 3.14159);
+// Outputs: Pi is approximately 3.14
+
+// Multiple arguments
+console.debug("Player: %s, Level: %d, Active: %s", "John", 5, true);
+// Outputs: Player: John, Level: 5, Active: true
+
+// Percent sign
+console.debug("Progress: %d%%", 75);
+// Outputs: Progress: 75%
+```
+
+### Logging objects
+
+```ts
+// Logging an object (uses inspection)
+const player = {
+  name: "PlayerOne",
+  level: 5,
+  health: 100,
+  inventory: ["sword", "shield", "potion"]
+};
+
+console.debug(player);
+// Outputs an inspected representation without indentation:
+// {name: "PlayerOne", level: 5, health: 100, inventory: ["sword", "shield", "potion"]}
+```
+
+### Logging arrays
+
+```ts
+// Logging an array
+const items = ["apple", "banana", "orange"];
+console.debug(items);
+// Outputs inspected array without indentation:
+// ["apple", "banana", "orange"]
+```

@@ -1,0 +1,78 @@
+# parseFloat
+
+Parses a string and returns a floating point number.
+
+## Signature
+
+```ts
+function parseFloat(value: unknown): number
+```
+
+## Description
+
+The `Number.parseFloat()` method parses a string argument and returns a floating point number. It works the same way as the global `parseFloat()` function.
+
+If the first character cannot be converted to a number, `NaN` is returned.
+
+### Parameters
+- `value`: A value to parse to a number, typically a string.
+
+### Return value
+- A floating point number parsed from the given string. If the first character cannot be converted to a number, `NaN` is returned.
+
+## Examples
+
+### Basic Usage
+
+```ts
+// Parsing simple number strings
+Number.parseFloat("3.14");             // 3.14
+Number.parseFloat("42");               // 42 (integer is also a float)
+Number.parseFloat("    3.14   ");      // 3.14 (whitespace is ignored)
+
+// Parsing strings with units
+Number.parseFloat("3.14meters");       // 3.14 (stops at non-numeric character)
+Number.parseFloat("10px");             // 10 (stops at 'p')
+
+// Invalid first characters
+Number.parseFloat("abc");              // NaN
+Number.parseFloat("$100");             // NaN ($ is not a number)
+Number.parseFloat("width: 100px");     // NaN
+```
+
+### Handling Different Numeric Formats
+
+```ts
+// Scientific notation
+Number.parseFloat("1.234e+5");         // 123400
+Number.parseFloat("5e-3");             // 0.005
+
+// Leading characters
+Number.parseFloat("+3.14");            // 3.14
+Number.parseFloat("-3.14");            // -3.14
+
+// Decimal point
+Number.parseFloat("3,14");             // 3 (stops at comma in many locales)
+Number.parseFloat(".5");               // 0.5
+```
+
+### Processing User Input
+
+```ts
+// Extract numeric value from user input
+function extractNumericValue(input: string): number {
+  const result = Number.parseFloat(input);
+  
+  if (Number.isNaN(result)) {
+    console.warn(`Could not parse numeric value from "${input}"`);
+    return 0; // Default value
+  }
+  
+  return result;
+}
+
+// Usage
+extractNumericValue("3.14");           // 3.14
+extractNumericValue("price: 19.99");   // 0 (with warning)
+extractNumericValue("$29.99");         // 0 (with warning)
+```

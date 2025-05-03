@@ -1,0 +1,51 @@
+# isInteger
+
+Determines whether the passed value is an integer.
+
+## Signature
+
+```ts
+function isInteger(value: number): boolean
+```
+
+## Description
+
+The `Number.isInteger()` method determines whether the passed value is an integer - that is, it checks if the type of the value is Number and the value has no decimal part.
+
+### Parameters
+- `value`: The value to be tested for being an integer.
+
+### Return value
+- `true` if the given value is an integer, otherwise `false`.
+
+## Examples
+
+### Basic Usage
+
+```ts
+// Integer numbers
+Number.isInteger(42);           // true
+Number.isInteger(-42);          // true
+Number.isInteger(0);            // true
+Number.isInteger(42.0);         // true (42.0 is the same as 42)
+
+// Non-integer numbers
+Number.isInteger(42.5);         // false
+Number.isInteger(0.1);          // false
+```
+
+### Validating Integer Input
+
+```ts
+// Validate that a value can be used as an array index
+function isValidIndex(value: unknown): boolean {
+  // Check if it's an integer and non-negative
+  return Number.isInteger(value) && (value as number) >= 0;
+}
+
+// Usage
+isValidIndex(42);          // true
+isValidIndex(-1);          // false (negative)
+isValidIndex(3.5);         // false (not an integer)
+isValidIndex("5");         // false (not a number)
+```

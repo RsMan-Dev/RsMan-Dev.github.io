@@ -1,0 +1,102 @@
+# toLowerCase
+
+Converts a string to lowercase.
+
+## Signature
+
+```ts
+function toLowerCase(str: string): string
+```
+
+## Description
+
+The `toLowerCase` function converts all the alphabetic characters in a string to lowercase. It uses Lua's `string.lower` function internally.
+
+### Parameters
+- `str`: The string to convert to lowercase.
+
+### Return value
+- A new string with all alphabetic characters converted to lowercase.
+
+## Examples
+
+### Basic usage
+
+```ts
+// Convert a string to lowercase
+const lower = String.toLowerCase("HELLO WORLD");
+print(lower); // Outputs: "hello world"
+
+// Mixed case conversion
+const mixed = String.toLowerCase("Hello World");
+print(mixed); // Outputs: "hello world"
+```
+
+### Case preservation for non-alphabetic characters
+
+```ts
+// Numbers and special characters are not affected
+const withNumbers = String.toLowerCase("HELLO 123!");
+print(withNumbers); // Outputs: "hello 123!"
+
+// Only alphabetic characters are converted
+const special = String.toLowerCase("ABC-DEF_GHI@JKL");
+print(special); // Outputs: "abc-def_ghi@jkl"
+```
+
+### Handling edge cases
+
+```ts
+// Empty string
+const empty = String.toLowerCase("");
+print(empty); // Outputs: ""
+
+// Already lowercase
+const alreadyLower = String.toLowerCase("hello world");
+print(alreadyLower); // Outputs: "hello world"
+
+// Non-alphabetic characters
+const nonAlpha = String.toLowerCase("123!@#");
+print(nonAlpha); // Outputs: "123!@#" (unchanged)
+```
+
+### Practical applications
+
+```ts
+// Case-insensitive comparison
+function compareIgnoreCase(str1: string, str2: string): boolean {
+  return String.toLowerCase(str1) === String.toLowerCase(str2);
+}
+
+print(compareIgnoreCase("Hello", "hello")); // Outputs: true
+print(compareIgnoreCase("World", "earth")); // Outputs: false
+
+// Normalizing user input
+function normalizeInput(input: string): string {
+  return String.toLowerCase(input);
+}
+
+print(normalizeInput("John.Doe@Example.COM")); // Outputs: "john.doe@example.com"
+```
+
+### Using with other string functions
+
+```ts
+// Combine with other string functions for more complex operations
+function isYesResponse(response: string): boolean {
+  const normalized = String.toLowerCase(String.trim(response));
+  return normalized === "yes" || normalized === "y";
+}
+
+print(isYesResponse("  YES  ")); // Outputs: true
+print(isYesResponse("y")); // Outputs: true
+print(isYesResponse("No")); // Outputs: false
+
+// Case-insensitive search
+function containsIgnoreCase(text: string, search: string): boolean {
+  return String.includes(String.toLowerCase(text), String.toLowerCase(search));
+}
+
+print(containsIgnoreCase("Hello World", "world")); // Outputs: true
+print(containsIgnoreCase("JavaScript", "SCRIPT")); // Outputs: true
+```

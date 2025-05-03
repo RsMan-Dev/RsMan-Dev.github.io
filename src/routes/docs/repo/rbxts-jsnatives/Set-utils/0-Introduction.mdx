@@ -1,0 +1,73 @@
+# Set Utilities
+
+Set Utilities provides a collection of functions for Set operations, making it easier to work with Sets in TypeScript for Roblox Lua.
+
+## Overview
+
+```ts
+declare const SetUtils: {
+  union: <T>(set1: Set<T>, set2: Set<T>) => Set<T>;
+  intersection: <T>(set1: Set<T>, set2: Set<T>) => Set<T>;
+  difference: <T>(set1: Set<T>, set2: Set<T>) => Set<T>;
+  symmetricDifference: <T>(set1: Set<T>, set2: Set<T>) => Set<T>;
+  isSubsetOf: <T>(set1: Set<T>, set2: Set<T>) => boolean;
+  isSupersetOf: <T>(set1: Set<T>, set2: Set<T>) => boolean;
+  isDisjointFrom: <T>(set1: Set<T>, set2: Set<T>) => boolean;
+};
+```
+
+The Set Utilities module provides mathematical set operations for JavaScript's built-in `Set` objects. These functions allow you to:
+
+- Combine sets with `union`
+- Find common elements with `intersection`
+- Remove elements with `difference`
+- Find elements unique to either set with `symmetricDifference`
+- Test set relationships with `isSubsetOf`, `isSupersetOf`, and `isDisjointFrom`
+
+All operations maintain the type of elements in the sets. The module is designed to be simple to use while providing powerful set manipulation capabilities.
+
+## Examples
+
+```ts
+// Create two sets
+const set1 = new Set([1, 2, 3, 4]);
+const set2 = new Set([3, 4, 5, 6]);
+
+// Union: combine both sets (all elements from both sets)
+const unionSet = SetUtils.union(set1, set2);
+// Result: Set(6) { 1, 2, 3, 4, 5, 6 }
+
+// Intersection: find common elements
+const intersectionSet = SetUtils.intersection(set1, set2);
+// Result: Set(2) { 3, 4 }
+
+// Difference: elements in set1 that are not in set2
+const differenceSet = SetUtils.difference(set1, set2);
+// Result: Set(2) { 1, 2 }
+
+// Symmetric Difference: elements in either set but not in both
+const symmetricDifferenceSet = SetUtils.symmetricDifference(set1, set2);
+// Result: Set(4) { 1, 2, 5, 6 }
+
+// Check if set1 is a subset of set2
+const isSubset = SetUtils.isSubsetOf(set1, set2);
+// Result: false
+
+// Check if set1 is a superset of set2
+const isSuperset = SetUtils.isSupersetOf(set1, set2);
+// Result: false
+
+// Check if sets are disjoint (have no elements in common)
+const isDisjoint = SetUtils.isDisjointFrom(set1, set2);
+// Result: false
+```
+
+## See Also
+
+- [union](./union.mdx)
+- [intersection](./intersection.mdx)
+- [difference](./difference.mdx)
+- [symmetricDifference](./symmetricDifference.mdx)
+- [isSubsetOf](./isSubsetOf.mdx)
+- [isSupersetOf](./isSupersetOf.mdx)
+- [isDisjointFrom](./isDisjointFrom.mdx) 

@@ -1,7 +1,61 @@
-works the same as a Map constructor, takes an array of [key, value] pairs to construct an object
+# Object.fromEntries
+
+Transforms a list of key-value pairs into an object.
+
+## Signature
 
 ```ts
-const a = Object.fromEntries([["a", 1], ["b", 2], ["c", 3]]);
+function fromEntries<P extends readonly [string | number | symbol, unknown]>(
+  i: ReadonlyArray<P>,
+) => Reconstruct<
+  UnionToIntersection<
+    P extends unknown ? { [k in P[0]]: P[1]; } : never
+  >
+>
+```
 
-print(a); // {a: 1, b: 2, c: 3}
+## Description
+
+The `Object.fromEntries()` method transforms a list of key-value pair arrays into an object. This is the reverse operation of `Object.entries()`.
+
+The method takes an iterable of key-value pairs and returns a new object whose properties are given by those entries.
+
+## Examples
+
+### Basic usage
+
+```ts
+const entries = [["a", 1], ["b", 2], ["c", 3]];
+const obj = Object.fromEntries(entries);
+
+print(obj); // {a: 1, b: 2, c: 3}
+```
+
+### Creating objects with complex values
+
+```ts
+const nestedEntries = [
+  ["user", {name: "Alice", role: "Admin"}],
+  ["settings", {theme: "dark", notifications: true}],
+  ["stats", [10, 20, 30]]
+];
+
+const complexObj = Object.fromEntries(nestedEntries);
+print(complexObj.user.name); // "Alice"
+print(complexObj.settings.theme); // "dark"
+print(complexObj.stats[1]); // 20
+```
+
+### Type inference
+
+```ts
+// TypeScript can infer the resulting object type
+const typedEntries = [
+  ["id", 1],
+  ["name", "Product"],
+  ["inStock", true]
+] as const;
+
+const product = Object.fromEntries(typedEntries);
+// product has type { id: number; name: string; inStock: boolean }
 ```

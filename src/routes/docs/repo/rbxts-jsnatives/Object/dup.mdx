@@ -1,61 +1,90 @@
-duplicates an object
+# Object.dup
+
+Creates a duplicate (shallow or deep copy) of an object.
+
+## Signature
 
 ```ts
-const a = {a: 1, b: 2, c: 3};
-const b = Object.dup(a);
-
-print(a, b, a === b); // {a: 1, b: 2, c: 3} {a: 1, b: 2, c: 3} false
+function dup<T>(obj: T, deep?: boolean): T
 ```
 
-<br/>
+## Description
+
+The `Object.dup()` method creates a new object that is a duplicate of the given object. By default, it performs a shallow copy, but if the second parameter is set to `true`, it performs a deep copy.
+
+A shallow copy duplicates the top-level structure but shares references to nested objects, while a deep copy duplicates the entire object hierarchy.
+
+Duplicable objects are objects without metatables, or proxies.
+
+## Examples
+
+### Basic object duplication
 
 ```ts
-const a = new Map([["a", 1], ["b", 2], ["c", 3]]);
-const b = Object.dup(a);
+const original = {a: 1, b: 2, c: 3};
+const duplicate = Object.dup(original);
 
-print(a, b, a === b); // {a: 1, b: 2, c: 3} {a: 1, b: 2, c: 3} false
+// The duplicate is a new object with the same properties
+print(original, duplicate, original === duplicate); 
+// {a: 1, b: 2, c: 3} {a: 1, b: 2, c: 3} false
 ```
 
-<br/>
+### Map duplication
 
 ```ts
-const a = new Set([1, 2, 3]);
-const b = Object.dup(a);
+const originalMap = new Map([["a", 1], ["b", 2], ["c", 3]]);
+const duplicateMap = Object.dup(originalMap);
 
-print(a, b, a === b); // {a: true, b: true, c: true} {a: true, b: true, c: true} false
+// The duplicate is a new Map with the same entries
+print(originalMap, duplicateMap, originalMap === duplicateMap); 
+// Map(3) {"a" => 1, "b" => 2, "c" => 3} Map(3) {"a" => 1, "b" => 2, "c" => 3} false
 ```
 
-
-<br/>
-
-Works with proxies
+### Set duplication
 
 ```ts
-const a = new Proxy({a: 1, b: 2, c: 3}, {});
-const b = Object.dup(a);
+const originalSet = new Set([1, 2, 3]);
+const duplicateSet = Object.dup(originalSet);
 
-print(a, b, a === b); // {} {a: 1, b: 2, c: 3} false
+// The duplicate is a new Set with the same values
+print(originalSet, duplicateSet, originalSet === duplicateSet); 
+// Set(3) {1, 2, 3} Set(3) {1, 2, 3} false
 ```
 
-<br/>
-
-Works with arrays
+### Proxy duplication
 
 ```ts
-const a = [1, 2, 3];
-const b = Object.dup(a);
+const proxiedObj = new Proxy({a: 1, b: 2, c: 3}, {});
+const duplicateObj = Object.dup(proxiedObj);
 
-print(a, b, a === b, Object.isArray(b)); // [1, 2, 3] [1, 2, 3] false true
+// The duplicate is a regular object with the same properties
+print(proxiedObj, duplicateObj, proxiedObj === duplicateObj); 
+// {} {a: 1, b: 2, c: 3} false (dont forget that proxies are in fact empty objects)
 ```
-<br/>
 
-Can be recursively duplicated
+### Array duplication
 
 ```ts
-const a = {a: 1, b: 2, c: 3, d: {e: 4, f: 5}};
-const b = Object.dup(a);
-const c = Object.dup(a, true);
+const originalArray = [1, 2, 3];
+const duplicateArray = Object.dup(originalArray);
 
-print(a, b, a.d === b.d); // {a: 1, b: 2, c: 3, d: {e: 4, f: 5}} {a: 1, b: 2, c: 3, d: {e: 4, f: 5}} true
-print(a, c, a.d === c.d); // {a: 1, b: 2, c: 3, d: {e: 4, f: 5}} {a: 1, b: 2, c: 3, d: {e: 4, f: 5}} false
+// The duplicate is a new array with the same elements
+print(originalArray, duplicateArray, originalArray === duplicateArray, Object.isArray(duplicateArray)); 
+// [1, 2, 3] [1, 2, 3] false true
+```
+
+### Deep duplication
+
+```ts
+const nestedObj = {a: 1, b: 2, c: 3, d: {e: 4, f: 5}};
+const shallowDuplicate = Object.dup(nestedObj);
+const deepDuplicate = Object.dup(nestedObj, true);
+
+// With shallow copy, nested objects are shared
+print(nestedObj, shallowDuplicate, nestedObj.d === shallowDuplicate.d); 
+// {a: 1, b: 2, c: 3, d: {e: 4, f: 5}} {a: 1, b: 2, c: 3, d: {e: 4, f: 5}} true
+
+// With deep copy, nested objects are also duplicated
+print(nestedObj, deepDuplicate, nestedObj.d === deepDuplicate.d); 
+// {a: 1, b: 2, c: 3, d: {e: 4, f: 5}} {a: 1, b: 2, c: 3, d: {e: 4, f: 5}} false
 ```

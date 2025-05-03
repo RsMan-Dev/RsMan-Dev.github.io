@@ -1,35 +1,81 @@
-check if an object is callable
+# Object.isCallable
+
+Determines whether a value is a callable function.
+
+## Signature
 
 ```ts
-const a = function() {};
-
-print(Object.isCallable(a)); // true
+function isCallable<T>(obj: unknown): obj is Callback
+function isCallable<T extends object>(obj: T): obj is T & Callback
 ```
 
-<br/>
+## Description
 
-Works with proxies
+The `Object.isCallable()` method determines whether a value is a function that can be called. This includes regular functions, methods, and objects with a `__call` metatable or `apply` trap for proxies.
+
+The method returns a type predicate that narrows the type to `Callback` or `T & Callback` depending on the input.
+
+## Examples
+
+### Basic function check
 
 ```ts
-const a = new Proxy({}, {
+const func = function() { return "hello"; };
+const obj = {a: 1, b: 2};
+
+print(Object.isCallable(func)); // true
+print(Object.isCallable(obj)); // false
+```
+
+### Working with proxies
+
+```ts
+const callableProxy = new Proxy({}, {
   apply: () => {
     return 1;
   }
 });
 
-print(Object.isCallable(a)); // true
+const regularProxy = new Proxy({}, {});
+
+print(Object.isCallable(callableProxy)); // true
+print(Object.isCallable(regularProxy)); // false
 ```
 
-<br/>
-
-Works metatables
+### Working with metatables
 
 ```ts
-const a = setmetatable({}, {
+const callableMetatable = setmetatable({}, {
   __call: () => {
     return 1;
   }
 });
 
-print(Object.isCallable(a)); // true
+print(Object.isCallable(callableMetatable)); // true
+```
+
+### Type narrowing
+
+```ts
+function processValue(value: unknown) {
+  if (Object.isCallable(value)) {
+    // In this block, value is typed as Callback
+    const result = value();
+    return result;
+  } else {
+    // In this block, value is still unknown
+    return "Not a function";
+  }
+}
+
+function processObject<T extends object>(obj: T) {
+  if (Object.isCallable(obj)) {
+    // In this block, obj is typed as T & Callback
+    const result = obj();
+    return result;
+  } else {
+    // In this block, obj is still T
+    return obj;
+  }
+}
 ```

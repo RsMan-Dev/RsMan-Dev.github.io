@@ -1,0 +1,74 @@
+# Array.concat
+
+Merges two or more arrays or values into a new array.
+
+## Signature
+
+```ts
+function concat<T>(first: T, ...items: Array<T>): T[];
+function concat<T>(first: T, ...items: Array<Array<T>>): T[];
+function concat<T>(first: Array<T>, ...items: Array<Array<T> | T>): T[];
+function concat<T>(...items: Array<Array<T> | T>): T[];
+```
+
+## Description
+
+The `Array.concat()` method is used to merge two or more arrays, or values into a new array. This method does not change the existing arrays, but instead returns a new array.
+
+The method can be called with different combinations of arguments:
+- Single value followed by other values
+- Single value followed by arrays
+- Array followed by other arrays and/or values
+- Multiple arrays and/or values
+
+## Examples
+
+### Concatenating values
+
+```ts
+const result = ArrayUtils.concat(1, 2, 3);
+print(result); // [1, 2, 3]
+```
+
+### Concatenating arrays
+
+```ts
+const array1 = [1, 2];
+const array2 = [3, 4];
+const array3 = [5, 6];
+
+const result = ArrayUtils.concat(array1, array2, array3);
+print(result); // [1, 2, 3, 4, 5, 6]
+```
+
+### Concatenating arrays and values
+
+```ts
+const array = [1, 2];
+const result = ArrayUtils.concat(array, 3, 4, [5, 6]);
+print(result); // [1, 2, 3, 4, 5, 6]
+```
+
+### Concatenating nested arrays
+
+```ts
+const array1 = [1, 2];
+const array2 = [3, [4, 5]];
+
+// When concatenating nested arrays, the arrays are not flattened
+const result = ArrayUtils.concat(array1, array2);
+print(result); // [1, 2, 3, [4, 5]]
+```
+
+### Empty arrays
+
+```ts
+const emptyArray = [];
+const array = [1, 2, 3];
+
+const result1 = ArrayUtils.concat(emptyArray, array);
+print(result1); // [1, 2, 3]
+
+const result2 = ArrayUtils.concat(array, emptyArray);
+print(result2); // [1, 2, 3]
+``` 

@@ -1,0 +1,79 @@
+# warn
+
+Outputs a warning message to the console with distinctive formatting to indicate a potential issue.
+
+## Signature
+
+```ts
+function warn(...args: unknown[]): void
+```
+
+## Description
+
+The `console.warn` method prints one or more values to the console, typically with yellow text or warning styling. Like `console.warn`, it supports string formatting when the first argument is a string, and automatically inspects objects.
+
+### Parameters
+- `...args`: A list of values to output to the console as a warning. If the first argument is a string, it can contain format specifiers.
+
+### Return value
+- None (void).
+
+## Examples
+
+### Basic usage
+
+```ts
+// Logging a simple string
+console.warn("Hello world");
+// Outputs: Hello world (with indentation)
+
+// Logging with string formatting
+console.warn("Player %s has score %d", "Alex", 42);
+// Outputs: Player Alex has score 42 (formatted string with indentation)
+
+// Logging numbers without formatting
+console.warn(42);
+// Outputs: 42 (with indentation)
+```
+
+### String formatting
+
+```ts
+// Using string format specifiers (like Lua's string.format)
+console.warn("Pi is approximately %.2f", 3.14159);
+// Outputs: Pi is approximately 3.14
+
+// Multiple arguments
+console.warn("Player: %s, Level: %d, Active: %s", "John", 5, true);
+// Outputs: Player: John, Level: 5, Active: true
+
+// Percent sign
+console.warn("Progress: %d%%", 75);
+// Outputs: Progress: 75%
+```
+
+### Logging objects
+
+```ts
+// Logging an object (uses inspection)
+const player = {
+  name: "PlayerOne",
+  level: 5,
+  health: 100,
+  inventory: ["sword", "shield", "potion"]
+};
+
+console.warn(player);
+// Outputs an inspected representation without indentation:
+// {name: "PlayerOne", level: 5, health: 100, inventory: ["sword", "shield", "potion"]}
+```
+
+### Logging arrays
+
+```ts
+// Logging an array
+const items = ["apple", "banana", "orange"];
+console.warn(items);
+// Outputs inspected array without indentation:
+// ["apple", "banana", "orange"]
+```

@@ -1,0 +1,61 @@
+# Array.flat
+
+Creates a new array with all sub-array elements concatenated into it recursively up to the specified depth.
+
+## Signature
+
+```ts
+function flat<T, Depth extends number = 1>(array: Array<T>, depth?: Depth): Array<FlatArray<T, Depth>>
+```
+
+## Description
+
+The `Array.flat()` method creates a new array with all sub-array elements concatenated into it recursively up to the specified depth.
+
+The `depth` parameter specifies how deep a nested array structure should be flattened. If no depth is provided, the default value is 1, which means only one level of arrays will be flattened.
+
+## Examples
+
+### Basic flattening (default depth of 1)
+
+```ts
+const nestedArray = [1, 2, [3, 4]];
+const flattened = ArrayUtils.flat(nestedArray);
+print(flattened); // [1, 2, 3, 4]
+```
+
+### Specifying a flattening depth
+
+```ts
+const deeplyNestedArray = [1, 2, [3, 4, [5, 6]]];
+
+// With default depth (1)
+const flattened1 = ArrayUtils.flat(deeplyNestedArray);
+print(flattened1); // [1, 2, 3, 4, [5, 6]]
+
+// With depth of 2
+const flattened2 = ArrayUtils.flat(deeplyNestedArray, 2);
+print(flattened2); // [1, 2, 3, 4, 5, 6]
+```
+
+### Flattening very deep arrays
+
+This case is special, because the type inference works until depth 20.
+
+```ts
+const veryNestedArray = [1, [2, [3, [4, [5, [6]]]]]];
+
+// To flatten all levels, use a large number for depth
+const fullyFlattened = ArrayUtils.flat(veryNestedArray, 20);
+print(fullyFlattened); // [1, 2, 3, 4, 5, 6]
+```
+
+### Type safety with depth parameter
+
+```ts
+const nestedArray = [1, 2, [3, 4, [5, 6]]];
+
+// TypeScript knows the structure will be flattened based on the depth until 20
+const flattened1 = ArrayUtils.flat(nestedArray); // Array<number | number[]>
+const flattened2 = ArrayUtils.flat(nestedArray, 2); // Array<number>
+``` 

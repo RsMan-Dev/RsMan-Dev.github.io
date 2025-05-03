@@ -1,0 +1,98 @@
+# endsWith
+
+Determines whether a string ends with the characters of a specified string.
+
+## Signature
+
+```ts
+function endsWith(str: string, search: PatternAdmissible, position?: NumericAdmissible): boolean
+```
+
+## Description
+
+The `endsWith` function checks if a string ends with a specified substring. It returns `true` if the string ends with the specified characters, and `false` otherwise. The search is case-sensitive.
+
+### Parameters
+- `str`: The string to check.
+- `search`: The characters to search for at the end of the string. Can be a string, number, or boolean.
+- `position` (optional): The position in the string at which to stop searching. Default is the string length. If a string is provided, it will be converted to a number.
+
+### Return value
+- `true` if the string ends with the specified characters.
+- `false` otherwise.
+
+## Examples
+
+### Basic usage
+
+```ts
+// Check if a string ends with a substring
+const endsWithWorld = String.endsWith("Hello world", "world");
+print(endsWithWorld); // Outputs: true
+
+const endsWithHello = String.endsWith("Hello world", "Hello");
+print(endsWithHello); // Outputs: false
+```
+
+### With position parameter
+
+```ts
+// Check up to a specific position
+const text = "Hello world";
+const endsWitho = String.endsWith(text, "o", 5);
+print(endsWitho); // Outputs: true (checks only in "Hello")
+
+// The position marks the end of the considered string
+const endsWitho2 = String.endsWith(text, "o", 6);
+print(endsWitho2); // Outputs: false (checks only in "Hello " including space)
+```
+
+### Using non-string values
+
+```ts
+// Checking with a number (converted to string)
+const endsWithNumber = String.endsWith("The answer is 42", 42);
+print(endsWithNumber); // Outputs: true
+
+// Checking with a boolean (converted to string)
+const endsWithBoolean = String.endsWith("The value is true", true);
+print(endsWithBoolean); // Outputs: true
+```
+
+### Case sensitivity
+
+```ts
+// The check is case-sensitive
+const text = "Hello World";
+const endsWithworld = String.endsWith(text, "world");
+print(endsWithworld); // Outputs: false
+
+const endsWithWorld = String.endsWith(text, "World");
+print(endsWithWorld); // Outputs: true
+```
+
+### Practical applications
+
+```ts
+// Check if a filename has a specific extension
+function hasExtension(filename: string, extension: string): boolean {
+  // Make sure extension starts with a dot
+  if (!String.startsWith(extension, ".")) {
+    extension = `.${extension}`;
+  }
+  
+  return String.endsWith(filename, extension);
+}
+
+print(hasExtension("document.pdf", "pdf")); // Outputs: true
+print(hasExtension("image.jpg", ".jpg")); // Outputs: true
+print(hasExtension("script.ts", "js")); // Outputs: false
+
+// check if git page is valid
+function isValidGitPage(url: string): boolean {
+  return String.endsWith(url, ".git") || String.endsWith(url, ".github.io");
+}
+
+print(isValidGitPage("https://github.com/RsMan-Dev/rbxts-jsnatives.git")); // Outputs: true
+print(isValidGitPage("https://example.com")); // Outputs: false
+```

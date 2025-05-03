@@ -9,8 +9,9 @@ export default function(props: ParentProps) {
     return base;
   });
   return <>
-    <h1>{loc()}</h1>
+    <h1 class="!text-4xl font-bold">{loc()}</h1>
     <hr/>
+    <br/>
     {props.children}
   </>
 }

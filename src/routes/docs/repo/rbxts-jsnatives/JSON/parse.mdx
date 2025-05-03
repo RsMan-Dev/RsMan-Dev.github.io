@@ -1,22 +1,40 @@
-parses a json string to a table
+# JSON.parse
+
+Parses a JSON string and converts it into a JavaScript object.
+
+## Signature
 
 ```ts
-const a = '{"a":1,"b":2,"c":3, "d": [1, 2, 3]}';
-
-print(JSON.parse(a)); // {a: 1, b: 2, c: 3, d: [1, 2, 3]}
+function parse<T>(data: string): T
 ```
 
-<br/>
+## Description
 
-Can parse maps or sets by infering the type
+The `parse` method converts a JSON string into a JavaScript object. You can optionally specify a generic type parameter to ensure type safety of the returned value.
+
+## Examples
+
+### Basic usage
 
 ```ts
-const a = '{"a":1,"b":2,"c":{"e": 1, "f": 2}, "d": {"e": true, "f": false}}';
+const jsonString = '{"a":1,"b":2,"c":3, "d": [1, 2, 3]}';
 
-print(JSON.parse<{
+const result = JSON.parse(jsonString);
+print(result); // {a: 1, b: 2, c: 3, d: [1, 2, 3]}
+```
+
+### Using type inference
+
+```ts
+const jsonString = '{"a":1,"b":2,"c":{"e": 1, "f": 2}, "d": [true, false]}';
+
+interface CustomData {
   a: number;
   b: number;
   c: Map<string, number>;
-  d: Set<string>;
-}>(a)); // {a: 1, b: 2, c: {e: 1, f: 2}, d: {e: true, f: false}}
+  d: boolean[];
+}
+
+const typedResult = JSON.parse<CustomData>(jsonString);
+// Returns properly typed object with enforced structure
 ```

@@ -1,0 +1,83 @@
+# clearTimeout
+
+Cancels a timeout that was set with `setTimeout`.
+
+## Signature
+
+```ts
+function clearTimeout(sym: symbol | undefined): void
+```
+
+## Description
+
+The `clearTimeout` function cancels a previously scheduled timeout that was created using `setTimeout`. Once a timeout is cleared, its callback function will not be executed.
+
+If the provided symbol is undefined or the timeout has already executed, the function has no effect.
+
+### Parameters
+- `sym`: The symbol that identifies the timeout to cancel, returned by `setTimeout`. Can be undefined.
+
+### Return value
+- None
+
+## Examples
+
+### Basic usage
+
+```ts
+// Create a timeout
+const timeoutSymbol = setTimeout((sym) => {
+  print("This will not be printed");
+}, 5000);
+
+// Cancel the timeout before it executes
+clearTimeout(timeoutSymbol);
+```
+
+### Handling undefined symbols
+
+```ts
+// clearTimeout safely handles undefined symbols
+let maybeTimeout: symbol | undefined;
+
+if (Math.random() > 0.5) {
+  maybeTimeout = setTimeout((sym) => {
+    print("Random timeout executed");
+  }, 1000);
+}
+
+// This is safe even if maybeTimeout is undefined
+clearTimeout(maybeTimeout);
+```
+
+### Creating a cancellable operation
+
+```ts
+// Create a function that starts an operation that can be cancelled
+function startCancellableOperation() {
+  let timeoutSymbol: symbol | undefined;
+  
+  const start = () => {
+    print("Operation started");
+    timeoutSymbol = setTimeout((sym) => {
+      print("Operation completed");
+      timeoutSymbol = undefined;
+    }, 5000);
+  };
+  
+  const cancel = () => {
+    if (timeoutSymbol) {
+      print("Operation cancelled");
+      clearTimeout(timeoutSymbol);
+      timeoutSymbol = undefined;
+    }
+  };
+  
+  return { start, cancel };
+}
+
+const operation = startCancellableOperation();
+operation.start();
+// Later:
+operation.cancel();
+``` 

@@ -1,13 +1,38 @@
-len is triggered when the length of the proxy is requested, it can be used to modify the length that is returned
+# Proxy - len hook
+
+The `len` hook is triggered when the length or size of the proxy is requested.
+
+## Signature
 
 ```ts
-const a = new Proxy([1, 2, 3], {
-  len: (target) => {
-    return target.length - 1;
+function len<T>(target: T, proxy: T): number;
+```
+
+## Description
+
+The `len` handler trap is called when the size of the proxy object is being determined, such as when using the `length` property on an array or the `size` property on a Map or Set.
+
+### Parameters
+- `target`: The original target object the proxy is wrapping
+- `proxy`: The proxy instance itself
+
+### Return value
+- A number representing the length or size of the proxy
+
+## Examples
+
+### Basic length customization for arrays
+
+```ts
+const array = [1, 2, 3, 4, 5];
+const proxy = new Proxy(array, {
+  len: (target, proxy) => {
+    console.log("Length requested");
+    // Return a custom length
+    return target.length * 2;
   }
 });
 
-a.size(); // will return 2
+console.log(proxy.length); // Logs: "Length requested", then 10
 ```
-
 

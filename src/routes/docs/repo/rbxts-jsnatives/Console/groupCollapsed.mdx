@@ -1,0 +1,88 @@
+# groupCollapsed
+
+Creates a new inline group in the console that is initially collapsed, requiring user interaction to expand it.
+
+## Signature
+
+```ts
+function groupCollapsed(...args: unknown[]): void
+```
+
+## Description
+
+The `console.groupCollapsed` method creates a new inline group in the console output that is initially collapsed. This is similar to `console.group()` but starts in a collapsed state, helping to create less cluttered console output while still organizing related messages. The group can be expanded by the user if needed.
+
+> Note: as roblox does not have intelligrnt logging, groupCollapsed acts like group()
+
+### Parameters
+- `...args`: A list of values to output as the label for the collapsed group. Can be of any type.
+
+### Return value
+- None (void).
+
+## Examples
+
+### Basic usage
+
+```ts
+// Create a simple collapsed group
+console.groupCollapsed("Detailed Debug Information");
+console.log("System version: 1.2.3");
+console.log("Build date: 2023-03-15");
+console.log("Configuration: Production");
+console.groupEnd();
+
+// Continue with normal logging
+console.log("Application started");
+```
+
+### Verbose logging
+
+```ts
+// Hide verbose logs in collapsed groups
+function verboseLog(message: string, ...details: unknown[]) {
+  console.groupCollapsed(`Verbose: ${message}`);
+  
+  console.log("Timestamp:", new Date().toISOString());
+  
+  if (details.length > 0) {
+    console.log("Details:");
+    details.forEach((detail, index) => {
+      console.log(`  ${index + 1}.`, detail);
+    });
+  }
+  
+  console.log("Stack:", new Error().stack);
+  
+  console.groupEnd();
+}
+
+// Usage
+verboseLog("Database query completed", 
+  "Query time: 150ms", 
+  "Rows returned: 42",
+  "Cache hit: false"
+);
+```
+
+### Nested collapsed groups
+
+```ts
+// Create nested collapsed groups for hierarchical information
+console.groupCollapsed("Application Details");
+console.log("Version: 1.0.0");
+
+console.groupCollapsed("Dependencies");
+console.log("React: 18.2.0");
+console.log("TypeScript: 4.9.5");
+console.log("Webpack: 5.75.0");
+console.groupEnd();
+
+console.groupCollapsed("Environment Variables");
+console.log("NODE_ENV: production");
+console.log("API_URL: https://api.example.com");
+console.log("DEBUG: false");
+console.groupEnd();
+
+console.groupEnd();
+```

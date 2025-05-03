@@ -1,0 +1,114 @@
+# toPascalCase
+
+Converts a string to PascalCase format.
+
+## Signature
+
+```ts
+function toPascalCase(str: string): string
+```
+
+## Description
+
+The `toPascalCase` function converts a string to PascalCase format. It removes spaces, hyphens, underscores, and other separators, and transforms the string into a format where each word starts with a capital letter, with no spaces or separators between them.
+
+### Parameters
+- `str`: The string to convert to PascalCase.
+
+### Return value
+- A new string in PascalCase format.
+
+## Examples
+
+### Basic usage
+
+```ts
+// Converting different formats to PascalCase
+const space = String.toPascalCase("hello world");
+print(space); // Outputs: "HelloWorld"
+
+const kebab = String.toPascalCase("hello-world");
+print(kebab); // Outputs: "HelloWorld"
+
+const snake = String.toPascalCase("hello_world");
+print(snake); // Outputs: "HelloWorld"
+
+const camel = String.toPascalCase("helloWorld");
+print(camel); // Outputs: "HelloWorld"
+```
+
+### Multiple words
+
+```ts
+// Converting multi-word strings
+const multiple = String.toPascalCase("hello beautiful world");
+print(multiple); // Outputs: "HelloBeautifulWorld"
+
+const mixedSeparators = String.toPascalCase("hello_beautiful-world");
+print(mixedSeparators); // Outputs: "HelloBeautifulWorld"
+```
+
+### Handling edge cases
+
+```ts
+// Empty string
+const empty = String.toPascalCase("");
+print(empty); // Outputs: ""
+
+// Single word lowercase
+const single = String.toPascalCase("hello");
+print(single); // Outputs: "Hello"
+
+// Single word uppercase
+const uppercase = String.toPascalCase("HELLO");
+print(uppercase); // Outputs: "HELLO"
+
+// Already in PascalCase
+const alreadyPascal = String.toPascalCase("HelloWorld");
+print(alreadyPascal); // Outputs: "HelloWorld"
+```
+
+### Converting from other cases
+
+```ts
+// From sentence case
+const sentence = String.toPascalCase("This is a sentence");
+print(sentence); // Outputs: "ThisIsASentence"
+
+// From title case
+const title = String.toPascalCase("This Is A Title");
+print(title); // Outputs: "ThisIsATitle"
+
+// From snake_case
+const snake = String.toPascalCase("user_first_name");
+print(snake); // Outputs: "UserFirstName"
+
+// From kebab-case
+const kebab = String.toPascalCase("api-response-code");
+print(kebab); // Outputs: "ApiResponseCode"
+
+// From camelCase
+const camel = String.toPascalCase("userLoginRequest");
+print(camel); // Outputs: "UserLoginRequest"
+```
+
+### Practical applications
+
+```ts
+// Convert strings to class names
+function createClassName(name: string): string {
+  return String.toPascalCase(name);
+}
+
+print(createClassName("user model")); // Outputs: "UserModel"
+print(createClassName("api_response")); // Outputs: "ApiResponse"
+
+// Convert event names to handler names
+function createEventHandlerName(eventName: string): string {
+  return `handle${String.toPascalCase(eventName)}`;
+}
+
+print(createEventHandlerName("button-click")); // Outputs: "handleButtonClick"
+print(createEventHandlerName("form_submit")); // Outputs: "handleFormSubmit"
+```
+``` 

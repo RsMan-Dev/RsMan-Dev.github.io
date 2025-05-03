@@ -1,0 +1,105 @@
+# concat
+
+Combines multiple strings into a single string.
+
+## Signature
+
+```ts
+function concat(...args: PatternAdmissible[]): string
+```
+
+## Description
+
+The `concat` function combines zero or more strings into a new string. It accepts any number of arguments which can be strings, numbers, or booleans (which will be converted to strings).
+
+### Parameters
+- `...args`: A list of values to join together. Each value can be a string, number, or boolean.
+
+### Return value
+- A new string containing all the concatenated values.
+- If no arguments are provided, an empty string is returned.
+
+## Examples
+
+### Basic usage
+
+```ts
+// Concatenate strings
+const result = String.concat("Hello", " ", "world");
+print(result); // Outputs: "Hello world"
+
+// Concatenate with no arguments
+const empty = String.concat();
+print(empty); // Outputs: "" (empty string)
+```
+
+### Using non-string values
+
+```ts
+// Numbers and booleans are converted to strings
+const withNumber = String.concat("The answer is ", 42);
+print(withNumber); // Outputs: "The answer is 42"
+
+const withBoolean = String.concat("Is it true? ", true);
+print(withBoolean); // Outputs: "Is it true? true"
+
+// Mix different types
+const mixed = String.concat("Value: ", 42, ", Enabled: ", true);
+print(mixed); // Outputs: "Value: 42, Enabled: true"
+```
+
+### Concatenating arrays of strings
+
+```ts
+// Using spread operator with arrays
+const parts = ["Hello", " ", "world"];
+const joined = String.concat(...parts);
+print(joined); // Outputs: "Hello world"
+
+// Concatenate with array and additional values
+const prefix = "Welcome: ";
+const name = ["John", " ", "Doe"];
+const message = String.concat(prefix, ...name);
+print(message); // Outputs: "Welcome: John Doe"
+```
+
+### Practical applications
+
+```ts
+// Build an address string
+function formatAddress(street: string, city: string, state: string, zip: string): string {
+  return String.concat(street, ", ", city, ", ", state, " ", zip);
+}
+
+const address = formatAddress("123 Main St", "Anytown", "CA", "12345");
+print(address); // Outputs: "123 Main St, Anytown, CA 12345"
+
+// Create URL with query parameters
+function buildUrl(baseUrl: string, params: Record<string, any>): string {
+  let url = baseUrl;
+  let isFirst = true;
+  
+  for (const [key, value] of Object.entries(params)) {
+    const separator = isFirst ? "?" : "&";
+    url = String.concat(url, separator, key, "=", value);
+    isFirst = false;
+  }
+  
+  return url;
+}
+
+const url = buildUrl("https://example.com", { user: "john", id: 42 });
+print(url); // Outputs: "https://example.com?user=john&id=42"
+```
+
+### Comparison with string addition
+
+```ts
+// Using concat
+const withConcat = String.concat("Hello", " ", "world");
+
+// Using string addition (with + operator)
+const withAddition = "Hello" + " " + "world";
+
+print(withConcat === withAddition); // Outputs: true
+```

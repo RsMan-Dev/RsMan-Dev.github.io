@@ -1,0 +1,89 @@
+# indexOf
+
+Returns the index of the first occurrence of a specified value in a string.
+
+## Signature
+
+```ts
+function indexOf(str: string, search: PatternAdmissible, position?: NumericAdmissible): number
+```
+
+## Description
+
+The `indexOf` function returns the position of the first occurrence of a specified value in a string. The search begins at the specified position and is case-sensitive.
+
+If the specified value is not found, it returns -1.
+
+### Parameters
+- `str`: The string to search within.
+- `search`: The value to search for. Can be a string, number, or boolean.
+- `position` (optional): The position within the string to start the search. Default is 0. If a string is provided, it will be converted to a number.
+
+### Return value
+- The zero-based index of the first occurrence of the specified value.
+- If the value is not found, -1 is returned.
+
+## Examples
+
+### Basic usage
+
+```ts
+// Find the first occurrence of a substring
+const pos = String.indexOf("Hello world", "world");
+print(pos); // Outputs: 6
+
+// Searching for a character
+const letterPos = String.indexOf("Hello world", "o");
+print(letterPos); // Outputs: 4
+```
+
+### With starting position
+
+```ts
+// Start searching from index 5
+const str = "Hello world, welcome to the universe";
+const pos = String.indexOf(str, "world", 5);
+print(pos); // Outputs: 6
+
+// Start searching after the first occurrence
+const firstPos = String.indexOf(str, "e");
+print(firstPos); // Outputs: 1
+
+const secondPos = String.indexOf(str, "e", firstPos + 1);
+print(secondPos); // Outputs: 8
+```
+
+### Using non-string search values
+
+```ts
+// Searching for a number (converted to string)
+const numPos = String.indexOf("Value: 42 is the answer", 42);
+print(numPos); // Outputs: 7
+
+// Searching for a boolean (converted to string)
+const boolPos = String.indexOf("Is it true or false?", true);
+print(boolPos); // Outputs: 6
+```
+
+### Not found cases
+
+```ts
+// Searching for a value that doesn't exist
+const notFound = String.indexOf("Hello world", "xyz");
+print(notFound); // Outputs: -1
+
+// Starting search beyond where the value exists
+const tooFar = String.indexOf("Hello world", "Hello", 2);
+print(tooFar); // Outputs: -1
+```
+
+### Case-sensitive search
+
+```ts
+// Searches are case-sensitive
+const lowerCase = String.indexOf("Hello World", "world");
+print(lowerCase); // Outputs: -1 (not found because of case difference)
+
+const exactCase = String.indexOf("Hello World", "World");
+print(exactCase); // Outputs: 6
+```

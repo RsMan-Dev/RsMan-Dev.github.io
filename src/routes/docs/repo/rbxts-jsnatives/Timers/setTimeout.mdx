@@ -1,21 +1,65 @@
-Uses runService.Heartbeat to call the function in given Timeout
+# setTimeout
+
+Schedules a function to be executed after a specified delay.
+
+## Signature
 
 ```ts
-const a = setTimeout(() => {
-  print("Hello, world!"); // will be called in 1 second
+function setTimeout(cb: (sym: symbol) => void, ms = 0): symbol
+```
+
+## Description
+
+The `setTimeout` function schedules the execution of a callback function after a specified delay in milliseconds. It returns a symbol that can be used to cancel the timeout using `clearTimeout`.
+
+Internally, it uses Roblox's `task.delay` function to implement the timeout behavior.
+
+### Parameters
+- `cb`: A callback function to execute after the delay. It receives the timeout symbol as an argument.
+- `ms`: The delay in milliseconds before executing the callback. Default is 0.
+
+### Return value
+- A unique symbol that identifies the timeout and can be used with `clearTimeout` to cancel it.
+
+## Examples
+
+### Basic usage
+
+```ts
+// Log a message after 1 second
+const timeoutSymbol = setTimeout((sym) => {
+  print("This message appears after 1 second");
 }, 1000);
 ```
 
-<br/>
-
-Returns a handle to the timeout, which can be used to clear the timeout
-The handle is a table, to ensure that we gets a unique reference
+### Canceling a timeout
 
 ```ts
-const a = setTimeout(() => {
-  print("Hello, world!"); // will be called in 1 second
-}, 1000);
+// Create a timeout that will execute after 5 seconds
+const timeoutSymbol = setTimeout((sym) => {
+  print("This will never be printed");
+}, 5000);
 
-clearTimeout(a); // will not be called
+// Cancel the timeout before it executes
+clearTimeout(timeoutSymbol);
 ```
 
+### Using the symbol parameter
+
+```ts
+// The symbol can be used inside the callback
+const timeoutSymbol = setTimeout((sym) => {
+  print(`Timeout with symbol: ${tostring(sym)} has executed`);
+  // The symbol can be used to identify which timeout fired
+}, 2000);
+```
+
+### Zero delay
+
+```ts
+// With zero delay, the function will execute as soon as possible
+// (but still asynchronously)
+setTimeout((sym) => {
+  print("This executes on the next frame");
+});
+```

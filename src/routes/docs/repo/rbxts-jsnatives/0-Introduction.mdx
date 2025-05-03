@@ -1,20 +1,57 @@
+# rbxts-jsnatives
 
+A collection of JavaScript-like APIs for Roblox TypeScript (roblox-ts).
 
-This library aims to add all missing javascript natives to roblox.
+## Overview
 
-## Why this library ?
+This package provides implementations of common JavaScript/TypeScript built-in functions and utilities that are not natively available in Roblox Lua. It aims to make porting JavaScript/TypeScript code to Roblox easier and provide familiar APIs for TypeScript developers working in Roblox.
 
-You may ask you why this library exists in a workd where object-utils or luau-polyfills exists.
+## Modules
 
-Well, the answer is simple, none of these libraries includes a proxy support for roblox,
-features that needs to rewrite all the natives to work correctly.  
-As on my own libraries a ise proxies a lot, i needed to make my own library to implement javascript natives supporting proxies.
+The package includes several modules:
+
+- **Array utilities** - Extra utilities for arrays ([Array-utils](./Array-utils/0-Introduction.mdx))
+- **Console** - Logging and debugging utilities ([Console](./Console/0-Introduction.mdx))
+- **JSON** - JSON parsing and stringification ([JSON](./JSON/0-Introduction.mdx))
+- **Number** - Number constants and methods ([Number](./Number.mdx))
+- **Object** - Object manipulation utilities ([Object](./Object/0-Introduction.mdx))
+- **Proxy** - Lua-compatible implementation of JS Proxies ([Proxy](./Proxy/0-Introduction.mdx))
+- **Set utilities** - Extra utilities for Set objects ([Set-utils](./Set-utils/0-Introduction.mdx))
+- **String** - String manipulation methods ([String](./String/0-Introduction.mdx))
+- **Timers** - setTimeout and setInterval implementations ([Timers](./Timers/0-Introduction.mdx))
+
+## Standalone Functions
+
+The package also includes standalone utility functions:
+
+- [**encodeUriComponent**](./encodeUriComponent.mdx) - Encodes URI components for safe use in URLs
+
+## Usage
+
+Import specific utilities from the library:
+
+```ts
+import { setTimeout, clearTimeout } from "@rbxts/jsnatives";
+
+const timerId = setTimeout(() => {
+  print("This runs after 1 second");
+}, 1000);
+
+// Cancel the timer if needed
+clearTimeout(timerId);
+```
+
+Or import all utilities:
+
+```ts
+import * as JsNatives from "@rbxts/jsnatives";
+
+JsNatives.console.log("Hello, %s!", "world");
+```
 
 ## Installation
 
-To use this library, you need to install it using roblox-ts.
-
-```bash title="roblox-ts"
+```bash
 npm install @rbxts/jsnatives
 ```
 
@@ -23,62 +60,3 @@ You also can install it directly from github (in case you want to use a unreleas
 ```bash
 npm install @rbxts/jsnatives@github:RsMan-Dev/rbxts-jsnatives
 ```
-
-<br/>
-
-## How to use
-
-You simply just have to import the objects utilities you want to use
-
-```ts
-import { Proxy, Object } from "@rbxts/jsnatives";
-
-const proxy = new Proxy({}, {get: (target, prop) => {
-  if(Object.hasOwn(target, prop)) return target[prop];
-  return "none";
-}});
-
-proxy.a = 1;
-print(proxy.a, proxy.b); // 1 none
-```
-
-<br/>
-
-## Features:
-
-- Proxy support with hooks:
-  - get => get a key
-  - set => set a key
-  - ownKeys => get all keys
-  - apply => call the proxy as a function
-  - len => get the length of the proxy (if an array)
-  - iter => iterate the proxy (must return iterator)
-
-- Object methods:
-  - isArray => check if the object is an array
-  - create => create an object
-  - keys => get all keys
-  - entries => get all entries
-  - values => get all values
-  - assign => assign an object
-  - fromEntries => create an object from an array of entries
-  - hasOwn => check if the object has a key
-  - isEmpty => check if the object is empty
-  - dup => duplicate an object
-  - is => check if the object is the same as another object
-  - equals => check if the object is equal to another object
-  - toString => convert the object to a string
-  - isCallable => check if the object is callable
-
-- JSON methods:
-  - parse => parse a string to an object
-  - stringify => convert an object to a string
-
-
-
-
-
-
-
-
-

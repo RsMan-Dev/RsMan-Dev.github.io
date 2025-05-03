@@ -1,0 +1,65 @@
+# Object.isFrozen
+
+Determines if an object is frozen.
+
+## Signature
+
+```ts
+function isFrozen<T>(obj: T): obj is Readonly<T>
+```
+
+## Description
+
+The `Object.isFrozen()` method determines whether an object is frozen. An object is frozen if and only if it is not extensible, all its properties are non-configurable, and all its data properties are non-writable.
+
+The method returns a type predicate that narrows the type to `Readonly<T>` when the object is frozen.
+
+## Examples
+
+### Checking frozen objects
+
+```ts
+const regularObj = {a: 1, b: 2};
+const frozenObj = Object.freeze({c: 3, d: 4});
+
+print(Object.isFrozen(regularObj)); // false
+print(Object.isFrozen(frozenObj)); // true
+```
+
+### Using with type narrowing
+
+```ts
+function processObject<T>(obj: T) {
+  if (Object.isFrozen(obj)) {
+    // In this block, obj is typed as Readonly<T>
+    console.log("Object is frozen and immutable");
+    // obj.someProp = 5; // TypeScript error: Cannot assign to property of readonly object
+  } else {
+    // In this block, obj is still typed as T
+    console.log("Object is not frozen");
+    // We can potentially modify it
+  }
+}
+
+const normalObj = {x: 10};
+const immutableObj = Object.freeze({y: 20});
+
+processObject(normalObj);     // "Object is not frozen"
+processObject(immutableObj);  // "Object is frozen and immutable"
+```
+
+### Working with collections
+
+```ts
+const array = [1, 2, 3];
+print(Object.isFrozen(array)); // false
+
+const frozenArray = Object.freeze([4, 5, 6]);
+print(Object.isFrozen(frozenArray)); // true
+
+const map = new Map([["a", 1]]);
+print(Object.isFrozen(map)); // false
+
+const frozenMap = Object.freeze(new Map([["b", 2]]));
+print(Object.isFrozen(frozenMap)); // true
+``` 

@@ -1,11 +1,109 @@
-the apply hook is triggered when a proxy is called as a function
+# Proxy - apply hook
+
+The `apply` hook is triggered when a proxy is called as a function.
+
+## Signature
 
 ```ts
-const a = new Proxy({}, {
-  apply: (target, proxy, ...argumentsList) => {
-    print("apply", target, thisArg, ...argumentsList);
+function apply<T>(target: T, proxy: T, ...args: unknown[]): any;
+```
+
+## Description
+
+The `apply` handler trap is called when the proxy is invoked as a function. It allows you to intercept function call operations.
+
+### Parameters
+- `target`: The original target object the proxy is wrapping
+- `proxy`: The proxy instance itself 
+- `...args`: The arguments passed to the function
+
+### Return value
+- Any value that should be returned from the function call
+
+## Examples
+
+### Basic function call interception
+
+```ts
+const target = function(x, y) {
+  return x + y;
+};
+
+const proxy = new Proxy(target, {
+  apply: (target, proxy, ...args) => {
+    console.log(`Function called with arguments: ${args.join(", ")}`);
+    return target(...args);
   }
 });
 
-a(1, 2, 3); // will log "apply" {} {} 1 2 3
+console.log(proxy(1, 2)); // Logs: "Function called with arguments: 1, 2", then 3
+```
+
+### Function call transformation
+
+```ts
+const multiply = function(x, y) {
+  return x * y;
+};
+
+const proxy = new Proxy(multiply, {
+  apply: (target, proxy, ...args) => {
+    // Double the result
+    return target(...args) * 2;
+  }
+});
+
+console.log(proxy(2, 3)); // 12 (2 * 3 * 2)
+```
+
+### Function call validation
+
+```ts
+const divide = function(x, y) {
+  return x / y;
+};
+
+const safeDivide = new Proxy(divide, {
+  apply: (target, proxy, ...args) => {
+    if (args[1] === 0) {
+      throw new Error("Cannot divide by zero");
+    }
+    return target(...args);
+  }
+});
+
+console.log(safeDivide(10, 2)); // 5
+// safeDivide(10, 0); // Throws: "Cannot divide by zero"
+```
+
+### Method profiling
+
+```ts
+const calculator = {
+  add: function(x, y) { return x + y; },
+  subtract: function(x, y) { return x - y; },
+  multiply: function(x, y) { return x * y; }
+};
+
+const profiledCalculator = new Proxy(calculator, {
+  get: (target, prop, proxy) => {
+    const value = target[prop];
+    
+    if (typeof value === "function") {
+      return new Proxy(value, {
+        apply: (fn, thisArg, ...args) => {
+          console.time(`${String(prop)} operation`);
+          const result = fn.apply(target, args[0]);
+          console.timeEnd(`${String(prop)} operation`);
+          return result;
+        }
+      });
+    }
+    
+    return value;
+  }
+});
+
+profiledCalculator.add(1, 2); // Logs: "add operation: 0.123ms"
+profiledCalculator.multiply(3, 4); // Logs: "multiply operation: 0.045ms"
 ```

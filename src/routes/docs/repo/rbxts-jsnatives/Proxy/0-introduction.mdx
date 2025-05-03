@@ -1,19 +1,73 @@
-Proxies are a way to intercept and redefine operations on objects.
-An object can act litterally like another object using proxy, can be used to create side effects on operations
+# Proxy
+
+Proxies are objects that allow you to intercept and customize operations performed on objects.
+
+## Signature
 
 ```ts
-const a = new Proxy({}, {
-  get: (target, prop) => {
-    print("get", prop);
-    return prop;
-  },
-  set: (target, prop, value) => {
-    print("set", prop, value);
-    target[prop] = value;
-  }
-});
+type ProxyTarget = Array<any> | Record<string | number, any> | Set<any> | Map<any, any> | Callback
 
-a.a = 1; // will log "set a 1"
-print(a.a); // will log "get a" and return 1
-print(a.b); // will log "get b" and return undefined
+type ProxyResult<T extends ProxyTarget, Hooks extends ProxyHandler<T>> = T & (Hooks extends { apply: (target: T, ...args: infer A) => infer R } ? { (...args: A): R } : {})
+
+interface ProxyHandler<T extends ProxyTarget> {
+  get?: (target: T, key: unknown, proxy: T) => any;
+  set?: (target: T, key: unknown, value: unknown, proxy: T) => boolean;
+  apply?: (target: T, proxy: T, ...args: unknown[]) => any;
+  ownKeys?: (target: T, proxy: T) => Array<keyof T>;
+  iter?: (target: T, proxy: T) => ReturnType<typeof pairs<T>>;
+  len?: (target: T, proxy: T) => number;
+}
+
+type ProxyConstructor = {
+  new <T extends ProxyTarget, H extends ProxyHandler<T>, Raw = {}>(
+    target: T, 
+    hooks: H, 
+    raw?: Raw, 
+    metaDefaults?: object
+  ): ProxyResult<T, H>
+}
 ```
+
+## Description
+
+The `Proxy` object enables you to create a proxy for another object, which can intercept and redefine fundamental operations for that object.
+
+A `Proxy` in rbxts-jsnatives works with various target types including arrays, plain objects, Sets, and Maps. The proxy handler allows you to define custom behaviors for operations like property access, property assignment, function invocation, and more.
+
+## Basic Usage
+
+```ts
+const handler = {
+  get: (target, prop, proxy) => {
+    console.log(`Property ${String(prop)} accessed`);
+    return target[prop];
+  },
+  set: (target, prop, value, proxy) => {
+    console.log(`Setting property ${String(prop)} to ${value}`);
+    target[prop] = value;
+    return true; // Indicate success
+  }
+};
+
+const original = { counter: 0 };
+const proxy = new Proxy(original, handler);
+
+proxy.counter = 1; // Logs: "Setting property counter to 1"
+console.log(proxy.counter); // Logs: "Property counter accessed" then "1"
+```
+
+## Parameters
+
+- **target**: The target object to wrap with Proxy. It can be an Array, a plain object, a Set, or a Map.
+- **hooks**: An object containing handler functions for the proxy traps.
+- **raw** (optional): Additional properties to be merged with the proxy result. (first argument of setmetatable)
+- **metaDefaults** (optional): Default metatable values. (second argument of setmetatable)
+
+## Available Hooks
+
+- **get**: Intercepts property access operations
+- **set**: Intercepts property assignment operations
+- **apply**: Intercepts function calls
+- **ownKeys**: Intercepts operations that return the object's keys
+- **iter**: Intercepts iteration operations
+- **len**: Intercepts length/size operations

@@ -1,0 +1,126 @@
+# substring
+
+Extracts characters from a string between two specified indices.
+
+## Signature
+
+```ts
+function substring(str: string, start?: NumericAdmissible, length?: NumericAdmissible): string
+```
+
+## Description
+
+The `substring` function extracts characters from a string between a specified starting position and a specified length. Note that unlike JavaScript's `substring`, this function takes a start position and a length, similar to Lua's `string.sub`.
+
+### Parameters
+- `str`: The string to extract from.
+- `start` (optional): The zero-based index at which to begin extraction. If a string is provided, it will be converted to a number. Default is 0.
+- `length` (optional): The number of characters to extract. If a string is provided, it will be converted to a number. If omitted or exceeds the string length, extraction continues to the end of the string.
+
+### Return value
+- A new string containing the extracted section of the string.
+
+## Examples
+
+### Basic usage
+
+```ts
+// Extract a substring
+const str = "Hello world";
+const world = String.substring(str, 6);
+print(world); // Outputs: "world"
+
+const hello = String.substring(str, 0, 5);
+print(hello); // Outputs: "Hello"
+```
+
+### Using with different parameters
+
+```ts
+const str = "Hello world";
+
+// Omitting the length parameter extracts to the end
+const fromIndex3 = String.substring(str, 3);
+print(fromIndex3); // Outputs: "lo world"
+
+// Specifying both start and length
+const middlePortion = String.substring(str, 2, 5);
+print(middlePortion); // Outputs: "llo w"
+```
+
+### Using string indices
+
+```ts
+// String indices are converted to numbers
+const str = "Hello world";
+const portion = String.substring(str, "1", "5");
+print(portion); // Outputs: "ello "
+```
+
+### Handling edge cases
+
+```ts
+const str = "Hello world";
+
+// If start is negative, it is treated as 0
+const negativeStart = String.substring(str, -3, 5);
+print(negativeStart); // Outputs: "Hello"
+
+// If length is greater than string length - start, returns to the end
+const beyondLength = String.substring(str, 6, 100);
+print(beyondLength); // Outputs: "world"
+
+// If start is beyond string length, returns empty string
+const startBeyondLength = String.substring(str, 20);
+print(startBeyondLength); // Outputs: ""
+```
+
+### Without parameters
+
+```ts
+// Without parameters, returns the entire string
+const str = "Hello world";
+const copy = String.substring(str);
+print(copy); // Outputs: "Hello world"
+```
+
+### Comparison with slice
+
+```ts
+const str = "Hello world";
+
+// substring with start and length
+const withSubstring = String.substring(str, 1, 4);
+print(withSubstring); // Outputs: "ello"
+
+// slice with start and end index
+const withSlice = String.slice(str, 1, 5); // Note: end index is 5, not 4
+print(withSlice); // Outputs: "ello"
+
+// Key difference: substring takes length, slice takes end index
+```
+
+### Practical applications
+
+```ts
+// Extract username from email
+function getUsernameFromEmail(email: string): string {
+  const atIndex = String.indexOf(email, "@");
+  if (atIndex === -1) {
+    return email;
+  }
+  return String.substring(email, 0, atIndex);
+}
+
+print(getUsernameFromEmail("user.name@example.com")); // Outputs: "user.name"
+
+// Truncate text with ellipsis
+function truncateText(text: string, maxLength: number): string {
+  if (text.length <= maxLength) {
+    return text;
+  }
+  return String.substring(text, 0, maxLength - 3) + "...";
+}
+
+print(truncateText("This is a very long text", 10)); // Outputs: "This is..."
+``` 

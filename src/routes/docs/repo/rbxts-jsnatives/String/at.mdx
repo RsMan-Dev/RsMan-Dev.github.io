@@ -1,0 +1,92 @@
+# at
+
+Returns the character at a specified index in a string.
+
+## Signature
+
+```ts
+function at(str: string, index: NumericAdmissible): string
+```
+
+## Description
+
+The `at` function returns the character at a specified position in a string. This method allows for both positive and negative integers, where negative integers count back from the end of the string.
+
+### Parameters
+- `str`: The string to extract a character from.
+- `index`: The position of the character to get. If a string is provided, it will be converted to a number.
+
+### Return value
+- A string containing a single character at the specified index.
+- An empty string if the index is out of range.
+
+## Examples
+
+### Basic usage
+
+```ts
+// Get a character by index
+const char = String.at("Hello", 1);
+print(char); // Outputs: "e"
+
+const firstChar = String.at("Hello", 0);
+print(firstChar); // Outputs: "H"
+```
+
+### Using negative indices
+
+```ts
+// Negative indices count from the end of the string
+const str = "Hello";
+const lastChar = String.at(str, -1);
+print(lastChar); // Outputs: "o"
+
+const secondToLast = String.at(str, -2);
+print(secondToLast); // Outputs: "l"
+```
+
+### Using string indices
+
+```ts
+// String indices are converted to numbers
+const str = "Hello";
+const char = String.at(str, "2");
+print(char); // Outputs: "l"
+```
+
+### Handling out of range indices
+
+```ts
+const str = "Hello";
+
+// Index beyond the string length
+const outOfRange = String.at(str, 10);
+print(outOfRange); // Outputs: "" (empty string)
+
+// Negative index beyond start of string
+const tooNegative = String.at(str, -10);
+print(tooNegative); // Outputs: "" (empty string)
+```
+
+### Common use cases
+
+```ts
+// Get first character
+function getFirstChar(str: string): string {
+  return String.at(str, 0);
+}
+print(getFirstChar("Hello")); // Outputs: "H"
+
+// Get last character
+function getLastChar(str: string): string {
+  return String.at(str, -1);
+}
+print(getLastChar("Hello")); // Outputs: "o"
+
+// Safely get character at index
+function safeCharAt(str: string, index: number): string | undefined {
+  const char = String.at(str, index);
+  return char !== "" ? char : undefined;
+}
+```
+``` 

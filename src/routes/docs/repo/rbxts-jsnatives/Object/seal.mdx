@@ -1,0 +1,77 @@
+# Object.seal
+
+Seals an object, preventing new properties from being added and marking all existing properties as non-configurable.
+
+## Signature
+
+```ts
+function seal<T>(obj: T): Readonly<T>
+```
+
+## Description
+
+The `Object.seal()` method seals an object, preventing new properties from being added to it and marking all existing properties as non-configurable. Values of existing properties can still be changed as long as they are writable.
+
+Unlike `Object.freeze()`, which makes properties non-writable as well, `Object.seal()` only prevents adding and removing properties.
+
+## Examples
+
+### Basic sealing
+
+```ts
+const obj = {a: 1, b: 2, c: 3};
+const sealedObj = Object.seal(obj);
+
+// Modifying existing properties still works
+sealedObj.a = 5;
+print(sealedObj.a); // 5
+
+// But adding new properties does not work
+sealedObj.d = 4; // This has no effect in JavaScript
+// In TypeScript, this would be a compilation error:
+// Property 'd' does not exist on type 'Readonly<{ a: number; b: number; c: number; }>'
+
+// Deleting properties also does not work
+delete sealedObj.b; // This has no effect
+print(sealedObj.b); // 2
+```
+
+### Comparing seal and freeze
+
+```ts
+const regularObj = {x: 1, y: 2};
+const sealedObj = Object.seal({x: 1, y: 2});
+const frozenObj = Object.freeze({x: 1, y: 2});
+
+// Regular object - can add, modify, delete
+regularObj.z = 3;
+regularObj.x = 10;
+delete regularObj.y;
+print(regularObj); // {x: 10, z: 3}
+
+// Sealed object - can only modify existing properties
+sealedObj.x = 10; // Can modify
+// sealedObj.z = 3; // Cannot add (no effect)
+// delete sealedObj.y; // Cannot delete (no effect)
+print(sealedObj); // {x: 10, y: 2}
+
+// Frozen object - cannot modify, add, or delete
+// frozenObj.x = 10; // Cannot modify (no effect)
+// frozenObj.z = 3; // Cannot add (no effect)
+// delete frozenObj.y; // Cannot delete (no effect)
+print(frozenObj); // {x: 1, y: 2}
+```
+
+### Sealing arrays and collections
+
+```ts
+const array = [1, 2, 3];
+const sealedArray = Object.seal(array);
+
+// Can modify existing elements
+sealedArray[0] = 10;
+print(sealedArray); // [10, 2, 3]
+
+// But cannot add new elements or change the length
+// sealedArray.push(4); // Error: Property 'push' does not exist on type 'Readonly<number[]>'.
+``` 

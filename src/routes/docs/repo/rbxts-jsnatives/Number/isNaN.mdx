@@ -1,0 +1,61 @@
+# isNaN
+
+Determines whether the passed value is NaN (Not a Number).
+
+## Signature
+
+```ts
+function isNaN(value: number): boolean
+```
+
+## Description
+
+The `Number.isNaN()` method determines whether the passed value is the special NaN value. Unlike the global `isNaN()` function, it doesn't convert its argument to a number before testing.
+
+### Parameters
+- `value`: The value to be tested for being NaN.
+
+### Return value
+- `true` if the given value is NaN, otherwise `false`.
+
+## Examples
+
+### Basic Usage
+
+```ts
+// Testing for NaN
+Number.isNaN(NaN);               // true
+Number.isNaN(Number.NaN);        // true
+Number.isNaN(0 / 0);             // true (result is NaN)
+
+// Regular numbers
+Number.isNaN(42);                // false
+Number.isNaN(-42);               // false
+Number.isNaN(0);                 // false
+Number.isNaN(Infinity);          // false
+
+// Non-numbers (where global isNaN would return true)
+Number.isNaN("NaN");             // false (string, not a Number)
+Number.isNaN(undefined);         // false
+Number.isNaN({});                // false
+Number.isNaN("blabla");          // false
+```
+
+### Checking Calculation Results
+
+```ts
+// Check if a calculation produced a valid result
+function safeCalculate(a: number, b: number): number | null {
+  const result = a / b;
+  
+  if (Number.isNaN(result)) {
+    return null; // Invalid result
+  }
+  
+  return result;
+}
+
+// Usage
+safeCalculate(10, 2);    // 5
+safeCalculate(0, 0);     // null (0/0 is NaN)
+```

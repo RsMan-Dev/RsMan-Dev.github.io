@@ -1,0 +1,69 @@
+# Console
+
+The Console API provides a set of logging and debugging utilities similar to the browser console object in JavaScript.
+
+## Overview
+
+```ts
+declare const console: {
+  clear: () => void
+  rawLog: (...args: unknown[]) => void
+  log: (...args: unknown[]) => void
+  debug: (...args: unknown[]) => void
+  info: (...args: unknown[]) => void
+  warn: (...args: unknown[]) => void
+  error: (...args: unknown[]) => void
+  time: (label?: string) => void
+  timeEnd: (label?: string) => void
+  group: (...args: unknown[]) => void
+  groupCollapsed: (...args: unknown[]) => void
+  groupEnd: () => void
+}
+```
+
+The Console API offers various methods for outputting information to the debug console in Roblox Studio. It includes:
+
+- Basic logging methods (`log`, `debug`, `info`, `warn`, `error`)
+- Console clearing (`clear`)
+- Raw logging without formatting (`rawLog`)
+- Performance measurement with timer functions (`time`, `timeEnd`)
+- Message grouping for organized output (`group`, `groupCollapsed`, `groupEnd`)
+
+This API is designed to mimic the behavior of browser console methods while being adapted for the Roblox environment.
+
+## Usage Example
+
+```ts
+// Basic logging
+console.log("Hello world");
+console.info("Player joined:", player.Name);
+console.warn("Deprecation notice: This API will be removed in future versions");
+console.error("Failed to load data:", errorMessage);
+
+// Performance measurement
+console.time("operationTimer");
+// ... perform some operation
+console.timeEnd("operationTimer"); // Outputs: operationTimer: 15.023ms
+
+// Grouping related messages
+console.group("Player Data");
+console.log("Name:", player.Name);
+console.log("Level:", player.Level);
+console.log("Health:", player.Health);
+console.groupEnd();
+```
+
+## See Also
+
+- [clear](./clear.mdx)
+- [rawLog](./rawLog.mdx)
+- [log](./log.mdx)
+- [debug](./debug.mdx)
+- [info](./info.mdx)
+- [warn](./warn.mdx)
+- [error](./error.mdx)
+- [time](./time.mdx)
+- [timeEnd](./timeEnd.mdx)
+- [group](./group.mdx)
+- [groupCollapsed](./groupCollapsed.mdx)
+- [groupEnd](./groupEnd.mdx) 

@@ -1,0 +1,118 @@
+# split
+
+Divides a string into an array of substrings based on a specified separator.
+
+## Signature
+
+```ts
+function split(str: string, separator: PatternAdmissible, limit?: NumericAdmissible): string[]
+```
+
+## Description
+
+The `split` function divides a string into an ordered list of substrings by searching for a pattern, puts these substrings into an array, and returns the array. The division is done by searching for a separator; the separator can be a string or a pattern.
+
+### Parameters
+- `str`: The string to split.
+- `separator`: The pattern describing where each split should occur. Can be a string, number, or boolean (which will be converted to a string).
+- `limit` (optional): An integer specifying a limit on the number of splits. If provided, the method will split the string at each occurrence of the specified separator, but stop when `limit` entries have been placed in the array. If a string is provided, it will be converted to a number.
+
+### Return value
+- An array of strings, split at each point where the separator occurs in the given string.
+- If the separator is not found in the string, the array contains one element with the entire original string.
+
+## Examples
+
+### Basic usage
+
+```ts
+// Split by a character
+const commaList = String.split("apple,banana,orange", ",");
+print(commaList); // Outputs: ["apple", "banana", "orange"]
+
+// Split by a string
+const words = String.split("Hello world", " ");
+print(words); // Outputs: ["Hello", "world"]
+```
+
+### Using a limit
+
+```ts
+// Limit the number of splits
+const limited = String.split("one,two,three,four,five", ",", 3);
+print(limited); // Outputs: ["one", "two", "three", "four,five"]
+
+// Using a string as limit
+const stringLimit = String.split("a,b,c,d,e", ",", "2");
+print(stringLimit); // Outputs: ["a", "b", "c,d,e"]
+```
+
+### Using non-string separators
+
+```ts
+// Numbers and booleans are converted to strings
+const withNumber = String.split("10,20,30,40,50", 30);
+print(withNumber); // Outputs: ["10,20,", ",40,50"]
+
+const withBoolean = String.split("true|false|true", true);
+print(withBoolean); // Outputs: ["", "|false|", ""]
+```
+
+### Handling edge cases
+
+```ts
+// Empty string
+const emptyResult = String.split("", ",");
+print(emptyResult); // Outputs: [""]
+
+// Separator not found
+const noSeparator = String.split("Hello", ",");
+print(noSeparator); // Outputs: ["Hello"]
+
+// Empty separator splits between each character
+const emptySeparator = String.split("Hello", "");
+print(emptySeparator); // Outputs: ["H", "e", "l", "l", "o"]
+```
+
+### Using Lua patterns
+
+```ts
+// Split on whitespace using a pattern
+const whitespace = String.split("Hello  world\tand\nuniverse", "%s+");
+print(whitespace); // Outputs: ["Hello", "world", "and", "universe"]
+
+// Split on digits
+const onDigits = String.split("abc123def456ghi", "%d+");
+print(onDigits); // Outputs: ["abc", "def", "ghi"]
+```
+
+### Practical applications
+
+```ts
+// Parse a CSV line
+function parseCSV(line: string): string[] {
+  return String.split(line, ",");
+}
+
+const csvData = parseCSV("John,Doe,42,New York");
+print(csvData); // Outputs: ["John", "Doe", "42", "New York"]
+
+// Get file extension
+function getFileNameParts(filename: string): { name: string, extension: string } {
+  const parts = String.split(filename, ".");
+  if (parts.length === 1) {
+    return { name: parts[0], extension: "" };
+  }
+  const extension = parts.pop() || "";
+  const name = parts.join(".");
+  return { name, extension };
+}
+
+const file = getFileNameParts("document.pdf");
+print(file.name); // Outputs: "document"
+print(file.extension); // Outputs: "pdf"
+
+const multiDot = getFileNameParts("archive.tar.gz");
+print(multiDot.name); // Outputs: "archive.tar"
+print(multiDot.extension); // Outputs: "gz"
+```

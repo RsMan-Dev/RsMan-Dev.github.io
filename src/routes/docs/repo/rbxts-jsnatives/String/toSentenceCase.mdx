@@ -1,0 +1,144 @@
+# toSentenceCase
+
+Converts a string to Sentence case format.
+
+## Signature
+
+```ts
+function toSentenceCase(str: string): string
+```
+
+## Description
+
+The `toSentenceCase` function converts a string to Sentence case format, where only the first letter of the entire string is capitalized and the rest of the letters are lowercase. This is typically used for sentences or phrases.
+
+### Parameters
+- `str`: The string to convert to Sentence case.
+
+### Return value
+- A new string in Sentence case format.
+
+## Examples
+
+### Basic usage
+
+```ts
+// Converting different formats to Sentence case
+const space = String.toSentenceCase("hello world");
+print(space); // Outputs: "Hello world"
+
+const camel = String.toSentenceCase("helloWorld");
+print(camel); // Outputs: "Hello world"
+
+const pascal = String.toSentenceCase("HelloWorld");
+print(pascal); // Outputs: "Hello world"
+
+const snake = String.toSentenceCase("hello_world");
+print(snake); // Outputs: "Hello world"
+
+const kebab = String.toSentenceCase("hello-world");
+print(kebab); // Outputs: "Hello world"
+```
+
+### Multiple words
+
+```ts
+// Converting multi-word strings
+const multiple = String.toSentenceCase("hello beautiful world");
+print(multiple); // Outputs: "Hello beautiful world"
+
+const mixedSeparators = String.toSentenceCase("hello_beautiful-world");
+print(mixedSeparators); // Outputs: "Hello beautiful world"
+```
+
+### Handling edge cases
+
+```ts
+// Empty string
+const empty = String.toSentenceCase("");
+print(empty); // Outputs: ""
+
+// Single word
+const single = String.toSentenceCase("hello");
+print(single); // Outputs: "Hello"
+
+// All uppercase
+const uppercase = String.toSentenceCase("HELLO WORLD");
+print(uppercase); // Outputs: "H e l l o w o r l d" (each uppercase is treated as new word)
+
+// Already in Sentence case
+const alreadySentence = String.toSentenceCase("Hello world");
+print(alreadySentence); // Outputs: "Hello world"
+```
+
+### Converting from other cases
+
+```ts
+// From Title case
+const title = String.toSentenceCase("This Is A Title");
+print(title); // Outputs: "This is a title"
+
+// From camelCase
+const camel = String.toSentenceCase("userFirstName");
+print(camel); // Outputs: "User first name"
+
+// From PascalCase
+const pascal = String.toSentenceCase("UserLoginRequest");
+print(pascal); // Outputs: "User login request"
+
+// From snake_case
+const snake = String.toSentenceCase("user_first_name");
+print(snake); // Outputs: "User first name"
+
+// From kebab-case
+const kebab = String.toSentenceCase("api-response-code");
+print(kebab); // Outputs: "Api response code"
+```
+
+### Practical applications
+
+```ts
+// Format text for display
+function formatDescription(description: string): string {
+  return String.toSentenceCase(description);
+}
+
+print(formatDescription("the_quick_brown_fox_jumps_over_the_lazy_dog"));
+// Outputs: "The quick brown fox jumps over the lazy dog"
+
+// Format error messages
+function formatErrorMessage(error: string): string {
+  // Ensure first letter is capitalized and rest is lowercase
+  return String.toSentenceCase(error);
+}
+
+print(formatErrorMessage("FILE_NOT_FOUND")); // Outputs: "File not found"
+print(formatErrorMessage("invalidUserInput")); // Outputs: "Invalid user input"
+```
+
+### Multiple sentences
+
+```ts
+// Note: toSentenceCase only capitalizes the first letter of the entire string,
+// not each sentence within a paragraph
+
+const paragraph = String.toSentenceCase("hello world. this is a test. another sentence.");
+print(paragraph); // Outputs: "Hello world. this is a test. another sentence."
+
+// To capitalize each sentence, you would need a custom function:
+function capitalizeEachSentence(text: string): string {
+  // Split by sentence ending punctuation followed by a space
+  const sentences = String.split(text, "%. ");
+  
+  // Capitalize each sentence
+  const capitalizedSentences = sentences.map(sentence => 
+    String.toSentenceCase(sentence)
+  );
+  
+  // Join back with periods
+  return capitalizedSentences.join(". ");
+}
+
+const proper = capitalizeEachSentence("hello world. this is a test. another sentence.");
+print(proper); // Outputs: "Hello world. This is a test. Another sentence."
+```

@@ -1,0 +1,73 @@
+# parseInt
+
+Parses a string and returns an integer of the specified radix.
+
+## Signature
+
+```ts
+function parseInt(value: unknown, radix?: number): number
+```
+
+## Description
+
+The `Number.parseInt()` method parses a string argument and returns an integer of the specified radix or base. It works the same way as the global `parseInt()` function.
+
+If the first character cannot be converted to a number in the specified radix, `NaN` is returned.
+
+### Parameters
+- `value`: A value to parse to an integer, typically a string.
+- `radix` (optional): An integer between 2 and 36 that represents the radix (the base in mathematical numeral systems) of the `value`. Default is 10 (decimal).
+
+### Return value
+- An integer parsed from the given string. If the first character cannot be converted to a number, `NaN` is returned.
+
+## Examples
+
+### Basic Usage
+
+```ts
+// Parsing decimal numbers
+Number.parseInt("42");             // 42
+Number.parseInt("42.5");           // 42 (decimal part is truncated)
+Number.parseInt("   42   ");       // 42 (whitespace is ignored)
+
+// Parsing with units
+Number.parseInt("42px");           // 42 (stops at 'p')
+Number.parseInt("42.5px");         // 42 (decimal part is truncated)
+
+// Invalid first characters
+Number.parseInt("abc");            // NaN
+Number.parseInt("$100");           // NaN ($ is not a number)
+```
+
+### Using Different Radixes
+
+```ts
+// Binary (base 2)
+Number.parseInt("101", 2);         // 5 (1*4 + 0*2 + 1*1)
+Number.parseInt("11111111", 2);    // 255
+
+// Octal (base 8)
+Number.parseInt("17", 8);          // 15 (1*8 + 7)
+
+// Hexadecimal (base 16)
+Number.parseInt("1A", 16);         // 26 (1*16 + 10)
+Number.parseInt("FF", 16);         // 255 (15*16 + 15)
+Number.parseInt("0xFF", 16);       // 255 (prefix 0x is supported for hex)
+
+// Custom radix
+Number.parseInt("Z", 36);          // 35 (max value in base 36)
+```
+
+### Handling Leading Characters
+
+```ts
+// Leading characters
+Number.parseInt("+42");            // 42
+Number.parseInt("-42");            // -42
+
+// Prefix vs radix parameter
+Number.parseInt("0xFF");           // 255 (treated as hexadecimal)
+Number.parseInt("0xFF", 16);       // 255 (treated as hex)
+Number.parseInt("FF", 16);         // 255 (no prefix needed when radix specified)
+```
