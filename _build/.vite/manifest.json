@@ -81,7 +81,7 @@
     ]
   },
   "src/routes/docs.tsx?pick=default&pick=$css": {
-    "file": "assets/docs-BoUXWvhE.js",
+    "file": "assets/docs-DRKUoiYY.js",
     "name": "docs",
     "src": "src/routes/docs.tsx?pick=default&pick=$css",
     "isEntry": true,
@@ -90,6 +90,9 @@
       "_web-CesR-2RA.js",
       "_Button-BtiNq1sq.js",
       "_routing-CIhIEP7y.js"
+    ],
+    "css": [
+      "assets/docs-CeYckVZ3.css"
     ]
   },
   "src/routes/docs/index.tsx?pick=default&pick=$css": {
@@ -103,7 +106,7 @@
     ]
   },
   "src/routes/docs/repo.tsx?pick=default&pick=$css": {
-    "file": "assets/repo-qUPtljw0.js",
+    "file": "assets/repo-CR4-gUzJ.js",
     "name": "repo",
     "src": "src/routes/docs/repo.tsx?pick=default&pick=$css",
     "isEntry": true,
@@ -158,7 +161,7 @@
     ]
   },
   "src/routes/docs/repo/rbxts-jsnatives/0-Introduction.mdx?pick=$css": {
-    "file": "assets/0-Introduction-DK2b31Qg.js",
+    "file": "assets/0-Introduction-Bb2DQT3w.js",
     "name": "0-Introduction",
     "src": "src/routes/docs/repo/rbxts-jsnatives/0-Introduction.mdx?pick=$css",
     "isEntry": true,
@@ -168,8 +171,283 @@
       "_index-D4wBul8M.js"
     ]
   },
+  "src/routes/docs/repo/rbxts-jsnatives/Array-utils/0-flat.mdx?pick=$css": {
+    "file": "assets/0-flat-EiLQaAmL.js",
+    "name": "0-flat",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Array-utils/0-flat.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/Array-utils/1-flatMap.mdx?pick=$css": {
+    "file": "assets/1-flatMap-CmoH-trd.js",
+    "name": "1-flatMap",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Array-utils/1-flatMap.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/Array-utils/concat.mdx?pick=$css": {
+    "file": "assets/concat-DqAZOLsb.js",
+    "name": "concat",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Array-utils/concat.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/Array-utils/isArray.mdx?pick=$css": {
+    "file": "assets/isArray-BFpKQoHv.js",
+    "name": "isArray",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Array-utils/isArray.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/Array-utils/reverse.mdx?pick=$css": {
+    "file": "assets/reverse-rKs6ewFl.js",
+    "name": "reverse",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Array-utils/reverse.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/Array-utils/slice.mdx?pick=$css": {
+    "file": "assets/slice-CiurJ6RS.js",
+    "name": "slice",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Array-utils/slice.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/Array-utils/splice.mdx?pick=$css": {
+    "file": "assets/splice-DZL821Ct.js",
+    "name": "splice",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Array-utils/splice.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/Array-utils/toReversed.mdx?pick=$css": {
+    "file": "assets/toReversed-ChFjWq_D.js",
+    "name": "toReversed",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Array-utils/toReversed.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/Console/0-Introduction.mdx?pick=$css": {
+    "file": "assets/0-Introduction-D0aM74YQ.js",
+    "name": "0-Introduction",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Console/0-Introduction.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/Console/clear.mdx?pick=$css": {
+    "file": "assets/clear-CbhRGvKB.js",
+    "name": "clear",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Console/clear.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/Console/debug.mdx?pick=$css": {
+    "file": "assets/debug-KOYAgL7p.js",
+    "name": "debug",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Console/debug.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/Console/error.mdx?pick=$css": {
+    "file": "assets/error-DERSVSmy.js",
+    "name": "error",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Console/error.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/Console/group.mdx?pick=$css": {
+    "file": "assets/group-C5TcA6UV.js",
+    "name": "group",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Console/group.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/Console/groupCollapsed.mdx?pick=$css": {
+    "file": "assets/groupCollapsed-CnBKig2j.js",
+    "name": "groupCollapsed",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Console/groupCollapsed.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/Console/groupEnd.mdx?pick=$css": {
+    "file": "assets/groupEnd-C0FYA1Xe.js",
+    "name": "groupEnd",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Console/groupEnd.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/Console/info.mdx?pick=$css": {
+    "file": "assets/info-BZFj6NRC.js",
+    "name": "info",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Console/info.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/Console/log.mdx?pick=$css": {
+    "file": "assets/log-DxjoORxL.js",
+    "name": "log",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Console/log.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/Console/rawLog.mdx?pick=$css": {
+    "file": "assets/rawLog-CrQmEKQw.js",
+    "name": "rawLog",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Console/rawLog.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/Console/time.mdx?pick=$css": {
+    "file": "assets/time-CwppIaQ-.js",
+    "name": "time",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Console/time.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/Console/timeEnd.mdx?pick=$css": {
+    "file": "assets/timeEnd-DX38ihCq.js",
+    "name": "timeEnd",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Console/timeEnd.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/Console/warn.mdx?pick=$css": {
+    "file": "assets/warn-HgqpNSdj.js",
+    "name": "warn",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Console/warn.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/Error/0-Introduction.mdx?pick=$css": {
+    "file": "assets/0-Introduction-Dgx62kVt.js",
+    "name": "0-Introduction",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Error/0-Introduction.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/Error/1-constructor.mdx?pick=$css": {
+    "file": "assets/1-constructor-9_KXx-9-.js",
+    "name": "1-constructor",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Error/1-constructor.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/Error/captureStackTrace.mdx?pick=$css": {
+    "file": "assets/captureStackTrace-BZZsglIL.js",
+    "name": "captureStackTrace",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Error/captureStackTrace.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/Error/properties.mdx?pick=$css": {
+    "file": "assets/properties-CWVpxWTL.js",
+    "name": "properties",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Error/properties.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
   "src/routes/docs/repo/rbxts-jsnatives/JSON/parse.mdx?pick=$css": {
-    "file": "assets/parse-BX7nbvBZ.js",
+    "file": "assets/parse-DdI-ZmNr.js",
     "name": "parse",
     "src": "src/routes/docs/repo/rbxts-jsnatives/JSON/parse.mdx?pick=$css",
     "isEntry": true,
@@ -180,7 +458,7 @@
     ]
   },
   "src/routes/docs/repo/rbxts-jsnatives/JSON/stringify.mdx?pick=$css": {
-    "file": "assets/stringify-C3NprnrM.js",
+    "file": "assets/stringify-2zgCaH4s.js",
     "name": "stringify",
     "src": "src/routes/docs/repo/rbxts-jsnatives/JSON/stringify.mdx?pick=$css",
     "isEntry": true,
@@ -190,8 +468,140 @@
       "_index-D4wBul8M.js"
     ]
   },
+  "src/routes/docs/repo/rbxts-jsnatives/Number/0-Introduction.mdx?pick=$css": {
+    "file": "assets/0-Introduction-BGAWXdMk.js",
+    "name": "0-Introduction",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Number/0-Introduction.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/Number/1-constants.mdx?pick=$css": {
+    "file": "assets/1-constants-BB3seXpq.js",
+    "name": "1-constants",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Number/1-constants.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/Number/2-constructor.mdx?pick=$css": {
+    "file": "assets/2-constructor-DrqKPend.js",
+    "name": "2-constructor",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Number/2-constructor.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/Number/isFinite.mdx?pick=$css": {
+    "file": "assets/isFinite-D2VCgcye.js",
+    "name": "isFinite",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Number/isFinite.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/Number/isInteger.mdx?pick=$css": {
+    "file": "assets/isInteger-DHZ0FSXX.js",
+    "name": "isInteger",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Number/isInteger.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/Number/isNaN.mdx?pick=$css": {
+    "file": "assets/isNaN-D8tJtNbE.js",
+    "name": "isNaN",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Number/isNaN.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/Number/isSafeInteger.mdx?pick=$css": {
+    "file": "assets/isSafeInteger-DoJ0S1Zv.js",
+    "name": "isSafeInteger",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Number/isSafeInteger.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/Number/parseFloat.mdx?pick=$css": {
+    "file": "assets/parseFloat-Bn8iUtDs.js",
+    "name": "parseFloat",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Number/parseFloat.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/Number/parseInt.mdx?pick=$css": {
+    "file": "assets/parseInt-6sGjiqV6.js",
+    "name": "parseInt",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Number/parseInt.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/Number/toExponential.mdx?pick=$css": {
+    "file": "assets/toExponential-YRQnQFVx.js",
+    "name": "toExponential",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Number/toExponential.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/Number/toFixed.mdx?pick=$css": {
+    "file": "assets/toFixed-BTJgZW-G.js",
+    "name": "toFixed",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Number/toFixed.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/Number/toString.mdx?pick=$css": {
+    "file": "assets/toString-CE9o0eg6.js",
+    "name": "toString",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Number/toString.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
   "src/routes/docs/repo/rbxts-jsnatives/Object/0-is.mdx?pick=$css": {
-    "file": "assets/0-is-aT9QG6nU.js",
+    "file": "assets/0-is-BsA5FUCa.js",
     "name": "0-is",
     "src": "src/routes/docs/repo/rbxts-jsnatives/Object/0-is.mdx?pick=$css",
     "isEntry": true,
@@ -213,7 +623,7 @@
     ]
   },
   "src/routes/docs/repo/rbxts-jsnatives/Object/assign.mdx?pick=$css": {
-    "file": "assets/assign-DXn_y53S.js",
+    "file": "assets/assign-C6h9-Kf4.js",
     "name": "assign",
     "src": "src/routes/docs/repo/rbxts-jsnatives/Object/assign.mdx?pick=$css",
     "isEntry": true,
@@ -224,7 +634,7 @@
     ]
   },
   "src/routes/docs/repo/rbxts-jsnatives/Object/create.mdx?pick=$css": {
-    "file": "assets/create-Cd2FT2Cx.js",
+    "file": "assets/create-B7L4hd6F.js",
     "name": "create",
     "src": "src/routes/docs/repo/rbxts-jsnatives/Object/create.mdx?pick=$css",
     "isEntry": true,
@@ -235,7 +645,7 @@
     ]
   },
   "src/routes/docs/repo/rbxts-jsnatives/Object/dup.mdx?pick=$css": {
-    "file": "assets/dup-DB6sYQXg.js",
+    "file": "assets/dup-DF6RkcQF.js",
     "name": "dup",
     "src": "src/routes/docs/repo/rbxts-jsnatives/Object/dup.mdx?pick=$css",
     "isEntry": true,
@@ -246,7 +656,7 @@
     ]
   },
   "src/routes/docs/repo/rbxts-jsnatives/Object/entries.mdx?pick=$css": {
-    "file": "assets/entries-4oSfn6zE.js",
+    "file": "assets/entries-skGP-Pzw.js",
     "name": "entries",
     "src": "src/routes/docs/repo/rbxts-jsnatives/Object/entries.mdx?pick=$css",
     "isEntry": true,
@@ -257,7 +667,7 @@
     ]
   },
   "src/routes/docs/repo/rbxts-jsnatives/Object/equals.mdx?pick=$css": {
-    "file": "assets/equals-Bybfg8Lp.js",
+    "file": "assets/equals-Cp0Zn68w.js",
     "name": "equals",
     "src": "src/routes/docs/repo/rbxts-jsnatives/Object/equals.mdx?pick=$css",
     "isEntry": true,
@@ -267,8 +677,19 @@
       "_index-D4wBul8M.js"
     ]
   },
+  "src/routes/docs/repo/rbxts-jsnatives/Object/freeze.mdx?pick=$css": {
+    "file": "assets/freeze-BDzRVgxk.js",
+    "name": "freeze",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Object/freeze.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
   "src/routes/docs/repo/rbxts-jsnatives/Object/fromEntries.mdx?pick=$css": {
-    "file": "assets/fromEntries-B5wkYNAj.js",
+    "file": "assets/fromEntries-C9G28f9F.js",
     "name": "fromEntries",
     "src": "src/routes/docs/repo/rbxts-jsnatives/Object/fromEntries.mdx?pick=$css",
     "isEntry": true,
@@ -279,7 +700,7 @@
     ]
   },
   "src/routes/docs/repo/rbxts-jsnatives/Object/hasOwn.mdx?pick=$css": {
-    "file": "assets/hasOwn-DspNOwj-.js",
+    "file": "assets/hasOwn-jw0HcoTA.js",
     "name": "hasOwn",
     "src": "src/routes/docs/repo/rbxts-jsnatives/Object/hasOwn.mdx?pick=$css",
     "isEntry": true,
@@ -301,7 +722,7 @@
     ]
   },
   "src/routes/docs/repo/rbxts-jsnatives/Object/isCallable.mdx?pick=$css": {
-    "file": "assets/isCallable-SrPfaTH1.js",
+    "file": "assets/isCallable-DMuGifmi.js",
     "name": "isCallable",
     "src": "src/routes/docs/repo/rbxts-jsnatives/Object/isCallable.mdx?pick=$css",
     "isEntry": true,
@@ -312,7 +733,7 @@
     ]
   },
   "src/routes/docs/repo/rbxts-jsnatives/Object/isEmpty.mdx?pick=$css": {
-    "file": "assets/isEmpty-jQ2r05kU.js",
+    "file": "assets/isEmpty-DxAMZ-1K.js",
     "name": "isEmpty",
     "src": "src/routes/docs/repo/rbxts-jsnatives/Object/isEmpty.mdx?pick=$css",
     "isEntry": true,
@@ -322,8 +743,19 @@
       "_index-D4wBul8M.js"
     ]
   },
+  "src/routes/docs/repo/rbxts-jsnatives/Object/isFrozen.mdx?pick=$css": {
+    "file": "assets/isFrozen-BtgUtPWG.js",
+    "name": "isFrozen",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Object/isFrozen.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
   "src/routes/docs/repo/rbxts-jsnatives/Object/keys.mdx?pick=$css": {
-    "file": "assets/keys-sH5j3W-G.js",
+    "file": "assets/keys-DDbCPyB9.js",
     "name": "keys",
     "src": "src/routes/docs/repo/rbxts-jsnatives/Object/keys.mdx?pick=$css",
     "isEntry": true,
@@ -333,8 +765,19 @@
       "_index-D4wBul8M.js"
     ]
   },
+  "src/routes/docs/repo/rbxts-jsnatives/Object/seal.mdx?pick=$css": {
+    "file": "assets/seal-BKa6DpW3.js",
+    "name": "seal",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Object/seal.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
   "src/routes/docs/repo/rbxts-jsnatives/Object/values.mdx?pick=$css": {
-    "file": "assets/values-CUjkMa6A.js",
+    "file": "assets/values-BqDAgMRC.js",
     "name": "values",
     "src": "src/routes/docs/repo/rbxts-jsnatives/Object/values.mdx?pick=$css",
     "isEntry": true,
@@ -345,7 +788,7 @@
     ]
   },
   "src/routes/docs/repo/rbxts-jsnatives/Proxy/0-introduction.mdx?pick=$css": {
-    "file": "assets/0-introduction-DAJZc9cq.js",
+    "file": "assets/0-introduction-I1HzSD3O.js",
     "name": "0-introduction",
     "src": "src/routes/docs/repo/rbxts-jsnatives/Proxy/0-introduction.mdx?pick=$css",
     "isEntry": true,
@@ -356,7 +799,7 @@
     ]
   },
   "src/routes/docs/repo/rbxts-jsnatives/Proxy/hook - apply.mdx?pick=$css": {
-    "file": "assets/hook - apply-DN4Wvu0p.js",
+    "file": "assets/hook - apply-yGhALYLa.js",
     "name": "hook - apply",
     "src": "src/routes/docs/repo/rbxts-jsnatives/Proxy/hook - apply.mdx?pick=$css",
     "isEntry": true,
@@ -367,7 +810,7 @@
     ]
   },
   "src/routes/docs/repo/rbxts-jsnatives/Proxy/hook - get.mdx?pick=$css": {
-    "file": "assets/hook - get-DLhiJ5tX.js",
+    "file": "assets/hook - get-BdL95Svz.js",
     "name": "hook - get",
     "src": "src/routes/docs/repo/rbxts-jsnatives/Proxy/hook - get.mdx?pick=$css",
     "isEntry": true,
@@ -378,7 +821,7 @@
     ]
   },
   "src/routes/docs/repo/rbxts-jsnatives/Proxy/hook - iter.mdx?pick=$css": {
-    "file": "assets/hook - iter-8_tICpZh.js",
+    "file": "assets/hook - iter-4ztZ4KPT.js",
     "name": "hook - iter",
     "src": "src/routes/docs/repo/rbxts-jsnatives/Proxy/hook - iter.mdx?pick=$css",
     "isEntry": true,
@@ -389,7 +832,7 @@
     ]
   },
   "src/routes/docs/repo/rbxts-jsnatives/Proxy/hook - len.mdx?pick=$css": {
-    "file": "assets/hook - len-BrmxocSa.js",
+    "file": "assets/hook - len-DMeNvgPe.js",
     "name": "hook - len",
     "src": "src/routes/docs/repo/rbxts-jsnatives/Proxy/hook - len.mdx?pick=$css",
     "isEntry": true,
@@ -400,7 +843,7 @@
     ]
   },
   "src/routes/docs/repo/rbxts-jsnatives/Proxy/hook - ownKeys.mdx?pick=$css": {
-    "file": "assets/hook - ownKeys-_Nnrqahs.js",
+    "file": "assets/hook - ownKeys-CjjtsUuV.js",
     "name": "hook - ownKeys",
     "src": "src/routes/docs/repo/rbxts-jsnatives/Proxy/hook - ownKeys.mdx?pick=$css",
     "isEntry": true,
@@ -411,7 +854,7 @@
     ]
   },
   "src/routes/docs/repo/rbxts-jsnatives/Proxy/hook - set.mdx?pick=$css": {
-    "file": "assets/hook - set-BZwetx80.js",
+    "file": "assets/hook - set-jF6KJJiw.js",
     "name": "hook - set",
     "src": "src/routes/docs/repo/rbxts-jsnatives/Proxy/hook - set.mdx?pick=$css",
     "isEntry": true,
@@ -421,8 +864,514 @@
       "_index-D4wBul8M.js"
     ]
   },
+  "src/routes/docs/repo/rbxts-jsnatives/Set-utils/0-Introduction.mdx?pick=$css": {
+    "file": "assets/0-Introduction-DEnQ7RIF.js",
+    "name": "0-Introduction",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Set-utils/0-Introduction.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/Set-utils/difference.mdx?pick=$css": {
+    "file": "assets/difference-hQyNVpVQ.js",
+    "name": "difference",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Set-utils/difference.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/Set-utils/intersection.mdx?pick=$css": {
+    "file": "assets/intersection-CvTdHG89.js",
+    "name": "intersection",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Set-utils/intersection.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/Set-utils/isDisjointFrom.mdx?pick=$css": {
+    "file": "assets/isDisjointFrom-Dpqqts91.js",
+    "name": "isDisjointFrom",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Set-utils/isDisjointFrom.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/Set-utils/isSubsetOf.mdx?pick=$css": {
+    "file": "assets/isSubsetOf-l4wbTuro.js",
+    "name": "isSubsetOf",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Set-utils/isSubsetOf.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/Set-utils/isSupersetOf.mdx?pick=$css": {
+    "file": "assets/isSupersetOf-CqkEal27.js",
+    "name": "isSupersetOf",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Set-utils/isSupersetOf.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/Set-utils/symmetricDifference.mdx?pick=$css": {
+    "file": "assets/symmetricDifference-BsnPaFwG.js",
+    "name": "symmetricDifference",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Set-utils/symmetricDifference.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/Set-utils/union.mdx?pick=$css": {
+    "file": "assets/union-B7LQBjBb.js",
+    "name": "union",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Set-utils/union.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/String/0-introduction.mdx?pick=$css": {
+    "file": "assets/0-introduction-CwG_HdTw.js",
+    "name": "0-introduction",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/String/0-introduction.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/String/1-replace.mdx?pick=$css": {
+    "file": "assets/1-replace-DfuUI_5R.js",
+    "name": "1-replace",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/String/1-replace.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/String/2-replaceAll.mdx?pick=$css": {
+    "file": "assets/2-replaceAll-D40yCVXg.js",
+    "name": "2-replaceAll",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/String/2-replaceAll.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/String/at.mdx?pick=$css": {
+    "file": "assets/at-DQORySEo.js",
+    "name": "at",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/String/at.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/String/charCodeAt.mdx?pick=$css": {
+    "file": "assets/charCodeAt-KftkB0IE.js",
+    "name": "charCodeAt",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/String/charCodeAt.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/String/concat.mdx?pick=$css": {
+    "file": "assets/concat-B5_plp8o.js",
+    "name": "concat",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/String/concat.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/String/endsWith.mdx?pick=$css": {
+    "file": "assets/endsWith-BDs0M0-G.js",
+    "name": "endsWith",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/String/endsWith.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/String/findOr.mdx?pick=$css": {
+    "file": "assets/findOr-uGoEaeOF.js",
+    "name": "findOr",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/String/findOr.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/String/includes.mdx?pick=$css": {
+    "file": "assets/includes-zwGy0dYr.js",
+    "name": "includes",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/String/includes.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/String/indexOf.mdx?pick=$css": {
+    "file": "assets/indexOf-J6ybK-aF.js",
+    "name": "indexOf",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/String/indexOf.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/String/lastIndexOf.mdx?pick=$css": {
+    "file": "assets/lastIndexOf-Bv28S5Pl.js",
+    "name": "lastIndexOf",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/String/lastIndexOf.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/String/padBoth.mdx?pick=$css": {
+    "file": "assets/padBoth-DSHQGupx.js",
+    "name": "padBoth",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/String/padBoth.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/String/padEnd.mdx?pick=$css": {
+    "file": "assets/padEnd-Bmp6O0Wz.js",
+    "name": "padEnd",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/String/padEnd.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/String/padStart.mdx?pick=$css": {
+    "file": "assets/padStart-CzYXj6IR.js",
+    "name": "padStart",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/String/padStart.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/String/search.mdx?pick=$css": {
+    "file": "assets/search-Fgv081Nn.js",
+    "name": "search",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/String/search.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/String/slice.mdx?pick=$css": {
+    "file": "assets/slice-CnnXQdT1.js",
+    "name": "slice",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/String/slice.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/String/split.mdx?pick=$css": {
+    "file": "assets/split-DikDZK4F.js",
+    "name": "split",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/String/split.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/String/startsWith.mdx?pick=$css": {
+    "file": "assets/startsWith-D_BS8-e0.js",
+    "name": "startsWith",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/String/startsWith.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/String/substring.mdx?pick=$css": {
+    "file": "assets/substring-CJwBnbUJ.js",
+    "name": "substring",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/String/substring.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/String/toCamelCase.mdx?pick=$css": {
+    "file": "assets/toCamelCase-DKwl1-f8.js",
+    "name": "toCamelCase",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/String/toCamelCase.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/String/toKebabCase.mdx?pick=$css": {
+    "file": "assets/toKebabCase-CPKFzOcL.js",
+    "name": "toKebabCase",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/String/toKebabCase.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/String/toLowerCase.mdx?pick=$css": {
+    "file": "assets/toLowerCase-DtXwV3Uh.js",
+    "name": "toLowerCase",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/String/toLowerCase.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/String/toPascalCase.mdx?pick=$css": {
+    "file": "assets/toPascalCase-XNVeQBTD.js",
+    "name": "toPascalCase",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/String/toPascalCase.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/String/toSentenceCase.mdx?pick=$css": {
+    "file": "assets/toSentenceCase-D_c5LJOR.js",
+    "name": "toSentenceCase",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/String/toSentenceCase.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/String/toSnakeCase.mdx?pick=$css": {
+    "file": "assets/toSnakeCase-BK7ggUhK.js",
+    "name": "toSnakeCase",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/String/toSnakeCase.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/String/toTitleCase.mdx?pick=$css": {
+    "file": "assets/toTitleCase-B5Qx_YFY.js",
+    "name": "toTitleCase",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/String/toTitleCase.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/String/toUpperCase.mdx?pick=$css": {
+    "file": "assets/toUpperCase-TgSxJNqT.js",
+    "name": "toUpperCase",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/String/toUpperCase.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/String/trim (both).mdx?pick=$css": {
+    "file": "assets/trim (both)-B4Mh0bY3.js",
+    "name": "trim (both)",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/String/trim (both).mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/String/trimEnd.mdx?pick=$css": {
+    "file": "assets/trimEnd-3tQTqtUK.js",
+    "name": "trimEnd",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/String/trimEnd.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/String/trimStart.mdx?pick=$css": {
+    "file": "assets/trimStart-D-gPRb6I.js",
+    "name": "trimStart",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/String/trimStart.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/Symbol/0-Introduction.mdx?pick=$css": {
+    "file": "assets/0-Introduction-D76td3yp.js",
+    "name": "0-Introduction",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Symbol/0-Introduction.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/Symbol/1-constructor.mdx?pick=$css": {
+    "file": "assets/1-constructor-CXKrjgsQ.js",
+    "name": "1-constructor",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Symbol/1-constructor.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/Symbol/WeakCollections.mdx?pick=$css": {
+    "file": "assets/WeakCollections-ChB-ARBd.js",
+    "name": "WeakCollections",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Symbol/WeakCollections.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/Symbol/for.mdx?pick=$css": {
+    "file": "assets/for-paN0Y650.js",
+    "name": "for",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Symbol/for.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/Symbol/isSymbol.mdx?pick=$css": {
+    "file": "assets/isSymbol-BlEc4CCb.js",
+    "name": "isSymbol",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Symbol/isSymbol.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/Timers/0-introduction.mdx?pick=$css": {
+    "file": "assets/0-introduction-eufNCrVP.js",
+    "name": "0-introduction",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Timers/0-introduction.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/Timers/clearInterval.mdx?pick=$css": {
+    "file": "assets/clearInterval-BWQEQjgY.js",
+    "name": "clearInterval",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Timers/clearInterval.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/Timers/clearTimeout.mdx?pick=$css": {
+    "file": "assets/clearTimeout-JC0ReL88.js",
+    "name": "clearTimeout",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Timers/clearTimeout.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
   "src/routes/docs/repo/rbxts-jsnatives/Timers/setInterval.mdx?pick=$css": {
-    "file": "assets/setInterval-DoHgm1n7.js",
+    "file": "assets/setInterval-BGx3Uq9J.js",
     "name": "setInterval",
     "src": "src/routes/docs/repo/rbxts-jsnatives/Timers/setInterval.mdx?pick=$css",
     "isEntry": true,
@@ -433,7 +1382,7 @@
     ]
   },
   "src/routes/docs/repo/rbxts-jsnatives/Timers/setTimeout.mdx?pick=$css": {
-    "file": "assets/setTimeout-Da_XSxgV.js",
+    "file": "assets/setTimeout-CZlRWfpR.js",
     "name": "setTimeout",
     "src": "src/routes/docs/repo/rbxts-jsnatives/Timers/setTimeout.mdx?pick=$css",
     "isEntry": true,
@@ -454,6 +1403,28 @@
       "_web-CesR-2RA.js"
     ]
   },
+  "src/routes/docs/repo/rbxts-jsnatives/encodeUriComponent.mdx?pick=$css": {
+    "file": "assets/encodeUriComponent-Dt8piU9X.js",
+    "name": "encodeUriComponent",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/encodeUriComponent.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/inspect.mdx?pick=$css": {
+    "file": "assets/inspect-CeiCI6Ds.js",
+    "name": "inspect",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/inspect.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
   "src/routes/index.tsx?pick=default&pick=$css": {
     "file": "assets/index-CY5om4Ez.js",
     "name": "index",
@@ -466,7 +1437,7 @@
     ]
   },
   "virtual:$vinxi/handler/client": {
-    "file": "assets/client-CqUKc_hU.js",
+    "file": "assets/client-UvCJB_b3.js",
     "name": "client",
     "src": "virtual:$vinxi/handler/client",
     "isEntry": true,
@@ -489,8 +1460,47 @@
       "src/routes/docs/repo/rbxts-bridge/fn.mdx?pick=$css",
       "src/routes/docs/repo/rbxts-jsnatives/0-Introduction.mdx?pick=$css",
       "src/routes/docs/repo/rbxts-jsnatives/[...404].tsx?pick=default&pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/encodeUriComponent.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/inspect.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Array-utils/0-flat.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Array-utils/1-flatMap.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Array-utils/concat.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Array-utils/isArray.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Array-utils/reverse.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Array-utils/slice.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Array-utils/splice.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Array-utils/toReversed.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Console/0-Introduction.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Console/clear.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Console/debug.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Console/error.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Console/group.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Console/groupCollapsed.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Console/groupEnd.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Console/info.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Console/log.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Console/rawLog.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Console/time.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Console/timeEnd.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Console/warn.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Error/0-Introduction.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Error/1-constructor.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Error/captureStackTrace.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Error/properties.mdx?pick=$css",
       "src/routes/docs/repo/rbxts-jsnatives/JSON/parse.mdx?pick=$css",
       "src/routes/docs/repo/rbxts-jsnatives/JSON/stringify.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Number/0-Introduction.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Number/1-constants.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Number/2-constructor.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Number/isFinite.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Number/isInteger.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Number/isNaN.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Number/isSafeInteger.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Number/parseFloat.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Number/parseInt.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Number/toExponential.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Number/toFixed.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Number/toString.mdx?pick=$css",
       "src/routes/docs/repo/rbxts-jsnatives/Object/0-is.mdx?pick=$css",
       "src/routes/docs/repo/rbxts-jsnatives/Object/1-toString.mdx?pick=$css",
       "src/routes/docs/repo/rbxts-jsnatives/Object/assign.mdx?pick=$css",
@@ -498,12 +1508,15 @@
       "src/routes/docs/repo/rbxts-jsnatives/Object/dup.mdx?pick=$css",
       "src/routes/docs/repo/rbxts-jsnatives/Object/entries.mdx?pick=$css",
       "src/routes/docs/repo/rbxts-jsnatives/Object/equals.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Object/freeze.mdx?pick=$css",
       "src/routes/docs/repo/rbxts-jsnatives/Object/fromEntries.mdx?pick=$css",
       "src/routes/docs/repo/rbxts-jsnatives/Object/hasOwn.mdx?pick=$css",
       "src/routes/docs/repo/rbxts-jsnatives/Object/isArray.mdx?pick=$css",
       "src/routes/docs/repo/rbxts-jsnatives/Object/isCallable.mdx?pick=$css",
       "src/routes/docs/repo/rbxts-jsnatives/Object/isEmpty.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Object/isFrozen.mdx?pick=$css",
       "src/routes/docs/repo/rbxts-jsnatives/Object/keys.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Object/seal.mdx?pick=$css",
       "src/routes/docs/repo/rbxts-jsnatives/Object/values.mdx?pick=$css",
       "src/routes/docs/repo/rbxts-jsnatives/Proxy/0-introduction.mdx?pick=$css",
       "src/routes/docs/repo/rbxts-jsnatives/Proxy/hook - apply.mdx?pick=$css",
@@ -512,12 +1525,58 @@
       "src/routes/docs/repo/rbxts-jsnatives/Proxy/hook - len.mdx?pick=$css",
       "src/routes/docs/repo/rbxts-jsnatives/Proxy/hook - ownKeys.mdx?pick=$css",
       "src/routes/docs/repo/rbxts-jsnatives/Proxy/hook - set.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Set-utils/0-Introduction.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Set-utils/difference.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Set-utils/intersection.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Set-utils/isDisjointFrom.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Set-utils/isSubsetOf.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Set-utils/isSupersetOf.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Set-utils/symmetricDifference.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Set-utils/union.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/String/0-introduction.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/String/1-replace.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/String/2-replaceAll.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/String/at.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/String/charCodeAt.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/String/concat.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/String/endsWith.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/String/findOr.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/String/includes.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/String/indexOf.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/String/lastIndexOf.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/String/padBoth.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/String/padEnd.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/String/padStart.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/String/search.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/String/slice.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/String/split.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/String/startsWith.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/String/substring.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/String/toCamelCase.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/String/toKebabCase.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/String/toLowerCase.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/String/toPascalCase.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/String/toSentenceCase.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/String/toSnakeCase.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/String/toTitleCase.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/String/toUpperCase.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/String/trim (both).mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/String/trimEnd.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/String/trimStart.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Symbol/0-Introduction.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Symbol/1-constructor.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Symbol/WeakCollections.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Symbol/for.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Symbol/isSymbol.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Timers/0-introduction.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Timers/clearInterval.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Timers/clearTimeout.mdx?pick=$css",
       "src/routes/docs/repo/rbxts-jsnatives/Timers/setInterval.mdx?pick=$css",
       "src/routes/docs/repo/rbxts-jsnatives/Timers/setTimeout.mdx?pick=$css",
       "src/custom-elements/sticky-el.ts"
     ],
     "css": [
-      "assets/client-W2kPuFHV.css"
+      "assets/client-DsVrGgGu.css"
     ]
   }
 }
