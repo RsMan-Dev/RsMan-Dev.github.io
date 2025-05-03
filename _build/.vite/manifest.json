@@ -161,7 +161,7 @@
     ]
   },
   "src/routes/docs/repo/rbxts-jsnatives/0-Introduction.mdx?pick=$css": {
-    "file": "assets/0-Introduction-Bb2DQT3w.js",
+    "file": "assets/0-Introduction-BerObkdJ.js",
     "name": "0-Introduction",
     "src": "src/routes/docs/repo/rbxts-jsnatives/0-Introduction.mdx?pick=$css",
     "isEntry": true,
@@ -1437,7 +1437,7 @@
     ]
   },
   "virtual:$vinxi/handler/client": {
-    "file": "assets/client-UvCJB_b3.js",
+    "file": "assets/client-BoY7PHD0.js",
     "name": "client",
     "src": "virtual:$vinxi/handler/client",
     "isEntry": true,

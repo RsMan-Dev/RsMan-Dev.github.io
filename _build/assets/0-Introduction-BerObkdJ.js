@@ -1,24 +1,27 @@
-import{b as r,k as a,i as t,t as d,H as l}from"./web-CesR-2RA.js";import{M as s}from"./index-D4wBul8M.js";var o=d("<style>"),p=d("<script type=module>");function c(n){const e=Object.assign({h1:"h1",p:"p",h2:"h2",ul:"ul",li:"li",strong:"strong",a:"a",div:"div",pre:"pre",code:"code",span:"span"},s(),n.components);return[r(e.h1,{children:"rbxts-jsnatives"}),`
+import{b as r,k as a,i as t,t as d,H as l}from"./web-CesR-2RA.js";import{M as s}from"./index-D4wBul8M.js";var o=d("<style>"),p=d("<script type=module>");function c(n){const e=Object.assign({h1:"h1",p:"p",h2:"h2",ul:"ul",li:"li",strong:"strong",div:"div",pre:"pre",code:"code",span:"span"},s(),n.components);return[r(e.h1,{children:"rbxts-jsnatives"}),`
 `,r(e.p,{children:"A collection of JavaScript-like APIs for Roblox TypeScript (roblox-ts)."}),`
 `,r(e.h2,{children:"Overview"}),`
 `,r(e.p,{children:"This package provides implementations of common JavaScript/TypeScript built-in functions and utilities that are not natively available in Roblox Lua. It aims to make porting JavaScript/TypeScript code to Roblox easier and provide familiar APIs for TypeScript developers working in Roblox."}),`
 `,r(e.h2,{children:"Modules"}),`
 `,r(e.p,{children:"The package includes several modules:"}),`
 `,r(e.ul,{get children(){return[`
-`,r(e.li,{get children(){return[r(e.strong,{children:"Array utilities"})," - Extra utilities for arrays (",r(e.a,{href:"./Array-utils/0-Introduction.mdx",children:"Array-utils"}),")"]}}),`
-`,r(e.li,{get children(){return[r(e.strong,{children:"Console"})," - Logging and debugging utilities (",r(e.a,{href:"./Console/0-Introduction.mdx",children:"Console"}),")"]}}),`
-`,r(e.li,{get children(){return[r(e.strong,{children:"JSON"})," - JSON parsing and stringification (",r(e.a,{href:"./JSON/0-Introduction.mdx",children:"JSON"}),")"]}}),`
-`,r(e.li,{get children(){return[r(e.strong,{children:"Number"})," - Number constants and methods (",r(e.a,{href:"./Number.mdx",children:"Number"}),")"]}}),`
-`,r(e.li,{get children(){return[r(e.strong,{children:"Object"})," - Object manipulation utilities (",r(e.a,{href:"./Object/0-Introduction.mdx",children:"Object"}),")"]}}),`
-`,r(e.li,{get children(){return[r(e.strong,{children:"Proxy"})," - Lua-compatible implementation of JS Proxies (",r(e.a,{href:"./Proxy/0-Introduction.mdx",children:"Proxy"}),")"]}}),`
-`,r(e.li,{get children(){return[r(e.strong,{children:"Set utilities"})," - Extra utilities for Set objects (",r(e.a,{href:"./Set-utils/0-Introduction.mdx",children:"Set-utils"}),")"]}}),`
-`,r(e.li,{get children(){return[r(e.strong,{children:"String"})," - String manipulation methods (",r(e.a,{href:"./String/0-Introduction.mdx",children:"String"}),")"]}}),`
-`,r(e.li,{get children(){return[r(e.strong,{children:"Timers"})," - setTimeout and setInterval implementations (",r(e.a,{href:"./Timers/0-Introduction.mdx",children:"Timers"}),")"]}}),`
+`,r(e.li,{get children(){return[r(e.strong,{children:"Array utilities"})," - Extra utilities for arrays"]}}),`
+`,r(e.li,{get children(){return[r(e.strong,{children:"Console"})," - Logging and debugging utilities"]}}),`
+`,r(e.li,{get children(){return[r(e.strong,{children:"Error"})," - Error handling utilities"]}}),`
+`,r(e.li,{get children(){return[r(e.strong,{children:"JSON"})," - JSON parsing and stringification"]}}),`
+`,r(e.li,{get children(){return[r(e.strong,{children:"Number"})," - Number constants and methods"]}}),`
+`,r(e.li,{get children(){return[r(e.strong,{children:"Object"})," - Object manipulation utilities"]}}),`
+`,r(e.li,{get children(){return[r(e.strong,{children:"Proxy"})," - Lua-compatible implementation of JS Proxies"]}}),`
+`,r(e.li,{get children(){return[r(e.strong,{children:"Set utilities"})," - Extra utilities for Set objects"]}}),`
+`,r(e.li,{get children(){return[r(e.strong,{children:"String"})," - String manipulation methods"]}}),`
+`,r(e.li,{get children(){return[r(e.strong,{children:"Symbol"})," - Symbol constants and methods"]}}),`
+`,r(e.li,{get children(){return[r(e.strong,{children:"Timers"})," - setTimeout and setInterval implementations"]}}),`
 `]}}),`
 `,r(e.h2,{children:"Standalone Functions"}),`
 `,r(e.p,{children:"The package also includes standalone utility functions:"}),`
 `,r(e.ul,{get children(){return[`
-`,r(e.li,{get children(){return[r(e.a,{href:"./encodeUriComponent.mdx",get children(){return r(e.strong,{children:"encodeUriComponent"})}})," - Encodes URI components for safe use in URLs"]}}),`
+`,r(e.li,{get children(){return[r(e.strong,{children:"encodeUriComponent"})," - Encodes URI components for safe use in URLs"]}}),`
+`,r(e.li,{get children(){return[r(e.strong,{children:"inspect"})," - Inspects an object and returns a string representation"]}}),`
 `]}}),`
 `,r(e.h2,{children:"Usage"}),`
 `,r(e.p,{children:"Import specific utilities from the library:"}),`
