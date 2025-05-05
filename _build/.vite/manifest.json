@@ -36,7 +36,7 @@
     "src": "assets/images/rbxts_logo.png"
   },
   "src/custom-elements/sticky-el.ts": {
-    "file": "assets/sticky-el-jEp8OxeE.js",
+    "file": "assets/sticky-el-0siIEAgL.js",
     "name": "sticky-el",
     "src": "src/custom-elements/sticky-el.ts",
     "isDynamicEntry": true
@@ -53,7 +53,7 @@
     ]
   },
   "src/routes/(app)/home.tsx?pick=default&pick=$css": {
-    "file": "assets/home-DxwnXzmT.js",
+    "file": "assets/home-CZErEtmt.js",
     "name": "home",
     "src": "src/routes/(app)/home.tsx?pick=default&pick=$css",
     "isEntry": true,
@@ -81,7 +81,7 @@
     ]
   },
   "src/routes/docs.tsx?pick=default&pick=$css": {
-    "file": "assets/docs-DRKUoiYY.js",
+    "file": "assets/docs-CHfeS8-h.js",
     "name": "docs",
     "src": "src/routes/docs.tsx?pick=default&pick=$css",
     "isEntry": true,
@@ -128,14 +128,14 @@
     ]
   },
   "src/routes/docs/repo/rbxts-bridge/0-Introduction.mdx?pick=$css": {
-    "file": "assets/0-Introduction-BYCfqJBV.js",
+    "file": "assets/0-Introduction-B3P4LQ3Y.js",
     "name": "0-Introduction",
     "src": "src/routes/docs/repo/rbxts-bridge/0-Introduction.mdx?pick=$css",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
-      "_index-D4wBul8M.js",
-      "_web-CesR-2RA.js"
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
     ]
   },
   "src/routes/docs/repo/rbxts-bridge/[...404].tsx?pick=default&pick=$css": {
@@ -149,15 +149,48 @@
       "_web-CesR-2RA.js"
     ]
   },
+  "src/routes/docs/repo/rbxts-bridge/events.mdx?pick=$css": {
+    "file": "assets/events-C9aiedY8.js",
+    "name": "events",
+    "src": "src/routes/docs/repo/rbxts-bridge/events.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
   "src/routes/docs/repo/rbxts-bridge/fn.mdx?pick=$css": {
-    "file": "assets/fn-BYCfqJBV.js",
+    "file": "assets/fn-C1WOsYRj.js",
     "name": "fn",
     "src": "src/routes/docs/repo/rbxts-bridge/fn.mdx?pick=$css",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
-      "_index-D4wBul8M.js",
-      "_web-CesR-2RA.js"
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-bridge/sync.mdx?pick=$css": {
+    "file": "assets/sync-DJ3dYd3t.js",
+    "name": "sync",
+    "src": "src/routes/docs/repo/rbxts-bridge/sync.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-bridge/types.mdx?pick=$css": {
+    "file": "assets/types-CI_yqx9P.js",
+    "name": "types",
+    "src": "src/routes/docs/repo/rbxts-bridge/types.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
     ]
   },
   "src/routes/docs/repo/rbxts-jsnatives/0-Introduction.mdx?pick=$css": {
@@ -1437,7 +1470,7 @@
     ]
   },
   "virtual:$vinxi/handler/client": {
-    "file": "assets/client-BoY7PHD0.js",
+    "file": "assets/client-Cjf3XJDH.js",
     "name": "client",
     "src": "virtual:$vinxi/handler/client",
     "isEntry": true,
@@ -1457,7 +1490,10 @@
       "src/routes/docs/repo/index.tsx?pick=default&pick=$css",
       "src/routes/docs/repo/rbxts-bridge/0-Introduction.mdx?pick=$css",
       "src/routes/docs/repo/rbxts-bridge/[...404].tsx?pick=default&pick=$css",
+      "src/routes/docs/repo/rbxts-bridge/events.mdx?pick=$css",
       "src/routes/docs/repo/rbxts-bridge/fn.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-bridge/sync.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-bridge/types.mdx?pick=$css",
       "src/routes/docs/repo/rbxts-jsnatives/0-Introduction.mdx?pick=$css",
       "src/routes/docs/repo/rbxts-jsnatives/[...404].tsx?pick=default&pick=$css",
       "src/routes/docs/repo/rbxts-jsnatives/encodeUriComponent.mdx?pick=$css",
@@ -1576,7 +1612,7 @@
       "src/custom-elements/sticky-el.ts"
     ],
     "css": [
-      "assets/client-DsVrGgGu.css"
+      "assets/client-DjgMId49.css"
     ]
   }
 }
