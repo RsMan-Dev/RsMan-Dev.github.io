@@ -105,12 +105,6 @@ document.body.addEventListener("click", end, { passive: true })
 
 const css = `
 html, body{height: 100%;}
-body:has(sticky-cursor){
-  position: relative;
-  &, > *, a, button {
-    cursor: crosshair;
-  }
-}
 
 body sticky-cursor{
   --c-x: 0px;
@@ -126,7 +120,7 @@ body sticky-cursor{
   --c-opacity: 0;
 
   pointer-events: none;
-  backdrop-filter: invert(1);
+  border: 1px solid var(--primary-color);
   position: absolute;
   overflow: clip;
   left: var(--c-x);

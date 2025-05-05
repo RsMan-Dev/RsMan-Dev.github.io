@@ -1,0 +1,42 @@
+# rbxts-bridge
+
+rbxts-bridge is a TypeScript library for Roblox that simplifies client-server communication. It provides a clean, type-safe API for sending events, calling remote functions, and synchronizing data between the server and client.
+
+## Features
+
+- **Events**: Send data between server and client with type safety
+- **Remote Functions**: Call functions on the server from client or vice versa
+- **Data Synchronization**: Keep data in sync between server and client with automatic updates
+- **Type Safety**: Full TypeScript support with custom type definitions
+
+## Installation
+
+You can install rbxts-bridge using npm:
+
+```bash
+npm install @rbxts/bridge
+```
+
+## Basic Usage
+
+```ts
+// Import the bridge module
+import bridge from "@rbxts/bridge";
+
+// Define your event types
+declare global {
+  interface BridgeEventMap {
+    myEvent: { message: string };
+  }
+}
+
+// Server-side: Listen for events
+bridge.on("myEvent", (data, player) => {
+  print(`Received message from ${player.Name}: ${data.message}`);
+});
+
+// Client-side: Send an event
+bridge.send("myEvent", { message: "Hello, server!" });
+```
+
+Continue reading to learn more about the different features of rbxts-bridge.

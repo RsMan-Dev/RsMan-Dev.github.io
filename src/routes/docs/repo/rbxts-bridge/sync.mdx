@@ -1,0 +1,233 @@
+# Data Synchronization
+
+The `sync` feature in rbxts-bridge provides a powerful way to keep data synchronized between server and client with automatic updates and conflict resolution.
+
+## Basic Concept
+
+The sync system allows you to:
+
+- Define data structures that are kept in sync between server and client
+- Make changes to the data on either side with automatic propagation
+- Control which side can modify the data
+- Throttle updates to optimize network usage
+- React to data changes with callbacks
+
+## Creating a Sync Context
+
+To create a synchronized data structure, use `bridge.sync`:
+
+```ts
+// Type for our synchronized data
+type PlayerStats = {
+  level: number;
+  health: number;
+  coins: number;
+};
+
+// Create a sync context with initial values
+const playerStats = bridge.sync<PlayerStats>("playerStats", {
+  level: 1,
+  health: 100,
+  coins: 0
+});
+```
+
+## Accessing Synchronized Data
+
+To access the synchronized data, call the function returned by `bridge.sync`:
+
+```ts
+// On client
+const stats = playerStats();
+print(`Current level: ${stats.data.level}`);
+
+// On server (with a specific player)
+const playerX = game.GetService("Players").FindFirstChild("PlayerX") as Player;
+const statsForPlayerX = playerStats(playerX);
+print(`${playerX.Name}'s health: ${statsForPlayerX.data.health}`);
+```
+
+## Modifying Data
+
+To modify synchronized data, use the `patch` method:
+
+```ts
+// Add coins to the player
+stats.patch((data) => {
+  data.coins += 10;
+  return data;
+});
+
+// Level up a player if they have enough coins
+if (stats.data.coins >= 100) {
+  stats.patch((data) => {
+    data.level += 1;
+    data.coins -= 100;
+    data.health = 100 + (data.level * 10); // More health with each level
+    return data;
+  });
+}
+```
+
+## Reacting to Data Changes
+
+Use the `onUpdated` callback to react when data is changed:
+
+```ts
+// Register a callback that runs whenever the data changes
+const unsubscribe = stats.onUpdated((ctx) => {
+  print(`Stats updated! New level: ${ctx.data.level}, Coins: ${ctx.data.coins}`);
+  
+  // You can also make additional changes in response
+  if (ctx.data.health <= 0 && ctx.data.coins > 0) {
+    ctx.patch((data) => {
+      data.health = 50;
+      data.coins = Math.floor(data.coins / 2);
+      return data;
+    });
+  }
+});
+
+// Later, when you no longer need the callback
+unsubscribe();
+```
+
+## Controlling Write Access
+
+You can control which side can modify the data using the `writeableOn` parameter:
+
+```ts
+// Only the server can modify this data
+const serverControlledData = bridge.sync("gameSettings", {
+  difficulty: "normal",
+  timeLimit: 300
+}, "server");
+
+// Only clients can modify this data
+const clientPreferences = bridge.sync("clientPrefs", {
+  musicVolume: 0.5,
+  sfxVolume: 0.8
+}, "client");
+
+// Both sides can modify (default)
+const sharedData = bridge.sync("sharedData", {
+  messages: []
+}, "client-server");
+```
+
+## Throttling Updates
+
+To optimize network usage, you can throttle updates with the `throttleDelay` parameter:
+
+```ts
+// Updates will be sent at most once every 500ms
+const throttledSync = bridge.sync("playerPosition", {
+  x: 0,
+  y: 0,
+  z: 0
+}, "client-server", false, 500);
+```
+
+## Asynchronous Initialization
+
+By default, the sync initialization is synchronous, but you can make it asynchronous:
+
+```ts
+// Use asyncInit = true for asynchronous initialization
+const asyncPlayerData = bridge.sync("asyncPlayerData", {
+  inventory: []
+}, "client-server", true);
+
+// You'll need to handle the potential delay in data availability
+```
+
+## Accessing Metadata
+
+The sync context provides additional metadata:
+
+```ts
+const stats = playerStats();
+
+// Check the current version number
+print(`Current version: ${stats.version}`);
+
+// Check the last synced version
+print(`Last synced version: ${stats.lastSyncedVersion}`);
+
+// Access the player associated with this sync context
+if (stats.player) {
+  print(`Sync context for player: ${stats.player.Name}`);
+}
+```
+
+## Advanced Example
+
+Here's a more complete example showing how to use sync in a game:
+
+```ts
+// Define our synchronized data structure
+type PlayerProgress = {
+  level: number;
+  experience: number;
+  achievements: string[];
+};
+
+// Create the sync context
+const playerProgress = bridge.sync<PlayerProgress>("playerProgress", {
+  level: 1,
+  experience: 0,
+  achievements: []
+}, "client-server", false, 200);
+
+// Server-side code
+export function setupServerSync() {
+  // When a player joins
+  game.GetService("Players").PlayerAdded.Connect((player) => {
+    // Get or create their progress
+    const progress = playerProgress(player);
+    
+    // Listen for changes
+    progress.onUpdated((ctx) => {
+      // Validate any changes made by the client
+      if (ctx.data.level > progress.lastSyncedVersion + 1) {
+        // Revert suspicious changes
+        ctx.patch((data) => {
+          data.level = progress.lastSyncedVersion;
+          return data;
+        });
+      }
+      
+      // Save to datastore when important changes happen
+      saveToDataStore(player.UserId, ctx.data);
+    });
+  });
+}
+
+// Client-side code
+export function setupClientSync() {
+  const progress = playerProgress();
+  
+  // Update UI when data changes
+  progress.onUpdated((ctx) => {
+    updateLevelDisplay(ctx.data.level);
+    updateExperienceBar(ctx.data.experience);
+    updateAchievementList(ctx.data.achievements);
+  });
+  
+  // When player earns XP
+  function awardExperience(amount: number) {
+    progress.patch((data) => {
+      data.experience += amount;
+      
+      // Level up if enough XP
+      const xpNeeded = data.level * 100;
+      if (data.experience >= xpNeeded) {
+        data.level += 1;
+        data.experience -= xpNeeded;
+      }
+      
+      return data;
+    });
+  }
+}
+``` 

@@ -1,0 +1,211 @@
+# Type Definitions
+
+rbxts-bridge uses TypeScript to provide a type-safe API. This page documents the type definitions used in the library.
+
+## Global Type Declarations
+
+These types need to be extended in your own code to enable type safety:
+
+```ts
+declare global {
+  // Define your event types here
+  interface BridgeEventMap {
+    [key: string]: unknown;
+  }
+
+  // Define input/output types for remote functions
+  type BridgeFunction<T = unknown, R = unknown> = [T, R];
+  
+  // Map function names to their input/output types
+  interface BridgeFunctionMap {
+    [key: string]: BridgeFunction;
+  }
+}
+```
+
+### BridgeEventMap
+
+The `BridgeEventMap` interface maps event names to their data types. Extend this interface to define your own event types:
+
+```ts
+declare global {
+  interface BridgeEventMap {
+    playerDied: { position: Vector3 };
+    scoreUpdated: { playerId: number; newScore: number };
+    // Add more event types here
+  }
+}
+```
+
+### BridgeFunction
+
+The `BridgeFunction` type represents a remote function's input and output types. It's a tuple of `[InputType, OutputType]`:
+
+```ts
+type BridgeFunction<T = unknown, R = unknown> = [T, R];
+```
+
+### BridgeFunctionMap
+
+The `BridgeFunctionMap` interface maps function names to their `BridgeFunction` type definitions:
+
+```ts
+declare global {
+  interface BridgeFunctionMap {
+    getUserData: BridgeFunction<{ userId: number }, { name: string; level: number }>;
+    // Add more function types here
+  }
+}
+```
+
+## Callback Types
+
+### EventCallback
+
+Defines the signature for event handlers:
+
+```ts
+export type EventCallback<T = unknown> = (data: T, player: Player) => void;
+```
+
+- `data`: The data received with the event (type `T`)
+- `player`: The player who sent the event (if on server) or the local player (if on client)
+
+### FunctionCallback
+
+Defines the signature for remote function handlers:
+
+```ts
+export type FunctionCallback<T = unknown, R = unknown> = (data: T, player: Player) => R;
+```
+
+- `data`: The input data for the function (type `T`)
+- `player`: The player who called the function (if on server) or the local player (if on client)
+- Returns a value of type `R`
+
+## Synchronization Types
+
+### SyncContext
+
+Represents a synchronized data context:
+
+```ts
+export type SyncContext<T = unknown> = {
+  // The current synchronized data
+  data: T;
+  
+  // Function to update the data
+  patch: (patcher: (data: T) => T) => void;
+  
+  // Register a callback that runs when data is updated
+  onUpdated: (callback: (ctx: SyncContext<T>) => void) => () => void;
+  
+  // Current version number of the data
+  version: number;
+  
+  // Last version that was successfully synced
+  lastSyncedVersion: number;
+  
+  // Set of cleanup functions
+  cleanups: Set<() => void>;
+  
+  // Player associated with this context
+  player: Player;
+};
+```
+
+### SyncConstructor
+
+Function that creates a sync context for a player:
+
+```ts
+export type SyncConstructor<T = unknown> = (player?: Player) => SyncContext<T>;
+```
+
+## Usage Examples
+
+### Type-Safe Events
+
+```ts
+// Define event types
+declare global {
+  interface BridgeEventMap {
+    playerMoved: { position: Vector3; rotation: Vector3 };
+  }
+}
+
+// Register an event handler with proper typing
+bridge.on("playerMoved", (data, player) => {
+  // data.position and data.rotation are properly typed as Vector3
+  print(`${player.Name} moved to ${data.position} with rotation ${data.rotation}`);
+});
+
+// Send an event with proper typing
+bridge.send("playerMoved", {
+  position: new Vector3(0, 10, 0),
+  rotation: new Vector3(0, 90, 0)
+});
+```
+
+### Type-Safe Functions
+
+```ts
+// Define function types
+declare global {
+  interface BridgeFunctionMap {
+    calculateDamage: BridgeFunction<
+      { attackerId: number; targetId: number; weapon: string },
+      { damage: number; isCritical: boolean }
+    >;
+  }
+}
+
+// Register a function handler with proper typing
+bridge.fn("calculateDamage", (data, player) => {
+  // data is properly typed with attackerId, targetId, and weapon
+  const damage = calculateDamageLogic(data.attackerId, data.targetId, data.weapon);
+  const isCritical = damage > 50;
+  
+  // Return value is properly typed
+  return { damage, isCritical };
+});
+
+// Call a function with proper typing
+const result = bridge.call("calculateDamage", {
+  attackerId: player.UserId,
+  targetId: enemy.UserId,
+  weapon: "sword"
+});
+
+// result is properly typed with damage and isCritical
+print(`Dealt ${result.damage} damage${result.isCritical ? " (CRITICAL)" : ""}`);
+```
+
+### Type-Safe Sync
+
+```ts
+// Define a type for player inventory
+type Inventory = {
+  gold: number;
+  items: { id: string; quantity: number }[];
+};
+
+// Create a typed sync constructor
+const inventorySync = bridge.sync<Inventory>("playerInventory", {
+  gold: 0,
+  items: []
+});
+
+// Get a player's inventory with proper typing
+const inventory = inventorySync(player);
+
+// Data is properly typed
+print(`Player has ${inventory.data.gold} gold and ${inventory.data.items.length} items`);
+
+// Patch with proper typing
+inventory.patch((data) => {
+  data.gold += 100;
+  data.items.push({ id: "health_potion", quantity: 3 });
+  return data;
+});
+``` 
