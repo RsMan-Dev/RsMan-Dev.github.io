@@ -1,0 +1,211 @@
+# createContext and useContext
+
+Create and consume context values that can be shared across components.
+
+## Signature
+
+```ts
+function createContext<T>(value: T): Context<T>;
+function useContext<T>(context: Context<T>): T;
+
+class Context<T> {
+  getValue(): T;
+  apply<R>(value: T, callback: () => R, tracks?: boolean): R;
+  Provider<R>(props: { Children: R; Value: T; }): R;
+}
+```
+
+## Description
+
+The context system allows sharing values throughout a component tree without explicitly passing props through every level. This is particularly useful for values that are considered "global" for a specific subtree, such as theme, user preferences, or authentication data.
+`tracks` in context.apply is used to define if the body of apply's callback will track changes
+
+`createContext()` creates a new context with a default value, while `useContext()` allows components to consume that context value.
+
+
+For usage, there are two main patterns:
+- In non-JSX code, use the `context.apply()` method to run code within a context scope
+- In JSX code, use the `Context.Provider` component to provide context values to child components
+
+## Examples
+
+### Non-JSX usage with context.apply
+
+```ts
+// Create a context with a default value
+const ThemeContext = createContext("light");
+
+// Component that consumes the context
+function Button() {
+  // Read the current theme from context
+  const theme = useContext(ThemeContext);
+  
+  return {
+    theme,
+    render() {
+      print(`Rendering button with theme: ${theme}`);
+    }
+  };
+}
+
+// Function that uses context.apply
+function App() {
+  const theme = createSignal("dark");
+  
+  // Using apply to provide context
+  return ThemeContext.apply(theme(), () => {
+    return Button();
+  });
+}
+
+const button = App();
+button.render(); // Prints: "Rendering button with theme: dark"
+```
+
+### JSX usage with Context.Provider
+
+```tsx
+// Create a context with a default value
+const ThemeContext = createContext("light");
+
+// Component that consumes the context in JSX
+function Button() {
+  // Read the current theme from context
+  const theme = useContext(ThemeContext);
+  
+  return <>
+    Themed Button color: {theme}
+  </>;
+}
+
+// JSX component that provides context
+function App() {
+  const theme = createSignal("dark");
+  
+  return (
+    <ThemeContext.Provider Value={theme()}>
+      <Button />
+    </ThemeContext.Provider>
+  );
+}
+```
+
+### Reactive context values with apply
+
+```ts
+// Create user context with default value
+const UserContext = createContext({ name: "", isLoggedIn: false });
+
+// Create a component that uses the context
+function Profile() {
+  const user = useContext(UserContext);
+  
+  createEffect(() => {
+    if (user.isLoggedIn) {
+      print(`Welcome back, ${user.name}!`);
+    } else {
+      print("Please log in");
+    }
+  });
+  
+  return {
+    showDetails() {
+      // The latest context value is always available
+      if (user.isLoggedIn) {
+        print(`User details for: ${user.name}`);
+      } else {
+        print("No user is logged in");
+      }
+    }
+  };
+}
+
+// App function that uses context.apply
+function App() {
+  const user = createSignal({ name: "", isLoggedIn: false });
+  
+  // Login function
+  const login = (name: string) => {
+    user({ name, isLoggedIn: true });
+  };
+  
+  // Use apply to provide the context
+  const profile = UserContext.apply(user(), () => {
+    return Profile();
+  });
+  
+  return {
+    profile,
+    login
+  };
+}
+
+const app = App();
+app.profile.showDetails(); // Prints: "No user is logged in"
+
+app.login("Alice"); // Effect in Profile runs, prints: "Welcome back, Alice!"
+app.profile.showDetails(); // Prints: "User details for: Alice"
+```
+
+### Nested contexts with apply
+
+```ts
+const ColorContext = createContext("blue");
+const SizeContext = createContext("medium");
+
+function ThemedComponent() {
+  const color = useContext(ColorContext);
+  const size = useContext(SizeContext);
+  
+  return {
+    render() {
+      print(`Component with ${color} color and ${size} size`);
+    }
+  };
+}
+
+function App() {
+  // Nested applies for multiple contexts
+  return ColorContext.apply("red", () => {
+    return SizeContext.apply("large", () => {
+      return ThemedComponent();
+    });
+  });
+}
+
+const app = App();
+app.render(); // Prints: "Component with red color and large size"
+```
+
+### Reactive context with signals
+
+Contexts can hold signals and other reactive primitives, allowing components to subscribe to context changes.
+
+```ts
+const ThemeContext = createContext("light");
+
+const theme = createSignal("dark");
+
+function App() {
+  const theme = useContext(ThemeContext)
+  createEffect(() => {
+    print(`Theme changed to: ${theme()}`);
+  });
+  onDispose(() => {
+    print("Disposing tree when theme was", theme());
+  });
+}
+
+const dispose = createRoot((dispose) => {
+  ThemeContext.apply(theme, () => {
+    return dispose;
+  });
+});
+
+// Prints Theme changed to: dark (initialization)
+theme("light") // Prints Theme changed to: light
+dispose() // Prints Disposing tree when theme was light
+```
+
+
+

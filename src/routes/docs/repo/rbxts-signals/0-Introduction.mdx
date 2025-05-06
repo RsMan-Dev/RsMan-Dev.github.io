@@ -1,0 +1,62 @@
+# rbxts-signals
+
+A reactive state management system for Roblox TypeScript (roblox-ts) inspired by S.js, SolidJS, Preact, and Signals.dart.
+
+## Overview
+
+This package provides a powerful reactive system that allows for efficient state management in Roblox TypeScript applications. It offers a signals-based approach to reactivity, where dependencies are automatically tracked and components are only updated when their dependencies change.
+
+> Note: rbxts-signals highly depends on rbxts-jsnatives, libary that provides javascript-like api for roblox.
+
+## Features
+
+- **Fine-grained reactivity** - Only update what changed, not the entire component
+- **Automatic dependency tracking** - No need to manually specify dependencies
+- **Signal-based state** - Intuitive API for creating and using reactive state
+- **Effects and Memos** - Create reactive computations that respond to state changes
+- **Batched updates** - Multiple updates are batched together for efficiency
+- **Context API** - Provide values to components without prop drilling
+
+## Key Concepts
+
+- **Signals** - Core primitive for reactive state
+- **Computations** - Track dependencies and execute code when dependencies change
+- **Effects** - Side effects that run when dependencies change
+- **Memos** - Cached computations that update only when dependencies change
+- **Batch** - Group updates together for performance
+- **Context** - Share state across components without prop drilling
+
+## Usage
+
+Import the specific utilities from the library:
+
+```ts
+import { createSignal, createEffect, createMemo } from "@rbxts/signals";
+
+// Create a signal with an initial value
+const count = createSignal(0);
+
+// Create an effect that runs when dependencies change
+createEffect(() => {
+  print(`Count is now: ${count()}`);
+});
+
+// Create a memo that computes a value based on dependencies
+const doubleCount = createMemo(() => count() * 2);
+
+// Update the signal value
+count(1); // Effect will run, printing "Count is now: 1"
+print(doubleCount()); // Outputs: 2
+```
+
+## Installation
+
+```bash
+npm install @rbxts/signals
+```
+
+You can also install it directly from GitHub:
+
+```bash
+npm install @rbxts/signals@github:RsMan-Dev/rbxts-signals
+``` 

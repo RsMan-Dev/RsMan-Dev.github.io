@@ -23,7 +23,7 @@ const routes = [...new Set(fs.globSync("./src/routes/**/*")
   ).filter(Boolean)
 ), "/"].map(route => (("") + route).replace("//", "/"))
 
-console.log(routes);
+// console.log(routes);
 
 const { default: mdx } = pkg;
 export default defineConfig({

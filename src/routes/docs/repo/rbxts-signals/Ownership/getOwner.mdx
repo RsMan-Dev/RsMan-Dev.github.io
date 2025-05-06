@@ -1,0 +1,134 @@
+# getOwner and runWithOwner
+
+Functions for managing computation ownership in reactive contexts.
+
+## Signature
+
+```ts
+function getOwner(): ComputationNode | undefined;
+function runWithOwner<T>(owner: ComputationNode | undefined, fn: () => T): T;
+```
+
+## Description
+
+The ownership system in rbxts-signals manages the lifecycle of reactive computations. Every computation (created with functions like `createEffect` or `createMemo`) is an owner, and when the owner is disposed, all of its owned computations are disposed as well.
+
+`getOwner()` returns the current running computation that owns the current context, or `undefined` if there is none.
+
+`runWithOwner()` runs a function with a specified owner, and then restores the previous owner after the function is executed. This is particularly useful in asynchronous contexts where the owner would otherwise be undefined.
+
+## Examples
+
+### Basic owner retrieval
+
+```ts
+// Inside a computation, the current computation is the owner
+createEffect(() => {
+  const owner = getOwner();
+  print(`Effect has an owner: ${owner !== undefined}`); // Prints: "Effect has an owner: true"
+});
+
+// Outside a computation, there is no owner
+const outsideOwner = getOwner();
+print(`Outside has an owner: ${outsideOwner !== undefined}`); // Prints: "Outside has an owner: false"
+```
+
+### Running code with an owner
+
+```ts
+createRoot((dispose) => {
+  const rootOwner = getOwner(); // Get the root computation node
+  
+  // Later, in an asynchronous context where the owner would be lost
+  task.spawn(() => {
+    const asyncOwner = getOwner();
+    print(`Async has an owner: ${asyncOwner !== undefined}`); // Prints: "Async has an owner: false"
+    
+    // Use runWithOwner to restore the owner
+    runWithOwner(rootOwner, () => {
+      const restoredOwner = getOwner();
+      print(`Restored owner: ${restoredOwner !== undefined}`); // Prints: "Restored owner: true"
+      
+      // Create a new computation that will be owned by the root owner
+      createEffect(() => {
+        print("This effect is owned by the root");
+      });
+    });
+  });
+  
+  return dispose;
+});
+```
+
+### Handling events with proper ownership
+
+```ts
+createRoot((dispose) => {
+  const count = createSignal(0);
+  const owner = getOwner(); // Store the current owner
+  
+  // Set up a button click handler
+  const button = new Instance("TextButton");
+  button.Text = "Increment";
+  button.Parent = game.Workspace;
+  
+  // The event callback will run outside of any reactive context
+  button.Activated.Connect(() => {
+    // Use runWithOwner to run with the correct ownership context
+    runWithOwner(owner, () => {
+      count(count() + 1);
+      print(`Count: ${count()}`);
+      
+      // Create an effect that will be properly owned
+      createEffect(() => {
+        print(`Effect from button click: ${count()}`);
+      });
+    });
+  });
+  
+  onCleanup(() => {
+    button.Destroy();
+  });
+  
+  return dispose;
+});
+```
+
+### Creating disposable computations in async contexts
+
+```ts
+const createAsyncComputation = (callback: () => void): () => void => {
+  // Get the current owner before going async
+  const owner = getOwner();
+  
+  // Return a function that creates a disposable computation
+  return () => {
+    return createRoot((dispose) => {
+      runWithOwner(owner, () => {
+        callback();
+      });
+      return dispose;
+    });
+  };
+};
+
+// Usage
+createEffect(() => {
+  const message = createSignal("Hello");
+  
+  // Create a disposable async computation
+  const createDisposable = createAsyncComputation(() => {
+    createEffect(() => {
+      print(`Async effect: ${message()}`);
+    });
+  });
+  
+  // Later, create and dispose the computation
+  const dispose = createDisposable();
+  
+  // Later, dispose it
+  task.delay(5, () => {
+    dispose();
+  });
+});
+``` 

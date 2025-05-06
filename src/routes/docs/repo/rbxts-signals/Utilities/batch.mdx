@@ -1,0 +1,130 @@
+# batch
+
+Groups multiple signal updates together to prevent unnecessary recalculations.
+
+## Signature
+
+```ts
+function batch<T>(fn: () => T): T;
+```
+
+## Description
+
+The `batch()` function groups multiple signal updates together, ensuring that computations (effects and memos) only run once after all updates are complete rather than after each individual update. This optimization significantly improves performance when multiple reactive values need to be updated simultaneously.
+
+Nested batches are supported but behave as a single batch. The `createEffect` and `createMemo` functions are already internally batched, so explicit batching is typically only needed when directly updating signals.
+
+## Important Behavior
+
+During a batch operation, signal values are not immediately updated when reading them:
+
+- Reading a signal during a batch returns the **frozen value** from before the batch, not the pending value
+- Only the `.set()` method has access to the pending value during the batch
+- All values are updated and effects run only after the batch completes
+
+This behavior allows for consistent reading of values during a batch operation, but requires careful handling when you need to access updated values within the batch itself.
+
+## Examples
+
+### Basic usage
+
+```ts
+const firstName = createSignal("John");
+const lastName = createSignal("Doe");
+const age = createSignal(30);
+
+// This effect will run on any change to the signals
+createEffect(() => {
+  print(`${firstName()} ${lastName()}, ${age()} years old`);
+});
+// Prints: "John Doe, 30 years old" (initial run)
+
+// Without batching - would run the effect 3 times
+firstName("Jane");
+lastName("Smith");
+age(25);
+// Prints effect 3 separate times
+
+// With batching - effect runs only once after all updates
+batch(() => {
+  firstName("Robert");
+  lastName("Johnson");
+  age(40);
+});
+// Prints effect only once: "Robert Johnson, 40 years old"
+```
+
+### Signal values during a batch
+
+```ts
+const count = createSignal(0);
+
+batch(() => {
+  // Update the count to 1
+  count(1);
+  
+  // Reading count() still returns 0 during the batch
+  print(count()); // 0
+  
+  // Using set() with a function gives access to the pending value
+  count.set(current => {
+    print(`Current pending value: ${current}`); // 1
+    return current + 1;
+  });
+  
+  // Even after set(), reading count() still returns the original value
+  print(count()); // 0
+});
+
+// After the batch completes, reading count() returns the final value
+print(count()); // 2
+```
+
+### With complex updates
+
+```ts
+const items = createSignal<string[]>([]);
+const count = createSignal(0);
+const loading = createSignal(true);
+
+createEffect(() => {
+  print(`Items: ${items().join(", ")}, Count: ${count()}, Loading: ${loading()}`);
+});
+// Prints: "Items: , Count: 0, Loading: true" (initial run)
+
+// Group all these updates into one batch
+batch(() => {
+  items(["Apple", "Banana", "Cherry"]);
+  count(3);
+  loading(false);
+});
+// Prints effect only once: "Items: Apple, Banana, Cherry, Count: 3, Loading: false"
+```
+
+### Nested batches
+
+```ts
+const a = createSignal(1);
+const b = createSignal(2);
+const c = createSignal(3);
+
+createEffect(() => {
+  print(`Sum: ${a() + b() + c()}`);
+});
+// Prints: "Sum: 6" (initial run)
+
+batch(() => {
+  a(10);
+  
+  // Nested batch - treated as part of the outer batch
+  batch(() => {
+    b(20);
+    c(30);
+  });
+  
+  // Still inside the outer batch
+  a(100);
+});
+// Prints effect only once: "Sum: 150"
+```
+

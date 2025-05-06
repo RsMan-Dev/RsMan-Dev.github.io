@@ -1,0 +1,92 @@
+# createMemo
+
+Creates a derived reactive value that recalculates only when its dependencies change.
+
+## Signature
+
+```ts
+function createMemo<T>(fn: (v: T | undefined) => T): ReadonlySignal<T>;
+function createMemo<T>(fn: (v: T) => T, value: T, options?: {
+  eq?: ((a: T, b: T) => boolean) | false;
+  lazy?: boolean;
+}): ReadonlySignal<T>;
+
+type ReadonlySignal<T> = {
+  (): T;
+  readonly val: T;
+  peek: T;
+  accessor: () => T;
+};
+```
+
+## Description
+
+The `createMemo()` function creates a read-only reactive value that's derived from other reactive sources. It automatically tracks dependencies during the execution of the provided function and only re-runs the calculation when those dependencies change.
+
+Memos are important for performance optimization as they cache their results and only recalculate when necessary. They create a node in the dependency graph that sits between the reactive sources and any effects or other memos that depend on it.
+
+## Options
+
+- `eq` - Custom equality function to determine when to trigger updates. When set to `false`, updates are always triggered.
+- `lazy` - If `true` (default), the memo is created when first accessed. If `false`, it's created immediately.
+
+## Examples
+
+### Basic usage
+
+```ts
+const count = createSignal(0);
+const doubled = createMemo(() => count() * 2);
+
+print(doubled()); // 0
+
+count(5);
+print(doubled()); // 10
+```
+
+### With previous value
+
+```ts
+const count = createSignal(0);
+const sumWithPrevious = createMemo((prev = 0) => prev + count());
+
+print(sumWithPrevious()); // 0 (initial count value)
+count(5);
+print(sumWithPrevious()); // 5 (previous 0 + new count 5)
+count(2);
+print(sumWithPrevious()); // 7 (previous 5 + new count 2)
+```
+
+### With initial value
+
+```ts
+const width = createSignal(10);
+const height = createSignal(20);
+const area = createMemo(() => width() * height(), 0);
+
+print(area()); // 200
+```
+
+### Custom equality function
+
+```ts
+interface User {
+  id: number;
+  name: string;
+}
+
+const user = createSignal<User>({ id: 1, name: "John" });
+const processedUser = createMemo(
+  () => {
+    return {
+      id: user().id,
+      displayName: user().name.toUpperCase()
+    };
+  },
+  { id: 0, displayName: "" },
+  {
+    // Only update when ID changes
+    eq: (a, b) => a.id === b.id
+  }
+);
+``` 

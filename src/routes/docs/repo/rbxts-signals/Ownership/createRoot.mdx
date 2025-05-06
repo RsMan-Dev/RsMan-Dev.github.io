@@ -1,0 +1,164 @@
+# createRoot
+
+Creates a new reactive root to manage computations and their lifecycle.
+
+## Signature
+
+```ts
+function createRoot<T>(fn: (dispose: () => void) => T): T;
+```
+
+## Description
+
+The `createRoot()` function creates a new computation node that serves as the root of a reactive computation tree. It provides a way to contain and manage reactive computations, ensuring they can be properly disposed when no longer needed.
+
+The function runs the provided callback immediately and passes a dispose function as its argument. When this dispose function is called, it cleans up all reactive computations created within the root, preventing memory leaks.
+
+Using `createRoot` is required to run any effect or signal-tracking elements without memory leak
+
+## Examples
+
+### Basic usage
+
+```ts
+const result = createRoot((dispose) => {
+  const count = createSignal(0);
+  
+  // Create computations that will be cleaned up when dispose is called
+  createEffect(() => {
+    print(`Count: ${count()}`);
+  });
+  
+  // Increment count after a delay
+  task.delay(2, () => {
+    count(1);
+    
+    // Dispose all reactive computations after another delay
+    task.delay(2, () => {
+      dispose();
+      
+      // This won't trigger the effect because it's been disposed
+      count(2);
+    });
+  });
+  
+  return "Root created";
+});
+
+print(result); // Prints: "Root created"
+// After 2 seconds, prints: "Count: 1"
+// After 4 seconds, all computations are disposed
+```
+
+### Managing multiple reactive systems
+
+```ts
+// Create a function that sets up a timer and returns a dispose function
+function createTimer(interval: number, callback: (time: number) => void) {
+  return createRoot((dispose) => {
+    const time = createSignal(0);
+    
+    createEffect(() => {
+      callback(time());
+    });
+    
+    // Set up the interval
+    const intervalId = setInterval(() => {
+      time(time() + interval);
+    }, interval);
+    
+    // Clean up the interval when disposed
+    onCleanup(() => {
+      clearInterval(intervalId);
+    });
+    
+    return dispose;
+  });
+}
+
+// Create multiple timers
+const disposeTimer1 = createTimer(1000, (time) => {
+  print(`Timer 1: ${time}ms`);
+});
+
+const disposeTimer2 = createTimer(500, (time) => {
+  print(`Timer 2: ${time}ms`);
+});
+
+// Later, dispose the timers when no longer needed
+task.delay(5, () => {
+  disposeTimer1(); // Dispose timer 1
+  print("Timer 1 disposed");
+});
+
+task.delay(10, () => {
+  disposeTimer2(); // Dispose timer 2
+  print("Timer 2 disposed");
+});
+```
+
+### Creating isolated reactive systems
+
+```ts
+function createUserProfile(userId: number) {
+  return createRoot((dispose) => {
+    const user = createSignal<{ id: number, name: string } | null>(null);
+    const loading = createSignal(true);
+    const error = createSignal<string | null>(null);
+    
+    // Fetch user data
+    createEffect(() => {
+      task.spawn(async () => {
+        try {
+          loading(true);
+          error(null);
+          
+          // Simulate API call
+          await task.wait(1);
+          
+          // Mock response
+          if (userId > 0) {
+            user({ id: userId, name: `User ${userId}` });
+          } else {
+            error("Invalid user ID");
+          }
+        } catch (err) {
+          error(`Failed to load user: ${err}`);
+        } finally {
+          loading(false);
+        }
+      });
+    });
+    
+    // Return both the reactive state and the dispose function
+    return {
+      getUser: () => user(),
+      isLoading: () => loading(),
+      getError: () => error(),
+      dispose
+    };
+  });
+}
+
+// Create an isolated user profile system
+const userProfile = createUserProfile(1);
+
+// Check user data periodically
+const checkInterval = setInterval(() => {
+  if (userProfile.isLoading()) {
+    print("Still loading...");
+  } else if (userProfile.getError()) {
+    print(`Error: ${userProfile.getError()}`);
+  } else {
+    const user = userProfile.getUser();
+    print(`User loaded: ${user?.name}`);
+  }
+}, 500);
+
+// Dispose when done
+task.delay(5, () => {
+  clearInterval(checkInterval);
+  userProfile.dispose();
+  print("User profile disposed");
+});
+``` 
