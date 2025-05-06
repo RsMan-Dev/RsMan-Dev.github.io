@@ -81,7 +81,7 @@
     ]
   },
   "src/routes/docs.tsx?pick=default&pick=$css": {
-    "file": "assets/docs-CHfeS8-h.js",
+    "file": "assets/docs-C_bfSdtA.js",
     "name": "docs",
     "src": "src/routes/docs.tsx?pick=default&pick=$css",
     "isEntry": true,
@@ -1458,6 +1458,138 @@
       "_index-D4wBul8M.js"
     ]
   },
+  "src/routes/docs/repo/rbxts-signals/0-Introduction.mdx?pick=$css": {
+    "file": "assets/0-Introduction-B4YVCm-r.js",
+    "name": "0-Introduction",
+    "src": "src/routes/docs/repo/rbxts-signals/0-Introduction.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-signals/Computations/createEffect.mdx?pick=$css": {
+    "file": "assets/createEffect-78Io5AVp.js",
+    "name": "createEffect",
+    "src": "src/routes/docs/repo/rbxts-signals/Computations/createEffect.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-signals/Computations/createMemo.mdx?pick=$css": {
+    "file": "assets/createMemo-Ek1yc74B.js",
+    "name": "createMemo",
+    "src": "src/routes/docs/repo/rbxts-signals/Computations/createMemo.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-signals/Context/createContext.mdx?pick=$css": {
+    "file": "assets/createContext-B3eoU9Ok.js",
+    "name": "createContext",
+    "src": "src/routes/docs/repo/rbxts-signals/Context/createContext.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-signals/Ownership/createRoot.mdx?pick=$css": {
+    "file": "assets/createRoot-DLylpqFm.js",
+    "name": "createRoot",
+    "src": "src/routes/docs/repo/rbxts-signals/Ownership/createRoot.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-signals/Ownership/getOwner.mdx?pick=$css": {
+    "file": "assets/getOwner-DXAt0FEi.js",
+    "name": "getOwner",
+    "src": "src/routes/docs/repo/rbxts-signals/Ownership/getOwner.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-signals/Signal/createSignal.mdx?pick=$css": {
+    "file": "assets/createSignal-9B3U19x_.js",
+    "name": "createSignal",
+    "src": "src/routes/docs/repo/rbxts-signals/Signal/createSignal.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-signals/Utilities/0-on.mdx?pick=$css": {
+    "file": "assets/0-on-BuxuLyMU.js",
+    "name": "0-on",
+    "src": "src/routes/docs/repo/rbxts-signals/Utilities/0-on.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-signals/Utilities/batch.mdx?pick=$css": {
+    "file": "assets/batch-BsxjX8vF.js",
+    "name": "batch",
+    "src": "src/routes/docs/repo/rbxts-signals/Utilities/batch.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-signals/Utilities/benchmark.mdx?pick=$css": {
+    "file": "assets/benchmark-G-ZPWDbO.js",
+    "name": "benchmark",
+    "src": "src/routes/docs/repo/rbxts-signals/Utilities/benchmark.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-signals/Utilities/onCleanup.mdx?pick=$css": {
+    "file": "assets/onCleanup-BESp4NKR.js",
+    "name": "onCleanup",
+    "src": "src/routes/docs/repo/rbxts-signals/Utilities/onCleanup.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-signals/Utilities/untrack.mdx?pick=$css": {
+    "file": "assets/untrack-C8z_qjLl.js",
+    "name": "untrack",
+    "src": "src/routes/docs/repo/rbxts-signals/Utilities/untrack.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
   "src/routes/index.tsx?pick=default&pick=$css": {
     "file": "assets/index-CY5om4Ez.js",
     "name": "index",
@@ -1470,7 +1602,7 @@
     ]
   },
   "virtual:$vinxi/handler/client": {
-    "file": "assets/client-Cjf3XJDH.js",
+    "file": "assets/client-i3YTWaik.js",
     "name": "client",
     "src": "virtual:$vinxi/handler/client",
     "isEntry": true,
@@ -1498,6 +1630,7 @@
       "src/routes/docs/repo/rbxts-jsnatives/[...404].tsx?pick=default&pick=$css",
       "src/routes/docs/repo/rbxts-jsnatives/encodeUriComponent.mdx?pick=$css",
       "src/routes/docs/repo/rbxts-jsnatives/inspect.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-signals/0-Introduction.mdx?pick=$css",
       "src/routes/docs/repo/rbxts-jsnatives/Array-utils/0-flat.mdx?pick=$css",
       "src/routes/docs/repo/rbxts-jsnatives/Array-utils/1-flatMap.mdx?pick=$css",
       "src/routes/docs/repo/rbxts-jsnatives/Array-utils/concat.mdx?pick=$css",
@@ -1609,10 +1742,21 @@
       "src/routes/docs/repo/rbxts-jsnatives/Timers/clearTimeout.mdx?pick=$css",
       "src/routes/docs/repo/rbxts-jsnatives/Timers/setInterval.mdx?pick=$css",
       "src/routes/docs/repo/rbxts-jsnatives/Timers/setTimeout.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-signals/Computations/createEffect.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-signals/Computations/createMemo.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-signals/Context/createContext.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-signals/Ownership/createRoot.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-signals/Ownership/getOwner.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-signals/Signal/createSignal.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-signals/Utilities/0-on.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-signals/Utilities/batch.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-signals/Utilities/benchmark.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-signals/Utilities/onCleanup.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-signals/Utilities/untrack.mdx?pick=$css",
       "src/custom-elements/sticky-el.ts"
     ],
     "css": [
-      "assets/client-DjgMId49.css"
+      "assets/client-B_CexwWj.css"
     ]
   }
 }
