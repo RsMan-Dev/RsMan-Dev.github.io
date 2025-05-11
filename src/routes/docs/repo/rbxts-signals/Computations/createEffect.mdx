@@ -1,0 +1,94 @@
+# createEffect
+
+Creates a reactive effect that runs when its dependencies change.
+
+## Signature
+
+```ts
+function createEffect<T>(fn: (v: T | undefined) => T): () => T;
+function createEffect<S, T>(fn: (v: S) => T, value: S): () => T;
+```
+
+## Description
+
+The `createEffect()` function creates a reactive effect that automatically tracks dependencies during its execution and re-runs whenever those dependencies change. Unlike `createMemo()`, effects are primarily used for their side effects rather than their return values.
+
+Effects are batched, meaning multiple dependency changes will trigger only one execution of the effect in the next update cycle. This optimization prevents unnecessary executions when multiple dependencies change simultaneously.
+
+## Examples
+
+### Basic usage
+
+```ts
+const count = createSignal(0);
+
+createEffect(() => {
+  print(`Count changed to ${count()}`);
+});
+
+// Prints: "Count changed to 0" (initial run)
+count(1); // Prints: "Count changed to 1"
+count(2); // Prints: "Count changed to 2"
+```
+
+### With previous value
+
+```ts
+const messages = createSignal("Hello");
+
+createEffect((prevMessage = "") => {
+  if (prevMessage !== "") {
+    print(`Previous message: ${prevMessage}`);
+  }
+  print(`Current message: ${messages()}`);
+  return messages(); // Return current value for next run
+});
+
+// Prints: "Current message: Hello" (initial run)
+messages("World");
+// Prints: "Previous message: Hello"
+// Prints: "Current message: World"
+```
+
+### With initial value
+
+```ts
+const position = createSignal({ x: 0, y: 0 });
+
+createEffect(
+  (prev) => {
+    // Only log changes, not initial value
+    if (prev) {
+      print(`Position changed from (${prev.x},${prev.y}) to (${position().x},${position().y})`);
+    }
+    return position();
+  },
+  undefined // Initial value is undefined
+);
+
+position({ x: 10, y: 5 });
+// Prints: "Position changed from (0,0) to (10,5)"
+```
+
+### Cleanup with onCleanup
+
+```ts
+const visible = createSignal(true);
+
+createEffect(() => {
+  if (visible()) {
+    const interval = setInterval(() => {
+      print("Tick");
+    }, 1000);
+    
+    // Clean up when visible changes or the effect is disposed
+    onCleanup(() => {
+      clearInterval(interval);
+      print("Interval cleared");
+    });
+  }
+});
+
+// Later, when visibility changes:
+visible(false); // Prints: "Interval cleared"
+``` 

@@ -1,0 +1,118 @@
+# onCleanup
+
+Registers a cleanup function that runs when the owner is disposed.
+
+## Signature
+
+```ts
+function onCleanup(fn: (final: boolean) => void): void;
+```
+
+## Description
+
+The `onCleanup()` function registers a callback to be executed when the current owner (computation) is disposed. This is useful for cleanup tasks like disconnecting events, clearing intervals, or freeing resources.
+
+The cleanup function is automatically called when:
+- The owner computation is re-run (with `final = false`)
+- The owner computation is disposed (with `final = true`)
+
+The `final` parameter indicates whether the cleanup is happening due to the final disposal of the owner or just because the computation is re-running.
+
+## Examples
+
+### Basic usage
+
+```ts
+createEffect(() => {
+  print("Effect running");
+  
+  onCleanup((final) => {
+    if (final) {
+      print("Effect is being disposed completely");
+    } else {
+      print("Effect is being re-run");
+    }
+  });
+});
+
+// Prints: "Effect running"
+// When a dependency changes: Prints "Effect is being re-run" followed by "Effect running"
+// When explicitly disposed: Prints "Effect is being disposed completely"
+```
+
+### Cleaning up resources
+
+```ts
+const visible = createSignal(true);
+
+createEffect(() => {
+  if (visible()) {
+    const connection = game.Workspace.ChildAdded.Connect((child) => {
+      print(`Child added: ${child.Name}`);
+    });
+    
+    onCleanup(() => {
+      connection.Disconnect();
+      print("Connection disconnected");
+    });
+  }
+});
+
+// Later, when visibility changes:
+visible(false); // Prints: "Connection disconnected"
+```
+
+### Using with createRoot
+
+```ts
+const dispose = createRoot((dispose) => {
+  const timer = createSignal(0);
+  
+  // Set up an interval
+  const intervalId = setInterval(() => {
+    timer(timer() + 1);
+  }, 1000);
+  
+  // Clean up when root is disposed
+  onCleanup(() => {
+    clearInterval(intervalId);
+    print("Timer stopped");
+  });
+  
+  createEffect(() => {
+    print(`Timer: ${timer()}`);
+  });
+  
+  return dispose;
+});
+
+// Later, to clean up everything:
+dispose(); // Prints: "Timer stopped"
+```
+
+### Multiple cleanup handlers
+
+```ts
+createEffect(() => {
+  const resourceA = acquireResourceA();
+  const resourceB = acquireResourceB();
+  
+  // Register multiple cleanup handlers
+  onCleanup(() => {
+    resourceA.release();
+    print("Resource A released");
+  });
+  
+  onCleanup(() => {
+    resourceB.release();
+    print("Resource B released");
+  });
+  
+  print("Using resources A and B");
+});
+
+// When the effect is disposed:
+// Prints: "Resource B released"
+// Prints: "Resource A released"
+// (Cleanup functions are called in reverse order of registration)
+``` 

@@ -1,0 +1,85 @@
+# on
+
+Controls dependency tracking with fine-grained precision.
+
+## Signature
+
+```ts
+function on<I, T>(
+  on: () => I, 
+  fn: (r: I, v?: T) => T, 
+  options?: { defer?: boolean }
+): (old?: T) => T;
+```
+
+## Description
+
+The `on()` function provides fine-grained control over dependency tracking. It separates the tracking phase from the execution phase, allowing you to explicitly define which reactive dependencies should trigger updates.
+
+It works by:
+1. Running the first function (`on`) in tracking mode to establish dependencies
+2. Running the second function (`fn`) in untracked mode, with the result of the first function as its argument
+
+This approach gives precise control over what reactive values cause the computation to re-run, while still being able to access other reactive values without creating dependencies.
+
+## Parameters
+
+- `on`: The tracking function that establishes dependencies
+- `fn`: The execution function that receives the result of the tracking function and the previous result
+- `options`: 
+  - `defer`: When true, skips the initial execution and only runs on the first change (defaults to false)
+
+## Examples
+
+### Basic usage
+
+```ts
+const firstName = createSignal("John");
+const lastName = createSignal("Doe");
+const fullName = createSignal("");
+
+// Only re-run when firstName or lastName changes, not fullName
+createEffect(on(
+  // Tracking function - establishes dependencies
+  () => [firstName(), lastName()],
+  // Execution function - runs with tracked values, but doesn't track fullName
+  ([first, last]) => {
+    fullName(`${first} ${last}`);
+    print(`Full name set to: ${first} ${last}`);
+    return fullName(); // Return for next execution
+  }
+));
+
+// Updates the effect because firstName is tracked
+firstName("Jane");
+
+// Updates the effect because lastName is tracked
+lastName("Smith");
+
+// Does NOT update the effect because fullName is not tracked
+fullName("Manual Override");
+```
+
+### With defer option
+
+```ts
+const count = createSignal(0);
+
+
+createEffect(on(
+  () => count(),
+  (value, prev) => {// Skip initial execution and only run on changes
+    print(`Count changed from ${prev} to ${value}`);
+    return value;
+  },
+  { defer: true }
+));
+
+print("Initial count:", count());
+
+count(1);
+// Prints: "Count changed from undefined to 1"
+
+count(2);
+// Prints: "Count changed from 1 to 2"
+```

@@ -9,6 +9,7 @@ body {
   --grid-size: 80px;
   --grid-color: #cccccc;
   --bg-color: theme('colors.background');
+  --primary-color: theme('colors.primary');
   --x-margin: 8rem;
 
   @apply min-h-full m-0 font-sans relative overflow-x-hidden scroll-smooth;
@@ -96,7 +97,7 @@ h6 {
 
 
 button, .btn {
-  @apply bg-primary text-white px-4 py-2 rounded-md outline outline-2 outline-primary -outline-offset-2 inline-block border-none font-bold uppercase;
+  @apply bg-primary text-white px-4 py-2 rounded-md outline outline-2 outline-primary -outline-offset-2 inline-block border-none font-bold uppercase cursor-pointer;
 
 
   sticky-el:has(> &) {

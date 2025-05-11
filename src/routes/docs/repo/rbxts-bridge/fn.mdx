@@ -1,0 +1,127 @@
+# Remote Functions
+
+rbxts-bridge offers a powerful way to call functions between server and client with full type safety through the `fn` and `call` methods.
+
+## Declaring Function Types
+
+To use remote functions with type safety, you need to declare your function types in the global `BridgeFunctionMap` interface:
+
+```ts
+declare global {
+  interface BridgeFunctionMap {
+    // Format: functionName: BridgeFunction<InputType, ReturnType>
+    getUserData: BridgeFunction<{ userId: number }, { name: string; level: number }>;
+    saveProgress: BridgeFunction<{ level: number; score: number }, { success: boolean }>;
+  }
+}
+```
+
+## Registering Functions
+
+Use `bridge.fn` to register a function handler that can be called from the other side:
+
+```ts
+// Server-side
+bridge.fn("getUserData", (data, player) => {
+  // data is typed as { userId: number }
+  // Return value should match the return type declared
+  return {
+    name: "Player123",
+    level: 42
+  };
+});
+
+// Client-side
+bridge.fn("saveProgress", (data, player) => {
+  // Handle client-side function call
+  return { success: true };
+});
+```
+
+## Calling Functions
+
+To call a function on the other side, use `bridge.call` (synchronous) or `bridge.callAsync` (asynchronous):
+
+### Synchronous Calls
+
+```ts
+// Client-side calling server
+const userData = bridge.call("getUserData", { userId: 123 });
+// userData is typed as { name: string; level: number }
+print(`User name: ${userData.name}, level: ${userData.level}`);
+
+// Server-side calling client
+const result = bridge.call("saveProgress", { level: 5, score: 1000 }, player);
+// result is typed as { success: boolean }
+```
+
+### Asynchronous Calls
+
+```ts
+// Using Promise-based approach
+bridge.callAsync("getUserData", { userId: 123 })
+  .then((userData) => {
+    print(`User name: ${userData.name}, level: ${userData.level}`);
+  });
+
+// Or with async/await
+async function fetchUserData() {
+  const userData = await bridge.callAsync("getUserData", { userId: 123 });
+  return userData;
+}
+```
+
+## Chaining Calls
+
+You can chain function calls between server and client:
+
+```ts
+// Server-side
+bridge.fn("getClientInfo", (data, player) => {
+  // Call back to the client for more information
+  const clientDetails = bridge.call("getDetails", { type: "graphics" }, player);
+  return {
+    playerName: player.Name,
+    details: clientDetails
+  };
+});
+
+// Client-side
+bridge.fn("getDetails", (data) => {
+  // Handle the server's request for more details
+  return { resolution: "1920x1080", quality: "High" };
+});
+```
+
+## Unregistering Functions
+
+You can unregister a function using `bridge.fnOff`:
+
+```ts
+bridge.fnOff("getUserData");
+```
+
+## Error Handling
+
+Remote function calls can throw errors, so it's recommended to use try/catch:
+
+```ts
+try {
+  const result = bridge.call("someFunction", data);
+  // Process result
+} catch (error) {
+  warn(`Error calling remote function: ${error}`);
+}
+```
+
+When using `callAsync`, you can handle errors with promise catch handlers:
+
+```ts
+bridge.callAsync("someFunction", data)
+  .then(result => {
+    // Process result
+  })
+  .catch(error => {
+    warn(`Error calling remote function: ${error}`);
+  });
+```

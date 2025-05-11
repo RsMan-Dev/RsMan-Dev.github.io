@@ -1,0 +1,99 @@
+# createSignal
+
+Creates a reactive signal that can be read and written to.
+
+## Signature
+
+```ts
+function createSignal<T>(value: T, options?: {
+  eq?: ((a: T, b: T) => boolean) | false;
+  lazy?: boolean;
+}): Signal<T>
+
+type Signal<T> = {
+  (): T;
+  (val: T): T;
+  val: T;
+  set: (fn: (val: T) => T) => T;
+  peek: T;
+  accessor: () => T;
+};
+```
+
+## Description
+
+The `createSignal()` function creates a reactive primitive that can store a value and notify dependencies when that value changes. It's the fundamental building block of the reactivity system.
+
+A signal returns a function that serves as both a getter and setter:
+- When called with no arguments, it returns the current value
+- When called with an argument, it sets the value and returns it
+
+Signals also provide additional properties:
+- `val` - Direct access to the current value
+- `set` - Function to update the value using a callback
+- `peek` - Access the current value without creating a dependency
+- `accessor` - Function that returns the current value (creates a dependency)
+
+## Options
+
+- `eq` - Custom equality function to determine when to trigger updates. When set to `false`, updates are always triggered.
+- `lazy` - If `true` (default), the signal is created when first accessed. If `false`, it's created immediately.
+
+## Examples
+
+### Basic usage
+
+```ts
+// Create a signal with initial value
+const count = createSignal(0);
+
+// Read the value
+print(count()); // 0
+
+// Update the value
+count(1);
+print(count()); // 1
+
+// Update with a function
+count.set(prev => prev + 1);
+print(count()); // 2
+
+// Access value without creating a dependency
+print(count.peek); // 2
+```
+
+### Using custom equality function
+
+```ts
+interface User {
+  id: number;
+  name: string;
+}
+
+// Only trigger updates when id changes
+const user = createSignal<User>({ id: 1, name: "John" }, {
+  eq: (a, b) => a.id === b.id
+});
+
+// This won't trigger updates as only name changed, not id
+user({ id: 1, name: "Jane" });
+
+// This will trigger updates as id changed
+user({ id: 2, name: "Jane" });
+```
+
+### Using with effects
+
+```ts
+const name = createSignal("John");
+const greeting = createSignal("Hello");
+
+createEffect(() => {
+  // This effect will re-run when name() or greeting() changes
+  print(`${greeting()} ${name()}!`);
+});
+
+// Prints: "Hello John!"
+name("Jane"); // Prints: "Hello Jane!"
+greeting("Hi"); // Prints: "Hi Jane!"
+``` 

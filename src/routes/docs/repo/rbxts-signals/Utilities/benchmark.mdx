@@ -1,0 +1,160 @@
+# benchmark
+
+Measures performance metrics for reactive code execution.
+
+## Signature
+
+```ts
+function benchmark<T>(fn: () => T, logs?: boolean): [T, Benchmark];
+
+interface Benchmark {
+    computations: number;
+    reads: number;
+    writes: number;
+    disposes: number;
+    execTime: number;
+}
+```
+
+## Description
+
+The `benchmark()` function measures key performance metrics when executing reactive code. It runs the provided function and tracks:
+
+- `computations`: Number of computations executed
+- `reads`: Number of signal read operations
+- `writes`: Number of signal write operations
+- `disposes`: Number of disposed computations
+- `execTime`: Total execution time in milliseconds
+
+This is useful for optimizing reactive code by identifying bottlenecks and comparing different implementation approaches.
+
+## Parameters
+
+- `fn`: The function to benchmark. All computations must be synchronous, and the context must not be frozen.
+- `logs`: Whether to log the results to the console (defaults to true).
+
+## Examples
+
+### Basic usage
+
+```ts
+const [result, metrics] = benchmark(() => {
+  const count = createSignal(0);
+  const doubled = createMemo(() => count() * 2);
+  
+  createEffect(() => {
+    print(`Count doubled: ${doubled()}`);
+  });
+  
+  count(5);
+  count(10);
+  
+  return doubled();
+});
+
+print(`Result: ${result}`); // Prints: "Result: 20"
+print(`Metrics:
+ - Computations: ${metrics.computations}
+ - Reads: ${metrics.reads}
+ - Writes: ${metrics.writes}
+ - Disposes: ${metrics.disposes}
+ - Execution time: ${metrics.execTime}ms`);
+```
+
+### Comparing implementation approaches
+
+```ts
+// Approach 1: Using multiple computations
+const [result1, metrics1] = benchmark(() => {
+  const a = createSignal(1);
+  const b = createSignal(2);
+  const c = createSignal(3);
+  
+  const sum = createMemo(() => a() + b() + c());
+  const squared = createMemo(() => sum() * sum());
+  
+  a(10);
+  b(20);
+  c(30);
+  
+  return squared();
+}, false);
+
+// Approach 2: Using fewer computations
+const [result2, metrics2] = benchmark(() => {
+  const a = createSignal(1);
+  const b = createSignal(2);
+  const c = createSignal(3);
+  
+  const squared = createMemo(() => {
+    const sum = a() + b() + c();
+    return sum * sum;
+  });
+  
+  a(10);
+  b(20);
+  c(30);
+  
+  return squared();
+}, false);
+
+print("Approach 1:");
+print(`- Result: ${result1}`);
+print(`- Computations: ${metrics1.computations}`);
+print(`- Reads: ${metrics1.reads}`);
+print(`- Writes: ${metrics1.writes}`);
+print(`- Execution time: ${metrics1.execTime}ms`);
+
+print("Approach 2:");
+print(`- Result: ${result2}`);
+print(`- Computations: ${metrics2.computations}`);
+print(`- Reads: ${metrics2.reads}`);
+print(`- Writes: ${metrics2.writes}`);
+print(`- Execution time: ${metrics2.execTime}ms`);
+```
+
+### Measuring complex reactivity
+
+```ts
+const [_, metrics] = benchmark(() => {
+  // Create a reactive data model
+  const items = createSignal<number[]>([]);
+  const filter = createSignal("all");
+  
+  // Derived state
+  const filteredItems = createMemo(() => {
+    const currentFilter = filter();
+    if (currentFilter === "all") return items();
+    if (currentFilter === "even") return items().filter(n => n % 2 === 0);
+    if (currentFilter === "odd") return items().filter(n => n % 2 !== 0);
+    return [];
+  });
+  
+  const stats = createMemo(() => {
+    const filtered = filteredItems();
+    return {
+      count: filtered.length,
+      sum: filtered.reduce((a, b) => a + b, 0),
+      average: filtered.length ? filtered.reduce((a, b) => a + b, 0) / filtered.length : 0
+    };
+  });
+  
+  // Effects
+  createEffect(() => {
+    print(`Stats: ${stats().count} items, sum: ${stats().sum}, avg: ${stats().average}`);
+  });
+  
+  // Actions that trigger reactivity
+  items([1, 2, 3, 4, 5]);
+  filter("even");
+  items([...items(), 6, 7, 8]);
+  filter("odd");
+  filter("all");
+});
+
+print(`Performance metrics for data model:
+ - Computations: ${metrics.computations}
+ - Reads: ${metrics.reads}
+ - Writes: ${metrics.writes}
+ - Execution time: ${metrics.execTime}ms`);
+``` 

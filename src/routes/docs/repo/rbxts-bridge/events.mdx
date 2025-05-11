@@ -1,0 +1,117 @@
+# Events
+
+The event system in rbxts-bridge allows for type-safe communication between server and client through remote events.
+
+## Declaring Event Types
+
+To ensure type safety for your events, declare your event types in the global `BridgeEventMap` interface:
+
+```ts
+declare global {
+  interface BridgeEventMap {
+    playerJoined: { playerId: number; username: string };
+    gameStateChanged: { state: string; countdown: number };
+    collectItem: { itemId: string; position: Vector3 };
+  }
+}
+```
+
+## Listening for Events
+
+Use `bridge.on` to register an event handler:
+
+```ts
+// Server-side
+bridge.on("collectItem", (data, player) => {
+  // data is typed as { itemId: string; position: Vector3 }
+  print(`${player.Name} collected item ${data.itemId} at ${data.position}`);
+  // Perform server-side logic
+});
+
+// Client-side
+bridge.on("gameStateChanged", (data, player) => {
+  // data is typed as { state: string; countdown: number }
+  print(`Game state changed to ${data.state} with countdown ${data.countdown}`);
+  // Update the UI or game state
+});
+```
+
+## Sending Events
+
+Use `bridge.send` to send an event:
+
+```ts
+// Client-side sending to server
+bridge.send("collectItem", { 
+  itemId: "coin-123", 
+  position: new Vector3(10, 5, 10) 
+});
+
+// Server-side sending to a specific client
+bridge.send("gameStateChanged", { 
+  state: "starting", 
+  countdown: 10 
+}, player);
+```
+
+## Broadcasting to All Clients
+
+Use `bridge.broadcast` to send an event to all connected clients:
+
+```ts
+// Server-side only
+bridge.broadcast("gameStateChanged", { 
+  state: "running", 
+  countdown: 60 
+});
+```
+
+## Unregistering Event Handlers
+
+Use `bridge.off` to unregister an event handler:
+
+```ts
+// Define the handler function first so you can reference it later
+const handleGameStateChanged = (data: BridgeEventMap["gameStateChanged"]) => {
+  print(`Game state changed to ${data.state}`);
+};
+
+// Register the handler
+bridge.on("gameStateChanged", handleGameStateChanged);
+
+// Later, unregister the handler
+bridge.off("gameStateChanged", handleGameStateChanged);
+```
+
+## Usage with Unknown Types
+
+You can also use events without defining types in the BridgeEventMap, though you'll lose type safety:
+
+```ts
+// Handler receives unknown type
+bridge.on("undefinedEvent", (data, player) => {
+  // data is typed as 'unknown'
+  print("Received data:", data);
+});
+
+// Sending untyped data
+bridge.send("undefinedEvent", { 
+  anyData: "can be sent" 
+});
+```
+
+## Error Handling
+
+It's a good practice to check if the event exists on the other side:
+
+```ts
+// Server-side
+try {
+  bridge.send("clientEvent", data, player, false);
+} catch (error) {
+  // Handle the case where the client doesn't have the event
+  warn(`Client ${player.Name} doesn't have 'clientEvent' registered`);
+}
+```
+
+The fourth parameter (`ignoreUnset`) determines whether to suppress warnings when the event isn't registered on the recipient. 

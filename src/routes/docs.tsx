@@ -35,7 +35,8 @@ export default function Docs( props: ParentProps) {
   return <div id="docs" class="flex h-full">
     <nav class="shadow-background shadow-xl bg-background p-4 flex flex-col gap-1 overflow-y-auto">
       <h2 class="!text-2xl font-bold !mb-4">Project Docs</h2>
-      <Button class="mb-4" onClick={"/home"}>Back to portfolio</Button>
+      <Button onClick={"/home"}>Back to portfolio</Button>
+      <div class="h-2"/>
       <NavGroup groups={fileGroups} parentPath="/docs/repo" nonExpandable/>
     </nav>
     <main ref={e => {

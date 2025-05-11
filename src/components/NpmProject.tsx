@@ -9,7 +9,7 @@ function repoUrlFromName(name: string) {
 
 function repoNameFromUrl<T extends string | undefined>(url: T): T {
   if(!url) return url
-  return url.replace(/^https?:\/\/github\.com\/(.*)\/(.*)(?:\.git)?$/, "$1/$2") as T
+  return url.replace(/^(?:git\+)?https?:\/\/github\.com\/([^/]+)\/([^.]+)(?:\.git)?$/, "$1/$2") as T
 }
 
 async function resourceCacheSession<T>(canFetch: boolean, type: "npm" | "repo", name: string, or: () => Promise<T>) {

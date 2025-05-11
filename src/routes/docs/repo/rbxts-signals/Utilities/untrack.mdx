@@ -1,0 +1,85 @@
+# untrack
+
+Prevents tracking dependencies within a function.
+
+## Signature
+
+```ts
+function untrack<T>(fn: () => T): T;
+```
+
+## Description
+
+The `untrack()` function executes a callback function without tracking any reactive dependencies that might be accessed inside it. This means that even if signals are read inside the callback, they won't cause the current computation to re-run when those signals change.
+
+This is useful for optimizing performance by selectively ignoring dependencies that aren't relevant to the computation's result or when you need to read a signal value without establishing a dependency.
+
+## Examples
+
+### Basic usage
+
+```ts
+const count = createSignal(0);
+const name = createSignal("John");
+
+createEffect(() => {
+  // This will track the name signal
+  print(`Name: ${name()}`);
+  
+  // This will NOT track the count signal
+  untrack(() => {
+    print(`Count: ${count()}`);
+  });
+});
+
+// Prints:
+// "Name: John"
+// "Count: 0"
+
+name("Jane"); // Effect re-runs, prints "Name: Jane" and "Count: 0"
+count(10);    // Effect does NOT re-run because count was read inside untrack
+```
+
+### Conditional dependencies
+
+```ts
+const shouldTrack = createSignal(true);
+const value = createSignal("hello");
+
+createEffect(() => {
+  const result = shouldTrack() 
+    ? value()                  // Track dependency when shouldTrack is true
+    : untrack(() => value());  // Don't track dependency when shouldTrack is false
+  
+  print(`Result: ${result}`);
+});
+
+// Initial run prints: "Result: hello"
+
+value("world");     // Effect re-runs if shouldTrack() is true
+shouldTrack(false); // Effect re-runs, but now it won't track value() anymore
+value("updated");   // Effect won't re-run because value is now untracked
+```
+
+### Reading reactive state during side effects
+
+```ts
+const users = createSignal(["Alice", "Bob", "Charlie"]);
+const currentUser = createSignal(0);
+
+createEffect(() => {
+  // This tracks currentUser()
+  const index = currentUser();
+  
+  // Read users() without making it a dependency
+  const allUsers = untrack(() => users());
+  const userName = allUsers[index];
+  
+  print(`Current user: ${userName}`);
+});
+
+// Prints: "Current user: Alice"
+
+currentUser(1); // Effect re-runs, prints "Current user: Bob"
+users(["David", "Emma", "Frank"]); // Effect doesn't re-run because users was untracked
+``` 
