@@ -1,0 +1,60 @@
+# Object.excludeTypes
+
+Removes properties of specified types from the input object.
+
+## Signature
+
+```ts
+function excludeTypes<T, Deep extends boolean>(
+  obj: T, 
+  types: (keyof CheckableTypes)[] | Set<keyof CheckableTypes>, 
+  deep?: Deep
+): Deep extends true ? DeepPartial<T> : Partial<T>
+```
+
+## Description
+
+The `Object.excludeTypes()` method removes properties of specified types from the input object. This is useful for filtering out specific types of values from an object, such as functions. The operation modifies the input object directly.
+
+## Examples
+
+### Basic type exclusion
+
+```ts
+const obj = {
+  name: "John",
+  age: 30,
+  sayHello: () => print("Hello"),
+};
+
+// Exclude functions and symbols
+Object.excludeTypes(obj, ["function"]);
+print(obj); // { name: "John", age: 30 }
+```
+
+### Deep type exclusion
+
+```ts
+const obj = {
+  user: {
+    name: "John",
+    age: 30,
+    sayHello: () => print("Hello"),
+  },
+  metadata: {
+    timestamp: Date.now(),
+    getValue: () => "value"
+  }
+};
+
+// Exclude functions and symbols recursively
+Object.excludeTypes(obj, ["function"], true);
+print(obj); // { user: { name: "John", age: 30 }, metadata: { timestamp: 1234567890 } }
+```
+
+## Notes
+
+- The function modifies the input object directly by removing properties of the specified types
+- When using deep exclusion, nested objects are processed recursively, but no cache or limit is implemented, so self-referencing tables will cause a stack overflow if you want to support that, you will need to implement your own recursive algorithm implementing Object.excludeTypes(a, b, false).
+- If you need to preserve the original object, make a copy first using `Object.dup(obj, true)`
+- The return type is typed as partial because it is not possible to know the exact type of the object after the operation, so it is recommended to use a type assertion to fix the type.

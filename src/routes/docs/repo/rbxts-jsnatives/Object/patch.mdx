@@ -1,0 +1,57 @@
+# Object.patch
+
+Applies a diff object to transform the target object according to the changes specified in the diff.
+
+## Signature
+
+```ts
+function patch<T, U, Deep extends boolean>(current: T, diff: U, deep?: Deep): T
+```
+
+## Description
+
+The `Object.patch()` method applies a diff object (typically created by `Object.diff()`) to transform the target object according to the changes specified in the diff. This is useful for applying incremental updates to objects, particularly in state management and synchronization scenarios.
+
+The patch operation is designed to work with the diff operation in a way that `patch(other, diff(current, other))` will transform `other` to match `current`.
+
+## Examples
+
+### Basic patching
+
+```ts
+const current = { a: 1, b: 2, c: 3 };
+const other = { a: 1, b: 4, d: 5 };
+
+const diff = Object.diff(current, other);
+const result = Object.patch(other, diff);
+print(result); // { a: 1, b: 2, c: 3 }
+```
+
+### Deep patching
+
+```ts
+const current = { 
+  user: { 
+    name: "John", 
+    age: 30 
+  }
+};
+const other = { 
+  user: { 
+    name: "John", 
+    age: 31 
+  }
+};
+
+const diff = Object.diff(current, other, true);
+const result = Object.patch(other, diff, true);
+print(result); // { user: { name: "John", age: 30 } }
+```
+
+## Notes
+
+- The patch operation is designed to work with the diff operation to transform objects, but you can implement your own patch operation to work with your own diff operation.
+- When using deep patch, nested objects are updated recursively, but no cache or limit is implemented, so self-referencing tables will cause a stack overflow if you want to support that, you will need to implement your own recursive algorithm implementing Object.patch(a, b, false).
+- Properties where the value in patch is `Object.diffDeletedSymbol` will be removed from the target object
+- The original object will be modified, if you want to keep the original object, you can use `Object.dup(target, true)` to clone the object before patching.
+- The operation is designed so that `patch(other, diff(current, other))` will transform `other` to match `current`, so after patching, Object.equals(patch(other, diff(current, other)), current) will normally be true.
