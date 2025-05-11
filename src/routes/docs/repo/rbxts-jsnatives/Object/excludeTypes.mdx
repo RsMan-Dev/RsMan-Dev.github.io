@@ -27,7 +27,7 @@ const obj = {
   sayHello: () => print("Hello"),
 };
 
-// Exclude functions and symbols
+// Exclude functions
 Object.excludeTypes(obj, ["function"]);
 print(obj); // { name: "John", age: 30 }
 ```
@@ -47,7 +47,7 @@ const obj = {
   }
 };
 
-// Exclude functions and symbols recursively
+// Exclude functions recursively
 Object.excludeTypes(obj, ["function"], true);
 print(obj); // { user: { name: "John", age: 30 }, metadata: { timestamp: 1234567890 } }
 ```
