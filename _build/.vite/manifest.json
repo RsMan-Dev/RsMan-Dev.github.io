@@ -81,7 +81,7 @@
     ]
   },
   "src/routes/docs.tsx?pick=default&pick=$css": {
-    "file": "assets/docs-C_bfSdtA.js",
+    "file": "assets/docs-Dz-6o6_0.js",
     "name": "docs",
     "src": "src/routes/docs.tsx?pick=default&pick=$css",
     "isEntry": true,
@@ -677,6 +677,17 @@
       "_index-D4wBul8M.js"
     ]
   },
+  "src/routes/docs/repo/rbxts-jsnatives/Object/diff.mdx?pick=$css": {
+    "file": "assets/diff-DzgA-Xes.js",
+    "name": "diff",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Object/diff.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
   "src/routes/docs/repo/rbxts-jsnatives/Object/dup.mdx?pick=$css": {
     "file": "assets/dup-DF6RkcQF.js",
     "name": "dup",
@@ -703,6 +714,17 @@
     "file": "assets/equals-Cp0Zn68w.js",
     "name": "equals",
     "src": "src/routes/docs/repo/rbxts-jsnatives/Object/equals.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/Object/excludeTypes.mdx?pick=$css": {
+    "file": "assets/excludeTypes-C3t8dYvH.js",
+    "name": "excludeTypes",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Object/excludeTypes.mdx?pick=$css",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
@@ -791,6 +813,17 @@
     "file": "assets/keys-DDbCPyB9.js",
     "name": "keys",
     "src": "src/routes/docs/repo/rbxts-jsnatives/Object/keys.mdx?pick=$css",
+    "isEntry": true,
+    "isDynamicEntry": true,
+    "imports": [
+      "_web-CesR-2RA.js",
+      "_index-D4wBul8M.js"
+    ]
+  },
+  "src/routes/docs/repo/rbxts-jsnatives/Object/patch.mdx?pick=$css": {
+    "file": "assets/patch-Fy6_XdfQ.js",
+    "name": "patch",
+    "src": "src/routes/docs/repo/rbxts-jsnatives/Object/patch.mdx?pick=$css",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
@@ -1602,7 +1635,7 @@
     ]
   },
   "virtual:$vinxi/handler/client": {
-    "file": "assets/client-i3YTWaik.js",
+    "file": "assets/client-DFMrU_NI.js",
     "name": "client",
     "src": "virtual:$vinxi/handler/client",
     "isEntry": true,
@@ -1674,9 +1707,11 @@
       "src/routes/docs/repo/rbxts-jsnatives/Object/1-toString.mdx?pick=$css",
       "src/routes/docs/repo/rbxts-jsnatives/Object/assign.mdx?pick=$css",
       "src/routes/docs/repo/rbxts-jsnatives/Object/create.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Object/diff.mdx?pick=$css",
       "src/routes/docs/repo/rbxts-jsnatives/Object/dup.mdx?pick=$css",
       "src/routes/docs/repo/rbxts-jsnatives/Object/entries.mdx?pick=$css",
       "src/routes/docs/repo/rbxts-jsnatives/Object/equals.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Object/excludeTypes.mdx?pick=$css",
       "src/routes/docs/repo/rbxts-jsnatives/Object/freeze.mdx?pick=$css",
       "src/routes/docs/repo/rbxts-jsnatives/Object/fromEntries.mdx?pick=$css",
       "src/routes/docs/repo/rbxts-jsnatives/Object/hasOwn.mdx?pick=$css",
@@ -1685,6 +1720,7 @@
       "src/routes/docs/repo/rbxts-jsnatives/Object/isEmpty.mdx?pick=$css",
       "src/routes/docs/repo/rbxts-jsnatives/Object/isFrozen.mdx?pick=$css",
       "src/routes/docs/repo/rbxts-jsnatives/Object/keys.mdx?pick=$css",
+      "src/routes/docs/repo/rbxts-jsnatives/Object/patch.mdx?pick=$css",
       "src/routes/docs/repo/rbxts-jsnatives/Object/seal.mdx?pick=$css",
       "src/routes/docs/repo/rbxts-jsnatives/Object/values.mdx?pick=$css",
       "src/routes/docs/repo/rbxts-jsnatives/Proxy/0-introduction.mdx?pick=$css",
